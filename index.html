@@ -35,9 +35,27 @@
         .menu-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
         .menu-tab { padding: 10px 25px; border: 2px solid var(--primary); background: white; color: var(--primary); border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .menu-tab.active { background: var(--primary); color: white; }
-        .menu-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
-        .menu-item:last-child { border-bottom: none; }
-        .price { color: var(--primary); font-weight: bold; font-size: 1.2em; }
+        
+        /* New Menu Styles */
+        .menu-category { margin-bottom: 40px; }
+        .menu-category h3 { font-size: 2em; color: var(--primary); margin-bottom: 20px; text-align: center; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .menu-item-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; border: 2px solid #f0f0f0; }
+        .menu-item-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .menu-item-card img { width: 100%; height: 200px; object-fit: cover; }
+        .menu-item-info { padding: 20px; }
+        .menu-item-info h4 { font-size: 1.2em; color: var(--dark); margin-bottom: 5px; }
+        .menu-item-info p { color: #777; font-size: 0.9em; margin-bottom: 10px; }
+        .menu-price { font-size: 1.5em; color: var(--primary); font-weight: bold; }
+        .promo-banner { background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-bottom: 30px; }
+        .promo-banner h3 { font-size: 2.5em; margin-bottom: 10px; }
+        .promo-banner p { font-size: 1.2em; margin-bottom: 20px; }
+        .promo-banner .highlight { background: white; color: #e74c3c; padding: 5px 20px; border-radius: 25px; display: inline-block; font-weight: bold; }
+        .slushy-counter { text-align: center; margin-bottom: 40px; }
+        .slushy-counter img { max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .slushy-flavors { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 20px; }
+        .flavor-tag { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px; border-radius: 20px; text-align: center; font-size: 0.9em; }
+        
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .contact-card { background: white; padding: 30px; border-radius: 15px; text-align: center; }
         .contact-card i { font-size: 2.5em; color: var(--primary); margin-bottom: 15px; }
@@ -66,15 +84,15 @@
 
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
-            <option value="th">🇹 ไทย</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="zh">🇳 中文</option>
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="en">🇬 English</option>
+            <option value="zh">🇨🇳 中文</option>
             <option value="ru">🇷🇺 Русский</option>
-            <option value="hi">🇳 हिन्दी</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
             <option value="he">🇮🇱 עברית</option>
             <option value="ja">🇯🇵 日本語</option>
             <option value="ko">🇰🇷 한국어</option>
-            <option value="ar">🇸 العربية</option>
+            <option value="ar">🇸🇦 العربية</option>
         </select>
     </div>
 
@@ -151,14 +169,116 @@
         <div class="hero">
             <h1 data-i18n="menu_title">เมนูอาหารและเครื่องดื่ม</h1>
         </div>
-        <div class="info-box">
-            <div class="menu-tabs">
-                <button class="menu-tab active" onclick="showMenu('scream')">Scream</button>
-                <button class="menu-tab" onclick="showMenu('haunted')" data-i18n="menu_haunted">บ้านผีสิง</button>
-                <button class="menu-tab" onclick="showMenu('hospital')" data-i18n="menu_hospital">โรงพยาบาล</button>
-                <button class="menu-tab" onclick="showMenu('pyramid')" data-i18n="menu_pyramid">พีระมิด</button>
+
+        <!-- Slushy Counter Image -->
+        <div class="slushy-counter">
+            <img src="https://images.unsplash.com/photo-1563223456-848635ab36b3?w=800" alt="Slushy Counter" style="max-width: 100%; border-radius: 15px;">
+        </div>
+
+        <!-- Promotion Banner -->
+        <div class="promo-banner">
+            <h3 data-i18n="promo_3for100_title">3 ชิ้น 100 บาท</h3>
+            <p data-i18n="promo_3for100_subtitle">3 PIECES FOR 100 BAHT</p>
+            <div class="highlight" data-i18n="promo_3for100_tag">คุ้มค่าที่สุดในราคาที่เป็นกันเอง</div>
+            <p style="margin-top: 15px; font-style: italic;" data-i18n="promo_3for100_desc">ร้อนๆ จากเตา... กรอบนอก นุ่มใน!</p>
+        </div>
+
+        <!-- Snacks Menu -->
+        <div class="menu-category">
+            <h3 data-i18n="menu_snacks">อาหารว่าง</h3>
+            <div class="menu-grid">
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1566478989037-e81674c14e1c?w=400" alt="SB Rod Snack">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="snack_sb">SB ROD SNACK CLASSIC</h4>
+                        <p data-i18n="snack_sb_th">ข้าวเกรียบ SB</p>
+                        <div class="menu-price">30 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1570554507683-5e735809a47c?w=400" alt="Popcorn">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="snack_popcorn">POPCORN</h4>
+                        <p data-i18n="snack_popcorn_desc">Original / Caramel</p>
+                        <div class="menu-price">90 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1573080496219-bb08bf770657?w=400" alt="French Fries">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="snack_fries">FRENCH FRIES</h4>
+                        <p data-i18n="snack_fries_th">เฟรนช์ฟรายส์</p>
+                        <div class="menu-price">69 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1562967915-61980704350f?w=400" alt="Chicken Sticks">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="snack_chicken_sticks">CHICKEN STICKS</h4>
+                        <p data-i18n="snack_chicken_sticks_th">สติ๊กไก่ทอด</p>
+                        <div class="menu-price">89 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1626082927389-6cd0dd2698e7?w=400" alt="Crispy Chicken Pop">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="snack_chicken_pop">CRISPY CHICKEN POP</h4>
+                        <p data-i18n="snack_chicken_pop_th">ไก่ป๊อป</p>
+                        <div class="menu-price">89 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1563223456-848635ab36b3?w=400" alt="Mixed Fried Snacks">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="snack_mixed">MIXED FRIED SNACKS</h4>
+                        <p data-i18n="snack_mixed_th">ของทานเล่นทอดรวม</p>
+                        <div class="menu-price">109 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
             </div>
-            <div id="menuContent"></div>
+        </div>
+
+        <!-- Drinks Menu -->
+        <div class="menu-category">
+            <h3 data-i18n="menu_drinks">เครื่องดื่ม</h3>
+            <div class="menu-grid">
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1548839140-2907bbbd45f0?w=400" alt="Water">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="drink_water">WATER</h4>
+                        <p data-i18n="drink_water_th">น้ำดื่ม</p>
+                        <div class="menu-price">25 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+                <div class="menu-item-card">
+                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32a7e20?w=400" alt="Soft Drinks">
+                    <div class="menu-item-info">
+                        <h4 data-i18n="drink_soft">SOFT DRINKS</h4>
+                        <p data-i18n="drink_soft_desc">Sprite, Fanta, Coke, Schweppes, Oishi</p>
+                        <div class="menu-price">35 <span data-i18n="baht">บาท</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slushy Menu -->
+        <div class="menu-category">
+            <h3 data-i18n="menu_slushy">SLUSHY</h3>
+            <div class="slushy-flavors">
+                <div class="flavor-tag">🥝 KIWI</div>
+                <div class="flavor-tag">🥭 MANGO</div>
+                <div class="flavor-tag">🍵 THAI TEA</div>
+                <div class="flavor-tag">🍯 HONEY LEMON</div>
+                <div class="flavor-tag">🍹 FRUIT PUNCH</div>
+                <div class="flavor-tag">🍊 ORANGE</div>
+                <div class="flavor-tag">🍇 GRAPE</div>
+                <div class="flavor-tag"> GREEN TEA</div>
+                <div class="flavor-tag">🍓 MIX BERRY</div>
+                <div class="flavor-tag">🍓 STRAWBERRY</div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <div class="menu-price" style="font-size: 2em; color: var(--primary);">59 <span data-i18n="baht">บาท</span></div>
+            </div>
         </div>
     </section>
 
@@ -247,9 +367,30 @@
                 coupon_step3: "นำคูปองไปแสดงที่เคาน์เตอร์ขายของทานเล่นก่อนชำระเงิน",
                 coupon_step4: "รับส่วนลดทันทีตามมูลค่าที่ระบุในคูปอง",
                 menu_title: "เมนูอาหารและเครื่องดื่ม",
-                menu_haunted: "บ้านผีสิง",
-                menu_hospital: "โรงพยาบาล",
-                menu_pyramid: "พีระมิด",
+                promo_3for100_title: "3 ชิ้น 100 บาท",
+                promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "คุ้มค่าที่สุดในราคาที่เป็นกันเอง",
+                promo_3for100_desc: "ร้อนๆ จากเตา... กรอบนอก นุ่มใน!",
+                menu_snacks: "อาหารว่าง",
+                snack_sb: "SB ROD SNACK CLASSIC",
+                snack_sb_th: "ข้าวเกรียบ SB",
+                snack_popcorn: "POPCORN",
+                snack_popcorn_desc: "Original / Caramel",
+                snack_fries: "FRENCH FRIES",
+                snack_fries_th: "เฟรนช์ฟรายส์",
+                snack_chicken_sticks: "CHICKEN STICKS",
+                snack_chicken_sticks_th: "สติ๊กไก่ทอด",
+                snack_chicken_pop: "CRISPY CHICKEN POP",
+                snack_chicken_pop_th: "ไก่ป๊อป",
+                snack_mixed: "MIXED FRIED SNACKS",
+                snack_mixed_th: "ของทานเล่นทอดรวม",
+                menu_drinks: "เครื่องดื่ม",
+                drink_water: "WATER",
+                drink_water_th: "น้ำดื่ม",
+                drink_soft: "SOFT DRINKS",
+                drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi",
+                menu_slushy: "SLUSHY",
+                baht: "บาท",
                 contact_title: "ติดต่อเรา",
                 contact_hours: "เวลาทำการ",
                 contact_hours_time: "11:00 น. - 22:00 น.<br>เริ่มโชว์ 11:30 น.",
@@ -286,9 +427,30 @@
                 coupon_step3: "Present coupon at snack counter before payment",
                 coupon_step4: "Get instant discount as indicated on coupon",
                 menu_title: "Food & Beverages Menu",
-                menu_haunted: "Haunted House",
-                menu_hospital: "Hospital",
-                menu_pyramid: "Pyramid",
+                promo_3for100_title: "3 Pieces for 100 Baht",
+                promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "Best Value at Friendly Price",
+                promo_3for100_desc: "Hot from the oven... Crispy outside, soft inside!",
+                menu_snacks: "Snacks",
+                snack_sb: "SB ROD SNACK CLASSIC",
+                snack_sb_th: "SB Rice Crackers",
+                snack_popcorn: "POPCORN",
+                snack_popcorn_desc: "Original / Caramel",
+                snack_fries: "FRENCH FRIES",
+                snack_fries_th: "French Fries",
+                snack_chicken_sticks: "CHICKEN STICKS",
+                snack_chicken_sticks_th: "Fried Chicken Sticks",
+                snack_chicken_pop: "CRISPY CHICKEN POP",
+                snack_chicken_pop_th: "Chicken Pop",
+                snack_mixed: "MIXED FRIED SNACKS",
+                snack_mixed_th: "Mixed Fried Snacks",
+                menu_drinks: "Beverages",
+                drink_water: "WATER",
+                drink_water_th: "Drinking Water",
+                drink_soft: "SOFT DRINKS",
+                drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi",
+                menu_slushy: "SLUSHY",
+                baht: "Baht",
                 contact_title: "Contact Us",
                 contact_hours: "Opening Hours",
                 contact_hours_time: "11:00 AM - 10:00 PM<br>Show starts 11:30 AM",
@@ -325,9 +487,30 @@
                 coupon_step3: "付款前在小吃柜台出示优惠券",
                 coupon_step4: "按优惠券所示获得即时折扣",
                 menu_title: "餐饮菜单",
-                menu_haunted: "鬼屋",
-                menu_hospital: "医院",
-                menu_pyramid: "金字塔",
+                promo_3for100_title: "3件100泰铢",
+                promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "最优惠的价格",
+                promo_3for100_desc: "热腾腾...外脆内软！",
+                menu_snacks: "小吃",
+                snack_sb: "SB ROD SNACK CLASSIC",
+                snack_sb_th: "SB米饼",
+                snack_popcorn: "POPCORN",
+                snack_popcorn_desc: "原味/焦糖",
+                snack_fries: "FRENCH FRIES",
+                snack_fries_th: "薯条",
+                snack_chicken_sticks: "CHICKEN STICKS",
+                snack_chicken_sticks_th: "炸鸡条",
+                snack_chicken_pop: "CRISPY CHICKEN POP",
+                snack_chicken_pop_th: "鸡块",
+                snack_mixed: "MIXED FRIED SNACKS",
+                snack_mixed_th: "混合炸小吃",
+                menu_drinks: "饮料",
+                drink_water: "WATER",
+                drink_water_th: "饮用水",
+                drink_soft: "SOFT DRINKS",
+                drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi",
+                menu_slushy: "冰沙",
+                baht: "泰铢",
                 contact_title: "联系我们",
                 contact_hours: "营业时间",
                 contact_hours_time: "上午11:00 - 晚上10:00<br>演出开始上午11:30",
@@ -364,9 +547,30 @@
                 coupon_step3: "Предъявите купон в стойке закусок перед оплатой",
                 coupon_step4: "Получите мгновенную скидку, указанную на купоне",
                 menu_title: "Меню еды и напитков",
-                menu_haunted: "Дом с привидениями",
-                menu_hospital: "Больница",
-                menu_pyramid: "Пирамида",
+                promo_3for100_title: "3 штуки за 100 бат",
+                promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "Лучшая цена по доступной цене",
+                promo_3for100_desc: "Горячее из печи... Хрустящее снаружи, мягкое внутри!",
+                menu_snacks: "Закуски",
+                snack_sb: "SB ROD SNACK CLASSIC",
+                snack_sb_th: "Рисовые крекеры SB",
+                snack_popcorn: "POPCORN",
+                snack_popcorn_desc: "Original / Caramel",
+                snack_fries: "FRENCH FRIES",
+                snack_fries_th: "Картофель фри",
+                snack_chicken_sticks: "CHICKEN STICKS",
+                snack_chicken_sticks_th: "Жареные куриные палочки",
+                snack_chicken_pop: "CRISPY CHICKEN POP",
+                snack_chicken_pop_th: "Куриные кусочки",
+                snack_mixed: "MIXED FRIED SNACKS",
+                snack_mixed_th: "Смешанные жареные закуски",
+                menu_drinks: "Напитки",
+                drink_water: "WATER",
+                drink_water_th: "Питьевая вода",
+                drink_soft: "SOFT DRINKS",
+                drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi",
+                menu_slushy: "SLUSHY",
+                baht: "бат",
                 contact_title: "Свяжитесь с нами",
                 contact_hours: "Часы работы",
                 contact_hours_time: "11:00 - 22:00<br>Шоу начинается в 11:30",
@@ -386,201 +590,11 @@
                 admin_logout: "Выйти",
                 admin_current: "Текущие позиции меню"
             },
-            hi: {
-                nav_home: "होम",
-                nav_coupon: "कूपन",
-                nav_menu: "मेनू",
-                nav_contact: "संपर्क",
-                tagline: "विश्वास करो या नहीं!",
-                coupon_title: "विशेष छूट कूपन",
-                coupon_get: "कूपन कैसे प्राप्त करें",
-                coupon_desc: "तुरंत छूट कूपन पाने के लिए हमारी रोमांचक गतिविधियों में शामिल हों!",
-                coupon_laser: "भोजन और पेय पर 10% छूट प्राप्त करें",
-                coupon_scream: "भोजन और पेय पर 15% छूट प्राप्त करें",
-                coupon_how: "कूपन का उपयोग कैसे करें",
-                coupon_step1: "लेजर मिशन या स्क्रीम इन द डार्क गतिविधियां पूरी करें",
-                coupon_step2: "क्षेत्र के कर्मचारी से छूट कूपन प्राप्त करें",
-                coupon_step3: "भुगतान से पहले स्नैक काउंटर पर कूपन पेश करें",
-                coupon_step4: "कूपन पर दर्शाए अनुसार तुरंत छूट प्राप्त करें",
-                menu_title: "भोजन और पेय मेनू",
-                menu_haunted: "भूतिया घर",
-                menu_hospital: "अस्पताल",
-                menu_pyramid: "पिरामिड",
-                contact_title: "संपर्क करें",
-                contact_hours: "खुलने का समय",
-                contact_hours_time: "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू",
-                contact_address: "पता",
-                contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "संपर्क चैनल",
-                contact_phone_text: "टेल: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
-                contact_map: "Google Maps पर देखें",
-                admin_login: "लॉगिन",
-                admin_error: "गलत पासवर्ड",
-                admin_warning: "नोट: डेटा केवल आपके ब्राउज़र में सहेजा जाता है (LocalStorage)। उत्पादन के लिए, HTML को सीधे संपादित करें या डेटाबेस से कनेक्ट करें।",
-                admin_manage: "भोजन मेनू प्रबंधित करें (डेमो)",
-                admin_name: "मेनू का नाम",
-                admin_price: "मूल्य (बाht)",
-                admin_zone: "क्षेत्र",
-                admin_add: "मेनू जोड़ें",
-                admin_logout: "लॉगआउट",
-                admin_current: "वर्तमान मेनू आइटम"
-            },
-            he: {
-                nav_home: "דף הבית",
-                nav_coupon: "קופונים",
-                nav_menu: "תפריט",
-                nav_contact: "צור קשר",
-                tagline: "תאמינו או לא!",
-                coupon_title: "קופוני הנחה מיוחדים",
-                coupon_get: "כיצד לקבל קופונים",
-                coupon_desc: "הצטרף לפעילויות המרגשות שלנו וקבל קופוני הנחה מיידית!",
-                coupon_laser: "קבל 10% הנחה על אוכל ומשקאות",
-                coupon_scream: "קבל 15% הנחה על אוכל ומשקאות",
-                coupon_how: "כיצד להשתמש בקופונים",
-                coupon_step1: "השלם את משימת הלייזר או צעקה בחושך",
-                coupon_step2: "קבל קופון הנחה מהצוות באזור",
-                coupon_step3: "הצג קופון בדלפק החטיפים לפני התשלום",
-                coupon_step4: "קבל הנחה מיידית כמצוין בקופון",
-                menu_title: "תפריט אוכל ומשקאות",
-                menu_haunted: "בית רדוף רוחות",
-                menu_hospital: "בית חולים",
-                menu_pyramid: "פירמידה",
-                contact_title: "צור קשר",
-                contact_hours: "שעות פתיחה",
-                contact_hours_time: "11:00 - 22:00<br>המופע מתחיל 11:30",
-                contact_address: "כתובת",
-                contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "ערוצי יצירת קשר",
-                contact_phone_text: "טל: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
-                contact_map: "צפה ב-Google Maps",
-                admin_login: "התחבר",
-                admin_error: "סיסמה שגויה",
-                admin_warning: "הערה: הנתונים נשמרים רק בדפדפן שלך (LocalStorage). לייצור, ערוך HTML ישירות או התחבר למסד נתונים.",
-                admin_manage: "נהל תפריט אוכל (דמו)",
-                admin_name: "שם התפריט",
-                admin_price: "מחיר (באט)",
-                admin_zone: "אזור",
-                admin_add: "הוסף תפריט",
-                admin_logout: "התנתק",
-                admin_current: "פריטי תפריט נוכחיים"
-            },
-            ja: {
-                nav_home: "ホーム",
-                nav_coupon: "クーポン",
-                nav_menu: "メニュー",
-                nav_contact: "お問い合わせ",
-                tagline: "信じられない！",
-                coupon_title: "特別割引クーポン",
-                coupon_get: "クーポンの入手方法",
-                coupon_desc: "エキサイティングなアクティビティに参加して即時割引クーポンを入手！",
-                coupon_laser: "飲食代10%割引",
-                coupon_scream: "飲食代15%割引",
-                coupon_how: "クーポンの使い方",
-                coupon_step1: "レーザーミッションまたはダークスクリームを完了",
-                coupon_step2: "ゾーンのスタッフから割引クーポンを受け取る",
-                coupon_step3: "支払い前にスナックカウンターでクーポンを提示",
-                coupon_step4: "クーポンに記載された即時割引を受ける",
-                menu_title: "飲食メニュー",
-                menu_haunted: "お化け屋敷",
-                menu_hospital: "病院",
-                menu_pyramid: "ピラミッド",
-                contact_title: "お問い合わせ",
-                contact_hours: "営業時間",
-                contact_hours_time: "午前11:00 - 午後10:00<br>ショー開始 午前11:30",
-                contact_address: "住所",
-                contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "連絡先",
-                contact_phone_text: "電話: +66 (38) 710-294-8<br>FAX: +66 (38) 710-487",
-                contact_map: "Google Mapsで見る",
-                admin_login: "ログイン",
-                admin_error: "パスワードが正しくありません",
-                admin_warning: "注意：データはブラウザのみに保存されます（LocalStorage）。本番環境ではHTMLを直接編集するかデータベースに接続してください。",
-                admin_manage: "フードメニュー管理（デモ）",
-                admin_name: "メニュー名",
-                admin_price: "価格（バーツ）",
-                admin_zone: "ゾーン",
-                admin_add: "メニューを追加",
-                admin_logout: "ログアウト",
-                admin_current: "現在のメニュー項目"
-            },
-            ko: {
-                nav_home: "홈",
-                nav_coupon: "쿠폰",
-                nav_menu: "메뉴",
-                nav_contact: "연락처",
-                tagline: "믿거나 말거나!",
-                coupon_title: "특별 할인 폰",
-                coupon_get: "폰 받는 방법",
-                coupon_desc: "흥미진진한 활동에 참여하고 즉시 할인 쿠폰을 받으세요!",
-                coupon_laser: "음식 및 음료 10% 할인",
-                coupon_scream: "음식 및 음료 15% 할인",
-                coupon_how: "쿠폰 사용 방법",
-                coupon_step1: "레이저 미션 또는 스크림 인 더 다크 완료",
-                coupon_step2: "존 직원에게서 할인 쿠폰 받기",
-                coupon_step3: "결제 전 스낵 카운터에서 쿠 제시",
-                coupon_step4: "폰에 표시된 즉시 할인 받기",
-                menu_title: "음식 및 음료 메뉴",
-                menu_haunted: "유령의 집",
-                menu_hospital: "병원",
-                menu_pyramid: "피라미드",
-                contact_title: "연락처",
-                contact_hours: "운영 시간",
-                contact_hours_time: "오전 11:00 - 오후 10:00<br>쇼 시작 오전 11:30",
-                contact_address: "주소",
-                contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "연락처",
-                contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
-                contact_map: "Google Maps에서 보기",
-                admin_login: "로그인",
-                admin_error: "잘못된 비밀번호",
-                admin_warning: "참고: 데이터는 브라우저에만 저장됩니다 (LocalStorage). 프로덕션의 경우 HTML을 직접 편집하거나 데이터베이스에 연결하세요.",
-                admin_manage: "음식 메뉴 관리 (데모)",
-                admin_name: "메뉴 이름",
-                admin_price: "가격 (바트)",
-                admin_zone: "존",
-                admin_add: "메뉴 추가",
-                admin_logout: "로그아웃",
-                admin_current: "현재 메뉴 항목"
-            },
-            ar: {
-                nav_home: "الرئيسية",
-                nav_coupon: "القسائم",
-                nav_menu: "القائمة",
-                nav_contact: "اتصل بنا",
-                tagline: "صدق أو لا تصدق!",
-                coupon_title: "قسائم خصم خاصة",
-                coupon_get: "كيفية الحصول على القسائم",
-                coupon_desc: "انضم إلى أنشطتنا المثيرة واحصل على قسائم خصم فورية!",
-                coupon_laser: "احصل على خصم 10% على الطعام والمشروبات",
-                coupon_scream: "احصل على خصم 15% على الطعام والمشروبات",
-                coupon_how: "كيفية استخدام القسائم",
-                coupon_step1: "أكمل مهمة الليزر أو الصراخ في الظلام",
-                coupon_step2: "احصل على قسيمة الخصم من موظف المنطقة",
-                coupon_step3: "أظهر القسيمة في-counter الوجبات الخفيفة قبل الدفع",
-                coupon_step4: "احصل على خصم فوري كما هو موضح في القسيمة",
-                menu_title: "قائمة الطعام والمشروبات",
-                menu_haunted: "البيت المسكون",
-                menu_hospital: "المستشفى",
-                menu_pyramid: "الهرم",
-                contact_title: "اتصل بنا",
-                contact_hours: "ساعات العمل",
-                contact_hours_time: "11:00 ص - 10:00 م<br>يبدأ العرض 11:30 ص",
-                contact_address: "العنوان",
-                contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "قنوات الاتصال",
-                contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
-                contact_map: "عرض على Google Maps",
-                admin_login: "تسجيل الدخول",
-                admin_error: "كلمة المرور غير صحيحة",
-                admin_warning: "ملاحظة: يتم حفظ البيانات فقط في متصفحك (LocalStorage). للإنتاج، قم بتحرير HTML مباشرة أو اتصل بقاعدة البيانات.",
-                admin_manage: "إدارة قائمة الطعام (تجريبي)",
-                admin_name: "اسم القائمة",
-                admin_price: "السعر (بات)",
-                admin_zone: "المنطقة",
-                admin_add: "إضافة قائمة",
-                admin_logout: "تسجيل الخروج",
-                admin_current: "عناصر القائمة الحالية"
-            }
+            hi: { nav_home: "होम", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क", tagline: "विश्वास करो या नहीं!", menu_title: "भोजन और पेय मेनू", menu_snacks: "नाश्ते", menu_drinks: "पेय", menu_slushy: "SLUSHY", baht: "बाht", contact_title: "संपर्क करें", contact_hours: "खुलने का समय", contact_hours_time: "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू", contact_address: "पता", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "संपर्क चैनल", contact_phone_text: "टेल: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487", contact_map: "Google Maps पर देखें", admin_login: "लॉगिन", admin_error: "गलत पासवर्ड", admin_warning: "नोट: डेटा केवल आपके ब्राउज़र में सहेजा जाता है (LocalStorage)। उत्पादन के लिए, HTML को सीधे संपादित करें या डेटाबेस से कनेक्ट करें।", admin_manage: "भोजन मेनू प्रबंधित करें (डेमो)", admin_name: "मेनू का नाम", admin_price: "मूल्य (बाht)", admin_zone: "क्षेत्र", admin_add: "मेनू जोड़ें", admin_logout: "लॉगआउट", admin_current: "वर्तमान मेनू आइटम", promo_3for100_title: "3 टुकड़े 100 बाht के लिए", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "अनुकूल कीमत पर सर्वोत्तम मूल्य", promo_3for100_desc: "ओवन से गर्म... बाहर से कुरकुरा, अंदर से नरम!", snack_sb: "SB ROD SNACK CLASSIC", snack_sb_th: "SB चावल के क्रैकर्स", snack_popcorn: "POPCORN", snack_popcorn_desc: "Original / Caramel", snack_fries: "FRENCH FRIES", snack_fries_th: "फ्रेंच फ्राइज़", snack_chicken_sticks: "CHICKEN STICKS", snack_chicken_sticks_th: "तली हुई चिकन स्टिक्स", snack_chicken_pop: "CRISPY CHICKEN POP", snack_chicken_pop_th: "चिकन पॉप", snack_mixed: "MIXED FRIED SNACKS", snack_mixed_th: "मिश्रित तले हुए नाश्ते", drink_water: "WATER", drink_water_th: "पीने का पानी", drink_soft: "SOFT DRINKS", drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi", coupon_title: "विशेष छूट कूपन", coupon_get: "कूपन कैसे प्राप्त करें", coupon_desc: "तुरंत छूट कूपन पाने के लिए हमारी रोमांचक गतिविधियों में शामिल हों!", coupon_laser: "भोजन और पेय पर 10% छूट प्राप्त करें", coupon_scream: "भोजन और पेय पर 15% छूट प्राप्त करें", coupon_how: "कूपन का उपयोग कैसे करें", coupon_step1: "लेजर मिशन या स्क्रीम इन द डार्क गतिविधियां पूरी करें", coupon_step2: "क्षेत्र के कर्मचारी से छूट कूपन प्राप्त करें", coupon_step3: "भुगतान से पहले स्नैक काउंटर पर कूपन पेश करें", coupon_step4: "कूपन पर दर्शाए अनुसार तुरंत छूट प्राप्त करें" },
+            he: { nav_home: "דף הבית", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר", tagline: "תאמינו או לא!", menu_title: "תפריט אוכל ומשקאות", menu_snacks: "חטיפים", menu_drinks: "משקאות", menu_slushy: "SLUSHY", baht: "באט", contact_title: "צור קשר", contact_hours: "שעות פתיחה", contact_hours_time: "11:00 - 22:00<br>המופע מתחיל 11:30", contact_address: "כתובת", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "ערוצי יצירת קשר", contact_phone_text: "טל: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487", contact_map: "צפה ב-Google Maps", admin_login: "התחבר", admin_error: "סיסמה שגויה", admin_warning: "הערה: הנתונים נשמרים רק בדפדפן שלך (LocalStorage). לייצור, ערוך HTML ישירות או התחבר למסד נתונים.", admin_manage: "נהל תפריט אוכל (דמו)", admin_name: "שם התפריט", admin_price: "מחיר (באט)", admin_zone: "אזור", admin_add: "הוסף תפריט", admin_logout: "התנתק", admin_current: "פריטי תפריט נוכחיים", promo_3for100_title: "3 פריטים ב-100 באט", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "הערך הטוב ביותר במחיר ידידותי", promo_3for100_desc: "חם מהתנור... פריך בחוץ, רך בפנים!", snack_sb: "SB ROD SNACK CLASSIC", snack_sb_th: "קרקרי אורז SB", snack_popcorn: "POPCORN", snack_popcorn_desc: "Original / Caramel", snack_fries: "FRENCH FRIES", snack_fries_th: "צ'יפס", snack_chicken_sticks: "CHICKEN STICKS", snack_chicken_sticks_th: "מקלות עוף מטוגנים", snack_chicken_pop: "CRISPY CHICKEN POP", snack_chicken_pop_th: "פופ עוף", snack_mixed: "MIXED FRIED SNACKS", snack_mixed_th: "חטיפים מטוגנים מעורבים", drink_water: "WATER", drink_water_th: "מי שתייה", drink_soft: "SOFT DRINKS", drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi", coupon_title: "קופוני הנחה מיוחדים", coupon_get: "כיצד לקבל קופונים", coupon_desc: "הצטרף לפעילויות המרגשות שלנו וקבל קופוני הנחה מיידית!", coupon_laser: "קבל 10% הנחה על אוכל ומשקאות", coupon_scream: "קבל 15% הנחה על אוכל ומשקאות", coupon_how: "כיצד להשתמש בקופונים", coupon_step1: "השלם את משימת הלייזר או צעקה בחושך", coupon_step2: "קבל קופון הנחה מהצוות באזור", coupon_step3: "הצג קופון בדלפק החטיפים לפני התשלום", coupon_step4: "קבל הנחה מיידית כמצוין בקופון" },
+            ja: { nav_home: "ホーム", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ", tagline: "信じられない！", menu_title: "飲食メニュー", menu_snacks: "スナック", menu_drinks: "飲み物", menu_slushy: "SLUSHY", baht: "バーツ", contact_title: "お問い合わせ", contact_hours: "営業時間", contact_hours_time: "午前11:00 - 午後10:00<br>ショー開始 午前11:30", contact_address: "住所", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "連絡先", contact_phone_text: "電話: +66 (38) 710-294-8<br>FAX: +66 (38) 710-487", contact_map: "Google Mapsで見る", admin_login: "ログイン", admin_error: "パスワードが正しくありません", admin_warning: "注意：データはブラウザのみに保存されます（LocalStorage）。本番環境ではHTMLを直接編集するかデータベースに接続してください。", admin_manage: "フードメニュー管理（デモ）", admin_name: "メニュー名", admin_price: "価格（バーツ）", admin_zone: "ゾーン", admin_add: "メニューを追加", admin_logout: "ログアウト", admin_current: "現在のメニュー項目", promo_3for100_title: "3個で100バーツ", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "手頃な価格で最高の価値", promo_3for100_desc: "オーブンから熱々...外はカリカリ、中はふわふわ！", snack_sb: "SB ROD SNACK CLASSIC", snack_sb_th: "SBライスクラッカー", snack_popcorn: "POPCORN", snack_popcorn_desc: "Original / Caramel", snack_fries: "FRENCH FRIES", snack_fries_th: "フライドポテト", snack_chicken_sticks: "CHICKEN STICKS", snack_chicken_sticks_th: "フライドチキンスティック", snack_chicken_pop: "CRISPY CHICKEN POP", snack_chicken_pop_th: "チキンポップ", snack_mixed: "MIXED FRIED SNACKS", snack_mixed_th: "ミックスフライドスナック", drink_water: "WATER", drink_water_th: "飲料水", drink_soft: "SOFT DRINKS", drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi", coupon_title: "特別割引クーポン", coupon_get: "クーポンの入手方法", coupon_desc: "エキサイティングなアクティビティに参加して即時割引クーポンを入手！", coupon_laser: "飲食代10%割引", coupon_scream: "飲食代15%割引", coupon_how: "クーポンの使い方", coupon_step1: "レーザーミッションまたはダークスクリームを完了", coupon_step2: "ゾーンのスタッフから割引クーポンを受け取る", coupon_step3: "支払い前にスナックカウンターでクーポンを提示", coupon_step4: "クーポンに記載された即時割引を受ける" },
+            ko: { nav_home: "홈", nav_coupon: "폰", nav_menu: "메뉴", nav_contact: "연락처", tagline: "믿거나 말거나!", menu_title: "음식 및 음료 메뉴", menu_snacks: "스낵", menu_drinks: "음료", menu_slushy: "SLUSHY", baht: "바트", contact_title: "연락처", contact_hours: "운영 시간", contact_hours_time: "오전 11:00 - 오후 10:00<br>쇼 시작 오전 11:30", contact_address: "주소", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "연락처", contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487", contact_map: "Google Maps에서 보기", admin_login: "로그인", admin_error: "잘못된 비밀번호", admin_warning: "참고: 데이터는 브라우저에만 저장됩니다 (LocalStorage). 프로덕션의 경우 HTML을 직접 편집하거나 데이터베이스에 연결하세요.", admin_manage: "음식 메뉴 관리 (데모)", admin_name: "메뉴 이름", admin_price: "가격 (바트)", admin_zone: "존", admin_add: "메뉴 추가", admin_logout: "로그아웃", admin_current: "현재 메뉴 항목", promo_3for100_title: "3개 100바트", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "합리적인 가격의 최고의 가치", promo_3for100_desc: "오븐에서 갓 나온... 바삭바삭하고 속은 부드럽!", snack_sb: "SB ROD SNACK CLASSIC", snack_sb_th: "SB 라이스 크래커", snack_popcorn: "POPCORN", snack_popcorn_desc: "Original / Caramel", snack_fries: "FRENCH FRIES", snack_fries_th: "프렌치 프라이", snack_chicken_sticks: "CHICKEN STICKS", snack_chicken_sticks_th: "프라이드 치킨 스틱", snack_chicken_pop: "CRISPY CHICKEN POP", snack_chicken_pop_th: "치킨 팝", snack_mixed: "MIXED FRIED SNACKS", snack_mixed_th: "믹스 프라이드 스낵", drink_water: "WATER", drink_water_th: "식수", drink_soft: "SOFT DRINKS", drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi", coupon_title: "특별 할인 쿠폰", coupon_get: "폰 받는 방법", coupon_desc: "흥미진진한 활동에 참여하고 즉시 할인 쿠폰을 받으세요!", coupon_laser: "음식 및 음료 10% 할인", coupon_scream: "음식 및 음료 15% 할인", coupon_how: "쿠폰 사용 방법", coupon_step1: "레이저 미션 또는 스크림 인 더 다크 완료", coupon_step2: "존 직원에게서 할인 쿠폰 받기", coupon_step3: "결제 전 스낵 카운터에서 쿠 제시", coupon_step4: "쿠폰에 표시된 즉시 할인 받기" },
+            ar: { nav_home: "الرئيسية", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا", tagline: "صدق أو لا تصدق!", menu_title: "قائمة الطعام والمشروبات", menu_snacks: "الوجبات الخفيفة", menu_drinks: "المشروبات", menu_slushy: "SLUSHY", baht: "بات", contact_title: "اتصل بنا", contact_hours: "ساعات العمل", contact_hours_time: "11:00 ص - 10:00 م<br>يبدأ العرض 11:30 ص", contact_address: "العنوان", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "قنوات الاتصال", contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487", contact_map: "عرض على Google Maps", admin_login: "تسجيل الدخول", admin_error: "كلمة المرور غير صحيحة", admin_warning: "ملاحظة: يتم حفظ البيانات فقط في متصفحك (LocalStorage). للإنتاج، قم بتحرير HTML مباشرة أو اتصل بقاعدة البيانات.", admin_manage: "إدارة قائمة الطعام (تجريبي)", admin_name: "اسم القائمة", admin_price: "السعر (بات)", admin_zone: "المنطقة", admin_add: "إضافة قائمة", admin_logout: "تسجيل الخروج", admin_current: "عناصر القائمة الحالية", promo_3for100_title: "3 قطع بـ 100 بات", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "أفضل قيمة بسعر مناسب", promo_3for100_desc: "ساخن من الفرن... مقرمش من الخارج، طري من الداخل!", snack_sb: "SB ROD SNACK CLASSIC", snack_sb_th: "بسكويت الأرز SB", snack_popcorn: "POPCORN", snack_popcorn_desc: "Original / Caramel", snack_fries: "FRENCH FRIES", snack_fries_th: "بطاطس مقلية", snack_chicken_sticks: "CHICKEN STICKS", snack_chicken_sticks_th: "أعواد دجاج مقلية", snack_chicken_pop: "CRISPY CHICKEN POP", snack_chicken_pop_th: "بوب الدجاج", snack_mixed: "MIXED FRIED SNACKS", snack_mixed_th: "وجبات خفيفة مقلية مختلطة", drink_water: "WATER", drink_water_th: "مياه الشرب", drink_soft: "SOFT DRINKS", drink_soft_desc: "Sprite, Fanta, Coke, Schweppes, Oishi", coupon_title: "قسائم خصم خاصة", coupon_get: "كيفية الحصول على القسائم", coupon_desc: "انضم إلى أنشطتنا المثيرة واحصل على قسائم خصم فورية!", coupon_laser: "احصل على خصم 10% على الطعام والمشروبات", coupon_scream: "احصل على خصم 15% على الطعام والمشروبات", coupon_how: "كيفية استخدام القسائم", coupon_step1: "أكمل مهمة الليزر أو الصراخ في الظلام", coupon_step2: "احصل على قسيمة الخصم من موظف المنطقة", coupon_step3: "أظهر القسيمة في counter الوجبات الخفيفة قبل الدفع", coupon_step4: "احصل على خصم فوري كما هو موضح في القسيمة" }
         };
 
         const defaultAttractions = {
@@ -612,26 +626,24 @@
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
         let currentMenu = JSON.parse(localStorage.getItem('ripleysMenu')) || [
-            { name: "น้ำอัดลม", price: 40, zone: "scream" },
-            { name: "ป๊อปคอร์น", price: 60, zone: "haunted" },
-            { name: "น้ำดื่ม", price: 20, zone: "hospital" },
-            { name: "ไอศกรีม", price: 50, zone: "pyramid" }
+            { name: "น้ำอัดลม", price: 35, zone: "scream" },
+            { name: "ป๊อปคอร์น", price: 90, zone: "haunted" },
+            { name: "น้ำดื่ม", price: 25, zone: "hospital" },
+            { name: "Slushy", price: 59, zone: "pyramid" }
         ];
-        let currentMenuZone = 'scream';
+        let currentMenuZone = 'snacks';
 
         function changeLang(lang) {
             currentLang = lang;
             localStorage.setItem('ripleysLang', lang);
             document.getElementById('langSelect').value = lang;
             
-            // RTL Support
             if (lang === 'ar' || lang === 'he') {
                 document.documentElement.setAttribute('dir', 'rtl');
             } else {
                 document.documentElement.setAttribute('dir', 'ltr');
             }
 
-            // Update ALL elements with data-i18n attribute
             const t = translations[lang] || translations['en'];
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -640,10 +652,8 @@
                 }
             });
 
-            // Update attractions
             renderAttractions();
             
-            // Update menu if visible
             if (document.getElementById('menu').classList.contains('active')) {
                 renderMenu(currentMenuZone);
             }
@@ -668,7 +678,7 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             event.target.closest('.nav-btn').classList.add('active');
-            if (id === 'menu') renderMenu('scream');
+            if (id === 'menu') renderMenu('snacks');
         }
 
         function showMenu(zone) {
@@ -681,13 +691,14 @@
         function renderMenu(zone) {
             const items = currentMenu.filter(m => m.zone === zone);
             const container = document.getElementById('menuContent');
+            if (!container) return;
             if (items.length === 0) {
                 container.innerHTML = '<p style="text-align:center; color:#999; padding:20px;">' + (translations[currentLang].menu_empty || 'ยังไม่มีเมนูในโซนนี้') + '</p>';
             } else {
                 container.innerHTML = items.map(m => `
                     <div class="menu-item">
                         <span><i class="fas fa-utensils" style="color:var(--primary); margin-right:10px;"></i> ${m.name}</span>
-                        <span class="price">${m.price} ${translations[currentLang].currency || 'บาท'}</span>
+                        <span class="price">${m.price} ${translations[currentLang].baht || 'บาท'}</span>
                     </div>
                 `).join('');
             }
