@@ -39,7 +39,10 @@
         .menu-item-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; border: 2px solid #f0f0f0; }
         .menu-item-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
         .menu-item-card img { width: 100%; height: 200px; object-fit: cover; background: #f0f0f0; }
-        .menu-item-info { padding: 20px; }
+        .img-wrap { position: relative; }
+        .menu-price-badge { position: absolute; bottom: 0; right: 12px; transform: translateY(50%); background: var(--primary); color: white; padding: 6px 16px; border-radius: 22px; font-size: 1.1em; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.35); border: 2px solid white; z-index: 2; white-space: nowrap; }
+        .menu-item-info { padding: 28px 20px 20px; }
+        [dir="rtl"] .menu-price-badge { right: auto; left: 12px; }
         .menu-item-info h4 { font-size: 1.2em; color: var(--dark); margin-bottom: 5px; }
         .menu-item-info p { color: #777; font-size: 0.9em; margin-bottom: 10px; }
         .menu-price { font-size: 1.5em; color: var(--primary); font-weight: bold; }
@@ -117,7 +120,8 @@
             .modal-box iframe { height: 200px; }
             .menu-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .menu-item-card img, .menu-item-card > div { height: 120px; }
-            .menu-item-info { padding: 12px; }
+            .menu-item-info { padding: 24px 12px 12px; }
+            .menu-price-badge { font-size: 0.95em; padding: 4px 12px; }
             .menu-item-info h4 { font-size: 0.95em; }
             .menu-price { font-size: 1.2em; }
             .promo-banner { padding: 20px 15px; }
@@ -213,12 +217,6 @@
         </div>
         <div class="slushy-counter">
             <img id="slushyCounterImg" src="" alt="Slushy Counter" style="max-width: 100%; border-radius: 15px; display: none;">
-        </div>
-        <div class="promo-banner">
-            <h3 data-i18n="promo_3for100_title">3 ชิ้น 100 บาท</h3>
-            <p data-i18n="promo_3for100_subtitle">3 PIECES FOR 100 BAHT</p>
-            <div class="highlight" data-i18n="promo_3for100_tag">คุ้มค่าที่สุดในราคาที่เป็นกันเอง</div>
-            <p style="margin-top: 15px; font-style: italic;" data-i18n="promo_3for100_desc">ร้อนๆ จากเตา... กรอบนอก นุ่มใน!</p>
         </div>
         <div class="menu-category">
             <h3 data-i18n="menu_snacks">อาหารว่าง</h3>
@@ -485,8 +483,7 @@
                     "contact_phone_text": "电话：+66 (38) 710-294-8<br>传真：+66 (38) 710-487",
                     "contact_map": "在谷歌地图上查看",
                     "admin_login": "登录",
-                    "admin_error": "密码错误",
-                    "tap_view": "点击查看详情"
+                    "admin_error": "密码错误"
           },
           "ru": {
                     "nav_home": "Главная",
@@ -524,8 +521,7 @@
                     "contact_phone_text": "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487",
                     "contact_map": "Открыть на Google Картах",
                     "admin_login": "Войти",
-                    "admin_error": "Неверный пароль",
-                    "tap_view": "Нажмите, чтобы подробнее"
+                    "admin_error": "Неверный пароль"
           },
           "hi": {
                     "nav_home": "होम",
@@ -563,8 +559,7 @@
                     "contact_phone_text": "फोन: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
                     "contact_map": "गूगल मैप्स पर देखें",
                     "admin_login": "लॉगिन",
-                    "admin_error": "गलत पासवर्ड",
-                    "tap_view": "विवरण देखने के लिए टैप करें"
+                    "admin_error": "गलत पासवर्ड"
           },
           "he": {
                     "nav_home": "דף הבית",
@@ -602,8 +597,7 @@
                     "contact_phone_text": "טלפון: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
                     "contact_map": "צפייה במפות גוגל",
                     "admin_login": "כניסה",
-                    "admin_error": "סיסמה שגויה",
-                    "tap_view": "הקש לפרטים"
+                    "admin_error": "סיסמה שגויה"
           },
           "ja": {
                     "nav_home": "ホーム",
@@ -641,8 +635,7 @@
                     "contact_phone_text": "電話: +66 (38) 710-294-8<br>ファックス: +66 (38) 710-487",
                     "contact_map": "Googleマップで見る",
                     "admin_login": "ログイン",
-                    "admin_error": "パスワードが間違っています",
-                    "tap_view": "タップして詳細を見る"
+                    "admin_error": "パスワードが間違っています"
           },
           "ko": {
                     "nav_home": "홈",
@@ -680,8 +673,7 @@
                     "contact_phone_text": "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
                     "contact_map": "구글 지도에서 보기",
                     "admin_login": "로그인",
-                    "admin_error": "비밀번호가 틀렸습니다",
-                    "tap_view": "탭하여 상세 보기"
+                    "admin_error": "비밀번호가 틀렸습니다"
           },
           "ar": {
                     "nav_home": "الرئيسية",
@@ -719,10 +711,9 @@
                     "contact_phone_text": "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
                     "contact_map": "عرض على خرائط جوجل",
                     "admin_login": "تسجيل الدخول",
-                    "admin_error": "كلمة مرور غير صحيحة",
-                    "tap_view": "اضغط لعرض التفاصيل"
+                    "admin_error": "كلمة مرور غير صحيحة"
           }
-};;;;;;;
+};;
 
         // Fallback translations for other languages (use English as base, then fully override below)
 ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
@@ -899,9 +890,8 @@ Object.assign(translations.ar, {
                                         "desc": "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "https://youtu.be/MdeEmO1Fuzg?si=GfSFOHYHOS-IXN7o",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": "https://youtu.be/MdeEmO1Fuzg?si=GfSFOHYHOS-IXN7o"
                               },
                               {
                                         "title": "สวนสนุกสุดสยอง",
@@ -909,9 +899,8 @@ Object.assign(translations.ar, {
                                         "desc": "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "โกดังผีสิง",
@@ -919,9 +908,8 @@ Object.assign(translations.ar, {
                                         "desc": "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส",
@@ -929,9 +917,8 @@ Object.assign(translations.ar, {
                                         "desc": "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "มหัศจรรย์เขาวงกต",
@@ -940,8 +927,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "เกมส์ตะลุยเลเซอร์",
@@ -950,8 +936,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "โรงพยาบาลหลอน",
@@ -959,9 +944,8 @@ Object.assign(translations.ar, {
                                         "desc": "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "พีระมิดที่สาบสูญ",
@@ -970,8 +954,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "เกมอินเตอร์แอคทีฟสุดล้ำ",
@@ -980,8 +963,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "หนีตายสวนสยอง",
@@ -990,8 +972,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "en": [
@@ -1001,9 +982,8 @@ Object.assign(translations.ar, {
                                         "desc": "Ripley's Believe It or Not! One of the world's most famous museums originating from the USA. The only one that collects wonders from all over the world, both mysterious and beautiful. Discover and experience over 350 types of real artifacts that will amaze you, such as human skin masks, 3-inch shrunken heads, a Titanic model made from over 1,000,000 matchsticks, a man with 4 black pupils, and much more. An experience you will never forget. Believe It or Not!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Scream in the Dark",
@@ -1011,9 +991,8 @@ Object.assign(translations.ar, {
                                         "desc": "The newest and 6th extreme ride at Ripley World Pattaya, welcoming thrill-seekers with a horror experience. Scream in the Dark was once a famous amusement park that suddenly closed down for unknown reasons. Some say they saw clown spirits floating at night, or heard screams in the darkness. No one dared to prove it until Ripley World Pattaya invites you to explore this deadly path. The only way to escape this haunted amusement park is with your sharp shooting skills and scream as loud as you can!",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Haunted Warehouse",
@@ -1021,9 +1000,8 @@ Object.assign(translations.ar, {
                                         "desc": "The largest coffin warehouse among the 5 in the world, with terrifying legends and cruelty spoken of for over 80 years. Encounter ghosts and uninvited guests from another realm, with special effects and the latest techniques from America in over 20 rooms filled with horror that will make you tremble at every step! Warning: Not suitable for the faint-hearted.",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Louis Tussaud's Waxworks",
@@ -1031,9 +1009,8 @@ Object.assign(translations.ar, {
                                         "desc": "The 5th branch in the world and the first in Thailand. This wax museum displays lifelike wax figures of important persons and world celebrities, both Thai and international, living and deceased, totaling over 84 figures. The exhibition is divided into 9 zones: THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER. The wax figures are crafted by world-class artists from various countries, including Thai artists.",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Infinity Maze",
@@ -1042,8 +1019,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Laser Mission",
@@ -1052,8 +1028,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "The Horror Hospital",
@@ -1061,9 +1036,8 @@ Object.assign(translations.ar, {
                                         "desc": "In a remote town in southern England, following tales from relatives and close ones of many patients who received treatment at this hospital, one by one with no sign of returning. This is the beginning that makes everyone wonder and fear what happened. Waiting for brave souls from all directions to challenge the terrifying mystery of this place.",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Lost Pyramid",
@@ -1072,8 +1046,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Interactive Games",
@@ -1082,8 +1055,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Escape the Haunted Garden",
@@ -1092,8 +1064,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "zh": [
@@ -1103,9 +1074,8 @@ Object.assign(translations.ar, {
                                         "desc": "瑞普利信不信由你博物馆是源自美国的世界知名博物馆之一，收藏了来自世界各地既神秘又精美的奇珍异宝。馆内展示超过350件真实展品，令人叹为观止，例如人皮面具、缩至3英寸的人头、用超过100万根火柴制成的泰坦尼克号模型，以及拥有4个黑色瞳孔的男子等等。这将是您永生难忘的体验，信不信由你！",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "黑暗尖叫",
@@ -1113,9 +1083,8 @@ Object.assign(translations.ar, {
                                         "desc": "Ripley World芭堤雅最新推出的第6项刺激游乐设施，专为喜爱恐怖挑战的游客打造。黑暗尖叫曾是一座著名的游乐园，却在不明原因下突然关闭。有人说曾在夜晚看到小丑幽灵飘荡，也有人说在黑暗中听到尖叫声，无人敢证实真相，直到Ripley World芭堤雅邀请您一同踏上这条死亡之路一探究竟。要逃离这座闹鬼游乐园，唯一的办法就是靠您精准的射击技巧，并尽情放声尖叫！",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "闹鬼仓库",
@@ -1123,9 +1092,8 @@ Object.assign(translations.ar, {
                                         "desc": "世界5大棺材仓库中规模最大的一座，流传着长达80多年的恐怖传说与残酷故事。在这里您将遇见幽灵与来自异界的不速之客，并体验来自美国最新的特效与技术，20多个房间充满恐怖氛围，让您每走一步都心惊胆战，直到最后一刻仍毛骨悚然！警告：胆小者请勿入内。",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "路易·杜莎夫人蜡像馆",
@@ -1133,9 +1101,8 @@ Object.assign(translations.ar, {
                                         "desc": "这是该品牌在全球的第5家分馆，也是泰国首家蜡像馆，馆内展示超过84尊栩栩如生的蜡像，涵盖泰国及国际知名人物，包括在世与已故名人。展区共分为9大主题区：泰式日落花园派对、体育、流行歌星、秘密房间、英国皇室、政治与人道主义领袖、恐怖巢穴、蝙蝠侠与伙伴们、明星角色扮演。所有蜡像均由多位世界顶尖艺术家精心打造而成。",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "无限迷宫",
@@ -1144,8 +1111,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "镭射任务",
@@ -1154,8 +1120,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "恐怖医院",
@@ -1163,9 +1128,8 @@ Object.assign(translations.ar, {
                                         "desc": "在英格兰南部一座偏远小镇上，据许多曾在这家医院接受治疗的病人的亲属和亲近之人流传的说法，一个接一个的病人音讯全无，从未归来。这便是一切疑惑与恐惧的起点，究竟发生了什么？如今，等待着来自四面八方的勇者，前来挑战这个地方骇人听闻的谜团。",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "失落的金字塔",
@@ -1174,8 +1138,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "互动游戏",
@@ -1184,8 +1147,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "逃离闹鬼花园",
@@ -1194,8 +1156,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "ru": [
@@ -1205,9 +1166,8 @@ Object.assign(translations.ar, {
                                         "desc": "Ripley's Believe It or Not! — один из самых известных музеев мира, зародившийся в США. Единственный в своём роде музей, собирающий чудеса со всего света — таинственные и прекрасные одновременно. Откройте для себя более 350 подлинных экспонатов, которые вас поразят: маски из человеческой кожи, уменьшенные до 3 дюймов головы, модель «Титаника» из более чем 1 000 000 спичек, человек с 4 чёрными зрачками и многое другое. Впечатления, которые вы никогда не забудете. Хотите верьте, хотите нет!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Крик во тьме",
@@ -1215,9 +1175,8 @@ Object.assign(translations.ar, {
                                         "desc": "Новейший и уже 6-й экстремальный аттракцион в Ripley World Pattaya, созданный для любителей острых ощущений. «Крик во тьме» когда-то был знаменитым парком развлечений, который неожиданно закрылся по неизвестным причинам. Одни утверждают, что видели по ночам призраков клоунов, другие — что слышали крики в темноте. Никто не решался проверить это, пока Ripley World Pattaya не пригласил вас пройти этим смертельно опасным путём. Единственный способ выбраться из этого парка с привидениями — меткая стрельба и громкий крик!",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Дом с привидениями",
@@ -1225,9 +1184,8 @@ Object.assign(translations.ar, {
                                         "desc": "Крупнейший из пяти в мире складов гробов, окружённый пугающими легендами и жестокими историями, передающимися из уст в уста уже более 80 лет. Встретьте призраков и незваных гостей из иного мира с новейшими спецэффектами и технологиями из Америки в более чем 20 комнатах, наполненных ужасом, который заставит вас содрогаться на каждом шагу вплоть до самого конца! Предупреждение: не рекомендуется людям со слабыми нервами.",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Музей восковых фигур Луи Тюссо",
@@ -1235,9 +1193,8 @@ Object.assign(translations.ar, {
                                         "desc": "Пятый филиал в мире и первый в Таиланде. В этом музее восковых фигур представлены более 84 реалистичных фигур выдающихся личностей и мировых знаменитостей, как тайских, так и зарубежных, живых и уже ушедших. Экспозиция разделена на 9 зон: THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER. Восковые фигуры созданы руками ведущих мировых мастеров этого искусства.",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Лабиринт бесконечности",
@@ -1246,8 +1203,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Лазерная миссия",
@@ -1256,8 +1212,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Больница ужасов",
@@ -1265,9 +1220,8 @@ Object.assign(translations.ar, {
                                         "desc": "В отдалённом городке на юге Англии, судя по рассказам родственников и близких многих пациентов, проходивших лечение в этой больнице, один за другим они бесследно исчезали и не возвращались. Именно с этого начались всеобщие подозрения и страх о том, что здесь произошло. Смельчаки со всех уголков мира приглашаются бросить вызов ужасающей тайне этого места.",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "Затерянная пирамида",
@@ -1276,8 +1230,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Интерактивные игры",
@@ -1286,8 +1239,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "Побег из сада с привидениями",
@@ -1296,8 +1248,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "ja": [
@@ -1307,9 +1258,8 @@ Object.assign(translations.ar, {
                                         "desc": "アメリカ発祥、世界的に有名なリプリーズ・ビリーブ・イット・オア・ノット。神秘的で美しい、世界中の驚異を集めた唯一無二のミュージアムです。人皮のマスク、3インチに縮められた人間の頭、100万本以上のマッチ棒で作られたタイタニック号の模型、黒い瞳を4つ持つ男性など、350種類を超える本物の展示品をご覧いただけます。忘れられない体験がここに。信じられない！",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "スクリーム・イン・ザ・ダーク",
@@ -1317,9 +1267,8 @@ Object.assign(translations.ar, {
                                         "desc": "Ripley World パタヤ最新、6番目のエクストリームライド。恐怖を求める挑戦者たちを迎えます。「スクリーム・イン・ザ・ダーク」はかつて有名な遊園地でしたが、原因不明のまま突然閉鎖されました。夜な夜な道化師の霊が漂うのを見た、暗闇の中で悲鳴が聞こえたという噂もあり、誰も確かめようとしませんでした。そんな中、Ripley World パタヤがこの死の道への挑戦へとあなたを招待します。この呪われた遊園地から脱出する唯一の方法は、あなたの正確な射撃の腕前と、思い切り叫ぶことだけです！",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "幽霊倉庫",
@@ -1327,9 +1276,8 @@ Object.assign(translations.ar, {
                                         "desc": "世界に5つある棺桶倉庫の中でも最大規模を誇り、80年以上語り継がれてきた恐ろしい伝説と残酷な物語があります。異世界からの幽霊や招かれざる客と出会い、アメリカ最新の特殊効果と技術を体験できます。20を超える部屋には恐怖が潜み、最後の一歩まで身の毛がよだつ体験が待っています！警告：気の弱い方にはおすすめできません。",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "ルイ・タッソー蝋人形館",
@@ -1337,9 +1285,8 @@ Object.assign(translations.ar, {
                                         "desc": "世界5番目、タイ初出店の蝋人形館。タイ国内外の著名人や世界的セレブリティ、存命・故人を含め84体以上のリアルな蝋人形を展示しています。会場は「タイ・サンセット・ガーデンパーティー」「スポーツ」「ポップスター」「秘密の部屋」「英国王室」「政治・人道リーダー」「ホラーデン」「バットマンと仲間たち」「キャラクターに扮したセレブリティ」の9ゾーンに分かれています。蝋人形は世界トップクラスの職人たちによって制作されています。",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "インフィニティ・メイズ",
@@ -1348,8 +1295,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "レーザーミッション",
@@ -1358,8 +1304,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "ホラー・ホスピタル",
@@ -1367,9 +1312,8 @@ Object.assign(translations.ar, {
                                         "desc": "イングランド南部の辺境の町。この病院で治療を受けた多くの患者の親族や近しい人々の証言によれば、彼らは一人また一人と姿を消し、二度と戻ることはありませんでした。これが、一体何が起きたのかという疑惑と恐怖の始まりでした。今、この場所の恐ろしい謎に挑む勇者たちを、あらゆる方角から待ち受けています。",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "失われたピラミッド",
@@ -1378,8 +1322,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "インタラクティブゲーム",
@@ -1388,8 +1331,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "幽霊の庭からの脱出",
@@ -1398,8 +1340,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "ko": [
@@ -1409,9 +1350,8 @@ Object.assign(translations.ar, {
                                         "desc": "미국에서 시작된 세계적으로 유명한 박물관, 리플리스 빌리브 잇 오어 낫! 전 세계의 신비롭고도 아름다운 경이로움을 모은 유일무이한 박물관입니다. 인간 피부 가면, 3인치로 줄어든 인간 머리, 100만 개 이상의 성냥개비로 만든 타이타닉 모형, 검은 눈동자가 4개인 남자 등 350종이 넘는 놀라운 실제 전시품을 만나보세요. 절대 잊지 못할 경험이 될 것입니다. 믿거나 말거나!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "스크림 인 더 다크",
@@ -1419,9 +1359,8 @@ Object.assign(translations.ar, {
                                         "desc": "리플리 월드 파타야의 최신 6번째 익스트림 라이드로, 공포를 즐기는 도전자들을 맞이합니다. 스크림 인 더 다크는 한때 유명했던 놀이공원이었지만 알 수 없는 이유로 갑자기 문을 닫았습니다. 밤마다 광대 유령이 떠도는 것을 보았다는 사람도 있고, 어둠 속에서 비명 소리를 들었다는 사람도 있지만, 아무도 확인할 용기를 내지 못했습니다. 리플리 월드 파타야가 이 죽음의 길을 함께 탐험하도록 여러분을 초대합니다. 이 유령의 놀이공원을 빠져나갈 유일한 방법은 정확한 사격 실력과 힘껏 지르는 비명뿐입니다!",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "유령 창고",
@@ -1429,9 +1368,8 @@ Object.assign(translations.ar, {
                                         "desc": "전 세계 5곳 중 가장 큰 규모의 관 창고로, 80년 넘게 전해 내려오는 무서운 전설과 잔혹한 이야기를 간직하고 있습니다. 미국의 최신 특수 효과와 기술로 구현된 20개가 넘는 방에서 유령과 이계에서 온 불청객을 만나보세요. 발걸음마다 소름이 돋고 마지막까지 등골이 오싹해지는 공포가 기다리고 있습니다! 경고: 심장이 약한 분에게는 권장하지 않습니다.",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "루이 투소 밀랍인형관",
@@ -1439,9 +1377,8 @@ Object.assign(translations.ar, {
                                         "desc": "세계 5번째 지점이자 태국 최초의 밀랍인형관입니다. 태국과 세계 각국의 생존 및 작고한 유명 인사와 셀럽을 사실적으로 재현한 84개 이상의 밀랍 인형을 전시하고 있습니다. 전시관은 태국 선셋 가든 파티, 스포츠, 팝스타, 비밀의 방, 영국 왕실, 정치·인도주의 지도자, 호러 덴, 배트맨과 친구들, 캐릭터 셀러브리티 등 9개 구역으로 나뉩니다. 밀랍 인형들은 세계 최고 수준의 예술가들이 정성껏 제작했습니다.",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "인피니티 미로",
@@ -1450,8 +1387,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "레이저 미션",
@@ -1460,8 +1396,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "호러 병원",
@@ -1469,9 +1404,8 @@ Object.assign(translations.ar, {
                                         "desc": "잉글랜드 남부의 외딴 마을. 이 병원에서 치료받던 많은 환자들의 친척과 지인들의 증언에 따르면, 환자들은 한 명씩 흔적도 없이 사라져 다시는 돌아오지 않았습니다. 이것이 바로 무슨 일이 일어났는지에 대한 모두의 의문과 두려움의 시작이었습니다. 이제 사방에서 온 용감한 이들이 이곳의 소름 끼치는 미스터리에 도전하기를 기다리고 있습니다.",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "잃어버린 피라미드",
@@ -1480,8 +1414,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "인터랙티브 게임",
@@ -1490,8 +1423,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "유령 정원 탈출",
@@ -1500,8 +1432,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "hi": [
@@ -1511,9 +1442,8 @@ Object.assign(translations.ar, {
                                         "desc": "रिप्लीज़ बिलीव इट और नॉट! अमेरिका से शुरू हुआ दुनिया का सबसे प्रसिद्ध संग्रहालयों में से एक। यह इकलौता संग्रहालय है जो दुनिया भर की रहस्यमयी और सुंदर अजूबों को एक साथ लाता है। 350 से अधिक असली वस्तुओं को देखें और अनुभव करें जो आपको चकित कर देंगी—जैसे इंसानी त्वचा के मुखौटे, 3 इंच के सिकुड़े हुए सिर, 10 लाख से अधिक माचिस की तीलियों से बना टाइटैनिक का मॉडल, 4 काली पुतलियों वाला एक व्यक्ति, और भी बहुत कुछ। एक ऐसा अनुभव जिसे आप कभी नहीं भूलेंगे। विश्वास करो या न करो!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "स्क्रीम इन द डार्क",
@@ -1521,9 +1451,8 @@ Object.assign(translations.ar, {
                                         "desc": "रिप्ले वर्ल्ड पटाया की नवीनतम और छठी एक्सट्रीम राइड, जो रोमांच के दीवानों का डरावने अनुभव के साथ स्वागत करती है। स्क्रीम इन द डार्क कभी एक प्रसिद्ध मनोरंजन पार्क हुआ करता था जो अचानक अज्ञात कारणों से बंद हो गया। कुछ लोग कहते हैं कि उन्होंने रात में जोकर की आत्माओं को मंडराते देखा, तो कुछ अंधेरे में चीखें सुनने का दावा करते हैं। किसी ने भी इसे साबित करने की हिम्मत नहीं की, जब तक रिप्ले वर्ल्ड पटाया ने आपको इस घातक रास्ते की खोज के लिए आमंत्रित नहीं किया। इस भूतिया मनोरंजन पार्क से बचने का एकमात्र तरीका है आपकी सटीक निशानेबाज़ी और जितना ज़ोर से हो सके चीखना!",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "भूतिया गोदाम",
@@ -1531,9 +1460,8 @@ Object.assign(translations.ar, {
                                         "desc": "दुनिया के 5 सबसे बड़े ताबूत गोदामों में से सबसे बड़ा, जिसमें 80 से अधिक वर्षों से चली आ रही भयानक किंवदंतियाँ और क्रूरता की कहानियाँ छिपी हैं। भूतों और दूसरी दुनिया से आए अनचाहे मेहमानों से मिलें, अमेरिका के नवीनतम विशेष प्रभावों और तकनीकों के साथ 20 से अधिक कमरों में जो डर से भरे हैं और हर कदम पर आपको कंपा देंगे, आखिरी पल तक! चेतावनी: कमज़ोर दिल वालों के लिए उपयुक्त नहीं।",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "लुइस टुसॉड्स वैक्सवर्क्स",
@@ -1541,9 +1469,8 @@ Object.assign(translations.ar, {
                                         "desc": "दुनिया की 5वीं शाखा और थाईलैंड की पहली। यह मोम संग्रहालय थाई और अंतरराष्ट्रीय, जीवित और दिवंगत महत्वपूर्ण हस्तियों और विश्व हस्तियों की 84 से अधिक जीवंत मोम प्रतिमाएँ प्रदर्शित करता है। प्रदर्शनी को 9 ज़ोन में बांटा गया है: थाई सनसेट गार्डन पार्टी, स्पोर्ट, पॉप स्टार, चैंबर ऑफ द सीक्रेट, ब्रिटिश रॉयल्टी, पॉलिटिकल एंड ह्यूमैनिटेरियन लीडर्स, हॉरर डेन, बैटमैन एंड फ्रेंड्स, सेलिब्रिटीज इन कैरेक्टर। ये मोम प्रतिमाएँ दुनिया के कई शीर्ष कलाकारों द्वारा तैयार की गई हैं।",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "इनफिनिटी मेज़",
@@ -1552,8 +1479,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "लेज़र मिशन",
@@ -1562,8 +1488,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "द हॉरर हॉस्पिटल",
@@ -1571,9 +1496,8 @@ Object.assign(translations.ar, {
                                         "desc": "दक्षिणी इंग्लैंड के एक दूरदराज़ शहर में, इस अस्पताल में इलाज करा चुके कई मरीज़ों के रिश्तेदारों और करीबी लोगों की कहानियों के अनुसार, एक के बाद एक मरीज़ बिना किसी निशान के गायब होते गए और कभी वापस नहीं लौटे। यही वह शुरुआत थी जिसने सभी को हैरान और भयभीत कर दिया कि आख़िर क्या हुआ था। अब, हर दिशा से आए बहादुर लोग इस जगह के भयावह रहस्य को चुनौती देने के लिए तैयार हैं।",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "लॉस्ट पिरामिड",
@@ -1582,8 +1506,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "इंटरैक्टिव गेम्स",
@@ -1592,8 +1515,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "एस्केप द हॉन्टेड गार्डन",
@@ -1602,8 +1524,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "he": [
@@ -1613,9 +1534,8 @@ Object.assign(translations.ar, {
                                         "desc": "ריפליז תאמינו או לא! אחד המוזיאונים המפורסמים בעולם שמקורו בארה\"ב. המוזיאון היחיד שאוסף פלאים מכל רחבי העולם, מסתוריים ומרהיבים כאחד. גלו וחוו למעלה מ-350 פריטים אמיתיים שיפעימו אתכם, כמו מסכות עור אדם, ראשים מכווצים בגודל 3 אינץ', דגם של הטיטניק העשוי מיותר ממיליון גפרורים, אדם עם 4 אישונים שחורים ועוד רבים אחרים. חוויה שלעולם לא תשכחו. תאמינו או לא!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "צרחות באפלה",
@@ -1623,9 +1543,8 @@ Object.assign(translations.ar, {
                                         "desc": "המתקן הקיצוני החדש והשישי ב-Ripley World פטאיה, המקבל בברכה את מבקשי הריגוש עם חוויית אימה. \"צרחות באפלה\" היה פעם פארק שעשועים מפורסם שנסגר לפתע מסיבה לא ידועה. יש האומרים שראו רוחות ליצנים מרחפות בלילה, ואחרים ששמעו צרחות בחשכה. איש לא העז להוכיח זאת, עד ש-Ripley World פטאיה מזמינה אתכם לחקור יחד את השביל הקטלני הזה. הדרך היחידה לברוח מפארק השעשועים הרדוף הזה היא דיוק ביריות ולצרוח בכל הכוח!",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "המחסן הרדוף",
@@ -1633,9 +1552,8 @@ Object.assign(translations.ar, {
                                         "desc": "מחסן הארונות הגדול ביותר מבין 5 בעולם, עם אגדות מפחידות וסיפורי אכזריות המסופרים כבר יותר מ-80 שנה. פגשו רוחות ואורחים לא קרואים מעולם אחר, עם אפקטים מיוחדים וטכניקות חדישות מארה\"ב, ביותר מ-20 חדרים גדושים באימה שיגרמו לכם לרעוד בכל צעד ועד הרגע האחרון! אזהרה: לא מומלץ לבעלי לב חלש.",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "מוזיאון השעווה של לואי טוסו",
@@ -1643,9 +1561,8 @@ Object.assign(translations.ar, {
                                         "desc": "הסניף החמישי בעולם והראשון בתאילנד. מוזיאון השעווה מציג למעלה מ-84 פסלי שעווה מדויקים של אישים חשובים ומפורסמים תאילנדים ובינלאומיים, בין אם בחיים ובין אם הלכו לעולמם. התערוכה מחולקת ל-9 אזורים: מסיבת גן שקיעה תאית, ספורט, פופ סטאר, חדר הסוד, המלוכה הבריטית, מנהיגים פוליטיים והומניטריים, מאורת האימה, באטמן וחבריו, סלבריטאים בתחפושת. פסלי השעווה נוצרו בידי כמה מהאמנים המובילים בעולם.",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "מבוך האינסוף",
@@ -1654,8 +1571,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "משימת הלייזר",
@@ -1664,8 +1580,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "בית החולים האימה",
@@ -1673,9 +1588,8 @@ Object.assign(translations.ar, {
                                         "desc": "בעיירה נידחת בדרום אנגליה, על פי סיפוריהם של קרובי משפחה ומקורבים של מטופלים רבים שטופלו בבית החולים הזה, אחד אחרי השני נעלמו ללא זכר ולא חזרו. זו הייתה ההתחלה שגרמה לכולם לתהות ולפחד ממה שקרה. אמיצים מכל קצוות העולם מוזמנים כעת לאתגר את התעלומה המבעיתה של המקום הזה.",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "הפירמידה האבודה",
@@ -1684,8 +1598,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "משחקים אינטראקטיביים",
@@ -1694,8 +1607,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "בריחה מהגן הרדוף",
@@ -1704,8 +1616,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ],
                     "ar": [
@@ -1715,9 +1626,8 @@ Object.assign(translations.ar, {
                                         "desc": "ريبليز صدق أو لا تصدق! أحد أشهر المتاحف في العالم ونشأ في الولايات المتحدة الأمريكية. المتحف الوحيد الذي يجمع عجائب من جميع أنحاء العالم، غامضة وجميلة في آن واحد. اكتشف واختبر أكثر من 350 قطعة حقيقية ستبهرك، مثل أقنعة الجلد البشري، ورؤوس مصغّرة بحجم 3 إنش، ونموذج لسفينة تايتانيك مصنوع من أكثر من مليون عود ثقاب، ورجل بأربع بؤبؤ سوداء، وغيرها الكثير. تجربة لن تنساها أبدًا. صدق أو لا تصدق!",
                                         "icon": "fa-museum",
                                         "color": "#8B4513",
-                                        "image": "https://i.postimg.cc/3JW8h6bb/484081823-1058531386309331-8195726869100371881-n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_8jibeg6geg8k87egaac5i.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "صرخة في الظلام",
@@ -1725,9 +1635,8 @@ Object.assign(translations.ar, {
                                         "desc": "أحدث لعبة إكستريم وسادسة لعبة من نوعها في ريبلي وورلد باتايا، ترحب بعشاق الإثارة والتحدي بتجربة مرعبة. كانت \"صرخة في الظلام\" ذات يوم مدينة ملاهي شهيرة أغلقت فجأة لأسباب غير معروفة. يقول البعض إنهم رأوا أشباح مهرجين تحوم ليلاً، بينما يقول آخرون إنهم سمعوا صرخات في الظلام. لم يجرؤ أحد على إثبات ذلك، حتى دعتك ريبلي وورلد باتايا لاستكشاف هذا الطريق المميت معًا. الطريقة الوحيدة للهروب من مدينة الملاهي المسكونة هذه هي دقة تصويبك وأن تصرخ بأعلى صوتك!",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://i.postimg.cc/HkJmyyQR/596523399_1282263177269483_6087097777288768906_n.jpg",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "المستودع المسكون",
@@ -1735,9 +1644,8 @@ Object.assign(translations.ar, {
                                         "desc": "أكبر مستودع توابيت من بين 5 مستودعات في العالم، يحمل أساطير مرعبة وقصص قسوة تُروى منذ أكثر من 80 عامًا. قابل الأشباح وضيوفًا غير مدعوين من عالم آخر، مع مؤثرات خاصة وأحدث التقنيات من أمريكا في أكثر من 20 غرفة مليئة بالرعب الذي سيجعلك ترتجف في كل خطوة حتى اللحظة الأخيرة! تحذير: غير مناسب لضعاف القلوب.",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://i.postimg.cc/0jtYBstt/photo-2026-02-18-22-13-56.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=5KsgIgp_xCIC81sb",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "متحف لويس توسو للشمع",
@@ -1745,9 +1653,8 @@ Object.assign(translations.ar, {
                                         "desc": "الفرع الخامس في العالم والأول في تايلاند. يعرض متحف الشمع هذا أكثر من 84 تمثالًا شمعيًا واقعيًا لشخصيات مهمة ومشاهير عالميين، تايلانديين وعالميين، أحياء وأمواتًا. يُقسّم المعرض إلى 9 مناطق: حفلة الحديقة الغروبية التايلاندية، الرياضة، نجوم البوب، غرفة السر، العائلة المالكة البريطانية، القادة السياسيون والإنسانيون، وكر الرعب، باتمان وأصدقاؤه، ومشاهير في شخصيات. تم صنع التماثيل الشمعية على يد نخبة من كبار الفنانين في العالم.",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://i.postimg.cc/k4YRfSph/483064204-1057981203031016-3867831455777390669-n.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=Vz7WU4xzqCCD-Uby",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "متاهة اللانهاية",
@@ -1756,8 +1663,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "مهمة الليزر",
@@ -1766,8 +1672,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "مستشفى الرعب",
@@ -1775,9 +1680,8 @@ Object.assign(translations.ar, {
                                         "desc": "في بلدة نائية جنوب إنجلترا، وبحسب روايات أقارب ومقربي العديد من المرضى الذين تلقوا العلاج في هذا المستشفى، اختفى المرضى واحدًا تلو الآخر دون أثر ولم يعودوا أبدًا. كانت هذه بداية تساؤل وخوف الجميع حول ما حدث. الآن، ينتظر هذا المكان الشجعان من كل الاتجاهات لتحدي لغزه المروع.",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://i.postimg.cc/rw0mkmwG/486608663-1064388875723582-1948340082536203494-n.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=ZXrxCtBzvCC11dtB",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "الهرم المفقود",
@@ -1786,8 +1690,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
                                         "image": "",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=a0LuNuoEbNTltoU8",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "ألعاب تفاعلية",
@@ -1796,8 +1699,7 @@ Object.assign(translations.ar, {
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
                                         "image": "",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=_IGyjIN_twEdOCnk",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg"
+                                        "video": ""
                               },
                               {
                                         "title": "الهروب من الحديقة المسكونة",
@@ -1806,48 +1708,53 @@ Object.assign(translations.ar, {
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
                                         "image": "",
-                                        "video": "",
-                                        "logo": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png"
+                                        "video": ""
                               }
                     ]
           },
           "menu": {
                     "snacks": [
                               {
+                                        "name": "SAUSAGE 3 PIECES",
+                                        "nameTh": "ไส้กรอก 3 ชิ้น",
+                                        "price": 100,
+                                        "image": "menu-sausage.jpg"
+                              },
+                              {
                                         "name": "SB ROD SNACK CLASSIC",
                                         "nameTh": "ข้าวเกรียบ SB",
                                         "price": 30,
-                                        "image": "https://img.wongnai.com/p/1920x0/2020/02/03/8e54b9dd71a24967a8deca5ee84a3577.jpg"
+                                        "image": ""
                               },
                               {
                                         "name": "POPCORN",
                                         "nameTh": "ป๊อปคอร์น",
                                         "price": 90,
-                                        "image": "https://img.wongnai.com/p/256x256/2023/07/12/045624e73d1f40f58309b5b92ca76bd3.jpg"
+                                        "image": ""
                               },
                               {
                                         "name": "FRENCH FRIES",
                                         "nameTh": "เฟรนช์ฟรายส์",
                                         "price": 69,
-                                        "image": "https://www.dinneratthezoo.com/wp-content/uploads/2020/01/baked-french-fries-5.jpg"
+                                        "image": ""
                               },
                               {
                                         "name": "CHICKEN STICKS",
                                         "nameTh": "สติ๊กไก่ทอด",
                                         "price": 89,
-                                        "image": "https://image.made-in-china.com/202f0j00pVSkacftuBzQ/Curry-Flavored-Chicken-and-Cheese-Stick-Delicious-Fast-Food.webp"
+                                        "image": ""
                               },
                               {
                                         "name": "CRISPY CHICKEN POP",
                                         "nameTh": "ไก่ป๊อป",
                                         "price": 89,
-                                        "image": "https://carlsbadcravings.com/wp-content/uploads/2020/04/Popcorn-Chicken-v5.jpg"
+                                        "image": ""
                               },
                               {
                                         "name": "MIXED FRIED SNACKS",
                                         "nameTh": "ของทานเล่นทอดรวม",
                                         "price": 109,
-                                        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmay4xeILHPcpIjddMB0E41OS4MX864EFKEaZWQM5En3nm-r1yWKT9f-72&s=10"
+                                        "image": ""
                               }
                     ],
                     "drinks": [
@@ -1855,23 +1762,17 @@ Object.assign(translations.ar, {
                                         "name": "WATER",
                                         "nameTh": "น้ำดื่ม",
                                         "price": 25,
-                                        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL35rxFe4RYDMzEwPxcuU3gHb_k1klHTYfVsoSBHxwq3fDqOwhVc68un6j&s=10"
+                                        "image": ""
                               },
                               {
                                         "name": "SOFT DRINKS",
                                         "nameTh": "น้ำอัดลม",
                                         "price": 35,
-                                        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSSUmNbeHrJoA3E9cJP_19KJHJvuOrjJGMQkVZLlAGJg&s=10"
-                              },
-                              {
-                                        "name": "Slushy",
-                                        "nameTh": "น้ำปั่นเกล็ดหิมะ",
-                                        "price": 59,
-                                        "image": "https://cx.lnwfile.com/_/cx/_raw/0r/9b/jv.jpg"
+                                        "image": ""
                               }
                     ]
           }
-};;;;;;;
+};;
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
@@ -1986,29 +1887,20 @@ Object.assign(translations.ar, {
         function renderMenu() {
             const t = translations[currentLang] || translations['en'];
             
-            const snacksGrid = document.getElementById('snacksGrid');
-            snacksGrid.innerHTML = siteData.menu.snacks.map(item => `
+            const renderItem = item => `
                 <div class="menu-item-card">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
+                    <div class="img-wrap">
+                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
+                        <div class="menu-price-badge">${item.price} ${t.baht || 'Baht'}</div>
+                    </div>
                     <div class="menu-item-info">
                         <h4>${item.name}</h4>
                         <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
-                        <div class="menu-price">${item.price} ${t.baht || 'Baht'}</div>
                     </div>
                 </div>
-            `).join('');
-
-            const drinksGrid = document.getElementById('drinksGrid');
-            drinksGrid.innerHTML = siteData.menu.drinks.map(item => `
-                <div class="menu-item-card">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
-                    <div class="menu-item-info">
-                        <h4>${item.name}</h4>
-                        <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
-                        <div class="menu-price">${item.price} ${t.baht || 'Baht'}</div>
-                    </div>
-                </div>
-            `).join('');
+            `;
+            document.getElementById('snacksGrid').innerHTML = siteData.menu.snacks.map(renderItem).join('');
+            document.getElementById('drinksGrid').innerHTML = siteData.menu.drinks.map(renderItem).join('');
         }
 
         function showSection(id) {
