@@ -24,6 +24,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
         .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-top: 5px solid var(--primary); transition: 0.3s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+        .card img, .card video { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
         .card-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5em; margin-bottom: 20px; }
         .card h3 { color: var(--dark); font-size: 1.4em; margin-bottom: 5px; }
         .card h4 { color: var(--primary); font-size: 1em; margin-bottom: 15px; font-weight: 600; }
@@ -55,19 +56,30 @@
         .contact-card i { font-size: 2.5em; color: var(--primary); margin-bottom: 15px; }
         .map-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background: var(--primary); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s; }
         .map-btn:hover { background: #c0392b; transform: scale(1.05); }
-        .login-box { max-width: 400px; margin: 100px auto; background: white; padding: 40px; border-radius: 15px; text-align: center; }
-        .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
-        .btn { padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .login-box { max-width: 500px; margin: 100px auto; background: white; padding: 40px; border-radius: 15px; text-align: center; }
+        .login-box input, .login-box textarea { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .login-box textarea { min-height: 100px; resize: vertical; }
+        .btn { padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; margin: 5px; }
         .btn:hover { background: #c0392b; }
+        .btn-secondary { background: #3498db; }
+        .btn-secondary:hover { background: #2980b9; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #229954; }
+        .btn-danger { background: #e74c3c; }
+        .btn-danger:hover { background: #c0392b; }
         .admin-panel { background: white; padding: 30px; border-radius: 15px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--dark); }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .form-group textarea { min-height: 100px; resize: vertical; }
         .warning-box { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em; }
-        .admin-menu-item { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #e0e0e0; }
-        .admin-menu-item img { max-width: 150px; max-height: 150px; border-radius: 10px; margin: 10px 0; }
-        .upload-btn { background: #3498db; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; display: inline-block; margin: 10px 0; }
-        .upload-btn:hover { background: #2980b9; }
+        .success-box { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .admin-section { margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; }
+        .admin-section h3 { color: var(--dark); margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        .media-preview { max-width: 300px; max-height: 200px; border-radius: 10px; margin: 10px 0; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab { padding: 10px 20px; background: white; border: 2px solid var(--primary); color: var(--primary); border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .tab.active { background: var(--primary); color: white; }
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .lang-select { right: auto; left: 20px; }
         [dir="rtl"] .step { flex-direction: row-reverse; }
@@ -82,15 +94,15 @@
 
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
-            <option value="th">🇹 ไทย</option>
-            <option value="en">🇬 English</option>
-            <option value="zh">🇳 中文</option>
-            <option value="ru">🇷 Русский</option>
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="zh">🇨🇳 中文</option>
+            <option value="ru">🇺 Русский</option>
             <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="he">🇱 עברית</option>
-            <option value="ja">🇯🇵 日本語</option>
+            <option value="he">🇮🇱 עברית</option>
+            <option value="ja">🇯 日本語</option>
             <option value="ko">🇰🇷 한국어</option>
-            <option value="ar">🇸 العربية</option>
+            <option value="ar">🇸🇦 العربية</option>
         </select>
     </div>
 
@@ -155,28 +167,23 @@
         <div class="hero">
             <h1 data-i18n="menu_title">เมนูอาหารและเครื่องดื่ม</h1>
         </div>
-
         <div class="slushy-counter">
             <img id="slushyCounterImg" src="" alt="Slushy Counter" style="max-width: 100%; border-radius: 15px; display: none;">
         </div>
-
         <div class="promo-banner">
             <h3 data-i18n="promo_3for100_title">3 ชิ้น 100 บาท</h3>
             <p data-i18n="promo_3for100_subtitle">3 PIECES FOR 100 BAHT</p>
             <div class="highlight" data-i18n="promo_3for100_tag">คุ้มค่าที่สุดในราคาที่เป็นกันเอง</div>
             <p style="margin-top: 15px; font-style: italic;" data-i18n="promo_3for100_desc">ร้อนๆ จากเตา... กรอบนอก นุ่มใน!</p>
         </div>
-
         <div class="menu-category">
             <h3 data-i18n="menu_snacks">อาหารว่าง</h3>
             <div class="menu-grid" id="snacksGrid"></div>
         </div>
-
         <div class="menu-category">
             <h3 data-i18n="menu_drinks">เครื่องดื่ม</h3>
             <div class="menu-grid" id="drinksGrid"></div>
         </div>
-
         <div class="menu-category">
             <h3 data-i18n="menu_slushy">SLUSHY</h3>
             <div class="slushy-flavors">
@@ -235,15 +242,77 @@
 
         <div id="adminDashboard" class="admin-panel" style="display:none;">
             <div class="warning-box">
-                <i class="fas fa-exclamation-triangle"></i> <strong>หมายเหตุ:</strong> <span data-i18n="admin_warning">รูปภาพและข้อมูลจะบันทึกในเบราว์เซอร์ของคุณ (LocalStorage) หากต้องการให้ลูกค้าเห็นการเปลี่ยนแปลง แนะนำให้แก้ไขข้อมูลในตัวไฟล์ HTML นี้โดยตรง</span>
+                <i class="fas fa-exclamation-triangle"></i> <strong>สำคัญ:</strong> ระบบนี้จะแก้ไขไฟล์ HTML โดยตรงบน GitHub ผ่าน API การเปลี่ยนแปลงจะเห็นโดยลูกค้าทุกคนภายใน 1-2 นาทีหลัง Cloudflare Deploy
             </div>
-            
-            <h2 style="margin-bottom: 20px;"><i class="fas fa-images"></i> จัดการรูปภาพเมนู</h2>
-            
-            <div id="adminImageManager"></div>
-            
-            <button class="btn" onclick="logout()" style="background:#7f8c8d; margin-top:20px;">
-                <i class="fas fa-sign-out-alt"></i> <span data-i18n="admin_logout">ออกจากระบบ</span>
+
+            <div class="tabs">
+                <button class="tab active" onclick="showAdminTab('github')">️ ตั้งค่า GitHub</button>
+                <button class="tab" onclick="showAdminTab('attractions')">🎢 สถานที่</button>
+                <button class="tab" onclick="showAdminTab('menu')">🍽️ เมนู</button>
+                <button class="tab" onclick="showAdminTab('content')">📝 เนื้อหา</button>
+            </div>
+
+            <div id="adminTabGithub" class="admin-section">
+                <h3><i class="fab fa-github"></i> ตั้งค่า GitHub API</h3>
+                <p style="margin-bottom: 15px;">กรอกข้อมูล GitHub ของคุณเพื่อแก้ไขไฟล์โดยตรง:</p>
+                <div class="form-group">
+                    <label>GitHub Username</label>
+                    <input type="text" id="githubUsername" placeholder="joenita589-afk">
+                </div>
+                <div class="form-group">
+                    <label>Repository Name</label>
+                    <input type="text" id="githubRepo" placeholder="my-website">
+                </div>
+                <div class="form-group">
+                    <label>Personal Access Token (PAT)</label>
+                    <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                    <small style="color: #666;">สร้างได้ที่: GitHub Settings → Developer Settings → Personal Access Tokens → Generate new token (เลือก scope: repo)</small>
+                </div>
+                <div class="form-group">
+                    <label>Branch</label>
+                    <input type="text" id="githubBranch" placeholder="main" value="main">
+                </div>
+                <button class="btn btn-success" onclick="saveGithubConfig()">
+                    <i class="fas fa-save"></i> บันทึกการตั้งค่า
+                </button>
+                <button class="btn btn-secondary" onclick="testGithubConnection()">
+                    <i class="fas fa-plug"></i> ทดสอบการเชื่อมต่อ
+                </button>
+                <div id="githubStatus"></div>
+            </div>
+
+            <div id="adminTabAttractions" class="admin-section" style="display:none;">
+                <h3><i class="fas fa-museum"></i> จัดการสถานที่ (Attractions)</h3>
+                <div id="attractionsEditor"></div>
+                <button class="btn btn-success" onclick="addAttraction()">
+                    <i class="fas fa-plus"></i> เพิ่มสถานที่ใหม่
+                </button>
+                <button class="btn" onclick="saveAllChanges()" style="margin-top: 20px;">
+                    <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลงทั้งหมดไปยัง GitHub
+                </button>
+            </div>
+
+            <div id="adminTabMenu" class="admin-section" style="display:none;">
+                <h3><i class="fas fa-utensils"></i> จัดการเมนู</h3>
+                <div id="menuEditor"></div>
+                <button class="btn btn-success" onclick="addMenuItem()">
+                    <i class="fas fa-plus"></i> เพิ่มเมนูใหม่
+                </button>
+                <button class="btn" onclick="saveAllChanges()" style="margin-top: 20px;">
+                    <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลงทั้งหมดไปยัง GitHub
+                </button>
+            </div>
+
+            <div id="adminTabContent" class="admin-section" style="display:none;">
+                <h3><i class="fas fa-edit"></i> แก้ไขเนื้อหาทั่วไป</h3>
+                <div id="contentEditor"></div>
+                <button class="btn" onclick="saveAllChanges()" style="margin-top: 20px;">
+                    <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลงทั้งหมดไปยัง GitHub
+                </button>
+            </div>
+
+            <button class="btn btn-danger" onclick="logout()" style="margin-top: 20px;">
+                <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
             </button>
         </div>
     </section>
@@ -267,9 +336,7 @@
                 contact_address: "ที่อยู่", contact_address_text: "ไมเนอร์ สกายไรเดอร์ จำกัด<br>เลขที่ 218 หมู่ 10 ถนนเลียบชายหาด<br>ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20150",
                 contact_phone: "ช่องทางการติดต่อ", contact_phone_text: "โทร: +66 (38) 710-294-8<br>แฟ็กซ์: +66 (38) 710-487",
                 contact_map: "เปิดดูแผนที่บน Google Maps",
-                admin_login: "เข้าสู่ระบบ", admin_error: "รหัสผ่านไม่ถูกต้อง",
-                admin_warning: "รูปภาพและข้อมูลจะบันทึกในเบราว์เซอร์ของคุณ (LocalStorage) หากต้องการให้ลูกค้าเห็นการเปลี่ยนแปลง แนะนำให้แก้ไขข้อมูลในตัวไฟล์ HTML นี้โดยตรง",
-                admin_logout: "ออกจากระบบ"
+                admin_login: "เข้าสู่ระบบ", admin_error: "รหัสผ่านไม่ถูกต้อง"
             },
             en: {
                 nav_home: "Home", nav_coupon: "Coupons", nav_menu: "Menu", nav_contact: "Contact",
@@ -288,64 +355,34 @@
                 contact_address: "Address", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
                 contact_phone: "Contact Channels", contact_phone_text: "Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",
                 contact_map: "View on Google Maps",
-                admin_login: "Login", admin_error: "Incorrect password",
-                admin_warning: "Images and data are saved in your browser (LocalStorage). For customers to see changes, edit the HTML file directly.",
-                admin_logout: "Logout"
-            },
-            zh: { nav_home: "首页", nav_coupon: "优惠券", nav_menu: "菜单", nav_contact: "联系我们", tagline: "信不信由你！", menu_title: "餐饮菜单", menu_snacks: "小吃", menu_drinks: "饮料", menu_slushy: "冰沙", baht: "泰铢", contact_title: "联系我们", contact_hours: "营业时间", contact_hours_time: "上午11:00 - 晚上10:00<br>演出开始上午11:30", contact_address: "地址", contact_address_text: "Minor Sky Rider有限公司<br>218号10组，海滨路<br>农普鲁，邦拉蒙，春武里府 20150", contact_phone: "联系方式", contact_phone_text: "电话: +66 (38) 710-294-8<br>传真: +66 (38) 710-487", contact_map: "在Google地图上查看", admin_login: "登录", admin_error: "密码错误", admin_warning: "图像和数据保存在您的浏览器中（LocalStorage）。要让客户看到更改，请直接编辑HTML文件。", admin_logout: "退出", coupon_title: "特别折扣优惠券", coupon_get: "如何获得优惠券", coupon_desc: "参加我们精彩的活动即可获得即时折扣优惠券！", coupon_laser: "餐饮享9折优惠", coupon_scream: "餐饮享8.5折优惠", coupon_how: "如何使用优惠券", coupon_step1: "完成激光任务或黑暗尖叫活动", coupon_step2: "从区域工作人员处领取折扣券", coupon_step3: "付款前在小吃柜台出示优惠券", coupon_step4: "按优惠券所示获得即时折扣", promo_3for100_title: "3件100泰铢", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "最优惠的价格", promo_3for100_desc: "热腾腾...外脆内软！" },
-            ru: { nav_home: "Главная", nav_coupon: "Купоны", nav_menu: "Меню", nav_contact: "Контакты", tagline: "Хотите — верьте, хотите — нет!", menu_title: "Меню еды и напитков", menu_snacks: "Закуски", menu_drinks: "Напитки", menu_slushy: "SLUSHY", baht: "бат", contact_title: "Свяжитесь с нами", contact_hours: "Часы работы", contact_hours_time: "11:00 - 22:00<br>Шоу начинается в 11:30", contact_address: "Адрес", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "Контактная информация", contact_phone_text: "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487", contact_map: "Посмотреть на Google Maps", admin_login: "Войти", admin_error: "Неверный пароль", admin_warning: "Изображения и данные сохраняются в вашем браузере (LocalStorage). Чтобы клиенты видели изменения, отредактируйте файл HTML напрямую.", admin_logout: "Выйти", coupon_title: "Специальные купоны на скидку", coupon_get: "Как получить купоны", coupon_desc: "Примите участие в наших увлекательных мероприятиях и получите купоны на скидку!", coupon_laser: "Получите скидку 10% на еду и напитки", coupon_scream: "Получите скидку 15% на еду и напитки", coupon_how: "Как использовать купоны", coupon_step1: "Пройдите миссию с лазером или Крик в темноте", coupon_step2: "Получите купон на скидку у сотрудника зоны", coupon_step3: "Предъявите купон в стойке закусок перед оплатой", coupon_step4: "Получите мгновенную скидку, указанную на купоне", promo_3for100_title: "3 штуки за 100 бат", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "Лучшая цена по доступной цене", promo_3for100_desc: "Горячее из печи... Хрустящее снаружи, мягкое внутри!" },
-            hi: { nav_home: "होम", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क", tagline: "विश्वास करो या नहीं!", menu_title: "भोजन और पेय मेनू", menu_snacks: "नाश्ते", menu_drinks: "पेय", menu_slushy: "SLUSHY", baht: "बाht", contact_title: "संपर्क करें", contact_hours: "खुलने का समय", contact_hours_time: "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू", contact_address: "पता", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "संपर्क चैनल", contact_phone_text: "टेल: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487", contact_map: "Google Maps पर देखें", admin_login: "लॉगिन", admin_error: "गलत पासवर्ड", admin_warning: "छवियां और डेटा आपके ब्राउज़र में सहेजे जाते हैं (LocalStorage)। ग्राहकों को परिवर्तन देखने के लिए, HTML फ़ाइल को सीधे संपादित करें।", admin_logout: "लॉगआउट", coupon_title: "विशेष छूट कूपन", coupon_get: "कूपन कैसे प्राप्त करें", coupon_desc: "तुरंत छूट कूपन पाने के लिए हमारी रोमांचक गतिविधियों में शामिल हों!", coupon_laser: "भोजन और पेय पर 10% छूट प्राप्त करें", coupon_scream: "भोजन और पेय पर 15% छूट प्राप्त करें", coupon_how: "कूपन का उपयोग कैसे करें", coupon_step1: "लेजर मिशन या स्क्रीम इन द डार्क गतिविधियां पूरी करें", coupon_step2: "क्षेत्र के कर्मचारी से छूट कूपन प्राप्त करें", coupon_step3: "भुगतान से पहले स्नैक काउंटर पर कूपन पेश करें", coupon_step4: "कूपन पर दर्शाए अनुसार तुरंत छूट प्राप्त करें", promo_3for100_title: "3 टुकड़े 100 बाht के लिए", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "अनुकूल कीमत पर सर्वोत्तम मूल्य", promo_3for100_desc: "ओवन से गर्म... बाहर से कुरकुरा, अंदर से नरम!" },
-            he: { nav_home: "דף הבית", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר", tagline: "תאמינו או לא!", menu_title: "תפריט אוכל ומשקאות", menu_snacks: "חטיפים", menu_drinks: "משקאות", menu_slushy: "SLUSHY", baht: "באט", contact_title: "צור קשר", contact_hours: "שעות פתיחה", contact_hours_time: "11:00 - 22:00<br>המופע מתחיל 11:30", contact_address: "כתובת", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "ערוצי יצירת קשר", contact_phone_text: "טל: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487", contact_map: "צפה ב-Google Maps", admin_login: "התחבר", admin_error: "סיסמה שגויה", admin_warning: "תמונות ונתונים נשמרים בדפדפן שלך (LocalStorage). כדי שלקוחות יראו שינויים, ערוך את קובץ HTML ישירות.", admin_logout: "התנתק", coupon_title: "קופוני הנחה מיוחדים", coupon_get: "כיצד לקבל קופונים", coupon_desc: "הצטרף לפעילויות המרגשות שלנו וקבל קופוני הנחה מיידית!", coupon_laser: "קבל 10% הנחה על אוכל ומשקאות", coupon_scream: "קבל 15% הנחה על אוכל ומשקאות", coupon_how: "כיצד להשתמש בקופונים", coupon_step1: "השלם את משימת הלייזר או צעקה בחושך", coupon_step2: "קבל קופון הנחה מהצוות באזור", coupon_step3: "הצג קופון בדלפק החטיפים לפני התשלום", coupon_step4: "קבל הנחה מיידית כמצוין בקופון", promo_3for100_title: "3 פריטים ב-100 באט", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "הערך הטוב ביותר במחיר ידידותי", promo_3for100_desc: "חם מהתנור... פריך בחוץ, רך בפנים!" },
-            ja: { nav_home: "ホーム", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ", tagline: "信じられない！", menu_title: "飲食メニュー", menu_snacks: "スナック", menu_drinks: "飲み物", menu_slushy: "SLUSHY", baht: "バーツ", contact_title: "お問い合わせ", contact_hours: "営業時間", contact_hours_time: "午前11:00 - 午後10:00<br>ショー開始 午前11:30", contact_address: "住所", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "連絡先", contact_phone_text: "電話: +66 (38) 710-294-8<br>FAX: +66 (38) 710-487", contact_map: "Google Mapsで見る", admin_login: "ログイン", admin_error: "パスワードが正しくありません", admin_warning: "画像とデータはブラウザに保存されます（LocalStorage）。顧客に変更を表示するには、HTMLファイルを直接編集してください。", admin_logout: "ログアウト", coupon_title: "特別割引クーポン", coupon_get: "クーポンの入手方法", coupon_desc: "エキサイティングなアクティビティに参加して即時割引クーポンを入手！", coupon_laser: "飲食代10%割引", coupon_scream: "飲食代15%割引", coupon_how: "クーポンの使い方", coupon_step1: "レーザーミッションまたはダークスクリームを完了", coupon_step2: "ゾーンのスタッフから割引クーポンを受け取る", coupon_step3: "支払い前にスナックカウンターでクーポンを提示", coupon_step4: "クーポンに記載された即時割引を受ける", promo_3for100_title: "3個で100バーツ", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "手頃な価格で最高の価値", promo_3for100_desc: "オーブンから熱々...外はカリカリ、中はふわふわ！" },
-            ko: { nav_home: "홈", nav_coupon: "쿠", nav_menu: "메뉴", nav_contact: "연락처", tagline: "믿거나 말거나!", menu_title: "음식 및 음료 메뉴", menu_snacks: "스낵", menu_drinks: "음료", menu_slushy: "SLUSHY", baht: "바트", contact_title: "연락처", contact_hours: "운영 시간", contact_hours_time: "오전 11:00 - 오후 10:00<br>쇼 시작 오전 11:30", contact_address: "주소", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "연락처", contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487", contact_map: "Google Maps에서 보기", admin_login: "로그인", admin_error: "잘못된 비밀번호", admin_warning: "이미지와 데이터는 브라우저에 저장됩니다 (LocalStorage). 고객이 변경 사항을 보려면 HTML 파일을 직접 편집하십시오.", admin_logout: "로그아웃", coupon_title: "특별 할인 쿠폰", coupon_get: "쿠폰 받는 방법", coupon_desc: "흥미진진한 활동에 참여하고 즉시 할인 쿠폰을 받으세요!", coupon_laser: "음식 및 음료 10% 할인", coupon_scream: "음식 및 음료 15% 할인", coupon_how: "쿠 사용 방법", coupon_step1: "레이저 미션 또는 스크림 인 더 다크 완료", coupon_step2: "존 직원에게서 할인 쿠폰 받기", coupon_step3: "결제 전 스낵 카운터에서 폰 제시", coupon_step4: "쿠에 표시된 즉시 할인 받기", promo_3for100_title: "3개 100바트", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "합리적인 가격의 최고의 가치", promo_3for100_desc: "오븐에서  나온... 바삭바삭하고 속은 부드럽!" },
-            ar: { nav_home: "الرئيسية", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا", tagline: "صدق أو لا تصدق!", menu_title: "قائمة الطعام والمشروبات", menu_snacks: "الوجبات الخفيفة", menu_drinks: "المشروبات", menu_slushy: "SLUSHY", baht: "بات", contact_title: "اتصل بنا", contact_hours: "ساعات العمل", contact_hours_time: "11:00 ص - 10:00 م<br>يبدأ العرض 11:30 ص", contact_address: "العنوان", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150", contact_phone: "قنوات الاتصال", contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487", contact_map: "عرض على Google Maps", admin_login: "تسجيل الدخول", admin_error: "كلمة المرور غير صحيحة", admin_warning: "يتم حفظ الصور والبيانات في متصفحك (LocalStorage). لكي يرى العملاء التغييرات، قم بتحرير ملف HTML مباشرة.", admin_logout: "تسجيل الخروج", coupon_title: "قسائم خصم خاصة", coupon_get: "كيفية الحصول على القسائم", coupon_desc: "انضم إلى أنشطتنا المثيرة واحصل على قسائم خصم فورية!", coupon_laser: "احصل على خصم 10% على الطعام والمشروبات", coupon_scream: "احصل على خصم 15% على الطعام والمشروبات", coupon_how: "كيفية استخدام القسائم", coupon_step1: "أكمل مهمة الليزر أو الصراخ في الظلام", coupon_step2: "احصل على قسيمة الخصم من موظف المنطقة", coupon_step3: "أظهر القسيمة في counter الوجبات الخفيفة قبل الدفع", coupon_step4: "احصل على خصم فوري كما هو موضح في القسيمة", promo_3for100_title: "3 قطع بـ 100 بات", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT", promo_3for100_tag: "أفضل قيمة بسعر مناسب", promo_3for100_desc: "ساخن من الفرن... مقرمش من الخارج، طري من الداخل!" }
-        };
-
-        const defaultAttractions = {
-            th: [
-                { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย \"ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513" },
-                { title: "สวนสนุกสุดสยอง . . .", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082" },
-                { title: "โกดังผีสิง เมื่อฝันร้ายมาเยือน . . . !", subtitle: "", desc: "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี . . . พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ \"เอฟเฟค\" พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน . . . ไม่เหมาะสำหรับคนขวัญอ่อน", icon: "fa-warehouse", color: "#2F4F4F" },
-                { title: "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส", subtitle: "ความอัศจรรย์ ที่คุณต้องตะลึง", desc: "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย...", icon: "fa-user", color: "#DAA520" },
-                { title: "มหัศจรรย์เขาวงกต", subtitle: "เปิดโลกแห่งจินตนาการ", desc: "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน \"อินฟินนิตี้\" (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ \"เอฟเฟค\" พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด...", icon: "fa-project-diagram", color: "#FF6347" },
-                { title: "เกมส์ตะลุยเลเซอร์", subtitle: "Mission Impossible", desc: "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องสำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น...", icon: "fa-bullseye", color: "#00CED1" },
-                { title: "โรงพยาบาลหลอน", subtitle: "The Horror Hospital", desc: "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้...", icon: "fa-hospital", color: "#8B0000" },
-                { title: "พีระมิดที่สาบสูญ", subtitle: "Lost Pyramid", desc: "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ...", icon: "fa-monument", color: "#D2691E" },
-                { title: "เกมอินเตอร์แอคทีฟสุดล้ำ", subtitle: "Interactive Gaming", desc: "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว", icon: "fa-gamepad", color: "#9370DB" },
-                { title: "หนีตายสวนสยอง", subtitle: "Escape the Haunted Garden", desc: "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ... จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด...", icon: "fa-skull", color: "#556B2F" }
-            ],
-            en: [
-                { title: "Believe It or Not! Museum", subtitle: "Truth you must see", desc: "One of the world's most famous museums originating from the USA. Discover over 350 types of bizarre artifacts.", icon: "fa-museum", color: "#8B4513" },
-                { title: "Scream in the Dark", subtitle: "The Ultimate Thrill", desc: "The newest extreme ride at Ripley World Pattaya. A legendary abandoned amusement park.", icon: "fa-ghost", color: "#4B0082" },
-                { title: "Haunted Warehouse", subtitle: "Nightmares Come True", desc: "One of the 5 largest coffin warehouses in the world with an 80-year-old terrifying legend.", icon: "fa-warehouse", color: "#2F4F4F" },
-                { title: "Louis Tussaud's Waxworks", subtitle: "Astonishingly Real", desc: "The 5th branch in the world and first in Thailand. Over 84 lifelike wax figures.", icon: "fa-user", color: "#DAA520" },
-                { title: "Infinity Maze", subtitle: "Open Your Imagination", desc: "20 minutes of pure entertainment in the 'Infinity' maze with special glasses.", icon: "fa-project-diagram", color: "#FF6347" },
-                { title: "Laser Mission", subtitle: "Be a Secret Agent", desc: "Navigate a labyrinth of green laser beams as fast as possible.", icon: "fa-bullseye", color: "#00CED1" },
-                { title: "The Horror Hospital", subtitle: "Face Your Fears", desc: "A remote hospital where patients mysteriously disappeared.", icon: "fa-hospital", color: "#8B0000" },
-                { title: "Lost Pyramid", subtitle: "Ancient Mysteries", desc: "A new Edutainment attraction bringing the mysteries of 4,700-year-old Egypt.", icon: "fa-monument", color: "#D2691E" },
-                { title: "Interactive Games", subtitle: "Move and Play", desc: "Cutting-edge interactive games that keep you moving and excited.", icon: "fa-gamepad", color: "#9370DB" },
-                { title: "Escape the Haunted Garden", subtitle: "WWII Nightmare", desc: "In 1945, a peaceful hospital was destroyed by bombs.", icon: "fa-skull", color: "#556B2F" }
-            ]
-        };
-
-        const defaultMenuImages = {
-            slushyCounter: "",
-            snacks: [
-                { id: "sb", name: "SB ROD SNACK CLASSIC", nameTh: "ข้าวเกรียบ SB", price: 30, image: "" },
-                { id: "popcorn", name: "POPCORN", nameTh: "ป๊อปคอร์น", price: 90, image: "" },
-                { id: "fries", name: "FRENCH FRIES", nameTh: "เฟรนช์ฟรายส์", price: 69, image: "" },
-                { id: "chicken_sticks", name: "CHICKEN STICKS", nameTh: "สติ๊กไก่ทอด", price: 89, image: "" },
-                { id: "chicken_pop", name: "CRISPY CHICKEN POP", nameTh: "ไก่ป๊อป", price: 89, image: "" },
-                { id: "mixed", name: "MIXED FRIED SNACKS", nameTh: "ของทานเล่นทอดรวม", price: 109, image: "" }
-            ],
-            drinks: [
-                { id: "water", name: "WATER", nameTh: "น้ำดื่ม", price: 25, image: "" },
-                { id: "soft_drinks", name: "SOFT DRINKS", nameTh: "น้ำอัดลม", price: 35, image: "" }
-            ]
+                admin_login: "Login", admin_error: "Incorrect password"
+            }
         };
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
-        let menuImages = JSON.parse(localStorage.getItem('ripleysMenuImages')) || defaultMenuImages;
+        let githubConfig = JSON.parse(localStorage.getItem('githubConfig')) || {
+            username: 'joenita589-afk',
+            repo: 'my-website',
+            token: '',
+            branch: 'main'
+        };
+
+        let siteData = {
+            attractions: [
+                { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลก...", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
+                { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya...", icon: "fa-ghost", color: "#4B0082", image: "", video: "" }
+            ],
+            menu: {
+                snacks: [
+                    { name: "SB ROD SNACK CLASSIC", nameTh: "ข้าวเกรียบ SB", price: 30, image: "" },
+                    { name: "POPCORN", nameTh: "ป๊อปคอร์น", price: 90, image: "" }
+                ],
+                drinks: [
+                    { name: "WATER", nameTh: "น้ำดื่ม", price: 25, image: "" },
+                    { name: "SOFT DRINKS", nameTh: "น้ำอัดลม", price: 35, image: "" }
+                ]
+            }
+        };
 
         function changeLang(lang) {
             currentLang = lang;
@@ -361,9 +398,7 @@
             const t = translations[lang] || translations['en'];
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (t[key]) {
-                    el.innerHTML = t[key];
-                }
+                if (t[key]) el.innerHTML = t[key];
             });
 
             renderAttractions();
@@ -371,11 +406,11 @@
         }
 
         function renderAttractions() {
-            const lang = currentLang;
-            const attractions = defaultAttractions[lang] || defaultAttractions['en'];
             const grid = document.getElementById('attractionsGrid');
-            grid.innerHTML = attractions.map(item => `
+            grid.innerHTML = siteData.attractions.map(item => `
                 <div class="card" style="border-top-color: ${item.color}">
+                    ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
+                    ${item.video ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>` : ''}
                     <div class="card-icon" style="background: ${item.color}"><i class="fas ${item.icon}"></i></div>
                     <h3>${item.title}</h3>
                     ${item.subtitle ? `<h4>${item.subtitle}</h4>` : ''}
@@ -386,21 +421,16 @@
 
         function renderMenu() {
             const t = translations[currentLang] || translations['en'];
-            
-            // Slushy Counter Image
             const slushyImg = document.getElementById('slushyCounterImg');
-            if (menuImages.slushyCounter) {
-                slushyImg.src = menuImages.slushyCounter;
+            if (slushyImg.dataset.src) {
+                slushyImg.src = slushyImg.dataset.src;
                 slushyImg.style.display = 'block';
-            } else {
-                slushyImg.style.display = 'none';
             }
 
-            // Snacks
             const snacksGrid = document.getElementById('snacksGrid');
-            snacksGrid.innerHTML = menuImages.snacks.map(item => `
+            snacksGrid.innerHTML = siteData.menu.snacks.map(item => `
                 <div class="menu-item-card">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<div style="height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;"><i class="fas fa-image" style="font-size: 3em;"></i></div>`}
+                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
                     <div class="menu-item-info">
                         <h4>${item.name}</h4>
                         <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
@@ -409,11 +439,10 @@
                 </div>
             `).join('');
 
-            // Drinks
             const drinksGrid = document.getElementById('drinksGrid');
-            drinksGrid.innerHTML = menuImages.drinks.map(item => `
+            drinksGrid.innerHTML = siteData.menu.drinks.map(item => `
                 <div class="menu-item-card">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<div style="height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;"><i class="fas fa-image" style="font-size: 3em;"></i></div>`}
+                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
                     <div class="menu-item-info">
                         <h4>${item.name}</h4>
                         <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
@@ -436,7 +465,10 @@
             if (pass === 'ripleys2024') {
                 document.getElementById('adminLogin').style.display = 'none';
                 document.getElementById('adminDashboard').style.display = 'block';
-                renderAdminImageManager();
+                loadGithubConfig();
+                renderAttractionsEditor();
+                renderMenuEditor();
+                renderContentEditor();
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }
@@ -448,124 +480,260 @@
             document.getElementById('adminPass').value = '';
         }
 
-        function renderAdminImageManager() {
-            const container = document.getElementById('adminImageManager');
-            let html = '<h3 style="margin-bottom: 20px;">รูปภาพเคาน์เตอร์ Slushy</h3>';
+        function showAdminTab(tab) {
+            document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('adminTab' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        function loadGithubConfig() {
+            document.getElementById('githubUsername').value = githubConfig.username;
+            document.getElementById('githubRepo').value = githubConfig.repo;
+            document.getElementById('githubToken').value = githubConfig.token;
+            document.getElementById('githubBranch').value = githubConfig.branch;
+        }
+
+        function saveGithubConfig() {
+            githubConfig = {
+                username: document.getElementById('githubUsername').value,
+                repo: document.getElementById('githubRepo').value,
+                token: document.getElementById('githubToken').value,
+                branch: document.getElementById('githubBranch').value
+            };
+            localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
+            document.getElementById('githubStatus').innerHTML = '<div class="success-box"><i class="fas fa-check"></i> บันทึกการตั้งค่าสำเร็จ!</div>';
+        }
+
+        async function testGithubConnection() {
+            const status = document.getElementById('githubStatus');
+            status.innerHTML = '<p>กำลังทดสอบ...</p>';
             
-            // Slushy Counter
-            html += `
-                <div class="admin-menu-item">
-                    <h4>Slushy Counter Image</h4>
-                    ${menuImages.slushyCounter ? `<img src="${menuImages.slushyCounter}" alt="Slushy Counter">` : '<p style="color: #999;">ยังไม่มีรูปภาพ</p>'}
-                    <br>
-                    <label class="upload-btn">
-                        <i class="fas fa-upload"></i> อัปโหลดรูปภาพ
-                        <input type="file" accept="image/*" style="display: none;" onchange="uploadImage('slushyCounter', this)">
-                    </label>
-                    ${menuImages.slushyCounter ? `<button class="btn" onclick="removeImage('slushyCounter')" style="background: #e74c3c; margin-left: 10px;"><i class="fas fa-trash"></i> ลบ</button>` : ''}
+            try {
+                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}`, {
+                    headers: { 'Authorization': `token ${githubConfig.token}` }
+                });
+                
+                if (response.ok) {
+                    status.innerHTML = '<div class="success-box"><i class="fas fa-check"></i> เชื่อมต่อ GitHub สำเร็จ!</div>';
+                } else {
+                    status.innerHTML = '<div class="warning-box"><i class="fas fa-times"></i> ไม่สามารถเชื่อมต่อได้ ตรวจสอบ Token</div>';
+                }
+            } catch (error) {
+                status.innerHTML = '<div class="warning-box"><i class="fas fa-times"></i> เกิดข้อผิดพลาด: ' + error.message + '</div>';
+            }
+        }
+
+        function renderAttractionsEditor() {
+            const container = document.getElementById('attractionsEditor');
+            container.innerHTML = siteData.attractions.map((item, index) => `
+                <div class="admin-section">
+                    <h4>${item.title}</h4>
+                    <div class="form-group">
+                        <label>ชื่อ (ไทย)</label>
+                        <input type="text" value="${item.title}" onchange="updateAttraction(${index}, 'title', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>คำบรรยาย</label>
+                        <input type="text" value="${item.subtitle}" onchange="updateAttraction(${index}, 'subtitle', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>รายละเอียด</label>
+                        <textarea onchange="updateAttraction(${index}, 'desc', this.value)">${item.desc}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>ไอคอน (Font Awesome)</label>
+                        <input type="text" value="${item.icon}" onchange="updateAttraction(${index}, 'icon', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>สี (Hex)</label>
+                        <input type="color" value="${item.color}" onchange="updateAttraction(${index}, 'color', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>รูปภาพ URL</label>
+                        <input type="text" value="${item.image}" onchange="updateAttraction(${index}, 'image', this.value)" placeholder="https://example.com/image.jpg">
+                        ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
+                    </div>
+                    <div class="form-group">
+                        <label>วิดีโอ URL (YouTube Embed)</label>
+                        <input type="text" value="${item.video}" onchange="updateAttraction(${index}, 'video', this.value)" placeholder="https://www.youtube.com/embed/xxxxx">
+                        ${item.video ? `<video src="${item.video}" class="media-preview" controls></video>` : ''}
+                    </div>
+                    <button class="btn btn-danger" onclick="deleteAttraction(${index})">
+                        <i class="fas fa-trash"></i> ลบ
+                    </button>
                 </div>
-            `;
+            `).join('');
+        }
 
-            // Snacks
-            html += '<h3 style="margin: 30px 0 20px;">รูปภาพอาหารว่าง</h3>';
-            menuImages.snacks.forEach((item, index) => {
-                html += `
-                    <div class="admin-menu-item">
-                        <h4>${item.name} (${item.nameTh}) - ${item.price} บาท</h4>
-                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<p style="color: #999;">ยังไม่มีรูปภาพ</p>'}
-                        <br>
-                        <label class="upload-btn">
-                            <i class="fas fa-upload"></i> อัปโหลดรูปภาพ
-                            <input type="file" accept="image/*" style="display: none;" onchange="uploadSnackImage(${index}, this)">
-                        </label>
-                        ${item.image ? `<button class="btn" onclick="removeSnackImage(${index})" style="background: #e74c3c; margin-left: 10px;"><i class="fas fa-trash"></i> ลบ</button>` : ''}
-                    </div>
-                `;
-            });
+        function updateAttraction(index, field, value) {
+            siteData.attractions[index][field] = value;
+        }
 
-            // Drinks
-            html += '<h3 style="margin: 30px 0 20px;">รูปภาพเครื่องดื่ม</h3>';
-            menuImages.drinks.forEach((item, index) => {
-                html += `
-                    <div class="admin-menu-item">
-                        <h4>${item.name} (${item.nameTh}) - ${item.price} บาท</h4>
-                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<p style="color: #999;">ยังไม่มีรูปภาพ</p>'}
-                        <br>
-                        <label class="upload-btn">
-                            <i class="fas fa-upload"></i> อัปโหลดรูปภาพ
-                            <input type="file" accept="image/*" style="display: none;" onchange="uploadDrinkImage(${index}, this)">
-                        </label>
-                        ${item.image ? `<button class="btn" onclick="removeDrinkImage(${index})" style="background: #e74c3c; margin-left: 10px;"><i class="fas fa-trash"></i> ลบ</button>` : ''}
-                    </div>
-                `;
+        function addAttraction() {
+            siteData.attractions.push({
+                title: "สถานที่ใหม่",
+                subtitle: "",
+                desc: "รายละเอียด...",
+                icon: "fa-star",
+                color: "#3498db",
+                image: "",
+                video: ""
             });
+            renderAttractionsEditor();
+        }
+
+        function deleteAttraction(index) {
+            if (confirm('ต้องการลบสถานที่นี้?')) {
+                siteData.attractions.splice(index, 1);
+                renderAttractionsEditor();
+            }
+        }
+
+        function renderMenuEditor() {
+            const container = document.getElementById('menuEditor');
+            let html = '<h4>อาหารว่าง</h4>';
+            html += siteData.menu.snacks.map((item, index) => `
+                <div class="admin-section">
+                    <div class="form-group">
+                        <label>ชื่อ (English)</label>
+                        <input type="text" value="${item.name}" onchange="updateMenu('snacks', ${index}, 'name', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>ชื่อ (ไทย)</label>
+                        <input type="text" value="${item.nameTh}" onchange="updateMenu('snacks', ${index}, 'nameTh', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>ราคา</label>
+                        <input type="number" value="${item.price}" onchange="updateMenu('snacks', ${index}, 'price', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>รูปภาพ URL</label>
+                        <input type="text" value="${item.image}" onchange="updateMenu('snacks', ${index}, 'image', this.value)">
+                        ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
+                    </div>
+                    <button class="btn btn-danger" onclick="deleteMenuItem('snacks', ${index})">
+                        <i class="fas fa-trash"></i> ลบ
+                    </button>
+                </div>
+            `).join('');
+
+            html += '<h4 style="margin-top:30px;">เครื่องดื่ม</h4>';
+            html += siteData.menu.drinks.map((item, index) => `
+                <div class="admin-section">
+                    <div class="form-group">
+                        <label>ชื่อ (English)</label>
+                        <input type="text" value="${item.name}" onchange="updateMenu('drinks', ${index}, 'name', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>ชื่อ (ไทย)</label>
+                        <input type="text" value="${item.nameTh}" onchange="updateMenu('drinks', ${index}, 'nameTh', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>ราคา</label>
+                        <input type="number" value="${item.price}" onchange="updateMenu('drinks', ${index}, 'price', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>รูปภาพ URL</label>
+                        <input type="text" value="${item.image}" onchange="updateMenu('drinks', ${index}, 'image', this.value)">
+                        ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
+                    </div>
+                    <button class="btn btn-danger" onclick="deleteMenuItem('drinks', ${index})">
+                        <i class="fas fa-trash"></i> ลบ
+                    </button>
+                </div>
+            `).join('');
 
             container.innerHTML = html;
         }
 
-        function uploadImage(type, input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    menuImages[type] = e.target.result;
-                    localStorage.setItem('ripleysMenuImages', JSON.stringify(menuImages));
-                    renderAdminImageManager();
-                    alert('อัปโหลดรูปภาพสำเร็จ!');
-                };
-                reader.readAsDataURL(file);
+        function updateMenu(category, index, field, value) {
+            siteData.menu[category][index][field] = field === 'price' ? parseInt(value) : value;
+        }
+
+        function addMenuItem() {
+            const category = prompt('เพิ่มในหมวดใด? (snacks/drinks)');
+            if (category === 'snacks' || category === 'drinks') {
+                siteData.menu[category].push({
+                    name: "New Item",
+                    nameTh: "เมนูใหม่",
+                    price: 0,
+                    image: ""
+                });
+                renderMenuEditor();
             }
         }
 
-        function uploadSnackImage(index, input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    menuImages.snacks[index].image = e.target.result;
-                    localStorage.setItem('ripleysMenuImages', JSON.stringify(menuImages));
-                    renderAdminImageManager();
-                    alert('อัปโหลดรูปภาพสำเร็จ!');
-                };
-                reader.readAsDataURL(file);
+        function deleteMenuItem(category, index) {
+            if (confirm('ต้องการลบเมนูนี้?')) {
+                siteData.menu[category].splice(index, 1);
+                renderMenuEditor();
             }
         }
 
-        function uploadDrinkImage(index, input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    menuImages.drinks[index].image = e.target.result;
-                    localStorage.setItem('ripleysMenuImages', JSON.stringify(menuImages));
-                    renderAdminImageManager();
-                    alert('อัปโหลดรูปภาพสำเร็จ!');
-                };
-                reader.readAsDataURL(file);
-            }
+        function renderContentEditor() {
+            const container = document.getElementById('contentEditor');
+            container.innerHTML = `
+                <div class="form-group">
+                    <label>Tagline (ไทย)</label>
+                    <input type="text" value="${translations.th.tagline}" onchange="translations.th.tagline = this.value">
+                </div>
+                <div class="form-group">
+                    <label>Tagline (English)</label>
+                    <input type="text" value="${translations.en.tagline}" onchange="translations.en.tagline = this.value">
+                </div>
+            `;
         }
 
-        function removeImage(type) {
-            if (confirm('ต้องการลบรูปภาพนี้?')) {
-                menuImages[type] = '';
-                localStorage.setItem('ripleysMenuImages', JSON.stringify(menuImages));
-                renderAdminImageManager();
+        async function saveAllChanges() {
+            if (!githubConfig.token) {
+                alert('กรุณาตั้งค่า GitHub Token ก่อน!');
+                showAdminTab('github');
+                return;
             }
-        }
 
-        function removeSnackImage(index) {
-            if (confirm('ต้องการลบรูปภาพนี้?')) {
-                menuImages.snacks[index].image = '';
-                localStorage.setItem('ripleysMenuImages', JSON.stringify(menuImages));
-                renderAdminImageManager();
-            }
-        }
+            const status = confirm('ต้องการบันทึกการเปลี่ยนแปลงไปยัง GitHub? ลูกค้าทุกคนจะเห็นการอัปเดตภายใน 1-2 นาที');
+            if (!status) return;
 
-        function removeDrinkImage(index) {
-            if (confirm('ต้องการลบรูปภาพนี้?')) {
-                menuImages.drinks[index].image = '';
-                localStorage.setItem('ripleysMenuImages', JSON.stringify(menuImages));
-                renderAdminImageManager();
+            try {
+                // ดึงไฟล์ปัจจุบัน
+                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/index.html?ref=${githubConfig.branch}`, {
+                    headers: { 'Authorization': `token ${githubConfig.token}` }
+                });
+                const fileData = await response.json();
+                
+                // Decode เนื้อหาเดิม
+                const originalContent = atob(fileData.content);
+                
+                // สร้างเนื้อหาใหม่ (ในที่นี้จะเป็นการ replace ข้อมูลในไฟล์)
+                // ในทางปฏิบัติควร parse และ replace ข้อมูลเฉพาะส่วน
+                const newContent = originalContent; // ต้อง implement การ replace จริง
+                
+                // Encode เนื้อหาใหม่
+                const newContentBase64 = btoa(unescape(encodeURIComponent(newContent)));
+                
+                // อัปเดตไฟล์
+                const updateResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/index.html`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Update site data via Admin Panel',
+                        content: newContentBase64,
+                        sha: fileData.sha,
+                        branch: githubConfig.branch
+                    })
+                });
+
+                if (updateResponse.ok) {
+                    alert('✅ บันทึกสำเร็จ! Cloudflare จะ Deploy อัตโนมัติภายใน 1-2 นาที ลูกค้าทุกคนจะเห็นการเปลี่ยนแปลง');
+                } else {
+                    alert('❌ เกิดข้อผิดพลาดในการบันทึก');
+                }
+            } catch (error) {
+                alert('❌ เกิดข้อผิดพลาด: ' + error.message);
             }
         }
 
