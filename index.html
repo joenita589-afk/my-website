@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ripley's Pattaya</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);min-height:100vh;color:#333}
+.lang-select{position:fixed;top:20px;right:20px;z-index:1000}
+.lang-select select{padding:10px;border-radius:25px;border:none;background:white;font-size:14px;cursor:pointer}
+.navbar{background:rgba(0,0,0,0.8);position:sticky;top:0;z-index:999;border-bottom:2px solid #e94560}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:center;flex-wrap:wrap;padding:15px;gap:10px}
+.nav-btn{background:none;border:none;color:white;padding:10px 20px;border-radius:20px;cursor:pointer;font-size:16px;display:flex;align-items:center;gap:8px}
+.nav-btn:hover,.nav-btn.active{background:#e94560}
+.section{display:none;max-width:1200px;margin:0 auto;padding:40px 20px}
+.section.active{display:block}
+.hero{text-align:center;padding:60px 20px;color:white}
+.hero h1{font-size:3em;color:#e94560;margin-bottom:10px}
+.hero p{font-size:1.5em;color:#ffd700;font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:30px;margin-top:30px}
+.card{background:white;border-radius:15px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.3);border-top:5px solid #e94560}
+.card:hover{transform:translateY(-10px)}
+.card img,.card video{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:15px}
+.card-icon{width:60px;height:60px;border-radius:50%;background:#e94560;color:white;display:flex;align-items:center;justify-content:center;font-size:1.5em;margin-bottom:20px}
+.card h3{color:#1a1a2e;font-size:1.4em;margin-bottom:5px}
+.card h4{color:#e94560;font-size:1em;margin-bottom:15px}
+.card p{color:#555;line-height:1.7}
+.info-box{background:white;border-radius:15px;padding:30px;margin-bottom:30px}
+.info-box h2{color:#1a1a2e;margin-bottom:20px;border-bottom:2px solid #e94560;padding-bottom:10px;display:inline-block}
+.step{display:flex;gap:15px;margin-bottom:20px;align-items:flex-start}
+.step-num{background:#e94560;color:white;width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.menu-category{margin-bottom:40px}
+.menu-category h3{font-size:2em;color:#e94560;margin-bottom:20px;text-align:center}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.menu-item-card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
+.menu-item-card img{width:100%;height:200px;object-fit:cover}
+.menu-item-info{padding:20px}
+.menu-item-info h4{font-size:1.2em;color:#1a1a2e;margin-bottom:5px}
+.menu-item-info p{color:#777;font-size:0.9em}
+.menu-price{font-size:1.5em;color:#e94560;font-weight:bold}
+.promo-banner{background:linear-gradient(135deg,#f39c12,#e74c3c);color:white;padding:30px;border-radius:15px;text-align:center;margin-bottom:30px}
+.promo-banner h3{font-size:2.5em;margin-bottom:10px}
+.promo-banner .highlight{background:white;color:#e74c3c;padding:5px 20px;border-radius:25px;display:inline-block;font-weight:bold}
+.slushy-flavors{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:20px}
+.flavor-tag{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:10px;border-radius:20px;text-align:center}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.contact-card{background:white;padding:30px;border-radius:15px;text-align:center}
+.contact-card i{font-size:2.5em;color:#e94560;margin-bottom:15px}
+.map-btn{display:inline-block;margin-top:20px;padding:15px 30px;background:#e94560;color:white;text-decoration:none;border-radius:30px;font-weight:bold}
+.login-box{max-width:500px;margin:100px auto;background:white;padding:40px;border-radius:15px;text-align:center}
+.login-box input{width:100%;padding:12px;margin:10px 0;border:2px solid #ddd;border-radius:8px;font-size:16px}
+.btn{padding:12px 25px;background:#e94560;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px;margin:5px}
+.btn:hover{background:#c0392b}
+.admin-panel{background:white;padding:30px;border-radius:15px}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;margin-bottom:5px;font-weight:bold}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px}
+.form-group textarea{min-height:100px}
+.admin-section{margin-bottom:30px;padding:20px;background:#f8f9fa;border-radius:10px}
+.tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:10px 20px;background:white;border:2px solid #e94560;color:#e94560;border-radius:25px;cursor:pointer;font-weight:bold}
+.tab.active{background:#e94560;color:white}
+[dir="rtl"]{text-align:right}
+[dir="rtl"] .lang-select{right:auto;left:20px}
+</style>
+</head>
+<body>
+
+<div class="lang-select">
+<select id="langSelect" onchange="changeLang(this.value)">
+<option value="th">🇹 ไทย</option>
+<option value="en">🇬🇧 English</option>
+<option value="zh">🇨🇳 中文</option>
+<option value="ru">🇷🇺 Русский</option>
+<option value="hi">🇮🇳 हिन्दी</option>
+<option value="he">🇮 עברית</option>
+<option value="ja">🇯🇵 日本語</option>
+<option value="ko">🇰🇷 한국어</option>
+<option value="ar">🇦 العربية</option>
+</select>
+</div>
+
+<nav class="navbar">
+<div class="nav-container">
+<button class="nav-btn active" onclick="showSection('home')"><i class="fas fa-home"></i> <span data-i18n="nav_home">หน้าหลัก</span></button>
+<button class="nav-btn" onclick="showSection('coupon')"><i class="fas fa-ticket-alt"></i> <span data-i18n="nav_coupon">คูปอง</span></button>
+<button class="nav-btn" onclick="showSection('menu')"><i class="fas fa-utensils"></i> <span data-i18n="nav_menu">เมนู</span></button>
+<button class="nav-btn" onclick="showSection('contact')"><i class="fas fa-map-marker-alt"></i> <span data-i18n="nav_contact">ติดต่อเรา</span></button>
+<button class="nav-btn" onclick="showSection('admin')"><i class="fas fa-lock"></i> Admin</button>
+</div>
+</nav>
+
+<section id="home" class="section active">
+<div class="hero">
+<h1>Ripley's Believe It or Not! Pattaya</h1>
+<p id="tagline" data-i18n="tagline">ความมหัศจรรย์ที่คุณต้องเชื่อ!</p>
+</div>
+<div class="grid" id="attractionsGrid"></div>
+</section>
+
+<section id="coupon" class="section">
+<div class="hero"><h1 data-i18n="coupon_title">คูปองส่วนลดพิเศษ</h1></div>
+<div class="info-box">
+<h2><i class="fas fa-gift"></i> <span data-i18n="coupon_get">วิธีการรับคูปอง</span></h2>
+<p data-i18n="coupon_desc">ร่วมกิจกรรมสุดมันส์เพื่อรับคูปองส่วนลดทันที!</p>
+<div class="grid" style="margin-top:20px">
+<div class="card" style="border-top-color:#00CED1">
+<div class="card-icon" style="background:#00CED1"><i class="fas fa-bullseye"></i></div>
+<h3 data-i18n="coupon_laser_title">Games Laser Mission</h3>
+<p data-i18n="coupon_laser">รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม</p>
+</div>
+<div class="card" style="border-top-color:#4B0082">
+<div class="card-icon" style="background:#4B0082"><i class="fas fa-ghost"></i></div>
+<h3 data-i18n="coupon_scream_title">Scream in the Dark</h3>
+<p data-i18n="coupon_scream">รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม</p>
+</div>
+</div>
+</div>
+<div class="info-box">
+<h2><i class="fas fa-info-circle"></i> <span data-i18n="coupon_how">วิธีใช้คูปอง</span></h2>
+<div class="step"><div class="step-num">1</div><div data-i18n="coupon_step1">ทำกิจกรรม เลเซอร์ หรือ Scream in the Dark ให้สำเร็จ</div></div>
+<div class="step"><div class="step-num">2</div><div data-i18n="coupon_step2">รับคูปองส่วนลดจากเจ้าหน้าที่ประจำโซน</div></div>
+<div class="step"><div class="step-num">3</div><div data-i18n="coupon_step3">นำคูปองไปแสดงที่เคาน์เตอร์ขายของทานเล่นก่อนชำระเงิน</div></div>
+<div class="step"><div class="step-num">4</div><div data-i18n="coupon_step4">รับส่วนลดทันทีตามมูลค่าที่ระบุในคูปอง</div></div>
+</div>
+</section>
+
+<section id="menu" class="section">
+<div class="hero"><h1 data-i18n="menu_title">เมนูอาหารและเครื่องดื่ม</h1></div>
+<div class="promo-banner">
+<h3 data-i18n="promo_3for100_title">3 ชิ้น 100 บาท</h3>
+<p data-i18n="promo_3for100_subtitle">3 PIECES FOR 100 BAHT</p>
+<div class="highlight" data-i18n="promo_3for100_tag">คุ้มค่าที่สุดในราคาที่เป็นกันเอง</div>
+<p style="margin-top:15px;font-style:italic" data-i18n="promo_3for100_desc">ร้อนๆ จากเตา... กรอบนอก นุ่มใน!</p>
+</div>
+<div class="menu-category">
+<h3 data-i18n="menu_snacks">อาหารว่าง</h3>
+<div class="menu-grid" id="snacksGrid"></div>
+</div>
+<div class="menu-category">
+<h3 data-i18n="menu_drinks">เครื่องดื่ม</h3>
+<div class="menu-grid" id="drinksGrid"></div>
+</div>
+<div class="menu-category">
+<h3 data-i18n="menu_slushy">SLUSHY</h3>
+<div class="slushy-flavors">
+<div class="flavor-tag">🥝 KIWI</div>
+<div class="flavor-tag">🥭 MANGO</div>
+<div class="flavor-tag">🍵 THAI TEA</div>
+<div class="flavor-tag">🍯 HONEY LEMON</div>
+<div class="flavor-tag">🍹 FRUIT PUNCH</div>
+<div class="flavor-tag">🍊 ORANGE</div>
+<div class="flavor-tag"> GRAPE</div>
+<div class="flavor-tag">🍵 GREEN TEA</div>
+<div class="flavor-tag">🍓 MIX BERRY</div>
+<div class="flavor-tag">🍓 STRAWBERRY</div>
+</div>
+<div style="text-align:center;margin-top:20px">
+<div class="menu-price" style="font-size:2em;color:#e94560">59 <span data-i18n="baht">บาท</span></div>
+</div>
+</div>
+</section>
+
+<section id="contact" class="section">
+<div class="hero"><h1 data-i18n="contact_title">ติดต่อเรา</h1></div>
+<div class="contact-grid">
+<div class="contact-card">
+<i class="fas fa-clock"></i>
+<h3 data-i18n="contact_hours">เวลาทำการ</h3>
+<p data-i18n="contact_hours_time">11:00 น. - 22:00 น.<br>เริ่มโชว์ 11:30 น.</p>
+</div>
+<div class="contact-card">
+<i class="fas fa-map-marker-alt"></i>
+<h3 data-i18n="contact_address">ที่อยู่</h3>
+<p data-i18n="contact_address_text">ไมเนอร์ สกายไรเดอร์ จำกัด<br>เลขที่ 218 หมู่ 10 ถนนเลียบชายหาด<br>ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20150</p>
+</div>
+<div class="contact-card">
+<i class="fas fa-phone-alt"></i>
+<h3 data-i18n="contact_phone">ช่องทางการติดต่อ</h3>
+<p data-i18n="contact_phone_text">โทร: +66 (38) 710-294-8<br>แฟ็กซ์: +66 (38) 710-487</p>
+</div>
+</div>
+<div style="text-align:center;margin-top:40px">
+<a href="https://maps.app.goo.gl/GvKaetCQbaCtduwH6" target="_blank" class="map-btn"><i class="fas fa-map-marked-alt"></i> <span data-i18n="contact_map">เปิดดูแผนที่บน Google Maps</span></a>
+</div>
+</section>
+
+<section id="admin" class="section">
+<div id="adminLogin" class="login-box">
+<h2><i class="fas fa-lock"></i> Admin Login</h2>
+<input type="password" id="adminPass" placeholder="กรอกรหัสผ่าน">
+<button class="btn" onclick="checkAdmin()" style="width:100%;margin-top:10px" data-i18n="admin_login">เข้าสู่ระบบ</button>
+<p id="loginError" style="color:red;margin-top:10px;display:none" data-i18n="admin_error">รหัสผ่านไม่ถูกต้อง</p>
+</div>
+<div id="adminDashboard" class="admin-panel" style="display:none">
+<div class="tabs">
+<button class="tab active" onclick="showAdminTab('attractions')">🎢 สถานที่</button>
+<button class="tab" onclick="showAdminTab('menu')">🍽️ เมนู</button>
+</div>
+<div id="adminTabAttractions" class="admin-section">
+<h3><i class="fas fa-museum"></i> จัดการสถานที่</h3>
+<div id="attractionsEditor"></div>
+<button class="btn" onclick="addAttraction()"><i class="fas fa-plus"></i> เพิ่มสถานที่</button>
+</div>
+<div id="adminTabMenu" class="admin-section" style="display:none">
+<h3><i class="fas fa-utensils"></i> จัดการเมนู</h3>
+<div id="menuEditor"></div>
+<button class="btn" onclick="addMenuItem()"><i class="fas fa-plus"></i> เพิ่มเมนู</button>
+</div>
+<button class="btn" onclick="logout()" style="background:#7f8c8d;margin-top:20px"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+</div>
+</section>
+
+<script>
+const T={
+th:{nav_home:"หน้าหลัก",nav_coupon:"คูปอง",nav_menu:"เมนู",nav_contact:"ติดต่อเรา",tagline:"ความมหัศจรรย์ที่คุณต้องเชื่อ!",coupon_title:"คูปองส่วนลดพิเศษ",coupon_get:"วิธีการรับคูปอง",coupon_desc:"ร่วมกิจกรรมสุดมันส์เพื่อรับคูปองส่วนลดทันที!",coupon_laser_title:"Games Laser Mission",coupon_laser:"รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม",coupon_scream_title:"Scream in the Dark",coupon_scream:"รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม",coupon_how:"วิธีใช้คูปอง",coupon_step1:"ทำกิจกรรม เลเซอร์ หรือ Scream in the Dark ให้สำเร็จ",coupon_step2:"รับคูปองส่วนลดจากเจ้าหน้าที่ประจำโซน",coupon_step3:"นำคูปองไปแสดงที่เคาน์เตอร์ขายของทานเล่นก่อนชำระเงิน",coupon_step4:"รับส่วนลดทันทีตามมูลค่าที่ระบุในคูปอง",menu_title:"เมนูอาหารและเครื่องดื่ม",promo_3for100_title:"3 ชิ้น 100 บาท",promo_3for100_subtitle:"3 PIECES FOR 100 BAHT",promo_3for100_tag:"คุ้มค่าที่สุดในราคาที่เป็นกันเอง",promo_3for100_desc:"ร้อนๆ จากเตา... กรอบนอก นุ่มใน!",menu_snacks:"อาหารว่าง",menu_drinks:"เครื่องดื่ม",menu_slushy:"SLUSHY",baht:"บาท",contact_title:"ติดต่อเรา",contact_hours:"เวลาทำการ",contact_hours_time:"11:00 น. - 22:00 น.<br>เริ่มโชว์ 11:30 น.",contact_address:"ที่อยู่",contact_address_text:"ไมเนอร์ สกายไรเดอร์ จำกัด<br>เลขที่ 218 หมู่ 10 ถนนเลียบชายหาด<br>ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20150",contact_phone:"ช่องทางการติดต่อ",contact_phone_text:"โทร: +66 (38) 710-294-8<br>แฟ็กซ์: +66 (38) 710-487",contact_map:"เปิดดูแผนที่บน Google Maps",admin_login:"เข้าสู่ระบบ",admin_error:"รหัสผ่านไม่ถูกต้อง"},
+en:{nav_home:"Home",nav_coupon:"Coupons",nav_menu:"Menu",nav_contact:"Contact",tagline:"Believe It or Not!",coupon_title:"Special Discount Coupons",coupon_get:"How to Get Coupons",coupon_desc:"Join our exciting activities!",coupon_laser_title:"Games Laser Mission",coupon_laser:"Get 10% discount on food and beverages",coupon_scream_title:"Scream in the Dark",coupon_scream:"Get 15% discount on food and beverages",coupon_how:"How to Use Coupons",coupon_step1:"Complete Laser Mission or Scream in the Dark",coupon_step2:"Receive discount coupon from staff",coupon_step3:"Present coupon at snack counter before payment",coupon_step4:"Get instant discount",menu_title:"Food & Beverages Menu",promo_3for100_title:"3 Pieces for 100 Baht",promo_3for100_subtitle:"3 PIECES FOR 100 BAHT",promo_3for100_tag:"Best Value",promo_3for100_desc:"Hot and crispy!",menu_snacks:"Snacks",menu_drinks:"Beverages",menu_slushy:"SLUSHY",baht:"Baht",contact_title:"Contact Us",contact_hours:"Opening Hours",contact_hours_time:"11:00 AM - 10:00 PM<br>Show starts 11:30 AM",contact_address:"Address",contact_address_text:"Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",contact_phone:"Contact",contact_phone_text:"Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",contact_map:"View on Google Maps",admin_login:"Login",admin_error:"Incorrect password"},
+zh:{nav_home:"首页",nav_coupon:"优惠券",nav_menu:"菜单",nav_contact:"联系我们",tagline:"信不信由你！",coupon_title:"特别折扣优惠券",coupon_get:"如何获得优惠券",coupon_desc:"参加精彩活动获得折扣券！",menu_title:"餐饮菜单",menu_snacks:"小吃",menu_drinks:"饮料",menu_slushy:"冰沙",baht:"泰铢",contact_title:"联系我们",contact_hours:"营业时间",contact_hours_time:"11:00 - 22:00",contact_address:"地址",contact_phone:"联系方式",admin_login:"登录",admin_error:"密码错误"},
+ru:{nav_home:"Главная",nav_coupon:"Купоны",nav_menu:"Меню",nav_contact:"Контакты",tagline:"Хотите — верьте!",menu_title:"Меню",menu_snacks:"Закуски",menu_drinks:"Напитки",baht:"бат",admin_login:"Войти"},
+hi:{nav_home:"होम",nav_coupon:"कूपन",nav_menu:"मेनू",nav_contact:"संपर्क",tagline:"विश्वास करो या नहीं!",menu_title:"मेनू",menu_snacks:"नाश्ते",menu_drinks:"पेय",baht:"बाht",admin_login:"लॉगिन"},
+he:{nav_home:"דף הבית",nav_coupon:"קופונים",nav_menu:"תפריט",nav_contact:"צור קשר",tagline:"תאמינו או לא!",menu_title:"תפריט",menu_snacks:"חטיפים",menu_drinks:"משקאות",baht:"באט",admin_login:"התחבר"},
+ja:{nav_home:"ホーム",nav_coupon:"クーポン",nav_menu:"メニュー",nav_contact:"お問い合わせ",tagline:"信じられない！",menu_title:"メニュー",menu_snacks:"スナック",menu_drinks:"飲み物",baht:"バーツ",admin_login:"ログイン"},
+ko:{nav_home:"홈",nav_coupon:"쿠폰",nav_menu:"메뉴",nav_contact:"연락처",tagline:"믿거나 말거나!",menu_title:"메뉴",menu_snacks:"스낵",menu_drinks:"음료",baht:"바트",admin_login:"로그인"},
+ar:{nav_home:"الرئيسية",nav_coupon:"القسائم",nav_menu:"القائمة",nav_contact:"اتصل بنا",tagline:"صدق أو لا تصدق!",menu_title:"القائمة",menu_snacks:"الوجبات",menu_drinks:"المشروبات",baht:"بات",admin_login:"تسجيل الدخول"}
+};
+
+const A={
+th:[
+{t:"พิพิธภัณฑ์ เชื่อหรือไม่!",s:"ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง",d:"พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลก พบของจริงกว่า 350 ประเภท เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วน เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน",i:"fa-museum",c:"#8B4513"},
+{t:"สวนสนุกสุดสยอง",s:"Scream in the Dark",d:"เครื่องเล่นใหม่ล่าสุดของ Ripley World Pattaya สำหรับคนรักความท้าทายแบบสยองขวัญ",i:"fa-ghost",c:"#4B0082"},
+{t:"โกดังผีสิง",s:"เมื่อฝันร้ายมาเยือน",d:"โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวมากว่า 80 ปี",i:"fa-warehouse",c:"#2F4F4F"},
+{t:"พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส",s:"ความอัศจรรย์ที่คุณต้องตะลึง",d:"สาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย จัดแสดงหุ่นขี้ผึ้งเสมือนจริงมากกว่า 84 ตัว",i:"fa-user",c:"#DAA520"},
+{t:"มหัศจรรย์เขาวงกต",s:"เปิดโลกแห่งจินตนาการ",d:"ตลอด 20 นาทีของการเดินทางใน อินฟินนิตี้ เพลินเพลินกับแว่นสุดพิเศษ",i:"fa-project-diagram",c:"#FF6347"},
+{t:"เกมส์ตะลุยเลเซอร์",s:"Mission Impossible",d:"เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรม ผ่านเขาวงกตเลเซอร์",i:"fa-bullseye",c:"#00CED1"},
+{t:"โรงพยาบาลหลอน",s:"The Horror Hospital",d:"โรงพยาบาลที่ผู้ป่วยเข้าไปแล้วไม่มีวี่แววจะได้กลับออกมา",i:"fa-hospital",c:"#8B0000"},
+{t:"พีระมิดที่สาบสูญ",s:"Lost Pyramid",d:"Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์",i:"fa-monument",c:"#D2691E"},
+{t:"เกมอินเตอร์แอคทีฟสุดล้ำ",s:"Interactive Gaming",d:"เกมที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที",i:"fa-gamepad",c:"#9370DB"},
+{t:"หนีตายสวนสยอง",s:"Escape the Haunted Garden",d:"ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลกลายเป็นซากปรักหักพัง",i:"fa-skull",c:"#556B2F"}
+],
+en:[
+{t:"Believe It or Not! Museum",s:"Truth you must see",d:"One of the world's most famous museums from USA. Over 350 types of bizarre artifacts.",i:"fa-museum",c:"#8B4513"},
+{t:"Scream in the Dark",s:"Ultimate Thrill",d:"Newest extreme ride at Ripley World Pattaya with horror experience.",i:"fa-ghost",c:"#4B0082"},
+{t:"Haunted Warehouse",s:"Nightmares Come True",d:"Largest coffin warehouse with 80-year terrifying legend.",i:"fa-warehouse",c:"#2F4F4F"},
+{t:"Louis Tussaud's Waxworks",s:"Astonishingly Real",d:"5th branch in world, first in Thailand. Over 84 lifelike wax figures.",i:"fa-user",c:"#DAA520"},
+{t:"Infinity Maze",s:"Open Imagination",d:"20 minutes through Infinity with special glasses and 16 rooms.",i:"fa-project-diagram",c:"#FF6347"},
+{t:"Laser Mission",s:"Mission Impossible",d:"Navigate laser maze as fast as possible without touching beams.",i:"fa-bullseye",c:"#00CED1"},
+{t:"Horror Hospital",s:"Face Your Fears",d:"Remote hospital where patients mysteriously disappeared.",i:"fa-hospital",c:"#8B0000"},
+{t:"Lost Pyramid",s:"Ancient Mysteries",d:"Edutainment attraction from Egypt 4,700 years ago.",i:"fa-monument",c:"#D2691E"},
+{t:"Interactive Games",s:"Move and Play",d:"Cutting-edge games combining movement and graphics.",i:"fa-gamepad",c:"#9370DB"},
+{t:"Haunted Garden",s:"WWII Nightmare",d:"1945 hospital destroyed by bombs, spirits still wander.",i:"fa-skull",c:"#556B2F"}
+]
+};
+
+const M={snacks:[{n:"SB ROD SNACK CLASSIC",nt:"ข้าวเกรียบ SB",p:30},{n:"POPCORN",nt:"ป๊อปคอร์น",p:90},{n:"FRENCH FRIES",nt:"เฟรนช์ฟรายส์",p:69},{n:"CHICKEN STICKS",nt:"สติ๊กไก่ทอด",p:89},{n:"CRISPY CHICKEN POP",nt:"ไก่ป๊อป",p:89},{n:"MIXED FRIED SNACKS",nt:"ของทานเล่นทอดรวม",p:109}],drinks:[{n:"WATER",nt:"น้ำดื่ม",p:25},{n:"SOFT DRINKS",nt:"น้ำอัดลม",p:35}]};
+
+let L=localStorage.getItem('lang')||'th';
+
+function GA(l){return A[l]||A.en||[]}
+
+function CL(l){
+L=l;
+localStorage.setItem('lang',l);
+document.getElementById('langSelect').value=l;
+document.documentElement.setAttribute('dir',(l==='ar'||l==='he')?'rtl':'ltr');
+const t=T[l]||T.en;
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(t[k])e.innerHTML=t[k]});
+RA();RM();
+}
+
+function RA(){
+const a=GA(L);
+document.getElementById('attractionsGrid').innerHTML=a.map(i=>`<div class="card" style="border-top-color:${i.c}"><div class="card-icon" style="background:${i.c}"><i class="fas ${i.i}"></i></div><h3>${i.t}</h3>${i.s?`<h4>${i.s}</h4>`:''}<p>${i.d}</p></div>`).join('');
+}
+
+function RM(){
+const t=T[L]||T.en;
+document.getElementById('snacksGrid').innerHTML=M.snacks.map(i=>`<div class="menu-item-card"><div class="menu-item-info"><h4>${i.n}</h4><p>${L==='th'?i.nt:i.n}</p><div class="menu-price">${i.p} ${t.baht||'Baht'}</div></div></div>`).join('');
+document.getElementById('drinksGrid').innerHTML=M.drinks.map(i=>`<div class="menu-item-card"><div class="menu-item-info"><h4>${i.n}</h4><p>${L==='th'?i.nt:i.n}</p><div class="menu-price">${i.p} ${t.baht||'Baht'}</div></div></div>`).join('');
+}
+
+function SS(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+event.target.closest('.nav-btn').classList.add('active');
+if(id==='menu')RM();if(id==='home')RA();
+}
+
+function CA(){
+if(document.getElementById('adminPass').value==='ripleys2024'){
+document.getElementById('adminLogin').style.display='none';
+document.getElementById('adminDashboard').style.display='block';
+RAE();RME();
+}else{document.getElementById('loginError').style.display='block'}
+}
+
+function LO(){
+document.getElementById('adminLogin').style.display='block';
+document.getElementById('adminDashboard').style.display='none';
+document.getElementById('adminPass').value='';
+}
+
+function SAT(t){
+document.querySelectorAll('.admin-section').forEach(s=>s.style.display='none');
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById('adminTab'+t.charAt(0).toUpperCase()+t.slice(1)).style.display='block';
+event.target.classList.add('active');
+}
+
+function RAE(){
+document.getElementById('attractionsEditor').innerHTML=GA(L).map((i,x)=>`<div class="admin-section"><h4>${i.t}</h4><div class="form-group"><label>ชื่อ</label><input type="text" value="${i.t}" onchange="A['${L}'][${x}].t=this.value"></div><div class="form-group"><label>คำบรรยาย</label><input type="text" value="${i.s}" onchange="A['${L}'][${x}].s=this.value"></div><div class="form-group"><label>รายละเอียด</label><textarea onchange="A['${L}'][${x}].d=this.value">${i.d}</textarea></div></div>`).join('');
+}
+
+function RME(){
+document.getElementById('menuEditor').innerHTML='<h4>อาหารว่าง</h4>'+M.snacks.map((i,x)=>`<div class="admin-section"><div class="form-group"><label>ชื่อ</label><input type="text" value="${i.n}" onchange="M.snacks[${x}].n=this.value"></div><div class="form-group"><label>ชื่อไทย</label><input type="text" value="${i.nt}" onchange="M.snacks[${x}].nt=this.value"></div><div class="form-group"><label>ราคา</label><input type="number" value="${i.p}" onchange="M.snacks[${x}].p=parseInt(this.value)"></div></div>`).join('');
+}
+
+function AA(){A[L].push({t:"ใหม่",s:"",d:"",i:"fa-star",c:"#3498db"});RAE()}
+function AM(){M.snacks.push({n:"New",nt:"ใหม่",p:0});RME()}
+
+window.onload=()=>{CL(L)};
+</script>
+</body>
+</html>
