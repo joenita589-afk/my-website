@@ -321,47 +321,349 @@
 
     <script>
         const translations = {
-            th: {
-                nav_home: "หน้าหลัก", nav_coupon: "คูปอง", nav_menu: "เมนู", nav_contact: "ติดต่อเรา",
-                tagline: "ความมหัศจรรย์ที่คุณต้องเชื่อ!",
-                coupon_title: "คูปองส่วนลดพิเศษ", coupon_get: "วิธีการรับคูปอง", coupon_desc: "ร่วมกิจกรรมสุดมันส์เพื่อรับคูปองส่วนลดทันที!",
-                coupon_laser_title: "Games Laser Mission", coupon_laser: "รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม",
-                coupon_scream_title: "Scream in the Dark", coupon_scream: "รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม",
-                coupon_how: "วิธีใช้คูปอง", coupon_step1: "ทำกิจกรรม เลเซอร์ หรือ Scream in the Dark ให้สำเร็จ",
-                coupon_step2: "รับคูปองส่วนลดจากเจ้าหน้าที่ประจำโซน", coupon_step3: "นำคูปองไปแสดงที่เคาน์เตอร์ขายของทานเล่นก่อนชำระเงิน",
-                coupon_step4: "รับส่วนลดทันทีตามมูลค่าที่ระบุในคูปอง",
-                menu_title: "เมนูอาหารและเครื่องดื่ม",
-                promo_3for100_title: "3 ชิ้น 100 บาท", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "คุ้มค่าที่สุดในราคาที่เป็นกันเอง", promo_3for100_desc: "ร้อนๆ จากเตา... กรอบนอก นุ่มใน!",
-                menu_snacks: "อาหารว่าง", menu_drinks: "เครื่องดื่ม", menu_slushy: "SLUSHY",
-                baht: "บาท",
-                contact_title: "ติดต่อเรา", contact_hours: "เวลาทำการ", contact_hours_time: "11:00 น. - 22:00 น.<br>เริ่มโชว์ 11:30 น.",
-                contact_address: "ที่อยู่", contact_address_text: "ไมเนอร์ สกายไรเดอร์ จำกัด<br>เลขที่ 218 หมู่ 10 ถนนเลียบชายหาด<br>ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20150",
-                contact_phone: "ช่องทางการติดต่อ", contact_phone_text: "โทร: +66 (38) 710-294-8<br>แฟ็กซ์: +66 (38) 710-487",
-                contact_map: "เปิดดูแผนที่บน Google Maps",
-                admin_login: "เข้าสู่ระบบ", admin_error: "รหัสผ่านไม่ถูกต้อง"
-            },
-            en: {
-                nav_home: "Home", nav_coupon: "Coupons", nav_menu: "Menu", nav_contact: "Contact",
-                tagline: "Believe It or Not!",
-                coupon_title: "Special Discount Coupons", coupon_get: "How to Get Coupons", coupon_desc: "Join our exciting activities to get instant discount coupons!",
-                coupon_laser_title: "Games Laser Mission", coupon_laser: "Get 10% discount on food and beverages",
-                coupon_scream_title: "Scream in the Dark", coupon_scream: "Get 15% discount on food and beverages",
-                coupon_how: "How to Use Coupons", coupon_step1: "Complete Laser Mission or Scream in the Dark activities",
-                coupon_step2: "Receive discount coupon from staff at the zone", coupon_step3: "Present coupon at snack counter before payment",
-                coupon_step4: "Get instant discount as indicated on coupon",
-                menu_title: "Food & Beverages Menu",
-                promo_3for100_title: "3 Pieces for 100 Baht", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "Best Value at Friendly Price", promo_3for100_desc: "Hot from the oven... Crispy outside, soft inside!",
-                menu_snacks: "Snacks", menu_drinks: "Beverages", menu_slushy: "SLUSHY",
-                baht: "Baht",
-                contact_title: "Contact Us", contact_hours: "Opening Hours", contact_hours_time: "11:00 AM - 10:00 PM<br>Show starts 11:30 AM",
-                contact_address: "Address", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "Contact Channels", contact_phone_text: "Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",
-                contact_map: "View on Google Maps",
-                admin_login: "Login", admin_error: "Incorrect password"
-            }
-        };
+          "th": {
+                    "nav_home": "หน้าหลัก",
+                    "nav_coupon": "คูปอง",
+                    "nav_menu": "เมนู",
+                    "nav_contact": "ติดต่อเรา",
+                    "tagline": "ความมหัศจรรย์ที่คุณต้องเชื่อ!",
+                    "coupon_title": "คูปองส่วนลดพิเศษ",
+                    "coupon_get": "วิธีการรับคูปอง",
+                    "coupon_desc": "ร่วมกิจกรรมสุดมันส์เพื่อรับคูปองส่วนลดทันที!",
+                    "coupon_laser_title": "Games Laser Mission",
+                    "coupon_laser": "รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม",
+                    "coupon_scream_title": "Scream in the Dark",
+                    "coupon_scream": "รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม",
+                    "coupon_how": "วิธีใช้คูปอง",
+                    "coupon_step1": "ทำกิจกรรม เลเซอร์ หรือ Scream in the Dark ให้สำเร็จ",
+                    "coupon_step2": "รับคูปองส่วนลดจากเจ้าหน้าที่ประจำโซน",
+                    "coupon_step3": "นำคูปองไปแสดงที่เคาน์เตอร์ขายของทานเล่นก่อนชำระเงิน",
+                    "coupon_step4": "รับส่วนลดทันทีตามมูลค่าที่ระบุในคูปอง",
+                    "menu_title": "เมนูอาหารและเครื่องดื่ม",
+                    "promo_3for100_title": "3 ชิ้น 100 บาท",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "คุ้มค่าที่สุดในราคาที่เป็นกันเอง",
+                    "promo_3for100_desc": "ร้อนๆ จากเตา... กรอบนอก นุ่มใน!",
+                    "menu_snacks": "อาหารว่าง",
+                    "menu_drinks": "เครื่องดื่ม",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "บาท",
+                    "contact_title": "ติดต่อเรา",
+                    "contact_hours": "เวลาทำการ",
+                    "contact_hours_time": "11:00 น. - 22:00 น.<br>เริ่มโชว์ 11:30 น.",
+                    "contact_address": "ที่อยู่",
+                    "contact_address_text": "ไมเนอร์ สกายไรเดอร์ จำกัด<br>เลขที่ 218 หมู่ 10 ถนนเลียบชายหาด<br>ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20150",
+                    "contact_phone": "ช่องทางการติดต่อ",
+                    "contact_phone_text": "โทร: +66 (38) 710-294-8<br>แฟ็กซ์: +66 (38) 710-487",
+                    "contact_map": "เปิดดูแผนที่บน Google Maps",
+                    "admin_login": "เข้าสู่ระบบ",
+                    "admin_error": "รหัสผ่านไม่ถูกต้อง"
+          },
+          "en": {
+                    "nav_home": "Home",
+                    "nav_coupon": "Coupons",
+                    "nav_menu": "Menu",
+                    "nav_contact": "Contact",
+                    "tagline": "Believe It or Not!",
+                    "coupon_title": "Special Discount Coupons",
+                    "coupon_get": "How to Get Coupons",
+                    "coupon_desc": "Join our exciting activities to get instant discount coupons!",
+                    "coupon_laser_title": "Games Laser Mission",
+                    "coupon_laser": "Get 10% discount on food and beverages",
+                    "coupon_scream_title": "Scream in the Dark",
+                    "coupon_scream": "Get 15% discount on food and beverages",
+                    "coupon_how": "How to Use Coupons",
+                    "coupon_step1": "Complete Laser Mission or Scream in the Dark activities",
+                    "coupon_step2": "Receive discount coupon from staff at the zone",
+                    "coupon_step3": "Present coupon at snack counter before payment",
+                    "coupon_step4": "Get instant discount as indicated on coupon",
+                    "menu_title": "Food & Beverages Menu",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "Snacks",
+                    "menu_drinks": "Beverages",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "Baht",
+                    "contact_title": "Contact Us",
+                    "contact_hours": "Opening Hours",
+                    "contact_hours_time": "11:00 AM - 10:00 PM<br>Show starts 11:30 AM",
+                    "contact_address": "Address",
+                    "contact_address_text": "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                    "contact_phone": "Contact Channels",
+                    "contact_phone_text": "Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",
+                    "contact_map": "View on Google Maps",
+                    "admin_login": "Login",
+                    "admin_error": "Incorrect password"
+          },
+          "zh": {
+                    "nav_home": "首页",
+                    "nav_coupon": "优惠券",
+                    "nav_menu": "菜单",
+                    "nav_contact": "联系我们",
+                    "tagline": "信不信由你！",
+                    "coupon_title": "特别折扣优惠券",
+                    "coupon_get": "如何获取优惠券",
+                    "coupon_desc": "参加精彩活动即可立即获得折扣优惠券！",
+                    "coupon_laser_title": "激光任务游戏",
+                    "coupon_laser": "享受餐饮9折优惠",
+                    "coupon_scream_title": "黑暗尖叫",
+                    "coupon_scream": "享受餐饮85折优惠",
+                    "coupon_how": "如何使用优惠券",
+                    "coupon_step1": "完成激光任务或黑暗尖叫活动",
+                    "coupon_step2": "在该区域从工作人员处领取折扣优惠券",
+                    "coupon_step3": "付款前在小吃柜台出示优惠券",
+                    "coupon_step4": "按优惠券标示金额立即获得折扣",
+                    "menu_title": "餐饮菜单",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "小吃",
+                    "menu_drinks": "饮料",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "泰铢",
+                    "contact_title": "联系我们",
+                    "contact_hours": "营业时间",
+                    "contact_hours_time": "上午11:00 - 晚上10:00<br>表演11:30开始",
+                    "contact_address": "地址",
+                    "contact_address_text": "Minor Sky Rider有限公司<br>218号10村海滨路<br>春武里府邦拉蒙县农布亚区 20150",
+                    "contact_phone": "联系方式",
+                    "contact_phone_text": "电话：+66 (38) 710-294-8<br>传真：+66 (38) 710-487",
+                    "contact_map": "在谷歌地图上查看",
+                    "admin_login": "登录",
+                    "admin_error": "密码错误"
+          },
+          "ru": {
+                    "nav_home": "Главная",
+                    "nav_coupon": "Купоны",
+                    "nav_menu": "Меню",
+                    "nav_contact": "Контакты",
+                    "tagline": "Хотите — верьте, хотите — нет!",
+                    "coupon_title": "Специальные купоны на скидку",
+                    "coupon_get": "Как получить купон",
+                    "coupon_desc": "Примите участие в наших увлекательных мероприятиях и получите купон на скидку мгновенно!",
+                    "coupon_laser_title": "Лазерная миссия",
+                    "coupon_laser": "Скидка 10% на еду и напитки",
+                    "coupon_scream_title": "Крик во тьме",
+                    "coupon_scream": "Скидка 15% на еду и напитки",
+                    "coupon_how": "Как использовать купон",
+                    "coupon_step1": "Пройдите Лазерную миссию или Крик во тьме",
+                    "coupon_step2": "Получите купон на скидку у персонала в зоне",
+                    "coupon_step3": "Предъявите купон на стойке закусок перед оплатой",
+                    "coupon_step4": "Получите мгновенную скидку согласно купону",
+                    "menu_title": "Меню еды и напитков",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "Закуски",
+                    "menu_drinks": "Напитки",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "бат",
+                    "contact_title": "Свяжитесь с нами",
+                    "contact_hours": "Часы работы",
+                    "contact_hours_time": "11:00 - 22:00<br>Начало шоу в 11:30",
+                    "contact_address": "Адрес",
+                    "contact_address_text": "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Нонг Прыа, Банг Ламунг, Чонбури 20150",
+                    "contact_phone": "Контакты",
+                    "contact_phone_text": "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487",
+                    "contact_map": "Открыть на Google Картах",
+                    "admin_login": "Войти",
+                    "admin_error": "Неверный пароль"
+          },
+          "hi": {
+                    "nav_home": "होम",
+                    "nav_coupon": "कूपन",
+                    "nav_menu": "मेनू",
+                    "nav_contact": "संपर्क",
+                    "tagline": "विश्वास करो या नहीं!",
+                    "coupon_title": "विशेष छूट कूपन",
+                    "coupon_get": "कूपन कैसे प्राप्त करें",
+                    "coupon_desc": "हमारी रोमांचक गतिविधियों में भाग लें और तुरंत छूट कूपन पाएं!",
+                    "coupon_laser_title": "लेज़र मिशन गेम",
+                    "coupon_laser": "भोजन और पेय पर 10% छूट पाएं",
+                    "coupon_scream_title": "स्क्रीम इन द डार्क",
+                    "coupon_scream": "भोजन और पेय पर 15% छूट पाएं",
+                    "coupon_how": "कूपन का उपयोग कैसे करें",
+                    "coupon_step1": "लेज़र मिशन या स्क्रीम इन द डार्क गतिविधि पूरी करें",
+                    "coupon_step2": "उस ज़ोन के स्टाफ से छूट कूपन प्राप्त करें",
+                    "coupon_step3": "भुगतान से पहले स्नैक काउंटर पर कूपन दिखाएं",
+                    "coupon_step4": "कूपन पर बताई गई राशि के अनुसार तुरंत छूट पाएं",
+                    "menu_title": "भोजन और पेय मेनू",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "नाश्ते",
+                    "menu_drinks": "पेय",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "बात",
+                    "contact_title": "हमसे संपर्क करें",
+                    "contact_hours": "खुलने का समय",
+                    "contact_hours_time": "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू होता है",
+                    "contact_address": "पता",
+                    "contact_address_text": "माइनर स्काई राइडर कं., लिमिटेड<br>218 मू 10, बीच रोड<br>नोंग प्रुए, बैंग ला मुंग, चोनबुरी 20150",
+                    "contact_phone": "संपर्क माध्यम",
+                    "contact_phone_text": "फोन: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
+                    "contact_map": "गूगल मैप्स पर देखें",
+                    "admin_login": "लॉगिन",
+                    "admin_error": "गलत पासवर्ड"
+          },
+          "he": {
+                    "nav_home": "דף הבית",
+                    "nav_coupon": "קופונים",
+                    "nav_menu": "תפריט",
+                    "nav_contact": "צור קשר",
+                    "tagline": "תאמינו או לא!",
+                    "coupon_title": "קופוני הנחה מיוחדים",
+                    "coupon_get": "כיצד לקבל קופון",
+                    "coupon_desc": "השתתפו בפעילויות המרגשות שלנו וקבלו קופון הנחה מיידי!",
+                    "coupon_laser_title": "משימת הלייזר",
+                    "coupon_laser": "קבלו 10% הנחה על אוכל ומשקאות",
+                    "coupon_scream_title": "צרחות באפלה",
+                    "coupon_scream": "קבלו 15% הנחה על אוכל ומשקאות",
+                    "coupon_how": "כיצד להשתמש בקופון",
+                    "coupon_step1": "השלימו את משימת הלייזר או צרחות באפלה",
+                    "coupon_step2": "קבלו קופון הנחה מהצוות באזור",
+                    "coupon_step3": "הציגו את הקופון בדוכן החטיפים לפני התשלום",
+                    "coupon_step4": "קבלו הנחה מיידית לפי הערך בקופון",
+                    "menu_title": "תפריט אוכל ומשקאות",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "חטיפים",
+                    "menu_drinks": "משקאות",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "באט",
+                    "contact_title": "צור קשר",
+                    "contact_hours": "שעות פתיחה",
+                    "contact_hours_time": "11:00 - 22:00<br>ההופעה מתחילה ב-11:30",
+                    "contact_address": "כתובת",
+                    "contact_address_text": "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>נונג פרואה, בנג לאמונג, צ'ונבורי 20150",
+                    "contact_phone": "ערוצי יצירת קשר",
+                    "contact_phone_text": "טלפון: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
+                    "contact_map": "צפייה במפות גוגל",
+                    "admin_login": "כניסה",
+                    "admin_error": "סיסמה שגויה"
+          },
+          "ja": {
+                    "nav_home": "ホーム",
+                    "nav_coupon": "クーポン",
+                    "nav_menu": "メニュー",
+                    "nav_contact": "お問い合わせ",
+                    "tagline": "信じられない！",
+                    "coupon_title": "特別割引クーポン",
+                    "coupon_get": "クーポンの入手方法",
+                    "coupon_desc": "楽しいアクティビティに参加して、その場で割引クーポンをゲットしよう！",
+                    "coupon_laser_title": "レーザーミッションゲーム",
+                    "coupon_laser": "飲食10%割引",
+                    "coupon_scream_title": "スクリーム・イン・ザ・ダーク",
+                    "coupon_scream": "飲食15%割引",
+                    "coupon_how": "クーポンの使い方",
+                    "coupon_step1": "レーザーミッションまたはスクリーム・イン・ザ・ダークを完了する",
+                    "coupon_step2": "各エリアのスタッフから割引クーポンを受け取る",
+                    "coupon_step3": "会計前にスナックカウンターでクーポンを提示する",
+                    "coupon_step4": "クーポン記載の割引がその場で適用されます",
+                    "menu_title": "飲食メニュー",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "スナック",
+                    "menu_drinks": "飲み物",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "バーツ",
+                    "contact_title": "お問い合わせ",
+                    "contact_hours": "営業時間",
+                    "contact_hours_time": "午前11:00 ～ 午後10:00<br>ショー開始 午前11:30",
+                    "contact_address": "住所",
+                    "contact_address_text": "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>ノーンプルー、バーンラムング、チョンブリー 20150",
+                    "contact_phone": "お問い合わせ先",
+                    "contact_phone_text": "電話: +66 (38) 710-294-8<br>ファックス: +66 (38) 710-487",
+                    "contact_map": "Googleマップで見る",
+                    "admin_login": "ログイン",
+                    "admin_error": "パスワードが間違っています"
+          },
+          "ko": {
+                    "nav_home": "홈",
+                    "nav_coupon": "쿠폰",
+                    "nav_menu": "메뉴",
+                    "nav_contact": "연락처",
+                    "tagline": "믿거나 말거나!",
+                    "coupon_title": "특별 할인 쿠폰",
+                    "coupon_get": "쿠폰 받는 방법",
+                    "coupon_desc": "신나는 액티비티에 참여하고 즉시 할인 쿠폰을 받아보세요!",
+                    "coupon_laser_title": "레이저 미션 게임",
+                    "coupon_laser": "음식 및 음료 10% 할인",
+                    "coupon_scream_title": "스크림 인 더 다크",
+                    "coupon_scream": "음식 및 음료 15% 할인",
+                    "coupon_how": "쿠폰 사용 방법",
+                    "coupon_step1": "레이저 미션 또는 스크림 인 더 다크 완료하기",
+                    "coupon_step2": "해당 구역 직원에게서 할인 쿠폰 받기",
+                    "coupon_step3": "결제 전 스낵 카운터에서 쿠폰 제시하기",
+                    "coupon_step4": "쿠폰에 표시된 즉시 할인 받기",
+                    "menu_title": "음식 및 음료 메뉴",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "스낵",
+                    "menu_drinks": "음료",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "바트",
+                    "contact_title": "문의하기",
+                    "contact_hours": "운영 시간",
+                    "contact_hours_time": "오전 11:00 - 오후 10:00<br>쇼는 오전 11:30에 시작",
+                    "contact_address": "주소",
+                    "contact_address_text": "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>농프루에, 방라뭉, 촌부리 20150",
+                    "contact_phone": "연락처",
+                    "contact_phone_text": "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
+                    "contact_map": "구글 지도에서 보기",
+                    "admin_login": "로그인",
+                    "admin_error": "비밀번호가 틀렸습니다"
+          },
+          "ar": {
+                    "nav_home": "الرئيسية",
+                    "nav_coupon": "القسائم",
+                    "nav_menu": "القائمة",
+                    "nav_contact": "اتصل بنا",
+                    "tagline": "صدق أو لا تصدق!",
+                    "coupon_title": "قسائم خصم خاصة",
+                    "coupon_get": "كيفية الحصول على القسيمة",
+                    "coupon_desc": "شارك في أنشطتنا الممتعة واحصل على قسيمة خصم فورية!",
+                    "coupon_laser_title": "لعبة مهمة الليزر",
+                    "coupon_laser": "احصل على خصم 10% على الطعام والمشروبات",
+                    "coupon_scream_title": "صرخة في الظلام",
+                    "coupon_scream": "احصل على خصم 15% على الطعام والمشروبات",
+                    "coupon_how": "كيفية استخدام القسيمة",
+                    "coupon_step1": "أكمل نشاط مهمة الليزر أو صرخة في الظلام",
+                    "coupon_step2": "احصل على قسيمة الخصم من الموظف في المنطقة",
+                    "coupon_step3": "اعرض القسيمة عند كاونتر الوجبات الخفيفة قبل الدفع",
+                    "coupon_step4": "احصل على الخصم فورًا حسب القيمة الموضحة في القسيمة",
+                    "menu_title": "قائمة الطعام والمشروبات",
+                    "promo_3for100_title": "3 Pieces for 100 Baht",
+                    "promo_3for100_subtitle": "3 PIECES FOR 100 BAHT",
+                    "promo_3for100_tag": "Best Value at Friendly Price",
+                    "promo_3for100_desc": "Hot from the oven... Crispy outside, soft inside!",
+                    "menu_snacks": "الوجبات الخفيفة",
+                    "menu_drinks": "المشروبات",
+                    "menu_slushy": "SLUSHY",
+                    "baht": "بات",
+                    "contact_title": "اتصل بنا",
+                    "contact_hours": "ساعات العمل",
+                    "contact_hours_time": "11:00 صباحًا - 10:00 مساءً<br>يبدأ العرض الساعة 11:30 صباحًا",
+                    "contact_address": "العنوان",
+                    "contact_address_text": "شركة ماينور سكاي رايدر المحدودة<br>218 حي 10، طريق الشاطئ<br>نونغ برو، بانغ لامونغ، تشونبوري 20150",
+                    "contact_phone": "قنوات الاتصال",
+                    "contact_phone_text": "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
+                    "contact_map": "عرض على خرائط جوجل",
+                    "admin_login": "تسجيل الدخول",
+                    "admin_error": "كلمة مرور غير صحيحة"
+          }
+};;
 
         // Fallback translations for other languages (use English as base, then fully override below)
 ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
@@ -530,33 +832,193 @@ Object.assign(translations.ar, {
 });
 
         const siteData = {
-            attractions: {
-                th: [
-                    { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
-                    { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082", image: "", video: "" },
-                    { title: "โกดังผีสิง", subtitle: "เมื่อฝันร้ายมาเยือน", desc: "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน", icon: "fa-warehouse", color: "#2F4F4F", image: "", video: "" },
-                    { title: "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส", subtitle: "ความอัศจรรย์ ที่คุณต้องตะลึง", desc: "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย", icon: "fa-user", color: "#DAA520", image: "", video: "" },
-                    { title: "มหัศจรรย์เขาวงกต", subtitle: "เปิดโลกแห่งจินตนาการ", desc: "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน อินฟินนิตี้ (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ เอฟเฟค พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด", icon: "fa-project-diagram", color: "#FF6347", image: "", video: "" },
-                    { title: "เกมส์ตะลุยเลเซอร์", subtitle: "Mission Impossible", desc: "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องลำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น", icon: "fa-bullseye", color: "#00CED1", image: "", video: "" },
-                    { title: "โรงพยาบาลหลอน", subtitle: "The Horror Hospital", desc: "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้", icon: "fa-hospital", color: "#8B0000", image: "", video: "" },
-                    { title: "พีระมิดที่สาบสูญ", subtitle: "Lost Pyramid", desc: "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ", icon: "fa-monument", color: "#D2691E", image: "", video: "" },
-                    { title: "เกมอินเตอร์แอคทีฟสุดล้ำ", subtitle: "Interactive Gaming", desc: "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว", icon: "fa-gamepad", color: "#9370DB", image: "", video: "" },
-                    { title: "หนีตายสวนสยอง", subtitle: "Escape the Haunted Garden", desc: "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด", icon: "fa-skull", color: "#556B2F", image: "", video: "" }
-                ],
-                en: [
-                    { title: "Believe It or Not! Museum", subtitle: "Truth you must see with your own eyes", desc: "Ripley's Believe It or Not! One of the world's most famous museums originating from the USA. The only one that collects wonders from all over the world, both mysterious and beautiful. Discover and experience over 350 types of real artifacts that will amaze you, such as human skin masks, 3-inch shrunken heads, a Titanic model made from over 1,000,000 matchsticks, a man with 4 black pupils, and much more. An experience you will never forget. Believe It or Not!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
-                    { title: "Scream in the Dark", subtitle: "The Ultimate Thrill Ride", desc: "The newest and 6th extreme ride at Ripley World Pattaya, welcoming thrill-seekers with a horror experience. Scream in the Dark was once a famous amusement park that suddenly closed down for unknown reasons. Some say they saw clown spirits floating at night, or heard screams in the darkness. No one dared to prove it until Ripley World Pattaya invites you to explore this deadly path. The only way to escape this haunted amusement park is with your sharp shooting skills and scream as loud as you can!", icon: "fa-ghost", color: "#4B0082", image: "", video: "" },
-                    { title: "Haunted Warehouse", subtitle: "When Nightmares Come True", desc: "The largest coffin warehouse among the 5 in the world, with terrifying legends and cruelty spoken of for over 80 years. Encounter ghosts and uninvited guests from another realm, with special effects and the latest techniques from America in over 20 rooms filled with horror that will make you tremble at every step! Warning: Not suitable for the faint-hearted.", icon: "fa-warehouse", color: "#2F4F4F", image: "", video: "" },
-                    { title: "Louis Tussaud's Waxworks", subtitle: "Astonishingly Real", desc: "The 5th branch in the world and the first in Thailand. This wax museum displays lifelike wax figures of important persons and world celebrities, both Thai and international, living and deceased, totaling over 84 figures. The exhibition is divided into 9 zones: THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER. The wax figures are crafted by world-class artists from various countries, including Thai artists.", icon: "fa-user", color: "#DAA520", image: "", video: "" },
-                    { title: "Infinity Maze", subtitle: "Open Your Imagination", desc: "The ultimate entertainment that must be seen with your own eyes. Throughout 20 minutes of traveling through 'Infinity', enjoy special glasses that will take you to discover the wonders of light, color, sound, and special effects across 16 rooms. Let everyone enjoy and relax in the beauty of mysterious dimensions and optical illusions in a universe with no beginning or end.", icon: "fa-project-diagram", color: "#FF6347", image: "", video: "" },
-                    { title: "Laser Mission", subtitle: "Mission Impossible", desc: "A game that makes you embody a secret agent like in the movies. From the first step into the mysterious mission room, a labyrinth of green laser beams appears before you. You must pass through this laser maze as fast as possible without touching the green beams. If any part of your body touches the laser beams, your mission time will increase.", icon: "fa-bullseye", color: "#00CED1", image: "", video: "" },
-                    { title: "The Horror Hospital", subtitle: "Face Your Fears", desc: "In a remote town in southern England, following tales from relatives and close ones of many patients who received treatment at this hospital, one by one with no sign of returning. This is the beginning that makes everyone wonder and fear what happened. Waiting for brave souls from all directions to challenge the terrifying mystery of this place.", icon: "fa-hospital", color: "#8B0000", image: "", video: "" },
-                    { title: "Lost Pyramid", subtitle: "Ancient Mysteries", desc: "Ripley's Believe It or Not! Pattaya invites everyone to be amazed by a new Edutainment attraction, bringing mysteries from Egypt over 4,700 years ago. One of the 7 wonders of the world, the land of the Pharaohs, known for its mystery, beauty, and grandeur. Brave adventurers are invited to explore and search for treasures.", icon: "fa-monument", color: "#D2691E", image: "", video: "" },
-                    { title: "Interactive Games", subtitle: "Move and Play", desc: "Cutting-edge interactive games that will make you move, have fun, and be excited every second. Combining movement with amazing graphics, playable solo or as a team. A new experience that combines gaming, exercise, and creativity in one place.", icon: "fa-gamepad", color: "#9370DB", image: "", video: "" },
-                    { title: "Escape the Haunted Garden", subtitle: "WWII Nightmare", desc: "In 1945, during World War II, a hospital on an island in southern England stood beside a park full of laughter. Children played happily, patients came out for fresh air, and families spent time together happily. Until a bomb exploded!! Everything collapsed in an instant. The hospital became ruins, people disappeared, leaving only cries for help that slowly faded into the darkness. Since then, no one dared to step in here again... They say the spirits still wander, crying, waiting, never leaving.", icon: "fa-skull", color: "#556B2F", image: "", video: "" }
-                ],
-                zh: [
-                    {
+          "attractions": {
+                    "th": [
+                              {
+                                        "title": "พิพิธภัณฑ์ เชื่อหรือไม่!",
+                                        "subtitle": "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง",
+                                        "desc": "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!",
+                                        "icon": "fa-museum",
+                                        "color": "#8B4513",
+                                        "image": "",
+                                        "video": "https://youtu.be/MdeEmO1Fuzg?si=GfSFOHYHOS-IXN7o"
+                              },
+                              {
+                                        "title": "สวนสนุกสุดสยอง",
+                                        "subtitle": "Scream in the Dark",
+                                        "desc": "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้",
+                                        "icon": "fa-ghost",
+                                        "color": "#4B0082",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "โกดังผีสิง",
+                                        "subtitle": "เมื่อฝันร้ายมาเยือน",
+                                        "desc": "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน",
+                                        "icon": "fa-warehouse",
+                                        "color": "#2F4F4F",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส",
+                                        "subtitle": "ความอัศจรรย์ ที่คุณต้องตะลึง",
+                                        "desc": "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย",
+                                        "icon": "fa-user",
+                                        "color": "#DAA520",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "มหัศจรรย์เขาวงกต",
+                                        "subtitle": "เปิดโลกแห่งจินตนาการ",
+                                        "desc": "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน อินฟินนิตี้ (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ เอฟเฟค พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด",
+                                        "icon": "fa-project-diagram",
+                                        "color": "#FF6347",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "เกมส์ตะลุยเลเซอร์",
+                                        "subtitle": "Mission Impossible",
+                                        "desc": "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องลำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น",
+                                        "icon": "fa-bullseye",
+                                        "color": "#00CED1",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "โรงพยาบาลหลอน",
+                                        "subtitle": "The Horror Hospital",
+                                        "desc": "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้",
+                                        "icon": "fa-hospital",
+                                        "color": "#8B0000",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "พีระมิดที่สาบสูญ",
+                                        "subtitle": "Lost Pyramid",
+                                        "desc": "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ",
+                                        "icon": "fa-monument",
+                                        "color": "#D2691E",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "เกมอินเตอร์แอคทีฟสุดล้ำ",
+                                        "subtitle": "Interactive Gaming",
+                                        "desc": "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว",
+                                        "icon": "fa-gamepad",
+                                        "color": "#9370DB",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "หนีตายสวนสยอง",
+                                        "subtitle": "Escape the Haunted Garden",
+                                        "desc": "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด",
+                                        "icon": "fa-skull",
+                                        "color": "#556B2F",
+                                        "image": "",
+                                        "video": ""
+                              }
+                    ],
+                    "en": [
+                              {
+                                        "title": "Believe It or Not! Museum",
+                                        "subtitle": "Truth you must see with your own eyes",
+                                        "desc": "Ripley's Believe It or Not! One of the world's most famous museums originating from the USA. The only one that collects wonders from all over the world, both mysterious and beautiful. Discover and experience over 350 types of real artifacts that will amaze you, such as human skin masks, 3-inch shrunken heads, a Titanic model made from over 1,000,000 matchsticks, a man with 4 black pupils, and much more. An experience you will never forget. Believe It or Not!",
+                                        "icon": "fa-museum",
+                                        "color": "#8B4513",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Scream in the Dark",
+                                        "subtitle": "The Ultimate Thrill Ride",
+                                        "desc": "The newest and 6th extreme ride at Ripley World Pattaya, welcoming thrill-seekers with a horror experience. Scream in the Dark was once a famous amusement park that suddenly closed down for unknown reasons. Some say they saw clown spirits floating at night, or heard screams in the darkness. No one dared to prove it until Ripley World Pattaya invites you to explore this deadly path. The only way to escape this haunted amusement park is with your sharp shooting skills and scream as loud as you can!",
+                                        "icon": "fa-ghost",
+                                        "color": "#4B0082",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Haunted Warehouse",
+                                        "subtitle": "When Nightmares Come True",
+                                        "desc": "The largest coffin warehouse among the 5 in the world, with terrifying legends and cruelty spoken of for over 80 years. Encounter ghosts and uninvited guests from another realm, with special effects and the latest techniques from America in over 20 rooms filled with horror that will make you tremble at every step! Warning: Not suitable for the faint-hearted.",
+                                        "icon": "fa-warehouse",
+                                        "color": "#2F4F4F",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Louis Tussaud's Waxworks",
+                                        "subtitle": "Astonishingly Real",
+                                        "desc": "The 5th branch in the world and the first in Thailand. This wax museum displays lifelike wax figures of important persons and world celebrities, both Thai and international, living and deceased, totaling over 84 figures. The exhibition is divided into 9 zones: THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER. The wax figures are crafted by world-class artists from various countries, including Thai artists.",
+                                        "icon": "fa-user",
+                                        "color": "#DAA520",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Infinity Maze",
+                                        "subtitle": "Open Your Imagination",
+                                        "desc": "The ultimate entertainment that must be seen with your own eyes. Throughout 20 minutes of traveling through 'Infinity', enjoy special glasses that will take you to discover the wonders of light, color, sound, and special effects across 16 rooms. Let everyone enjoy and relax in the beauty of mysterious dimensions and optical illusions in a universe with no beginning or end.",
+                                        "icon": "fa-project-diagram",
+                                        "color": "#FF6347",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Laser Mission",
+                                        "subtitle": "Mission Impossible",
+                                        "desc": "A game that makes you embody a secret agent like in the movies. From the first step into the mysterious mission room, a labyrinth of green laser beams appears before you. You must pass through this laser maze as fast as possible without touching the green beams. If any part of your body touches the laser beams, your mission time will increase.",
+                                        "icon": "fa-bullseye",
+                                        "color": "#00CED1",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "The Horror Hospital",
+                                        "subtitle": "Face Your Fears",
+                                        "desc": "In a remote town in southern England, following tales from relatives and close ones of many patients who received treatment at this hospital, one by one with no sign of returning. This is the beginning that makes everyone wonder and fear what happened. Waiting for brave souls from all directions to challenge the terrifying mystery of this place.",
+                                        "icon": "fa-hospital",
+                                        "color": "#8B0000",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Lost Pyramid",
+                                        "subtitle": "Ancient Mysteries",
+                                        "desc": "Ripley's Believe It or Not! Pattaya invites everyone to be amazed by a new Edutainment attraction, bringing mysteries from Egypt over 4,700 years ago. One of the 7 wonders of the world, the land of the Pharaohs, known for its mystery, beauty, and grandeur. Brave adventurers are invited to explore and search for treasures.",
+                                        "icon": "fa-monument",
+                                        "color": "#D2691E",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Interactive Games",
+                                        "subtitle": "Move and Play",
+                                        "desc": "Cutting-edge interactive games that will make you move, have fun, and be excited every second. Combining movement with amazing graphics, playable solo or as a team. A new experience that combines gaming, exercise, and creativity in one place.",
+                                        "icon": "fa-gamepad",
+                                        "color": "#9370DB",
+                                        "image": "",
+                                        "video": ""
+                              },
+                              {
+                                        "title": "Escape the Haunted Garden",
+                                        "subtitle": "WWII Nightmare",
+                                        "desc": "In 1945, during World War II, a hospital on an island in southern England stood beside a park full of laughter. Children played happily, patients came out for fresh air, and families spent time together happily. Until a bomb exploded!! Everything collapsed in an instant. The hospital became ruins, people disappeared, leaving only cries for help that slowly faded into the darkness. Since then, no one dared to step in here again... They say the spirits still wander, crying, waiting, never leaving.",
+                                        "icon": "fa-skull",
+                                        "color": "#556B2F",
+                                        "image": "",
+                                        "video": ""
+                              }
+                    ],
+                    "zh": [
+                              {
                                         "title": "信不信由你博物馆",
                                         "subtitle": "眼见为实的真相",
                                         "desc": "瑞普利信不信由你博物馆是源自美国的世界知名博物馆之一，收藏了来自世界各地既神秘又精美的奇珍异宝。馆内展示超过350件真实展品，令人叹为观止，例如人皮面具、缩至3英寸的人头、用超过100万根火柴制成的泰坦尼克号模型，以及拥有4个黑色瞳孔的男子等等。这将是您永生难忘的体验，信不信由你！",
@@ -564,8 +1026,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "黑暗尖叫",
                                         "subtitle": "终极刺激体验",
                                         "desc": "Ripley World芭堤雅最新推出的第6项刺激游乐设施，专为喜爱恐怖挑战的游客打造。黑暗尖叫曾是一座著名的游乐园，却在不明原因下突然关闭。有人说曾在夜晚看到小丑幽灵飘荡，也有人说在黑暗中听到尖叫声，无人敢证实真相，直到Ripley World芭堤雅邀请您一同踏上这条死亡之路一探究竟。要逃离这座闹鬼游乐园，唯一的办法就是靠您精准的射击技巧，并尽情放声尖叫！",
@@ -573,8 +1035,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "闹鬼仓库",
                                         "subtitle": "当噩梦成真",
                                         "desc": "世界5大棺材仓库中规模最大的一座，流传着长达80多年的恐怖传说与残酷故事。在这里您将遇见幽灵与来自异界的不速之客，并体验来自美国最新的特效与技术，20多个房间充满恐怖氛围，让您每走一步都心惊胆战，直到最后一刻仍毛骨悚然！警告：胆小者请勿入内。",
@@ -582,8 +1044,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "路易·杜莎夫人蜡像馆",
                                         "subtitle": "逼真到令人惊叹",
                                         "desc": "这是该品牌在全球的第5家分馆，也是泰国首家蜡像馆，馆内展示超过84尊栩栩如生的蜡像，涵盖泰国及国际知名人物，包括在世与已故名人。展区共分为9大主题区：泰式日落花园派对、体育、流行歌星、秘密房间、英国皇室、政治与人道主义领袖、恐怖巢穴、蝙蝠侠与伙伴们、明星角色扮演。所有蜡像均由多位世界顶尖艺术家精心打造而成。",
@@ -591,8 +1053,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "无限迷宫",
                                         "subtitle": "开启想象之门",
                                         "desc": "一场必须亲眼目睹的终极视觉盛宴。在长达20分钟的\"无限\"之旅中，戴上特制眼镜，探索光影、色彩与声音交织而成的奇幻世界，穿越16个房间的最新特效场景。让每一位游客尽情享受、放松身心，沉浸在没有起点也没有终点的神秘维度与幻象宇宙之中。",
@@ -600,8 +1062,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "镭射任务",
                                         "subtitle": "不可能的任务",
                                         "desc": "这是一款让您瞬间化身间谍特工的游戏，宛如电影情节。踏入神秘的任务室，一片由绿色镭射光束构成的迷宫将出现在您眼前。您必须尽快穿越这座镭射迷宫，同时不能碰触任何一道绿色光束。只要身体任何部位触碰到光束，任务时间就会增加。",
@@ -609,8 +1071,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "恐怖医院",
                                         "subtitle": "直面你的恐惧",
                                         "desc": "在英格兰南部一座偏远小镇上，据许多曾在这家医院接受治疗的病人的亲属和亲近之人流传的说法，一个接一个的病人音讯全无，从未归来。这便是一切疑惑与恐惧的起点，究竟发生了什么？如今，等待着来自四面八方的勇者，前来挑战这个地方骇人听闻的谜团。",
@@ -618,8 +1080,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "失落的金字塔",
                                         "subtitle": "古老的谜团",
                                         "desc": "Ripley's Believe It or Not! 芭堤雅邀请所有游客体验全新的寓教于乐设施，将您带回4700多年前的古埃及。作为世界七大奇迹之一，法老的国度以其神秘、探索价值、壮美与宏伟而闻名于世。勇敢的冒险家们将在此展开一场寻宝探险之旅。",
@@ -627,8 +1089,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "互动游戏",
                                         "subtitle": "动起来，玩起来",
                                         "desc": "尖端互动游戏让您每一秒都充满运动、乐趣与兴奋感。将身体动作与精彩图像效果完美结合，可单人游玩，也可组队挑战。这是一种将游戏、运动与创意融为一体的全新体验。",
@@ -636,8 +1098,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "逃离闹鬼花园",
                                         "subtitle": "二战梦魇",
                                         "desc": "1945年，第二次世界大战期间，英格兰南部一座岛屿上的一家医院，紧邻一座充满欢声笑语的公园。孩子们在此嬉戏玩耍，病人出来呼吸新鲜空气，家庭们幸福地共度时光。直到一声爆炸巨响！！一切在瞬间崩塌，医院化为废墟，人们纷纷失踪，只剩下逐渐消散在黑暗中的求救声。自那以后，再也没有人敢踏入此地……据说亡魂至今仍在游荡，哭泣、等待，永不离去。",
@@ -645,10 +1107,10 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-],
-                ru: [
-                    {
+                              }
+                    ],
+                    "ru": [
+                              {
                                         "title": "Музей «Хотите верьте, хотите нет»",
                                         "subtitle": "Правда, в которую нужно поверить своими глазами",
                                         "desc": "Ripley's Believe It or Not! — один из самых известных музеев мира, зародившийся в США. Единственный в своём роде музей, собирающий чудеса со всего света — таинственные и прекрасные одновременно. Откройте для себя более 350 подлинных экспонатов, которые вас поразят: маски из человеческой кожи, уменьшенные до 3 дюймов головы, модель «Титаника» из более чем 1 000 000 спичек, человек с 4 чёрными зрачками и многое другое. Впечатления, которые вы никогда не забудете. Хотите верьте, хотите нет!",
@@ -656,8 +1118,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Крик во тьме",
                                         "subtitle": "Экстремальный аттракцион",
                                         "desc": "Новейший и уже 6-й экстремальный аттракцион в Ripley World Pattaya, созданный для любителей острых ощущений. «Крик во тьме» когда-то был знаменитым парком развлечений, который неожиданно закрылся по неизвестным причинам. Одни утверждают, что видели по ночам призраков клоунов, другие — что слышали крики в темноте. Никто не решался проверить это, пока Ripley World Pattaya не пригласил вас пройти этим смертельно опасным путём. Единственный способ выбраться из этого парка с привидениями — меткая стрельба и громкий крик!",
@@ -665,8 +1127,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Дом с привидениями",
                                         "subtitle": "Когда кошмары становятся явью",
                                         "desc": "Крупнейший из пяти в мире складов гробов, окружённый пугающими легендами и жестокими историями, передающимися из уст в уста уже более 80 лет. Встретьте призраков и незваных гостей из иного мира с новейшими спецэффектами и технологиями из Америки в более чем 20 комнатах, наполненных ужасом, который заставит вас содрогаться на каждом шагу вплоть до самого конца! Предупреждение: не рекомендуется людям со слабыми нервами.",
@@ -674,8 +1136,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Музей восковых фигур Луи Тюссо",
                                         "subtitle": "Поразительно реалистично",
                                         "desc": "Пятый филиал в мире и первый в Таиланде. В этом музее восковых фигур представлены более 84 реалистичных фигур выдающихся личностей и мировых знаменитостей, как тайских, так и зарубежных, живых и уже ушедших. Экспозиция разделена на 9 зон: THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER. Восковые фигуры созданы руками ведущих мировых мастеров этого искусства.",
@@ -683,8 +1145,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Лабиринт бесконечности",
                                         "subtitle": "Откройте своё воображение",
                                         "desc": "Развлечение, которое нужно увидеть своими глазами. За 20 минут путешествия сквозь «Бесконечность» наденьте специальные очки и откройте для себя чудеса света, цвета и звука, а также новейшие спецэффекты в 16 залах. Позвольте себе насладиться и расслабиться в красоте загадочных измерений и оптических иллюзий вселенной без начала и конца.",
@@ -692,8 +1154,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Лазерная миссия",
                                         "subtitle": "Невыполнимая миссия",
                                         "desc": "Игра, которая позволит вам почувствовать себя настоящим секретным агентом, как в кино. С первого шага в таинственную комнату миссии перед вами предстанет лабиринт из зелёных лазерных лучей. Вам нужно пройти этот лазерный лабиринт как можно быстрее, не касаясь ни одного луча. Если какая-либо часть тела коснётся луча, время выполнения миссии увеличится.",
@@ -701,8 +1163,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Больница ужасов",
                                         "subtitle": "Встретьтесь со своими страхами",
                                         "desc": "В отдалённом городке на юге Англии, судя по рассказам родственников и близких многих пациентов, проходивших лечение в этой больнице, один за другим они бесследно исчезали и не возвращались. Именно с этого начались всеобщие подозрения и страх о том, что здесь произошло. Смельчаки со всех уголков мира приглашаются бросить вызов ужасающей тайне этого места.",
@@ -710,8 +1172,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Затерянная пирамида",
                                         "subtitle": "Древние тайны",
                                         "desc": "Ripley's Believe It or Not! Pattaya приглашает всех познакомиться с новым аттракционом в жанре эдьютейнмент, переносящим тайны Древнего Египта из глубины более 4700 лет назад. Одно из 7 чудес света, земля фараонов, известная своей загадочностью, красотой и величием. Отважные искатели приключений приглашаются исследовать эти земли в поисках сокровищ.",
@@ -719,8 +1181,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Интерактивные игры",
                                         "subtitle": "Двигайся и играй",
                                         "desc": "Передовые интерактивные игры заставят вас двигаться, веселиться и испытывать восторг каждую секунду. Сочетание движения с потрясающей графикой — играйте в одиночку или командой. Новый опыт, объединяющий игру, физическую активность и творчество в одном месте.",
@@ -728,8 +1190,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "Побег из сада с привидениями",
                                         "subtitle": "Кошмар Второй мировой войны",
                                         "desc": "1945 год, разгар Второй мировой войны. Больница на острове у южного побережья Англии стояла рядом с парком, полным смеха. Дети играли, пациенты выходили подышать свежим воздухом, семьи проводили время вместе. Пока не прогремел взрыв!! Всё разрушилось в мгновение ока. Больница превратилась в руины, люди пропали без вести, остались лишь крики о помощи, медленно растворяющиеся во тьме. С тех пор никто не решался войти сюда снова… Говорят, духи до сих пор бродят здесь, плача и ожидая, никогда не покидая это место.",
@@ -737,10 +1199,10 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-],
-                ja: [
-                    {
+                              }
+                    ],
+                    "ja": [
+                              {
                                         "title": "信じられない！ミュージアム",
                                         "subtitle": "その目で確かめるべき真実",
                                         "desc": "アメリカ発祥、世界的に有名なリプリーズ・ビリーブ・イット・オア・ノット。神秘的で美しい、世界中の驚異を集めた唯一無二のミュージアムです。人皮のマスク、3インチに縮められた人間の頭、100万本以上のマッチ棒で作られたタイタニック号の模型、黒い瞳を4つ持つ男性など、350種類を超える本物の展示品をご覧いただけます。忘れられない体験がここに。信じられない！",
@@ -748,8 +1210,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "スクリーム・イン・ザ・ダーク",
                                         "subtitle": "究極のスリルライド",
                                         "desc": "Ripley World パタヤ最新、6番目のエクストリームライド。恐怖を求める挑戦者たちを迎えます。「スクリーム・イン・ザ・ダーク」はかつて有名な遊園地でしたが、原因不明のまま突然閉鎖されました。夜な夜な道化師の霊が漂うのを見た、暗闇の中で悲鳴が聞こえたという噂もあり、誰も確かめようとしませんでした。そんな中、Ripley World パタヤがこの死の道への挑戦へとあなたを招待します。この呪われた遊園地から脱出する唯一の方法は、あなたの正確な射撃の腕前と、思い切り叫ぶことだけです！",
@@ -757,8 +1219,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "幽霊倉庫",
                                         "subtitle": "悪夢が現実になるとき",
                                         "desc": "世界に5つある棺桶倉庫の中でも最大規模を誇り、80年以上語り継がれてきた恐ろしい伝説と残酷な物語があります。異世界からの幽霊や招かれざる客と出会い、アメリカ最新の特殊効果と技術を体験できます。20を超える部屋には恐怖が潜み、最後の一歩まで身の毛がよだつ体験が待っています！警告：気の弱い方にはおすすめできません。",
@@ -766,8 +1228,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "ルイ・タッソー蝋人形館",
                                         "subtitle": "驚くほどリアル",
                                         "desc": "世界5番目、タイ初出店の蝋人形館。タイ国内外の著名人や世界的セレブリティ、存命・故人を含め84体以上のリアルな蝋人形を展示しています。会場は「タイ・サンセット・ガーデンパーティー」「スポーツ」「ポップスター」「秘密の部屋」「英国王室」「政治・人道リーダー」「ホラーデン」「バットマンと仲間たち」「キャラクターに扮したセレブリティ」の9ゾーンに分かれています。蝋人形は世界トップクラスの職人たちによって制作されています。",
@@ -775,8 +1237,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "インフィニティ・メイズ",
                                         "subtitle": "あなたの想像力を解き放て",
                                         "desc": "その目で見るべき究極のエンターテインメント。20分間の「インフィニティ」の旅では、特別なメガネをかけて、光・色・音の驚異と最新の特殊効果を16の部屋で体験できます。始まりも終わりもない宇宙の中で、神秘的な次元の美しさと錯覚を存分にお楽しみください。",
@@ -784,8 +1246,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "レーザーミッション",
                                         "subtitle": "ミッション・インポッシブル",
                                         "desc": "映画さながらのスパイになりきれるゲーム。謎めいたミッションルームに足を踏み入れた瞬間、目の前に緑色のレーザー光線が織りなす迷路が現れます。その光線に触れることなく、できるだけ早くこのレーザーミッションを突破しなければなりません。体の一部が光線に触れると、ミッションの時間が加算されてしまいます。",
@@ -793,8 +1255,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "ホラー・ホスピタル",
                                         "subtitle": "恐怖と向き合え",
                                         "desc": "イングランド南部の辺境の町。この病院で治療を受けた多くの患者の親族や近しい人々の証言によれば、彼らは一人また一人と姿を消し、二度と戻ることはありませんでした。これが、一体何が起きたのかという疑惑と恐怖の始まりでした。今、この場所の恐ろしい謎に挑む勇者たちを、あらゆる方角から待ち受けています。",
@@ -802,8 +1264,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "失われたピラミッド",
                                         "subtitle": "古代の謎",
                                         "desc": "Ripley's Believe It or Not! パタヤが贈る、新しいエデュテインメント・アトラクション。4,700年以上前の古代エジプトの神秘へようこそ。世界七不思議の一つ、ファラオの地は、その神秘性、探求心をそそる魅力、美しさ、そして壮大さで語り継がれています。勇敢な冒険者たちよ、宝を求めて共に冒険へ出かけましょう。",
@@ -811,8 +1273,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "インタラクティブゲーム",
                                         "subtitle": "動いて、遊ぼう",
                                         "desc": "最先端のインタラクティブゲームで、一秒一秒、体を動かし、楽しみ、興奮を味わえます。動きと迫力あるグラフィックを融合させ、一人でもチームでも楽しめます。ゲーム、運動、創造性を一つに融合させた新しい体験です。",
@@ -820,8 +1282,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "幽霊の庭からの脱出",
                                         "subtitle": "第二次世界大戦の悪夢",
                                         "desc": "1945年、第二次世界大戦のさなか。イングランド南部の島にあった病院は、笑い声にあふれた公園のすぐそばにありました。子供たちは楽しそうに遊び、患者たちは外の空気を吸いに出て、家族は幸せなひとときを過ごしていました。そこへ、爆発音が轟いた！！すべてが一瞬にして崩れ去りました。病院は廃墟と化し、人々は消息を絶ち、暗闇の中に消えゆく助けを求める叫び声だけが残りました。それ以来、誰もこの場所に足を踏み入れる勇気を持てませんでした……今もなお、霊たちはさまよい、泣き、待ち続け、決して立ち去らないと言われています。",
@@ -829,10 +1291,10 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-],
-                ko: [
-                    {
+                              }
+                    ],
+                    "ko": [
+                              {
                                         "title": "믿거나 말거나 박물관",
                                         "subtitle": "직접 눈으로 확인해야 할 진실",
                                         "desc": "미국에서 시작된 세계적으로 유명한 박물관, 리플리스 빌리브 잇 오어 낫! 전 세계의 신비롭고도 아름다운 경이로움을 모은 유일무이한 박물관입니다. 인간 피부 가면, 3인치로 줄어든 인간 머리, 100만 개 이상의 성냥개비로 만든 타이타닉 모형, 검은 눈동자가 4개인 남자 등 350종이 넘는 놀라운 실제 전시품을 만나보세요. 절대 잊지 못할 경험이 될 것입니다. 믿거나 말거나!",
@@ -840,8 +1302,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "스크림 인 더 다크",
                                         "subtitle": "궁극의 스릴 라이드",
                                         "desc": "리플리 월드 파타야의 최신 6번째 익스트림 라이드로, 공포를 즐기는 도전자들을 맞이합니다. 스크림 인 더 다크는 한때 유명했던 놀이공원이었지만 알 수 없는 이유로 갑자기 문을 닫았습니다. 밤마다 광대 유령이 떠도는 것을 보았다는 사람도 있고, 어둠 속에서 비명 소리를 들었다는 사람도 있지만, 아무도 확인할 용기를 내지 못했습니다. 리플리 월드 파타야가 이 죽음의 길을 함께 탐험하도록 여러분을 초대합니다. 이 유령의 놀이공원을 빠져나갈 유일한 방법은 정확한 사격 실력과 힘껏 지르는 비명뿐입니다!",
@@ -849,8 +1311,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "유령 창고",
                                         "subtitle": "악몽이 현실이 될 때",
                                         "desc": "전 세계 5곳 중 가장 큰 규모의 관 창고로, 80년 넘게 전해 내려오는 무서운 전설과 잔혹한 이야기를 간직하고 있습니다. 미국의 최신 특수 효과와 기술로 구현된 20개가 넘는 방에서 유령과 이계에서 온 불청객을 만나보세요. 발걸음마다 소름이 돋고 마지막까지 등골이 오싹해지는 공포가 기다리고 있습니다! 경고: 심장이 약한 분에게는 권장하지 않습니다.",
@@ -858,8 +1320,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "루이 투소 밀랍인형관",
                                         "subtitle": "놀라울 정도로 사실적인",
                                         "desc": "세계 5번째 지점이자 태국 최초의 밀랍인형관입니다. 태국과 세계 각국의 생존 및 작고한 유명 인사와 셀럽을 사실적으로 재현한 84개 이상의 밀랍 인형을 전시하고 있습니다. 전시관은 태국 선셋 가든 파티, 스포츠, 팝스타, 비밀의 방, 영국 왕실, 정치·인도주의 지도자, 호러 덴, 배트맨과 친구들, 캐릭터 셀러브리티 등 9개 구역으로 나뉩니다. 밀랍 인형들은 세계 최고 수준의 예술가들이 정성껏 제작했습니다.",
@@ -867,8 +1329,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "인피니티 미로",
                                         "subtitle": "당신의 상상력을 열어보세요",
                                         "desc": "직접 눈으로 봐야 하는 궁극의 엔터테인먼트. 20분간 이어지는 '인피니티' 여행에서 특별한 안경을 쓰고 빛, 색, 소리의 경이로움과 16개 방에 걸친 최신 특수 효과를 만나보세요. 시작도 끝도 없는 우주 속 신비로운 차원의 아름다움과 착시 현상 속에서 마음껏 즐기고 편안히 휴식을 취해보세요.",
@@ -876,8 +1338,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "레이저 미션",
                                         "subtitle": "미션 임파서블",
                                         "desc": "영화 속 스파이가 된 듯한 기분을 느낄 수 있는 게임입니다. 신비로운 미션룸에 첫발을 내딛는 순간, 초록색 레이저 광선으로 이루어진 미로가 눈앞에 펼쳐집니다. 광선에 닿지 않고 최대한 빠르게 이 레이저 미로를 통과해야 합니다. 몸의 어느 부위든 광선에 닿으면 미션 시간이 늘어납니다.",
@@ -885,8 +1347,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "호러 병원",
                                         "subtitle": "당신의 두려움과 마주하라",
                                         "desc": "잉글랜드 남부의 외딴 마을. 이 병원에서 치료받던 많은 환자들의 친척과 지인들의 증언에 따르면, 환자들은 한 명씩 흔적도 없이 사라져 다시는 돌아오지 않았습니다. 이것이 바로 무슨 일이 일어났는지에 대한 모두의 의문과 두려움의 시작이었습니다. 이제 사방에서 온 용감한 이들이 이곳의 소름 끼치는 미스터리에 도전하기를 기다리고 있습니다.",
@@ -894,8 +1356,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "잃어버린 피라미드",
                                         "subtitle": "고대의 미스터리",
                                         "desc": "Ripley's Believe It or Not! 파타야가 선보이는 새로운 에듀테인먼트 어트랙션으로 여러분을 초대합니다. 4,700년도 더 된 고대 이집트의 신비 속으로 떠나보세요. 세계 7대 불가사의 중 하나인 파라오의 땅은 신비로움과 탐구심을 자극하는 아름다움, 그리고 웅장함으로 유명합니다. 용감한 모험가들이 보물을 찾아 함께 모험을 떠날 준비가 되어 있습니다.",
@@ -903,8 +1365,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "인터랙티브 게임",
                                         "subtitle": "움직이고 즐기세요",
                                         "desc": "매 순간 몸을 움직이고 즐거움과 흥분을 느낄 수 있는 최첨단 인터랙티브 게임. 움직임과 놀라운 그래픽을 결합하여 혼자서도, 팀으로도 즐길 수 있습니다. 게임과 운동, 창의력을 한자리에 담은 새로운 경험입니다.",
@@ -912,8 +1374,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "유령 정원 탈출",
                                         "subtitle": "2차 세계대전의 악몽",
                                         "desc": "1945년, 제2차 세계대전이 한창일 때, 잉글랜드 남부 섬에 있던 한 병원은 웃음소리 가득한 공원 바로 옆에 자리하고 있었습니다. 아이들은 즐겁게 뛰놀고, 환자들은 신선한 공기를 마시러 나오고, 가족들은 행복한 시간을 함께 보냈습니다. 그러던 어느 날, 굉음과 함께 폭탄이 터졌습니다!! 모든 것이 순식간에 무너져 내렸습니다. 병원은 폐허가 되었고, 사람들은 사라졌으며, 어둠 속으로 서서히 사라져가는 도움을 청하는 외침만이 남았습니다. 그날 이후로 아무도 다시 이곳에 발을 들이려 하지 않았습니다... 지금도 영혼들이 울며 기다리고, 결코 떠나지 않은 채 이곳을 떠돌고 있다고 전해집니다.",
@@ -921,10 +1383,10 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-],
-                hi: [
-                    {
+                              }
+                    ],
+                    "hi": [
+                              {
                                         "title": "विश्वास करो या न करो! संग्रहालय",
                                         "subtitle": "वह सच्चाई जिसे आपको अपनी आँखों से देखना होगा",
                                         "desc": "रिप्लीज़ बिलीव इट और नॉट! अमेरिका से शुरू हुआ दुनिया का सबसे प्रसिद्ध संग्रहालयों में से एक। यह इकलौता संग्रहालय है जो दुनिया भर की रहस्यमयी और सुंदर अजूबों को एक साथ लाता है। 350 से अधिक असली वस्तुओं को देखें और अनुभव करें जो आपको चकित कर देंगी—जैसे इंसानी त्वचा के मुखौटे, 3 इंच के सिकुड़े हुए सिर, 10 लाख से अधिक माचिस की तीलियों से बना टाइटैनिक का मॉडल, 4 काली पुतलियों वाला एक व्यक्ति, और भी बहुत कुछ। एक ऐसा अनुभव जिसे आप कभी नहीं भूलेंगे। विश्वास करो या न करो!",
@@ -932,8 +1394,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "स्क्रीम इन द डार्क",
                                         "subtitle": "सबसे रोमांचक राइड",
                                         "desc": "रिप्ले वर्ल्ड पटाया की नवीनतम और छठी एक्सट्रीम राइड, जो रोमांच के दीवानों का डरावने अनुभव के साथ स्वागत करती है। स्क्रीम इन द डार्क कभी एक प्रसिद्ध मनोरंजन पार्क हुआ करता था जो अचानक अज्ञात कारणों से बंद हो गया। कुछ लोग कहते हैं कि उन्होंने रात में जोकर की आत्माओं को मंडराते देखा, तो कुछ अंधेरे में चीखें सुनने का दावा करते हैं। किसी ने भी इसे साबित करने की हिम्मत नहीं की, जब तक रिप्ले वर्ल्ड पटाया ने आपको इस घातक रास्ते की खोज के लिए आमंत्रित नहीं किया। इस भूतिया मनोरंजन पार्क से बचने का एकमात्र तरीका है आपकी सटीक निशानेबाज़ी और जितना ज़ोर से हो सके चीखना!",
@@ -941,8 +1403,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "भूतिया गोदाम",
                                         "subtitle": "जब बुरे सपने सच हो जाएं",
                                         "desc": "दुनिया के 5 सबसे बड़े ताबूत गोदामों में से सबसे बड़ा, जिसमें 80 से अधिक वर्षों से चली आ रही भयानक किंवदंतियाँ और क्रूरता की कहानियाँ छिपी हैं। भूतों और दूसरी दुनिया से आए अनचाहे मेहमानों से मिलें, अमेरिका के नवीनतम विशेष प्रभावों और तकनीकों के साथ 20 से अधिक कमरों में जो डर से भरे हैं और हर कदम पर आपको कंपा देंगे, आखिरी पल तक! चेतावनी: कमज़ोर दिल वालों के लिए उपयुक्त नहीं।",
@@ -950,8 +1412,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "लुइस टुसॉड्स वैक्सवर्क्स",
                                         "subtitle": "हैरान कर देने वाला यथार्थवाद",
                                         "desc": "दुनिया की 5वीं शाखा और थाईलैंड की पहली। यह मोम संग्रहालय थाई और अंतरराष्ट्रीय, जीवित और दिवंगत महत्वपूर्ण हस्तियों और विश्व हस्तियों की 84 से अधिक जीवंत मोम प्रतिमाएँ प्रदर्शित करता है। प्रदर्शनी को 9 ज़ोन में बांटा गया है: थाई सनसेट गार्डन पार्टी, स्पोर्ट, पॉप स्टार, चैंबर ऑफ द सीक्रेट, ब्रिटिश रॉयल्टी, पॉलिटिकल एंड ह्यूमैनिटेरियन लीडर्स, हॉरर डेन, बैटमैन एंड फ्रेंड्स, सेलिब्रिटीज इन कैरेक्टर। ये मोम प्रतिमाएँ दुनिया के कई शीर्ष कलाकारों द्वारा तैयार की गई हैं।",
@@ -959,8 +1421,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "इनफिनिटी मेज़",
                                         "subtitle": "अपनी कल्पना को खोलें",
                                         "desc": "सबसे बेहतरीन मनोरंजन जिसे अपनी आँखों से देखना ज़रूरी है। 'इनफिनिटी' के सफर के 20 मिनट के दौरान, विशेष चश्मे पहनकर रोशनी, रंग और ध्वनि के अजूबों तथा 16 कमरों में फैले नवीनतम विशेष प्रभावों का आनंद लें। हर किसी को रहस्यमयी आयामों की सुंदरता और बिना किसी शुरुआत या अंत वाले ब्रह्मांड के भ्रम में आराम और आनंद लेने दें।",
@@ -968,8 +1430,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "लेज़र मिशन",
                                         "subtitle": "मिशन इम्पॉसिबल",
                                         "desc": "एक ऐसा खेल जो आपको फिल्मों की तरह एक गुप्तचर एजेंट बना देता है। रहस्यमयी मिशन रूम में कदम रखते ही, आपके सामने हरे लेज़र किरणों की एक भूलभुलैया प्रकट होती है। आपको बिना उन हरी किरणों को छुए इस लेज़र भूलभुलैया को जितनी जल्दी हो सके पार करना होगा। यदि आपके शरीर का कोई भी हिस्सा किरण को छूता है, तो आपके मिशन का समय बढ़ जाएगा।",
@@ -977,8 +1439,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "द हॉरर हॉस्पिटल",
                                         "subtitle": "अपने डर का सामना करें",
                                         "desc": "दक्षिणी इंग्लैंड के एक दूरदराज़ शहर में, इस अस्पताल में इलाज करा चुके कई मरीज़ों के रिश्तेदारों और करीबी लोगों की कहानियों के अनुसार, एक के बाद एक मरीज़ बिना किसी निशान के गायब होते गए और कभी वापस नहीं लौटे। यही वह शुरुआत थी जिसने सभी को हैरान और भयभीत कर दिया कि आख़िर क्या हुआ था। अब, हर दिशा से आए बहादुर लोग इस जगह के भयावह रहस्य को चुनौती देने के लिए तैयार हैं।",
@@ -986,8 +1448,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "लॉस्ट पिरामिड",
                                         "subtitle": "प्राचीन रहस्य",
                                         "desc": "रिप्लीज़ बिलीव इट और नॉट! पटाया सभी को एक नए एडुटेनमेंट अट्रैक्शन से रूबरू कराता है, जो 4,700 साल से भी पुराने मिस्र के रहस्यों को सामने लाता है। दुनिया के 7 अजूबों में से एक, फैरोज़ की भूमि, अपनी रहस्यमयता, खोज की चाह, सुंदरता और भव्यता के लिए जानी जाती है। साहसी खोजकर्ताओं को खजाने की खोज में एक साहसिक यात्रा पर निकलने के लिए आमंत्रित किया जाता है।",
@@ -995,8 +1457,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "इंटरैक्टिव गेम्स",
                                         "subtitle": "चलें और खेलें",
                                         "desc": "अत्याधुनिक इंटरैक्टिव गेम्स जो आपको हर पल हिलने-डुलने, मस्ती करने और उत्साहित होने पर मजबूर कर देंगे। शानदार ग्राफिक्स के साथ गति को जोड़ते हुए, अकेले या टीम में खेलें। एक नया अनुभव जो गेमिंग, व्यायाम और रचनात्मकता को एक ही जगह पर लाता है।",
@@ -1004,8 +1466,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "एस्केप द हॉन्टेड गार्डन",
                                         "subtitle": "द्वितीय विश्व युद्ध का दुःस्वप्न",
                                         "desc": "वर्ष 1945, द्वितीय विश्व युद्ध के दौरान, दक्षिणी इंग्लैंड के एक द्वीप पर स्थित एक अस्पताल, हँसी-खुशी से भरे एक पार्क के बगल में स्थित था। बच्चे खुशी से खेलते थे, मरीज़ ताज़ी हवा के लिए बाहर आते थे, और परिवार खुशी-खुशी साथ समय बिताते थे। जब तक एक धमाका नहीं हुआ!! सब कुछ पल भर में ढह गया। अस्पताल खंडहर बन गया, लोग गायब हो गए, और बस मदद के लिए पुकारें बची रहीं जो धीरे-धीरे अंधेरे में विलीन होती गईं। तब से, किसी ने भी दोबारा यहाँ कदम रखने की हिम्मत नहीं की... कहा जाता है कि आत्माएँ आज भी यहाँ भटकती हैं, रोती हैं, इंतज़ार करती हैं, और कभी नहीं जातीं।",
@@ -1013,10 +1475,10 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-],
-                he: [
-                    {
+                              }
+                    ],
+                    "he": [
+                              {
                                         "title": "מוזיאון תאמינו או לא",
                                         "subtitle": "אמת שחייבים לראות במו עינייך",
                                         "desc": "ריפליז תאמינו או לא! אחד המוזיאונים המפורסמים בעולם שמקורו בארה\"ב. המוזיאון היחיד שאוסף פלאים מכל רחבי העולם, מסתוריים ומרהיבים כאחד. גלו וחוו למעלה מ-350 פריטים אמיתיים שיפעימו אתכם, כמו מסכות עור אדם, ראשים מכווצים בגודל 3 אינץ', דגם של הטיטניק העשוי מיותר ממיליון גפרורים, אדם עם 4 אישונים שחורים ועוד רבים אחרים. חוויה שלעולם לא תשכחו. תאמינו או לא!",
@@ -1024,8 +1486,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "צרחות באפלה",
                                         "subtitle": "מתקן האימה האולטימטיבי",
                                         "desc": "המתקן הקיצוני החדש והשישי ב-Ripley World פטאיה, המקבל בברכה את מבקשי הריגוש עם חוויית אימה. \"צרחות באפלה\" היה פעם פארק שעשועים מפורסם שנסגר לפתע מסיבה לא ידועה. יש האומרים שראו רוחות ליצנים מרחפות בלילה, ואחרים ששמעו צרחות בחשכה. איש לא העז להוכיח זאת, עד ש-Ripley World פטאיה מזמינה אתכם לחקור יחד את השביל הקטלני הזה. הדרך היחידה לברוח מפארק השעשועים הרדוף הזה היא דיוק ביריות ולצרוח בכל הכוח!",
@@ -1033,8 +1495,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "המחסן הרדוף",
                                         "subtitle": "כשסיוטים הופכים למציאות",
                                         "desc": "מחסן הארונות הגדול ביותר מבין 5 בעולם, עם אגדות מפחידות וסיפורי אכזריות המסופרים כבר יותר מ-80 שנה. פגשו רוחות ואורחים לא קרואים מעולם אחר, עם אפקטים מיוחדים וטכניקות חדישות מארה\"ב, ביותר מ-20 חדרים גדושים באימה שיגרמו לכם לרעוד בכל צעד ועד הרגע האחרון! אזהרה: לא מומלץ לבעלי לב חלש.",
@@ -1042,8 +1504,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "מוזיאון השעווה של לואי טוסו",
                                         "subtitle": "מציאותי באופן מדהים",
                                         "desc": "הסניף החמישי בעולם והראשון בתאילנד. מוזיאון השעווה מציג למעלה מ-84 פסלי שעווה מדויקים של אישים חשובים ומפורסמים תאילנדים ובינלאומיים, בין אם בחיים ובין אם הלכו לעולמם. התערוכה מחולקת ל-9 אזורים: מסיבת גן שקיעה תאית, ספורט, פופ סטאר, חדר הסוד, המלוכה הבריטית, מנהיגים פוליטיים והומניטריים, מאורת האימה, באטמן וחבריו, סלבריטאים בתחפושת. פסלי השעווה נוצרו בידי כמה מהאמנים המובילים בעולם.",
@@ -1051,8 +1513,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "מבוך האינסוף",
                                         "subtitle": "פתחו את הדמיון שלכם",
                                         "desc": "הבידור האולטימטיבי שחייבים לראות במו עינייך. במהלך 20 דקות של מסע ב\"אינסוף\", חבשו משקפיים מיוחדים שיובילו אתכם לגלות את פלאי האור, הצבע והצליל, ואפקטים מיוחדים חדישים ב-16 חדרים. תנו לעצמכם ליהנות ולהירגע ביופיים של ממדים מסתוריים ואשליות אופטיות ביקום ללא התחלה וסוף.",
@@ -1060,8 +1522,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "משימת הלייזר",
                                         "subtitle": "משימה בלתי אפשרית",
                                         "desc": "משחק שהופך אתכם לסוכן חשאי כמו בסרטים. כבר בצעד הראשון לתוך חדר המשימה המסתורי, מבוך של קרני לייזר ירוקות מופיע מולכם. עליכם לעבור את מבוך הלייזר הזה מהר ככל האפשר מבלי לגעת בקרניים הירוקות. אם חלק כלשהו בגוף נוגע בקרן הלייזר, זמן המשימה שלכם יגדל.",
@@ -1069,8 +1531,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "בית החולים האימה",
                                         "subtitle": "התמודדו עם הפחדים שלכם",
                                         "desc": "בעיירה נידחת בדרום אנגליה, על פי סיפוריהם של קרובי משפחה ומקורבים של מטופלים רבים שטופלו בבית החולים הזה, אחד אחרי השני נעלמו ללא זכר ולא חזרו. זו הייתה ההתחלה שגרמה לכולם לתהות ולפחד ממה שקרה. אמיצים מכל קצוות העולם מוזמנים כעת לאתגר את התעלומה המבעיתה של המקום הזה.",
@@ -1078,8 +1540,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "הפירמידה האבודה",
                                         "subtitle": "תעלומות עתיקות",
                                         "desc": "Ripley's Believe It or Not! פטאיה מזמינים את כולם להתפעל מאטרקציה חדשה בסגנון בידור-חינוכי, המביאה תעלומות ממצרים העתיקה לפני יותר מ-4,700 שנה. אחד משבעת פלאי תבל, ארץ הפרעונים, הידועה במסתורין, ביופי ובגדולתה. הרפתקנים אמיצים מוזמנים לצאת למסע הרפתקאות בחיפוש אחר אוצרות.",
@@ -1087,8 +1549,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "משחקים אינטראקטיביים",
                                         "subtitle": "זוזו ושחקו",
                                         "desc": "משחקים אינטראקטיביים חדשניים שיגרמו לכם לזוז, ליהנות ולהתרגש בכל שנייה. שילוב של תנועה עם גרפיקה מרהיבה, ניתן לשחק לבד או בקבוצה. חוויה חדשה המשלבת משחק, פעילות גופנית ויצירתיות במקום אחד.",
@@ -1096,8 +1558,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "בריחה מהגן הרדוף",
                                         "subtitle": "סיוט מלחמת העולם השנייה",
                                         "desc": "בשנת 1945, בעיצומה של מלחמת העולם השנייה, בית חולים באי בדרום אנגליה עמד לצד פארק מלא צחוק. ילדים שיחקו בשמחה, מטופלים יצאו לנשום אוויר צח, ומשפחות בילו יחד בשמחה. עד שהתפוצצות רעמה!! הכול קרס ברגע אחד. בית החולים הפך לחורבות, אנשים נעלמו, ונותרו רק זעקות לעזרה שדעכו לאט אל תוך החשכה. מאז, איש לא העז לחזור לכאן... אומרים שהרוחות עדיין משוטטות, בוכות, ממתינות, ולעולם אינן עוזבות.",
@@ -1105,10 +1567,10 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-],
-                ar: [
-                    {
+                              }
+                    ],
+                    "ar": [
+                              {
                                         "title": "متحف صدق أو لا تصدق",
                                         "subtitle": "حقيقة يجب أن تراها بعينيك",
                                         "desc": "ريبليز صدق أو لا تصدق! أحد أشهر المتاحف في العالم ونشأ في الولايات المتحدة الأمريكية. المتحف الوحيد الذي يجمع عجائب من جميع أنحاء العالم، غامضة وجميلة في آن واحد. اكتشف واختبر أكثر من 350 قطعة حقيقية ستبهرك، مثل أقنعة الجلد البشري، ورؤوس مصغّرة بحجم 3 إنش، ونموذج لسفينة تايتانيك مصنوع من أكثر من مليون عود ثقاب، ورجل بأربع بؤبؤ سوداء، وغيرها الكثير. تجربة لن تنساها أبدًا. صدق أو لا تصدق!",
@@ -1116,8 +1578,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B4513",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "صرخة في الظلام",
                                         "subtitle": "أقصى تجربة إثارة",
                                         "desc": "أحدث لعبة إكستريم وسادسة لعبة من نوعها في ريبلي وورلد باتايا، ترحب بعشاق الإثارة والتحدي بتجربة مرعبة. كانت \"صرخة في الظلام\" ذات يوم مدينة ملاهي شهيرة أغلقت فجأة لأسباب غير معروفة. يقول البعض إنهم رأوا أشباح مهرجين تحوم ليلاً، بينما يقول آخرون إنهم سمعوا صرخات في الظلام. لم يجرؤ أحد على إثبات ذلك، حتى دعتك ريبلي وورلد باتايا لاستكشاف هذا الطريق المميت معًا. الطريقة الوحيدة للهروب من مدينة الملاهي المسكونة هذه هي دقة تصويبك وأن تصرخ بأعلى صوتك!",
@@ -1125,8 +1587,8 @@ Object.assign(translations.ar, {
                                         "color": "#4B0082",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "المستودع المسكون",
                                         "subtitle": "عندما تتحول الكوابيس إلى حقيقة",
                                         "desc": "أكبر مستودع توابيت من بين 5 مستودعات في العالم، يحمل أساطير مرعبة وقصص قسوة تُروى منذ أكثر من 80 عامًا. قابل الأشباح وضيوفًا غير مدعوين من عالم آخر، مع مؤثرات خاصة وأحدث التقنيات من أمريكا في أكثر من 20 غرفة مليئة بالرعب الذي سيجعلك ترتجف في كل خطوة حتى اللحظة الأخيرة! تحذير: غير مناسب لضعاف القلوب.",
@@ -1134,8 +1596,8 @@ Object.assign(translations.ar, {
                                         "color": "#2F4F4F",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "متحف لويس توسو للشمع",
                                         "subtitle": "واقعية مذهلة بشكل لا يُصدق",
                                         "desc": "الفرع الخامس في العالم والأول في تايلاند. يعرض متحف الشمع هذا أكثر من 84 تمثالًا شمعيًا واقعيًا لشخصيات مهمة ومشاهير عالميين، تايلانديين وعالميين، أحياء وأمواتًا. يُقسّم المعرض إلى 9 مناطق: حفلة الحديقة الغروبية التايلاندية، الرياضة، نجوم البوب، غرفة السر، العائلة المالكة البريطانية، القادة السياسيون والإنسانيون، وكر الرعب، باتمان وأصدقاؤه، ومشاهير في شخصيات. تم صنع التماثيل الشمعية على يد نخبة من كبار الفنانين في العالم.",
@@ -1143,8 +1605,8 @@ Object.assign(translations.ar, {
                                         "color": "#DAA520",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "متاهة اللانهاية",
                                         "subtitle": "أطلق العنان لخيالك",
                                         "desc": "أقصى درجات الترفيه التي يجب أن تُرى بعينك. خلال 20 دقيقة من الرحلة عبر \"اللانهاية\"، استمتع بنظارات خاصة ستأخذك لاكتشاف عجائب الضوء واللون والصوت، ومؤثرات خاصة حديثة عبر 16 غرفة. دع الجميع يستمتعون ويسترخون في جمال الأبعاد الغامضة والأوهام البصرية في كون بلا بداية أو نهاية.",
@@ -1152,8 +1614,8 @@ Object.assign(translations.ar, {
                                         "color": "#FF6347",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "مهمة الليزر",
                                         "subtitle": "مهمة مستحيلة",
                                         "desc": "لعبة تجعلك تتقمص شخصية عميل سري كما في الأفلام. من الخطوة الأولى داخل غرفة المهمة الغامضة، تظهر أمامك متاهة من أشعة الليزر الخضراء. عليك اجتياز متاهة الليزر هذه بأسرع ما يمكن دون لمس تلك الأشعة الخضراء. إذا لمس أي جزء من جسمك شعاع الليزر، سيزداد وقت مهمتك.",
@@ -1161,8 +1623,8 @@ Object.assign(translations.ar, {
                                         "color": "#00CED1",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "مستشفى الرعب",
                                         "subtitle": "واجه مخاوفك",
                                         "desc": "في بلدة نائية جنوب إنجلترا، وبحسب روايات أقارب ومقربي العديد من المرضى الذين تلقوا العلاج في هذا المستشفى، اختفى المرضى واحدًا تلو الآخر دون أثر ولم يعودوا أبدًا. كانت هذه بداية تساؤل وخوف الجميع حول ما حدث. الآن، ينتظر هذا المكان الشجعان من كل الاتجاهات لتحدي لغزه المروع.",
@@ -1170,8 +1632,8 @@ Object.assign(translations.ar, {
                                         "color": "#8B0000",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "الهرم المفقود",
                                         "subtitle": "أسرار قديمة",
                                         "desc": "تدعوكم ريبليز صدق أو لا تصدق! باتايا للاستمتاع بمعلم ترفيهي وتعليمي جديد، ينقل أسرار مصر القديمة من أكثر من 4700 عام مضت. أحد عجائب الدنيا السبع، أرض الفراعنة، المعروفة بغموضها وجمالها وعظمتها التي تستحق الاستكشاف. المغامرون الشجعان مدعوون للانطلاق في مغامرة بحثًا عن الكنوز.",
@@ -1179,8 +1641,8 @@ Object.assign(translations.ar, {
                                         "color": "#D2691E",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "ألعاب تفاعلية",
                                         "subtitle": "تحرك والعب",
                                         "desc": "ألعاب تفاعلية متطورة ستجعلك تتحرك وتستمتع وتشعر بالإثارة في كل لحظة. تجمع بين الحركة والرسومات المذهلة، يمكن لعبها فرديًا أو كفريق. تجربة جديدة تجمع بين الألعاب والتمارين والإبداع في مكان واحد.",
@@ -1188,8 +1650,8 @@ Object.assign(translations.ar, {
                                         "color": "#9370DB",
                                         "image": "",
                                         "video": ""
-                    },
-                    {
+                              },
+                              {
                                         "title": "الهروب من الحديقة المسكونة",
                                         "subtitle": "كابوس الحرب العالمية الثانية",
                                         "desc": "في عام 1945، في خضم الحرب العالمية الثانية، كان هناك مستشفى في جزيرة جنوب إنجلترا يقع بجوار حديقة عامة مليئة بالضحك. كان الأطفال يلعبون بسعادة، ويخرج المرضى لاستنشاق الهواء النقي، وتقضي العائلات وقتًا سعيدًا معًا. حتى دوى انفجار!! انهار كل شيء في لحظة. تحول المستشفى إلى أنقاض، واختفى الناس، ولم يتبقَّ سوى صرخات طلب النجدة التي تلاشت ببطء في الظلام. منذ ذلك الحين، لم يجرؤ أحد على العودة إلى هنا مرة أخرى... يُقال إن الأرواح ما زالت تتجول، تبكي، تنتظر، ولا تغادر أبدًا.",
@@ -1197,24 +1659,64 @@ Object.assign(translations.ar, {
                                         "color": "#556B2F",
                                         "image": "",
                                         "video": ""
-                    }
-]
-            },
-            menu: {
-                snacks: [
-                    { name: "SB ROD SNACK CLASSIC", nameTh: "ข้าวเกรียบ SB", price: 30, image: "" },
-                    { name: "POPCORN", nameTh: "ป๊อปคอร์น", price: 90, image: "" },
-                    { name: "FRENCH FRIES", nameTh: "เฟรนช์ฟรายส์", price: 69, image: "" },
-                    { name: "CHICKEN STICKS", nameTh: "สติ๊กไก่ทอด", price: 89, image: "" },
-                    { name: "CRISPY CHICKEN POP", nameTh: "ไก่ป๊อป", price: 89, image: "" },
-                    { name: "MIXED FRIED SNACKS", nameTh: "ของทานเล่นทอดรวม", price: 109, image: "" }
-                ],
-                drinks: [
-                    { name: "WATER", nameTh: "น้ำดื่ม", price: 25, image: "" },
-                    { name: "SOFT DRINKS", nameTh: "น้ำอัดลม", price: 35, image: "" }
-                ]
-            }
-        };
+                              }
+                    ]
+          },
+          "menu": {
+                    "snacks": [
+                              {
+                                        "name": "SB ROD SNACK CLASSIC",
+                                        "nameTh": "ข้าวเกรียบ SB",
+                                        "price": 30,
+                                        "image": ""
+                              },
+                              {
+                                        "name": "POPCORN",
+                                        "nameTh": "ป๊อปคอร์น",
+                                        "price": 90,
+                                        "image": ""
+                              },
+                              {
+                                        "name": "FRENCH FRIES",
+                                        "nameTh": "เฟรนช์ฟรายส์",
+                                        "price": 69,
+                                        "image": ""
+                              },
+                              {
+                                        "name": "CHICKEN STICKS",
+                                        "nameTh": "สติ๊กไก่ทอด",
+                                        "price": 89,
+                                        "image": ""
+                              },
+                              {
+                                        "name": "CRISPY CHICKEN POP",
+                                        "nameTh": "ไก่ป๊อป",
+                                        "price": 89,
+                                        "image": ""
+                              },
+                              {
+                                        "name": "MIXED FRIED SNACKS",
+                                        "nameTh": "ของทานเล่นทอดรวม",
+                                        "price": 109,
+                                        "image": ""
+                              }
+                    ],
+                    "drinks": [
+                              {
+                                        "name": "WATER",
+                                        "nameTh": "น้ำดื่ม",
+                                        "price": 25,
+                                        "image": ""
+                              },
+                              {
+                                        "name": "SOFT DRINKS",
+                                        "nameTh": "น้ำอัดลม",
+                                        "price": 35,
+                                        "image": ""
+                              }
+                    ]
+          }
+};;
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
