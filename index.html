@@ -9,9 +9,8 @@
         :root { --primary: #e94560; --secondary: #ffd700; --dark: #1a1a2e; --light: #f8f9fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #333; line-height: 1.6; }
-        .navbar { position: sticky; }
-        .lang-select { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); z-index: 1000; }
-        .lang-select select { padding: 8px 14px; border-radius: 25px; border: none; background: white; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 46vw; }
+        .top-bar { background: #0d0d1a; display: flex; justify-content: flex-end; align-items: center; padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+        .lang-select select { padding: 8px 14px; border-radius: 25px; border: 2px solid var(--primary); background: #ffffff; color: #1a1a2e; font-size: 14px; font-weight: 600; cursor: pointer; max-width: 60vw; }
         .navbar { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 999; border-bottom: 2px solid var(--primary); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; flex-wrap: wrap; padding: 15px 20px; gap: 10px; }
         .nav-btn { background: none; border: none; color: white; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 16px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -86,7 +85,7 @@
         .tab.active { background: var(--primary); color: white; }
         .lang-editing-note { background: #e7f3ff; border: 1px solid #b6daff; color: #084298; padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em; }
         [dir="rtl"] { text-align: right; }
-        [dir="rtl"] .lang-select { right: auto; left: 12px; }
+        [dir="rtl"] .top-bar { justify-content: flex-start; }
         [dir="rtl"] .step { flex-direction: row-reverse; }
         .nav-toggle { display: none; background: rgba(0,0,0,0.9); border: none; color: white; font-size: 1.5em; padding: 12px 18px; cursor: pointer; width: 100%; text-align: right; }
         .logo-img { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 15px; display: block; }
@@ -139,8 +138,8 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    <!-- แถบเลือกภาษาแยกด้านบนสุด ไม่เกี่ยวกับแถบเมนู -->
+    <div class="top-bar">
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
             <option value="th">🇹🇭 ไทย</option>
@@ -154,6 +153,10 @@
             <option value="ar">🇸 العربية</option>
         </select>
     </div>
+    </div>
+
+    <nav class="navbar">
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
 
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" onclick="showSection('home')">
