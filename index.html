@@ -24,7 +24,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
         .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-top: 5px solid var(--primary); transition: 0.3s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
-        .card img, .card video { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .card img, .card video, .card iframe { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
         .card-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5em; margin-bottom: 20px; }
         .card h3 { color: var(--dark); font-size: 1.4em; margin-bottom: 5px; }
         .card h4 { color: var(--primary); font-size: 1em; margin-bottom: 15px; font-weight: 600; }
@@ -80,6 +80,7 @@
         .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab { padding: 10px 20px; background: white; border: 2px solid var(--primary); color: var(--primary); border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .tab.active { background: var(--primary); color: white; }
+        .lang-editing-note { background: #e7f3ff; border: 1px solid #b6daff; color: #084298; padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em; }
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .lang-select { right: auto; left: 20px; }
         [dir="rtl"] .step { flex-direction: row-reverse; }
@@ -283,6 +284,7 @@
 
             <div id="adminTabAttractions" class="admin-section" style="display:none;">
                 <h3><i class="fas fa-museum"></i> จัดการสถานที่ (Attractions)</h3>
+                <div id="attractionsLangNote" class="lang-editing-note"></div>
                 <div id="attractionsEditor"></div>
                 <button class="btn btn-success" onclick="addAttraction()">
                     <i class="fas fa-plus"></i> เพิ่มสถานที่ใหม่
@@ -483,8 +485,32 @@
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
         function getAttractions(lang) {
-            // ดึงข้อมูลตามภาษา ถ้าไม่มีให้ fallback เป็นภาษาอังกฤษ
+            // ดึงข้อมูลตามภาษา ถ้าไม่มีให้ fallback เป็นภาษาอังกฤษ (สำหรับแสดงผลหน้าเว็บ)
             return siteData.attractions[lang] || siteData.attractions['en'] || [];
+        }
+
+        function ensureAttractionsLang(lang) {
+            // สำหรับหน้าแอดมิน: ถ้ายังไม่มีข้อมูลของภาษานี้ ให้คัดลอกจากอังกฤษมาเป็นชุดข้อมูลจริงของภาษานั้น
+            // เพื่อให้แก้ไข/บันทึกแยกเป็นรายภาษา แทนที่จะไปแก้ทับข้อมูลภาษาอังกฤษโดยไม่ตั้งใจ
+            if (!siteData.attractions[lang]) {
+                const base = siteData.attractions['en'] || [];
+                siteData.attractions[lang] = JSON.parse(JSON.stringify(base));
+            }
+            return siteData.attractions[lang];
+        }
+
+        function isDirectVideoFile(url) {
+            return /\.(mp4|webm|ogg)(\?.*)?$/i.test(url || '');
+        }
+
+        function getVideoEmbedUrl(url) {
+            if (!url) return '';
+            if (url.includes('youtube.com/embed/') || url.includes('player.vimeo.com')) return url;
+            const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+            if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}`;
+            const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+            if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+            return url;
         }
 
         function changeLang(lang) {
@@ -507,6 +533,12 @@
             // Render attractions ตามภาษาที่เลือก
             renderAttractions();
             renderMenu();
+
+            // ถ้ากำลังเปิดหน้าแอดมินอยู่ ให้รีเฟรชตัวแก้ไขสถานที่ตามภาษาที่เลือกด้วย
+            const attractionsTab = document.getElementById('adminTabAttractions');
+            if (attractionsTab && attractionsTab.style.display !== 'none') {
+                renderAttractionsEditor();
+            }
         }
 
         function renderAttractions() {
@@ -515,7 +547,9 @@
             grid.innerHTML = attractions.map(item => `
                 <div class="card" style="border-top-color: ${item.color}">
                     ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
-                    ${item.video ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>` : ''}
+                    ${item.video ? (isDirectVideoFile(item.video)
+                        ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>`
+                        : `<iframe src="${getVideoEmbedUrl(item.video)}" style="width:100%; height:200px; border:0; border-radius:10px; margin-bottom:15px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`) : ''}
                     <div class="card-icon" style="background: ${item.color}"><i class="fas ${item.icon}"></i></div>
                     <h3>${item.title}</h3>
                     ${item.subtitle ? `<h4>${item.subtitle}</h4>` : ''}
@@ -586,6 +620,7 @@
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.getElementById('adminTab' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
             event.target.classList.add('active');
+            if (tab === 'attractions') renderAttractionsEditor();
         }
 
         function loadGithubConfig() {
@@ -628,8 +663,16 @@
         }
 
         function renderAttractionsEditor() {
+            const langNames = { th: 'ไทย', en: 'English', zh: '中文', ru: 'Русский', hi: 'हिन्दी', he: 'עברית', ja: '日本語', ko: '한국어', ar: 'العربية' };
+            const noteEl = document.getElementById('attractionsLangNote');
+            const hadLangBefore = !!siteData.attractions[currentLang];
+            const attractions = ensureAttractionsLang(currentLang);
+            if (noteEl) {
+                noteEl.innerHTML = `<i class="fas fa-language"></i> กำลังแก้ไขข้อมูลของภาษา: <strong>${langNames[currentLang] || currentLang}</strong>` +
+                    (!hadLangBefore ? ` (ยังไม่เคยมีข้อมูลภาษานี้ ระบบคัดลอกจากภาษาอังกฤษมาให้เริ่มแก้ไข)` : '') +
+                    `<br>สลับภาษาที่มุมขวาบนเพื่อแก้ไขเนื้อหาของภาษาอื่น`;
+            }
             const container = document.getElementById('attractionsEditor');
-            const attractions = getAttractions(currentLang);
             container.innerHTML = attractions.map((item, index) => `
                 <div class="admin-section">
                     <h4>${item.title}</h4>
@@ -659,8 +702,11 @@
                         ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
                     </div>
                     <div class="form-group">
-                        <label>วิดีโอ URL (YouTube Embed)</label>
-                        <input type="text" value="${item.video}" onchange="updateAttraction(${index}, 'video', this.value)" placeholder="https://www.youtube.com/embed/xxxxx">
+                        <label>วิดีโอ URL (ลิงก์ YouTube ปกติ, youtu.be, YouTube embed, Vimeo หรือไฟล์ .mp4 โดยตรง)</label>
+                        <input type="text" value="${item.video}" onchange="updateAttraction(${index}, 'video', this.value)" placeholder="https://www.youtube.com/watch?v=xxxxx">
+                        ${item.video ? (isDirectVideoFile(item.video)
+                            ? `<video src="${item.video}" controls class="media-preview"></video>`
+                            : `<iframe src="${getVideoEmbedUrl(item.video)}" class="media-preview" style="width:300px; height:170px; border:0;" allowfullscreen></iframe>`) : ''}
                     </div>
                     <button class="btn btn-danger" onclick="deleteAttraction(${index})">
                         <i class="fas fa-trash"></i> ลบ
@@ -670,15 +716,15 @@
         }
 
         function updateAttraction(index, field, value) {
-            const attractions = getAttractions(currentLang);
+            const attractions = ensureAttractionsLang(currentLang);
             attractions[index][field] = value;
+            renderAttractionsEditor();
+            renderAttractions();
         }
 
         function addAttraction() {
-            if (!siteData.attractions[currentLang]) {
-                siteData.attractions[currentLang] = [];
-            }
-            siteData.attractions[currentLang].push({
+            const attractions = ensureAttractionsLang(currentLang);
+            attractions.push({
                 title: "สถานที่ใหม่",
                 subtitle: "",
                 desc: "รายละเอียด...",
@@ -692,7 +738,7 @@
 
         function deleteAttraction(index) {
             if (confirm('ต้องการลบสถานที่นี้?')) {
-                const attractions = getAttractions(currentLang);
+                const attractions = ensureAttractionsLang(currentLang);
                 attractions.splice(index, 1);
                 renderAttractionsEditor();
             }
@@ -757,6 +803,7 @@
 
         function updateMenu(category, index, field, value) {
             siteData.menu[category][index][field] = field === 'price' ? parseInt(value) : value;
+            renderMenu();
         }
 
         function addMenuItem() {
@@ -790,6 +837,29 @@
             `;
         }
 
+        // ค้นหาและแทนที่ object literal (เช่น "const siteData = {...};") ด้วยข้อมูลล่าสุดในหน่วยความจำ
+        // ใช้การนับวงเล็บปีกกาแทน regex ธรรมดา เพื่อรองรับโครงสร้างที่ซ้อนกันหลายชั้นได้อย่างถูกต้อง
+        function replaceObjectLiteral(source, varName, newValue) {
+            const marker = `const ${varName} = {`;
+            const startIdx = source.indexOf(marker);
+            if (startIdx === -1) return source;
+            let i = startIdx + marker.length - 1;
+            let depth = 0;
+            let endIdx = -1;
+            for (; i < source.length; i++) {
+                if (source[i] === '{') depth++;
+                if (source[i] === '}') {
+                    depth--;
+                    if (depth === 0) { endIdx = i; break; }
+                }
+            }
+            if (endIdx === -1) return source;
+            const before = source.slice(0, startIdx);
+            const after = source.slice(endIdx + 1);
+            const json = JSON.stringify(newValue, null, 12);
+            return `${before}const ${varName} = ${json};${after}`;
+        }
+
         async function saveAllChanges() {
             const config = JSON.parse(localStorage.getItem('githubConfig'));
             if (!config || !config.token) {
@@ -806,9 +876,15 @@
                     headers: { 'Authorization': `token ${config.token}` }
                 });
                 const fileData = await response.json();
-                
-                const originalContent = atob(fileData.content);
-                const newContent = originalContent;
+
+                // ถอดรหัส base64 -> UTF-8 อย่างถูกต้อง (ไฟล์เดิมถอดแบบ atob เฉย ๆ ซึ่งทำให้ตัวอักษรไทย/ภาษาอื่นเพี้ยน)
+                const originalContent = decodeURIComponent(escape(atob(fileData.content)));
+
+                // แทรกข้อมูล siteData และ translations ที่แก้ไขล่าสุดในหน้าแอดมินกลับเข้าไปในไฟล์จริง
+                // (เดิมโค้ดจุดนี้เขียนไฟล์เดิมกลับไปโดยไม่ใส่การเปลี่ยนแปลงใด ๆ เลย ทำให้กด "บันทึก" แล้วไม่มีผลจริง)
+                let newContent = replaceObjectLiteral(originalContent, 'siteData', siteData);
+                newContent = replaceObjectLiteral(newContent, 'translations', translations);
+
                 const newContentBase64 = btoa(unescape(encodeURIComponent(newContent)));
                 
                 const updateResponse = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}/contents/index.html`, {
