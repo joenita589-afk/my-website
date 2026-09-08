@@ -4,53 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ripley's Believe It or Not! Pattaya</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .language-selector select {
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .main-nav {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            gap: 10px;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: #e94560;
+            color: white;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            color: #e94560;
+        }
+        .tagline {
+            font-size: 1.5em;
+            font-style: italic;
+            color: #ffd700;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .attraction-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-top: 6px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .attraction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .attraction-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .attraction-card h2 {
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            font-size: 1.6em;
+        }
+        .attraction-card h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .attraction-card p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95em;
+            flex-grow: 1;
+        }
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2em; }
+            .tagline { font-size: 1.2em; }
+            .nav-container { flex-direction: column; align-items: center; }
+            .nav-link { width: 100%; text-align: center; }
+            .attractions-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Language Selector -->
     <div class="language-selector">
         <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="th">🇹🇭 ไทย</option>
+            <option value="th">🇹 ไทย</option>
             <option value="en">🇬🇧 English</option>
-            <option value="zh">🇨🇳 中文</option>
+            <option value="zh">🇨 中文</option>
             <option value="ru">🇷🇺 Русский</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="hi">🇮 हिन्दी</option>
             <option value="he">🇮🇱 עברית</option>
             <option value="ja">🇯🇵 日本語</option>
-            <option value="ko">🇰🇷 한국어</option>
+            <option value="ko">🇰 한국어</option>
             <option value="ar">🇸🇦 العربية</option>
         </select>
     </div>
 
-    <!-- Navigation Menu -->
     <nav class="main-nav">
         <div class="nav-container">
             <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> หน้าหลัก</a>
             <a href="coupon.html" class="nav-link"><i class="fas fa-ticket-alt"></i> คูปอง</a>
             <a href="menu.html" class="nav-link"><i class="fas fa-utensils"></i> เมนู</a>
             <a href="contact.html" class="nav-link"><i class="fas fa-map-marker-alt"></i> ติดต่อเรา</a>
-            <a href="login.html" class="nav-link admin-btn"><i class="fas fa-lock"></i> Admin</a>
+            <a href="login.html" class="nav-link"><i class="fas fa-lock"></i> Admin</a>
         </div>
     </nav>
 
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <h1>Ripley's Believe It or Not! Pattaya</h1>
-            <p class="tagline" data-key="tagline">ความมหัศจรรย์ที่คุณต้องเชื่อ!</p>
+            <p class="tagline" id="tagline">ความมหัศจรรย์ที่คุณต้องเชื่อ!</p>
         </div>
     </header>
 
-    <!-- Attractions Grid -->
     <main class="container">
         <section id="attractions" class="attractions-grid">
-            <!-- เนื้อหาจะถูกโหลดโดย JavaScript จากไฟล์ languages.js -->
             <p style="text-align: center; color: white; grid-column: 1/-1;">กำลังโหลดข้อมูล...</p>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Ripley's Believe It or Not! Pattaya. All Rights Reserved.</p>
@@ -58,7 +192,68 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="js/languages.js"></script>
+    <script>
+        const translations = {
+            th: {
+                tagline: "ความมหัศจรรย์ที่คุณต้องเชื่อ!",
+                attractions: [
+                    { id: 1, title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", description: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลก ทั้งความลี้ลับพิสดารและความงดงาม พบของจริงกว่า 350 ประเภท เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วน เรือจำลองไททานิคจากไม้ขีดไฟกว่า 1,000,000 ก้าน และอื่นๆ อีกมากมาย", icon: "fa-museum", color: "#8B4513" },
+                    { id: 2, title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", description: "เครื่องเล่นใหม่ล่าสุดของ Ripley World Pattaya เครื่องเล่นสุดมันส์อันดับ 6 สำหรับคนรักความท้าทายแบบสยองขวัญ สวนสนุกที่ปิดตัวลงอย่างลึกลับ มีตำนานวิญญาณตัวตลกและเสียงกรีดร้องในความมืด ทางเดียวที่จะรอดพ้นออกมาได้คือความแม่นยำในการยิงปืนของคุณ", icon: "fa-ghost", color: "#4B0082" },
+                    { id: 3, title: "โกดังผีสิง", subtitle: "เมื่อฝันร้ายมาเยือน", description: "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมเอฟเฟกต์พิเศษและเทคนิคอันทันสมัยจากอเมริกา ในแต่ละห้องกว่า 20 ห้องที่แฝงไว้ด้วยความสยอง คำเตือน: ไม่เหมาะสำหรับคนขวัญอ่อน", icon: "fa-warehouse", color: "#2F4F4F" },
+                    { id: 4, title: "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส", subtitle: "ความอัศจรรย์ที่คุณต้องตะลึง", description: "สาขาที่ 5 ของโลกและครั้งแรกในประเทศไทย จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญและคนดังระดับโลกทั้งไทยและเทศมากกว่า 84 ตัว แบ่งเป็น 9 โซน เช่น SPORT, POP STAR, BRITISH ROYALTY, HORROR DEN, BATMAN AND FRIENDS ฯลฯ พร้อมลูกเล่นเรื่องกลิ่น แสง และเสียงที่สมจริง", icon: "fa-user", color: "#DAA520" },
+                    { id: 5, title: "มหัศจรรย์เขาวงกต", subtitle: "เปิดโลกแห่งจินตนาการ", description: "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาทีของการเดินทางใน 'อินฟินนิตี้' (Infinity) เพลิดเพลินกับแว่นสุดพิเศษที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และเอฟเฟกต์พิเศษถึง 16 ห้อง ในมิติพิศวงที่ไม่มีจุดเริ่มต้นและสิ้นสุด", icon: "fa-project-diagram", color: "#FF6347" },
+                    { id: 6, title: "เกมส์ตะลุยเลเซอร์", subtitle: "Mission Impossible", description: "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เข้าสู่ห้องปฏิบัติภารกิจลึกลับ ด่านเขาวงกตลำแสงเลเซอร์สีเขียว คุณต้องผ่านไปได้ไวที่สุดโดยไม่แตะต้องลำแสง หากสัมผัส เวลาจะเพิ่มขึ้นและภารกิจอาจไม่สำเร็จ!", icon: "fa-bullseye", color: "#00CED1" },
+                    { id: 7, title: "โรงพยาบาลหลอน", subtitle: "The Horror Hospital", description: "ณ เมืองห่างไกลทางตอนใต้ของอังกฤษ โรงพยาบาลที่ผู้ป่วยเข้าไปแล้วไม่มีวี่แววจะได้กลับออกมา รอคอยผู้กล้ามาท้าทายความลี้ลับสยดสยอง พร้อมปลุกเหล่าวิญญาณและภูติผีให้ตื่นขึ้น ขอเตือนก่อนว่าที่นี่ไม่เหมาะกับคนขวัญอ่อน", icon: "fa-hospital", color: "#8B0000" },
+                    { id: 8, title: "พีระมิดที่สาบสูญ", subtitle: "Lost Pyramid", description: "Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์เมื่อกว่า 4,700 ปีที่แล้ว ดินแดนของกษัตริย์ฟาโรห์ที่กล่าวขานถึงความลึกลับ สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยเข้าไปร่วมค้นหาสมบัติและพีระมิดสีดำที่สาบสูญ", icon: "fa-monument", color: "#D2691E" },
+                    { id: 9, title: "เกมอินเตอร์แอคทีฟสุดล้ำ", subtitle: "Interactive Gaming", description: "เกมที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว", icon: "fa-gamepad", color: "#9370DB" },
+                    { id: 10, title: "หนีตายสวนสยอง", subtitle: "Escape the Haunted Garden", description: "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลและสวนสาธารณะที่เต็มไปด้วยความสุขพังทลายลงจากเสียงระเบิด ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่เลือนหายไปในความมืด ว่ากันว่าพวกเขายังคงวนเวียนรอคอยอยู่ที่นี่...", icon: "fa-skull", color: "#556B2F" }
+                ]
+            },
+            en: {
+                tagline: "Believe It or Not!",
+                attractions: [
+                    { id: 1, title: "Believe It or Not! Museum", subtitle: "Truth you must see with your own eyes", description: "Ripley's Believe It or Not! One of the world's most famous museums originating from the USA. Discover over 350 types of bizarre and amazing artifacts, including a human skin mask, a shrunken head, and a Titanic model made of over 1,000,000 matchsticks.", icon: "fa-museum", color: "#8B4513" },
+                    { id: 2, title: "Scream in the Dark", subtitle: "The Ultimate Thrill Ride", description: "The newest and 6th extreme ride at Ripley World Pattaya. A legendary abandoned amusement park haunted by clown spirits and midnight screams. Your only way out is your sharpshooting skills.", icon: "fa-ghost", color: "#4B0082" },
+                    { id: 3, title: "Haunted Warehouse", subtitle: "When Nightmares Come True", description: "One of the 5 largest coffin warehouses in the world with an 80-year-old terrifying legend. Face ghosts and supernatural effects across 20+ rooms. Warning: Not for the faint of heart.", icon: "fa-warehouse", color: "#2F4F4F" },
+                    { id: 4, title: "Louis Tussaud's Waxworks", subtitle: "Astonishingly Real", description: "The 5th branch in the world and first in Thailand. Features over 84 lifelike wax figures of global and Thai celebrities across 9 zones, complete with realistic scents, lighting, and sound effects.", icon: "fa-user", color: "#DAA520" },
+                    { id: 5, title: "Infinity Maze", subtitle: "Open Your Imagination", description: "20 minutes of pure entertainment in the 'Infinity' maze. Use special glasses to experience light, sound, and special effects across 16 rooms in a mind-bending universe with no beginning or end.", icon: "fa-project-diagram", color: "#FF6347" },
+                    { id: 6, title: "Laser Mission", subtitle: "Be a Secret Agent", description: "Step into a secret agent's shoes. Navigate a labyrinth of green laser beams as fast as possible without touching them. Breaking a beam adds time to your mission!", icon: "fa-bullseye", color: "#00CED1" },
+                    { id: 7, title: "The Horror Hospital", subtitle: "Face Your Fears", description: "A remote hospital in southern England where patients mysteriously disappeared. Face the chilling spirits and ghosts that still linger. Warning: Not for the faint of heart.", icon: "fa-hospital", color: "#8B0000" },
+                    { id: 8, title: "Lost Pyramid", subtitle: "Ancient Mysteries", description: "A new Edutainment attraction bringing the mysteries of 4,700-year-old Egypt to life. Join the adventure to find hidden treasures and the legendary lost Black Pyramid.", icon: "fa-monument", color: "#D2691E" },
+                    { id: 9, title: "Interactive Games", subtitle: "Move and Play", description: "Cutting-edge interactive games that keep you moving and excited every second. Combines motion, graphics, exercise, and creativity for solo or team play.", icon: "fa-gamepad", color: "#9370DB" },
+                    { id: 10, title: "Escape the Haunted Garden", subtitle: "WWII Nightmare", description: "In 1945, a peaceful hospital and garden were destroyed by bombs. The voices of the lost still echo in the darkness. Legend says they are still waiting here...", icon: "fa-skull", color: "#556B2F" }
+                ]
+            }
+        };
+
+        let currentLang = 'th';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const data = translations[lang] || translations['th'];
+            
+            document.getElementById('tagline').textContent = data.tagline;
+            
+            const container = document.getElementById('attractions');
+            container.innerHTML = data.attractions.map(attr => `
+                <div class="attraction-card" style="border-top-color: ${attr.color}">
+                    <div class="attraction-icon" style="background: ${attr.color}">
+                        <i class="fas ${attr.icon}"></i>
+                    </div>
+                    <h2>${attr.title}</h2>
+                    ${attr.subtitle ? `<h3>${attr.subtitle}</h3>` : ''}
+                    <p>${attr.description}</p>
+                </div>
+            `).join('');
+            
+            localStorage.setItem('preferredLanguage', lang);
+            document.getElementById('languageSelect').value = lang;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'th';
+            changeLanguage(savedLang);
+        });
+    </script>
 </body>
 </html>
