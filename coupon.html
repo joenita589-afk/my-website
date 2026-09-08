@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คูปองส่วนลด - Ripley's Pattaya</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .coupon-hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .coupon-hero h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .coupon-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .coupon-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #f5576c;
+        }
+        .coupon-card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .coupon-list {
+            list-style: none;
+            padding: 0;
+        }
+        .coupon-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .coupon-list li i {
+            margin-right: 15px;
+            font-size: 1.5em;
+            color: #f5576c;
+        }
+        .how-to-use {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+        .how-to-use h2 {
+            color: #2e7d32;
+        }
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .steps li {
+            counter-increment: step;
+            padding: 20px;
+            margin: 15px 0;
+            background: white;
+            border-radius: 10px;
+            position: relative;
+            padding-left: 70px;
+        }
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: #4caf50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .menu-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .menu-item {
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .menu-item h4 {
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        .menu-item .price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="en">🇬 English</option>
+            <option value="zh">🇨🇳 中文</option>
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="he">🇮🇱 עברית</option>
+            <option value="ja">🇯🇵 日本語</option>
+            <option value="ko">🇰🇷 한국어</option>
+            <option value="ar">🇦 العربية</option>
+        </select>
+    </div>
+
+    <div class="coupon-hero">
+        <h1><i class="fas fa-ticket-alt"></i> คูปองส่วนลด</h1>
+        <p>รับส่วนลดพิเศษจากกิจกรรมสุดมันส์!</p>
+    </div>
+
+    <div class="coupon-container">
+        <!-- กิจกรรมที่ได้คูปอง -->
+        <div class="coupon-card">
+            <h2><i class="fas fa-gift"></i> กิจกรรมที่ได้รับคูปองส่วนลด</h2>
+            <ul class="coupon-list" id="couponActivities">
+                <!-- จะถูกโหลดจาก JavaScript -->
+            </ul>
+        </div>
+
+        <!-- วิธีใช้คูปอง -->
+        <div class="coupon-card how-to-use">
+            <h2><i class="fas fa-info-circle"></i> วิธีการใช้คูปอง</h2>
+            <ol class="steps" id="howToUseSteps">
+                <li>ทำกิจกรรม เลเซอร์ หรือ Scream in the Dark</li>
+                <li>รับคูปองส่วนลดจากเจ้าหน้าที่</li>
+                <li>นำคูปองไปแลกซื้ออาหารและเครื่องดื่มที่เคาน์เตอร์</li>
+                <li>แสดงคูปองก่อนชำระเงินเพื่อรับส่วนลด</li>
+            </ol>
+        </div>
+
+        <!-- เมนูอาหารและเครื่องดื่ม -->
+        <div class="coupon-card">
+            <h2><i class="fas fa-utensils"></i> เมนูอาหารและเครื่องดื่ม</h2>
+            <p>เลือกรับประทานอาหารอร่อยๆ ที่เคาน์เตอร์ขายของทานเล่น</p>
+            <div class="menu-preview" id="menuPreview">
+                <!-- จะถูกโหลดจาก JavaScript -->
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="menu.html" class="btn btn-primary">ดูเมนูทั้งหมด <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-link">
+        <a href="login.html"><i class="fas fa-cog"></i> Admin</a>
+    </div>
+
+    <script src="js/languages.js"></script>
+    <script>
+        // โหลดข้อมูลคูปองและเมนู
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCouponData();
+            loadMenuPreview();
+        });
+
+        function loadCouponData() {
+            const couponData = JSON.parse(localStorage.getItem('couponData')) || {
+                activities: [
+                    { name: 'เกมส์ตะลุยเลเซอร์', discount: '10%', icon: 'fa-bullseye' },
+                    { name: 'Scream in the Dark', discount: '15%', icon: 'fa-ghost' }
+                ]
+            };
+
+            const container = document.getElementById('couponActivities');
+            container.innerHTML = couponData.activities.map(act => `
+                <li>
+                    <i class="fas ${act.icon}"></i>
+                    <div>
+                        <strong>${act.name}</strong><br>
+                        <span style="color: #e74c3c; font-weight: bold;">ลด ${act.discount}</span>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        function loadMenuPreview() {
+            const menuData = JSON.parse(localStorage.getItem('menuData')) || [];
+            const container = document.getElementById('menuPreview');
+            
+            const previewItems = menuData.slice(0, 4); // แสดง 4 รายการแรก
+            
+            if (previewItems.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">ยังไม่มีเมนู กรุณาเพิ่มในหน้า Admin</p>';
+            } else {
+                container.innerHTML = previewItems.map(item => `
+                    <div class="menu-item">
+                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : ''}
+                        <h4>${item.name}</h4>
+                        <p class="price">${item.price} บาท</p>
+                        <small>${item.location}</small>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
+</body>
+</html>

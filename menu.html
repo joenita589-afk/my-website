@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เมนูอาหารและเครื่องดื่ม - Ripley's Pattaya</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .menu-header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .menu-header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .location-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .location-tab {
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .location-tab.active {
+            background: #e74c3c;
+            color: white;
+        }
+        .location-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .menu-section {
+            display: none;
+        }
+        .menu-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .menu-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .menu-card-content {
+            padding: 20px;
+        }
+        .menu-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .menu-card .price {
+            color: #e74c3c;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .menu-card .description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="th">🇹 ไทย</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="zh">🇳 中文</option>
+        </select>
+    </div>
+
+    <div class="menu-header">
+        <h1><i class="fas fa-utensils"></i> เมนูอาหารและเครื่องดื่ม</h1>
+        <p>อร่อยกับเมนูหลากหลายจากทุกโซน</p>
+    </div>
+
+    <div class="menu-container">
+        <!-- Tabs -->
+        <div class="location-tabs">
+            <button class="location-tab active" onclick="showLocation('scream')">
+                <i class="fas fa-ghost"></i> Scream
+            </button>
+            <button class="location-tab" onclick="showLocation('haunted')">
+                <i class="fas fa-house"></i> บ้านผี
+            </button>
+            <button class="location-tab" onclick="showLocation('hospital')">
+                <i class="fas fa-hospital"></i> โรงพยาบาล
+            </button>
+            <button class="location-tab" onclick="showLocation('pyramid')">
+                <i class="fas fa-monument"></i> พีระมิด
+            </button>
+        </div>
+
+        <!-- Menu Sections -->
+        <div id="scream" class="menu-section active">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">
+                <i class="fas fa-ghost" style="color: #e74c3c;"></i> เมนู Scream in the Dark
+            </h2>
+            <div class="menu-grid" id="screamMenu"></div>
+        </div>
+
+        <div id="haunted" class="menu-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">
+                <i class="fas fa-house" style="color: #8e44ad;"></i> เมนูบ้านผีสิง
+            </h2>
+            <div class="menu-grid" id="hauntedMenu"></div>
+        </div>
+
+        <div id="hospital" class="menu-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">
+                <i class="fas fa-hospital" style="color: #c0392b;"></i> เมนูโรงพยาบาลหลอน
+            </h2>
+            <div class="menu-grid" id="hospitalMenu"></div>
+        </div>
+
+        <div id="pyramid" class="menu-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">
+                <i class="fas fa-monument" style="color: #d35400;"></i> เมนูพีระมิด
+            </h2>
+            <div class="menu-grid" id="pyramidMenu"></div>
+        </div>
+    </div>
+
+    <div class="admin-link">
+        <a href="login.html"><i class="fas fa-cog"></i> Admin</a>
+    </div>
+
+    <script src="js/languages.js"></script>
+    <script>
+        function showLocation(location) {
+            // ซ่อนทุก section
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // เอา active ออกจากทุก tab
+            document.querySelectorAll('.location-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // แสดง section ที่เลือก
+            document.getElementById(location).classList.add('active');
+            
+            // เพิ่ม active ให้ tab ที่กด
+            event.target.classList.add('active');
+            
+            // โหลดเมนู
+            loadMenu(location);
+        }
+
+        function loadMenu(location) {
+            const menuData = JSON.parse(localStorage.getItem('menuData')) || [];
+            const filteredMenu = menuData.filter(item => item.location.toLowerCase() === location);
+            
+            const container = document.getElementById(location + 'Menu');
+            
+            if (filteredMenu.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999; padding: 40px;">ยังไม่มีเมนู กรุณาเพิ่มในหน้า Admin</p>';
+            } else {
+                container.innerHTML = filteredMenu.map(item => `
+                    <div class="menu-card">
+                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height: 200px; background: #ecf0f1;"></div>'}
+                        <div class="menu-card-content">
+                            <h3>${item.name}</h3>
+                            <div class="price">${item.price} บาท</div>
+                            <p class="description">${item.description || ''}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMenu('scream');
+        });
+    </script>
+</body>
+</html>
