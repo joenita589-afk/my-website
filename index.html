@@ -84,12 +84,54 @@
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .lang-select { right: auto; left: 20px; }
         [dir="rtl"] .step { flex-direction: row-reverse; }
+        .nav-toggle { display: none; background: rgba(0,0,0,0.9); border: none; color: white; font-size: 1.5em; padding: 12px 18px; cursor: pointer; width: 100%; text-align: right; }
+        .logo-img { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 15px; display: block; }
+        .logo-icon { width: 90px; height: 90px; font-size: 2.2em; margin: 0 auto 15px; }
+        .attraction-card { text-align: center; cursor: pointer; }
+        .detail-hint { margin-top: 12px; color: var(--primary); font-size: 0.9em; font-weight: 600; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 15px; }
+        .modal-overlay.show { display: flex; }
+        .modal-box { background: white; border-radius: 15px; max-width: 720px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative; animation: fadeIn 0.3s; }
+        .modal-close { position: absolute; top: 12px; right: 12px; background: var(--primary); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.1em; cursor: pointer; z-index: 10; }
+        .modal-box > img, .modal-box img.modal-photo { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        .modal-box video, .modal-box iframe { width: 100%; border-radius: 10px; margin-bottom: 15px; border: 0; }
+        .modal-box h2 { color: var(--dark); margin-bottom: 5px; }
+        .modal-box h4 { color: var(--primary); margin-bottom: 15px; }
+        .modal-box p { color: #555; line-height: 1.8; }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2em; }
-            .nav-container { flex-direction: column; align-items: center; }
+            .hero { padding: 30px 15px; }
+            .hero h1 { font-size: 1.6em; }
+            .hero p { font-size: 1.1em; }
+            .nav-toggle { display: block; }
+            .nav-container { display: none; flex-direction: column; align-items: stretch; padding: 10px 15px; }
+            .nav-container.open { display: flex; }
             .nav-btn { width: 100%; justify-content: center; }
+            .grid { grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+            .card { padding: 18px 15px; }
+            .logo-img { width: 90px; height: 90px; }
+            .logo-icon { width: 70px; height: 70px; font-size: 1.8em; }
+            .card h3 { font-size: 1.05em; }
+            .card h4 { font-size: 0.85em; }
+            .section { padding: 20px 15px; }
+            .modal-box { padding: 20px; max-height: 92vh; }
+            .modal-box iframe { height: 200px; }
+            .menu-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .menu-item-card img, .menu-item-card > div { height: 120px; }
+            .menu-item-info { padding: 12px; }
+            .menu-item-info h4 { font-size: 0.95em; }
+            .menu-price { font-size: 1.2em; }
+            .promo-banner { padding: 20px 15px; }
+            .promo-banner h3 { font-size: 1.5em; }
+            .lang-select { top: 10px; right: 10px; }
+            .lang-select select { padding: 6px 10px; font-size: 12px; }
         }
+        @media (max-width: 420px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+        [dir="rtl"] .nav-toggle { text-align: left; }
+        [dir="rtl"] .modal-close { right: auto; left: 12px; }
     </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -108,7 +150,8 @@
     </div>
 
     <nav class="navbar">
-        <div class="nav-container">
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        <div class="nav-container" id="navContainer">
             <button class="nav-btn active" onclick="showSection('home')">
                 <i class="fas fa-home"></i> <span data-i18n="nav_home">หน้าหลัก</span>
             </button>
@@ -319,6 +362,13 @@
         </div>
     </section>
 
+    <div class="modal-overlay" id="attractionModal" onclick="if(event.target===this)closeAttractionModal()">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeAttractionModal()" aria-label="Close"><i class="fas fa-times"></i></button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
     <script>
         const translations = {
           "th": {
@@ -357,7 +407,8 @@
                     "contact_phone_text": "โทร: +66 (38) 710-294-8<br>แฟ็กซ์: +66 (38) 710-487",
                     "contact_map": "เปิดดูแผนที่บน Google Maps",
                     "admin_login": "เข้าสู่ระบบ",
-                    "admin_error": "รหัสผ่านไม่ถูกต้อง"
+                    "admin_error": "รหัสผ่านไม่ถูกต้อง",
+                    "tap_view": "แตะเพื่อดูรายละเอียด"
           },
           "en": {
                     "nav_home": "Home",
@@ -395,7 +446,8 @@
                     "contact_phone_text": "Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",
                     "contact_map": "View on Google Maps",
                     "admin_login": "Login",
-                    "admin_error": "Incorrect password"
+                    "admin_error": "Incorrect password",
+                    "tap_view": "Tap to view details"
           },
           "zh": {
                     "nav_home": "首页",
@@ -663,7 +715,7 @@
                     "admin_login": "تسجيل الدخول",
                     "admin_error": "كلمة مرور غير صحيحة"
           }
-};;;
+};;
 
         // Fallback translations for other languages (use English as base, then fully override below)
 ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
@@ -690,7 +742,7 @@ Object.assign(translations.zh, {
     contact_phone: "联系方式",
     contact_phone_text: "电话：+66 (38) 710-294-8<br>传真：+66 (38) 710-487",
     contact_map: "在谷歌地图上查看",
-    admin_login: "登录", admin_error: "密码错误"
+    admin_login: "登录", admin_error: "密码错误", tap_view: "点击查看详情"
 });
 
 Object.assign(translations.ru, {
@@ -713,7 +765,7 @@ Object.assign(translations.ru, {
     contact_phone: "Контакты",
     contact_phone_text: "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487",
     contact_map: "Открыть на Google Картах",
-    admin_login: "Войти", admin_error: "Неверный пароль"
+    admin_login: "Войти", admin_error: "Неверный пароль", tap_view: "Нажмите, чтобы подробнее"
 });
 
 Object.assign(translations.hi, {
@@ -736,7 +788,7 @@ Object.assign(translations.hi, {
     contact_phone: "संपर्क माध्यम",
     contact_phone_text: "फोन: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
     contact_map: "गूगल मैप्स पर देखें",
-    admin_login: "लॉगिन", admin_error: "गलत पासवर्ड"
+    admin_login: "लॉगिन", admin_error: "गलत पासवर्ड", tap_view: "विवरण देखने के लिए टैप करें"
 });
 
 Object.assign(translations.he, {
@@ -759,7 +811,7 @@ Object.assign(translations.he, {
     contact_phone: "ערוצי יצירת קשר",
     contact_phone_text: "טלפון: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
     contact_map: "צפייה במפות גוגל",
-    admin_login: "כניסה", admin_error: "סיסמה שגויה"
+    admin_login: "כניסה", admin_error: "סיסמה שגויה", tap_view: "הקש לפרטים"
 });
 
 Object.assign(translations.ja, {
@@ -782,7 +834,7 @@ Object.assign(translations.ja, {
     contact_phone: "お問い合わせ先",
     contact_phone_text: "電話: +66 (38) 710-294-8<br>ファックス: +66 (38) 710-487",
     contact_map: "Googleマップで見る",
-    admin_login: "ログイン", admin_error: "パスワードが間違っています"
+    admin_login: "ログイン", admin_error: "パスワードが間違っています", tap_view: "タップして詳細を見る"
 });
 
 Object.assign(translations.ko, {
@@ -805,7 +857,7 @@ Object.assign(translations.ko, {
     contact_phone: "연락처",
     contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
     contact_map: "구글 지도에서 보기",
-    admin_login: "로그인", admin_error: "비밀번호가 틀렸습니다"
+    admin_login: "로그인", admin_error: "비밀번호가 틀렸습니다", tap_view: "탭하여 상세 보기"
 });
 
 Object.assign(translations.ar, {
@@ -828,7 +880,7 @@ Object.assign(translations.ar, {
     contact_phone: "قنوات الاتصال",
     contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
     contact_map: "عرض على خرائط جوجل",
-    admin_login: "تسجيل الدخول", admin_error: "كلمة مرور غير صحيحة"
+    admin_login: "تسجيل الدخول", admin_error: "كلمة مرور غير صحيحة", tap_view: "اضغط لعرض التفاصيل"
 });
 
         const siteData = {
@@ -849,7 +901,7 @@ Object.assign(translations.ar, {
                                         "desc": "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้",
                                         "icon": "fa-ghost",
                                         "color": "#4B0082",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_06_26_aic88dij8djbb7ejid8bh.jpg",
+                                        "image": "",
                                         "video": ""
                               },
                               {
@@ -858,8 +910,8 @@ Object.assign(translations.ar, {
                                         "desc": "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน",
                                         "icon": "fa-warehouse",
                                         "color": "#2F4F4F",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_06_26_kcfd7b6fgf5hhdf5b6jbk.jpg",
-                                        "video": "https://youtu.be/z8nWmG4aZWQ?si=NvyEpOkZ5GTzTJyN"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส",
@@ -867,8 +919,8 @@ Object.assign(translations.ar, {
                                         "desc": "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย",
                                         "icon": "fa-user",
                                         "color": "#DAA520",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibcek6aakbdajah8kfjia.jpg",
-                                        "video": "https://youtu.be/VIoSJh7JBFQ?si=9enRbpC-db8wle15"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "มหัศจรรย์เขาวงกต",
@@ -876,8 +928,8 @@ Object.assign(translations.ar, {
                                         "desc": "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน อินฟินนิตี้ (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ เอฟเฟค พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด",
                                         "icon": "fa-project-diagram",
                                         "color": "#FF6347",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_06_26_ibi8a6a77bf5b8bhhbb7i.jpg",
-                                        "video": "https://youtu.be/dWjN47QT7Ko?si=ImkOLwKuD5I4nKn7"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "เกมส์ตะลุยเลเซอร์",
@@ -885,7 +937,7 @@ Object.assign(translations.ar, {
                                         "desc": "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องลำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น",
                                         "icon": "fa-bullseye",
                                         "color": "#00CED1",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_06_26_g9iah5gf88d795ekdehd7.jpg",
+                                        "image": "",
                                         "video": ""
                               },
                               {
@@ -894,8 +946,8 @@ Object.assign(translations.ar, {
                                         "desc": "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้",
                                         "icon": "fa-hospital",
                                         "color": "#8B0000",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_06_26_gafca9ghj75gaj96fkgg7.jpg",
-                                        "video": "https://youtu.be/cY4F1hjeCKw?si=5R3Jas6nz5SGcTqG"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "พีระมิดที่สาบสูญ",
@@ -903,8 +955,8 @@ Object.assign(translations.ar, {
                                         "desc": "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ",
                                         "icon": "fa-monument",
                                         "color": "#D2691E",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2024_09_18_bggccce5ba5kaacbadaj8.jpg",
-                                        "video": "https://youtu.be/ElxurmCgvWs?si=_SSvN9vK5GsdgEy2"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "เกมอินเตอร์แอคทีฟสุดล้ำ",
@@ -912,8 +964,8 @@ Object.assign(translations.ar, {
                                         "desc": "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว",
                                         "icon": "fa-gamepad",
                                         "color": "#9370DB",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2025_05_13_b5a5d9h5ab9eba6ffa65j.jpg",
-                                        "video": "https://youtu.be/DA6btx73lDY?si=9bFx9g7Ih7TCwSSy"
+                                        "image": "",
+                                        "video": ""
                               },
                               {
                                         "title": "หนีตายสวนสยอง",
@@ -921,7 +973,7 @@ Object.assign(translations.ar, {
                                         "desc": "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด",
                                         "icon": "fa-skull",
                                         "color": "#556B2F",
-                                        "image": "https://ripleysthailand.com/assets/uploads/2026_08_07_eiak7bghbcedjca7jegbh.png",
+                                        "image": "",
                                         "video": ""
                               }
                     ],
@@ -1716,13 +1768,21 @@ Object.assign(translations.ar, {
                               }
                     ]
           }
-};;;
+};;
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
         function getAttractions(lang) {
             // ดึงข้อมูลตามภาษา ถ้าไม่มีให้ fallback เป็นภาษาอังกฤษ (สำหรับแสดงผลหน้าเว็บ)
-            return siteData.attractions[lang] || siteData.attractions['en'] || [];
+            const items = siteData.attractions[lang] || siteData.attractions['en'] || [];
+            // โลโก้/รูปภาพ/วิดีโอใช้ร่วมกันทุกภาษา: ถ้าภาษานั้นไม่มี ให้ fallback จากชุดข้อมูลภาษาไทย
+            const base = siteData.attractions['th'] || [];
+            return items.map((item, i) => ({
+                ...item,
+                logo:  item.logo  || (base[i] ? base[i].logo  : '') || '',
+                image: item.image || (base[i] ? base[i].image : '') || '',
+                video: item.video || (base[i] ? base[i].video : '') || ''
+            }));
         }
 
         function ensureAttractionsLang(lang) {
@@ -1779,20 +1839,46 @@ Object.assign(translations.ar, {
 
         function renderAttractions() {
             const attractions = getAttractions(currentLang);
+            const t = translations[currentLang] || translations['en'];
             const grid = document.getElementById('attractionsGrid');
-            grid.innerHTML = attractions.map(item => `
-                <div class="card" style="border-top-color: ${item.color}">
-                    ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
-                    ${item.video ? (isDirectVideoFile(item.video)
-                        ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>`
-                        : `<iframe src="${getVideoEmbedUrl(item.video)}" style="width:100%; height:200px; border:0; border-radius:10px; margin-bottom:15px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`) : ''}
-                    <div class="card-icon" style="background: ${item.color}"><i class="fas ${item.icon}"></i></div>
+            // หน้าแรกแสดงเป็นการ์ดโลโก้ของแต่ละเครื่องเล่น แตะเพื่อเปิดดูรายละเอียด/รูปภาพ/วิดีโอ
+            grid.innerHTML = attractions.map((item, i) => `
+                <div class="card attraction-card" style="border-top-color: ${item.color}" onclick="openAttractionDetail(${i})" role="button">
+                    ${item.logo
+                        ? `<img class="logo-img" src="${item.logo}" alt="${item.title}">`
+                        : `<div class="card-icon logo-icon" style="background: ${item.color}"><i class="fas ${item.icon}"></i></div>`}
                     <h3>${item.title}</h3>
                     ${item.subtitle ? `<h4>${item.subtitle}</h4>` : ''}
-                    <p>${item.desc}</p>
+                    <div class="detail-hint"><i class="fas fa-hand-pointer"></i> ${t.tap_view || 'Tap to view details'}</div>
                 </div>
             `).join('');
         }
+
+        function openAttractionDetail(index) {
+            const item = getAttractions(currentLang)[index];
+            if (!item) return;
+            document.getElementById('modalContent').innerHTML = `
+                ${item.image ? `<img class="modal-photo" src="${item.image}" alt="${item.title}">` : ''}
+                ${item.video ? (isDirectVideoFile(item.video)
+                    ? `<video src="${item.video}" controls style="height:240px;"></video>`
+                    : `<iframe src="${getVideoEmbedUrl(item.video)}" height="240" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`) : ''}
+                <h2>${item.title}</h2>
+                ${item.subtitle ? `<h4>${item.subtitle}</h4>` : ''}
+                <p>${item.desc}</p>
+            `;
+            document.getElementById('attractionModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAttractionModal() {
+            document.getElementById('attractionModal').classList.remove('show');
+            document.getElementById('modalContent').innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeAttractionModal();
+        });
 
         function renderMenu() {
             const t = translations[currentLang] || translations['en'];
@@ -1827,8 +1913,13 @@ Object.assign(translations.ar, {
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             event.target.closest('.nav-btn').classList.add('active');
+            document.getElementById('navContainer').classList.remove('open');
             if (id === 'menu') renderMenu();
             if (id === 'home') renderAttractions();
+        }
+
+        function toggleNav() {
+            document.getElementById('navContainer').classList.toggle('open');
         }
 
         function checkAdmin() {
@@ -1906,7 +1997,8 @@ Object.assign(translations.ar, {
             if (noteEl) {
                 noteEl.innerHTML = `<i class="fas fa-language"></i> กำลังแก้ไขข้อมูลของภาษา: <strong>${langNames[currentLang] || currentLang}</strong>` +
                     (!hadLangBefore ? ` (ยังไม่เคยมีข้อมูลภาษานี้ ระบบคัดลอกจากภาษาอังกฤษมาให้เริ่มแก้ไข)` : '') +
-                    `<br>สลับภาษาที่มุมขวาบนเพื่อแก้ไขเนื้อหาของภาษาอื่น`;
+                    `<br>สลับภาษาที่มุมขวาบนเพื่อแก้ไขเนื้อหาของภาษาอื่น` +
+                    `<br><i class="fas fa-photo-video"></i> โลโก้ / รูปภาพ / วิดีโอ ใช้ร่วมกันทุกภาษา แก้ครั้งเดียวมีผลทุกภาษา`;
             }
             const container = document.getElementById('attractionsEditor');
             container.innerHTML = attractions.map((item, index) => `
@@ -1933,6 +2025,11 @@ Object.assign(translations.ar, {
                         <input type="color" value="${item.color}" onchange="updateAttraction(${index}, 'color', this.value)">
                     </div>
                     <div class="form-group">
+                        <label>โลโก้ URL (แสดงบนหน้าแรก)</label>
+                        <input type="text" value="${item.logo || ''}" onchange="updateAttraction(${index}, 'logo', this.value)" placeholder="https://example.com/logo.png">
+                        ${item.logo ? `<img src="${item.logo}" class="media-preview" style="object-fit:contain; background:#f8f9fa;">` : ''}
+                    </div>
+                    <div class="form-group">
                         <label>รูปภาพ URL</label>
                         <input type="text" value="${item.image}" onchange="updateAttraction(${index}, 'image', this.value)" placeholder="https://example.com/image.jpg">
                         ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
@@ -1954,6 +2051,14 @@ Object.assign(translations.ar, {
         function updateAttraction(index, field, value) {
             const attractions = ensureAttractionsLang(currentLang);
             attractions[index][field] = value;
+            // โลโก้/รูปภาพ/วิดีโอใช้ร่วมกันทุกภาษา: อัปเดตทุกชุดภาษาให้ค่าเดียวกัน
+            if (field === 'logo' || field === 'image' || field === 'video') {
+                Object.keys(siteData.attractions).forEach(l => {
+                    if (siteData.attractions[l] && siteData.attractions[l][index]) {
+                        siteData.attractions[l][index][field] = value;
+                    }
+                });
+            }
             renderAttractionsEditor();
             renderAttractions();
         }
@@ -1966,8 +2071,13 @@ Object.assign(translations.ar, {
                 desc: "รายละเอียด...",
                 icon: "fa-star",
                 color: "#3498db",
+                logo: "",
                 image: "",
                 video: ""
+            });
+            // เพิ่มช่องโลโก้ว่างให้ทุกภาษาด้วย เพื่อให้โครงสร้างตรงกัน
+            Object.keys(siteData.attractions).forEach(l => {
+                if (siteData.attractions[l]) siteData.attractions[l].forEach(a => { if (a.logo === undefined) a.logo = ''; });
             });
             renderAttractionsEditor();
         }
