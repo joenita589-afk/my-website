@@ -9,8 +9,9 @@
         :root { --primary: #e94560; --secondary: #ffd700; --dark: #1a1a2e; --light: #f8f9fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #333; line-height: 1.6; }
-        .lang-select { position: fixed; top: 20px; right: 20px; z-index: 1000; }
-        .lang-select select { padding: 10px 15px; border-radius: 25px; border: none; background: white; font-size: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .navbar { position: sticky; }
+        .lang-select { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); z-index: 1000; }
+        .lang-select select { padding: 8px 14px; border-radius: 25px; border: none; background: white; font-size: 13px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 46vw; }
         .navbar { background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 999; border-bottom: 2px solid var(--primary); }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; flex-wrap: wrap; padding: 15px 20px; gap: 10px; }
         .nav-btn { background: none; border: none; color: white; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 16px; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -85,7 +86,7 @@
         .tab.active { background: var(--primary); color: white; }
         .lang-editing-note { background: #e7f3ff; border: 1px solid #b6daff; color: #084298; padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em; }
         [dir="rtl"] { text-align: right; }
-        [dir="rtl"] .lang-select { right: auto; left: 20px; }
+        [dir="rtl"] .lang-select { right: auto; left: 12px; }
         [dir="rtl"] .step { flex-direction: row-reverse; }
         .nav-toggle { display: none; background: rgba(0,0,0,0.9); border: none; color: white; font-size: 1.5em; padding: 12px 18px; cursor: pointer; width: 100%; text-align: right; }
         .logo-img { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 15px; display: block; }
@@ -126,8 +127,6 @@
             .menu-price { font-size: 1.2em; }
             .promo-banner { padding: 20px 15px; }
             .promo-banner h3 { font-size: 1.5em; }
-            .lang-select { top: 10px; right: 10px; }
-            .lang-select select { padding: 6px 10px; font-size: 12px; }
         }
         @media (max-width: 420px) {
             .grid { grid-template-columns: 1fr; }
@@ -136,9 +135,12 @@
         [dir="rtl"] .modal-close { right: auto; left: 12px; }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
+    <nav class="navbar">
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
             <option value="th">🇹🇭 ไทย</option>
@@ -153,8 +155,6 @@
         </select>
     </div>
 
-    <nav class="navbar">
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu"><i class="fas fa-bars"></i></button>
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" onclick="showSection('home')">
                 <i class="fas fa-home"></i> <span data-i18n="nav_home">หน้าหลัก</span>
@@ -292,6 +292,7 @@
                 <button class="tab" onclick="showAdminTab('attractions')">🎢 สถานที่</button>
                 <button class="tab" onclick="showAdminTab('menu')">🍽️ เมนู</button>
                 <button class="tab" onclick="showAdminTab('content')">📝 เนื้อหา</button>
+                <button class="tab" onclick="showAdminTab('coupon')">🎟️ คูปอง</button>
             </div>
 
             <div id="adminTabGithub" class="admin-section">
@@ -341,6 +342,15 @@
                 <button class="btn btn-success" onclick="addMenuItem()">
                     <i class="fas fa-plus"></i> เพิ่มเมนูใหม่
                 </button>
+                <button class="btn" onclick="saveAllChanges()" style="margin-top: 20px;">
+                    <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลงทั้งหมดไปยัง GitHub
+                </button>
+            </div>
+
+            <div id="adminTabCoupon" class="admin-section" style="display:none;">
+                <h3><i class="fas fa-ticket-alt"></i> จัดการหน้าคูปอง</h3>
+                <div id="couponLangNote" class="lang-editing-note"></div>
+                <div id="couponEditor"></div>
                 <button class="btn" onclick="saveAllChanges()" style="margin-top: 20px;">
                     <i class="fas fa-save"></i> บันทึกการเปลี่ยนแปลงทั้งหมดไปยัง GitHub
                 </button>
@@ -1936,6 +1946,10 @@ Object.assign(translations.ar, {
             if (attractionsTab && attractionsTab.style.display !== 'none') {
                 renderAttractionsEditor();
             }
+            const couponTab = document.getElementById('adminTabCoupon');
+            if (couponTab && couponTab.style.display !== 'none') {
+                renderCouponEditor();
+            }
         }
 
         function renderAttractions() {
@@ -2023,6 +2037,7 @@ Object.assign(translations.ar, {
                 renderAttractionsEditor();
                 renderMenuEditor();
                 renderContentEditor();
+                renderCouponEditor();
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }
@@ -2040,6 +2055,7 @@ Object.assign(translations.ar, {
             document.getElementById('adminTab' + tab.charAt(0).toUpperCase() + tab.slice(1)).style.display = 'block';
             event.target.classList.add('active');
             if (tab === 'attractions') renderAttractionsEditor();
+            if (tab === 'coupon') renderCouponEditor();
         }
 
         function loadGithubConfig() {
@@ -2262,6 +2278,45 @@ Object.assign(translations.ar, {
                 siteData.menu[category].splice(index, 1);
                 renderMenuEditor();
             }
+        }
+
+        function renderCouponEditor() {
+            const langNames = { th: 'ไทย', en: 'English', zh: '中文', ru: 'Русский', hi: 'हिन्दी', he: 'עברית', ja: '日本語', ko: '한국어', ar: 'العربية' };
+            const t = translations[currentLang] || translations['en'];
+            const fields = [
+                ['coupon_title', 'หัวข้อหน้าคูปอง'],
+                ['coupon_get', 'หัวข้อ: วิธีการรับคูปอง'],
+                ['coupon_desc', 'คำอธิบายใต้หัวข้อรับคูปอง'],
+                ['coupon_laser_title', 'ชื่อกิจกรรมเลเซอร์'],
+                ['coupon_laser', 'รายละเอียดส่วนลดเลเซอร์'],
+                ['coupon_scream_title', 'ชื่อกิจกรรม Scream in the Dark'],
+                ['coupon_scream', 'รายละเอียดส่วนลด Scream in the Dark'],
+                ['coupon_how', 'หัวข้อ: วิธีใช้คูปอง'],
+                ['coupon_step1', 'ขั้นตอนที่ 1'],
+                ['coupon_step2', 'ขั้นตอนที่ 2'],
+                ['coupon_step3', 'ขั้นตอนที่ 3'],
+                ['coupon_step4', 'ขั้นตอนที่ 4']
+            ];
+            const noteEl = document.getElementById('couponLangNote');
+            if (noteEl) {
+                noteEl.innerHTML = `<i class="fas fa-language"></i> กำลังแก้ไขข้อความของภาษา: <strong>${langNames[currentLang] || currentLang}</strong>` +
+                    `<br>สลับภาษาที่มุมขวาบนเพื่อแก้ไขเนื้อหาของภาษาอื่น (ตัวเลือกภาษาอยู่ในแถบเมนูด้านบน)`;
+            }
+            document.getElementById('couponEditor').innerHTML = fields.map(([key, label]) => `
+                <div class="form-group">
+                    <label>${label} <small style="color:#999;">(${key})</small></label>
+                    <input type="text" value="${(t[key] || '').replace(/"/g, '&quot;')}" onchange="updateCouponText('${key}', this.value)">
+                </div>
+            `).join('');
+        }
+
+        function updateCouponText(key, value) {
+            if (!translations[currentLang]) translations[currentLang] = {};
+            translations[currentLang][key] = value;
+            const t = translations[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                if (el.getAttribute('data-i18n') === key && t[key]) el.innerHTML = t[key];
+            });
         }
 
         function renderContentEditor() {
