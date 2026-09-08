@@ -363,81 +363,171 @@
             }
         };
 
-        // Fallback translations for other languages (use English as base)
-        ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
-            translations[lang] = { ...translations.en };
-        });
+        // Fallback translations for other languages (use English as base, then fully override below)
+['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
+    translations[lang] = { ...translations.en };
+});
 
-        // Custom translations for specific languages
-        translations.zh.tagline = "信不信由你！";
-        translations.zh.nav_home = "首页";
-        translations.zh.nav_coupon = "优惠券";
-        translations.zh.nav_menu = "菜单";
-        translations.zh.nav_contact = "联系我们";
-        translations.zh.menu_title = "餐饮菜单";
-        translations.zh.menu_snacks = "小吃";
-        translations.zh.menu_drinks = "饮料";
-        translations.zh.baht = "泰铢";
+Object.assign(translations.zh, {
+    nav_home: "首页", nav_coupon: "优惠券", nav_menu: "菜单", nav_contact: "联系我们",
+    tagline: "信不信由你！",
+    coupon_title: "特别折扣优惠券", coupon_get: "如何获取优惠券",
+    coupon_desc: "参加精彩活动即可立即获得折扣优惠券！",
+    coupon_laser_title: "激光任务游戏", coupon_laser: "享受餐饮9折优惠",
+    coupon_scream_title: "黑暗尖叫", coupon_scream: "享受餐饮85折优惠",
+    coupon_how: "如何使用优惠券",
+    coupon_step1: "完成激光任务或黑暗尖叫活动",
+    coupon_step2: "在该区域从工作人员处领取折扣优惠券",
+    coupon_step3: "付款前在小吃柜台出示优惠券",
+    coupon_step4: "按优惠券标示金额立即获得折扣",
+    menu_title: "餐饮菜单", menu_snacks: "小吃", menu_drinks: "饮料", baht: "泰铢",
+    contact_title: "联系我们", contact_hours: "营业时间",
+    contact_hours_time: "上午11:00 - 晚上10:00<br>表演11:30开始",
+    contact_address: "地址",
+    contact_address_text: "Minor Sky Rider有限公司<br>218号10村海滨路<br>春武里府邦拉蒙县农布亚区 20150",
+    contact_phone: "联系方式",
+    contact_phone_text: "电话：+66 (38) 710-294-8<br>传真：+66 (38) 710-487",
+    contact_map: "在谷歌地图上查看",
+    admin_login: "登录", admin_error: "密码错误"
+});
 
-        translations.ru.tagline = "Хотите — верьте, хотите — нет!";
-        translations.ru.nav_home = "Главная";
-        translations.ru.nav_coupon = "Купоны";
-        translations.ru.nav_menu = "Меню";
-        translations.ru.nav_contact = "Контакты";
-        translations.ru.menu_title = "Меню еды и напитков";
-        translations.ru.menu_snacks = "Закуски";
-        translations.ru.menu_drinks = "Напитки";
-        translations.ru.baht = "бат";
+Object.assign(translations.ru, {
+    nav_home: "Главная", nav_coupon: "Купоны", nav_menu: "Меню", nav_contact: "Контакты",
+    tagline: "Хотите — верьте, хотите — нет!",
+    coupon_title: "Специальные купоны на скидку", coupon_get: "Как получить купон",
+    coupon_desc: "Примите участие в наших увлекательных мероприятиях и получите купон на скидку мгновенно!",
+    coupon_laser_title: "Лазерная миссия", coupon_laser: "Скидка 10% на еду и напитки",
+    coupon_scream_title: "Крик во тьме", coupon_scream: "Скидка 15% на еду и напитки",
+    coupon_how: "Как использовать купон",
+    coupon_step1: "Пройдите Лазерную миссию или Крик во тьме",
+    coupon_step2: "Получите купон на скидку у персонала в зоне",
+    coupon_step3: "Предъявите купон на стойке закусок перед оплатой",
+    coupon_step4: "Получите мгновенную скидку согласно купону",
+    menu_title: "Меню еды и напитков", menu_snacks: "Закуски", menu_drinks: "Напитки", baht: "бат",
+    contact_title: "Свяжитесь с нами", contact_hours: "Часы работы",
+    contact_hours_time: "11:00 - 22:00<br>Начало шоу в 11:30",
+    contact_address: "Адрес",
+    contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Нонг Прыа, Банг Ламунг, Чонбури 20150",
+    contact_phone: "Контакты",
+    contact_phone_text: "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487",
+    contact_map: "Открыть на Google Картах",
+    admin_login: "Войти", admin_error: "Неверный пароль"
+});
 
-        translations.hi.tagline = "विश्वास करो या नहीं!";
-        translations.hi.nav_home = "होम";
-        translations.hi.nav_coupon = "कूपन";
-        translations.hi.nav_menu = "मेनू";
-        translations.hi.nav_contact = "संपर्क";
-        translations.hi.menu_title = "भोजन और पेय मेनू";
-        translations.hi.menu_snacks = "नाश्ते";
-        translations.hi.menu_drinks = "पेय";
-        translations.hi.baht = "बाht";
+Object.assign(translations.hi, {
+    nav_home: "होम", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क",
+    tagline: "विश्वास करो या नहीं!",
+    coupon_title: "विशेष छूट कूपन", coupon_get: "कूपन कैसे प्राप्त करें",
+    coupon_desc: "हमारी रोमांचक गतिविधियों में भाग लें और तुरंत छूट कूपन पाएं!",
+    coupon_laser_title: "लेज़र मिशन गेम", coupon_laser: "भोजन और पेय पर 10% छूट पाएं",
+    coupon_scream_title: "स्क्रीम इन द डार्क", coupon_scream: "भोजन और पेय पर 15% छूट पाएं",
+    coupon_how: "कूपन का उपयोग कैसे करें",
+    coupon_step1: "लेज़र मिशन या स्क्रीम इन द डार्क गतिविधि पूरी करें",
+    coupon_step2: "उस ज़ोन के स्टाफ से छूट कूपन प्राप्त करें",
+    coupon_step3: "भुगतान से पहले स्नैक काउंटर पर कूपन दिखाएं",
+    coupon_step4: "कूपन पर बताई गई राशि के अनुसार तुरंत छूट पाएं",
+    menu_title: "भोजन और पेय मेनू", menu_snacks: "नाश्ते", menu_drinks: "पेय", baht: "बात",
+    contact_title: "हमसे संपर्क करें", contact_hours: "खुलने का समय",
+    contact_hours_time: "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू होता है",
+    contact_address: "पता",
+    contact_address_text: "माइनर स्काई राइडर कं., लिमिटेड<br>218 मू 10, बीच रोड<br>नोंग प्रुए, बैंग ला मुंग, चोनबुरी 20150",
+    contact_phone: "संपर्क माध्यम",
+    contact_phone_text: "फोन: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
+    contact_map: "गूगल मैप्स पर देखें",
+    admin_login: "लॉगिन", admin_error: "गलत पासवर्ड"
+});
 
-        translations.he.tagline = "תאמינו או לא!";
-        translations.he.nav_home = "דף הבית";
-        translations.he.nav_coupon = "קופונים";
-        translations.he.nav_menu = "תפריט";
-        translations.he.nav_contact = "צור קשר";
-        translations.he.menu_title = "תפריט אוכל ומשקאות";
-        translations.he.menu_snacks = "חטיפים";
-        translations.he.menu_drinks = "משקאות";
-        translations.he.baht = "באט";
+Object.assign(translations.he, {
+    nav_home: "דף הבית", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר",
+    tagline: "תאמינו או לא!",
+    coupon_title: "קופוני הנחה מיוחדים", coupon_get: "כיצד לקבל קופון",
+    coupon_desc: "השתתפו בפעילויות המרגשות שלנו וקבלו קופון הנחה מיידי!",
+    coupon_laser_title: "משימת הלייזר", coupon_laser: "קבלו 10% הנחה על אוכל ומשקאות",
+    coupon_scream_title: "צרחות באפלה", coupon_scream: "קבלו 15% הנחה על אוכל ומשקאות",
+    coupon_how: "כיצד להשתמש בקופון",
+    coupon_step1: "השלימו את משימת הלייזר או צרחות באפלה",
+    coupon_step2: "קבלו קופון הנחה מהצוות באזור",
+    coupon_step3: "הציגו את הקופון בדוכן החטיפים לפני התשלום",
+    coupon_step4: "קבלו הנחה מיידית לפי הערך בקופון",
+    menu_title: "תפריט אוכל ומשקאות", menu_snacks: "חטיפים", menu_drinks: "משקאות", baht: "באט",
+    contact_title: "צור קשר", contact_hours: "שעות פתיחה",
+    contact_hours_time: "11:00 - 22:00<br>ההופעה מתחילה ב-11:30",
+    contact_address: "כתובת",
+    contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>נונג פרואה, בנג לאמונג, צ'ונבורי 20150",
+    contact_phone: "ערוצי יצירת קשר",
+    contact_phone_text: "טלפון: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
+    contact_map: "צפייה במפות גוגל",
+    admin_login: "כניסה", admin_error: "סיסמה שגויה"
+});
 
-        translations.ja.tagline = "信じられない！";
-        translations.ja.nav_home = "ホーム";
-        translations.ja.nav_coupon = "クーポン";
-        translations.ja.nav_menu = "メニュー";
-        translations.ja.nav_contact = "お問い合わせ";
-        translations.ja.menu_title = "飲食メニュー";
-        translations.ja.menu_snacks = "スナック";
-        translations.ja.menu_drinks = "飲み物";
-        translations.ja.baht = "バーツ";
+Object.assign(translations.ja, {
+    nav_home: "ホーム", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ",
+    tagline: "信じられない！",
+    coupon_title: "特別割引クーポン", coupon_get: "クーポンの入手方法",
+    coupon_desc: "楽しいアクティビティに参加して、その場で割引クーポンをゲットしよう！",
+    coupon_laser_title: "レーザーミッションゲーム", coupon_laser: "飲食10%割引",
+    coupon_scream_title: "スクリーム・イン・ザ・ダーク", coupon_scream: "飲食15%割引",
+    coupon_how: "クーポンの使い方",
+    coupon_step1: "レーザーミッションまたはスクリーム・イン・ザ・ダークを完了する",
+    coupon_step2: "各エリアのスタッフから割引クーポンを受け取る",
+    coupon_step3: "会計前にスナックカウンターでクーポンを提示する",
+    coupon_step4: "クーポン記載の割引がその場で適用されます",
+    menu_title: "飲食メニュー", menu_snacks: "スナック", menu_drinks: "飲み物", baht: "バーツ",
+    contact_title: "お問い合わせ", contact_hours: "営業時間",
+    contact_hours_time: "午前11:00 ～ 午後10:00<br>ショー開始 午前11:30",
+    contact_address: "住所",
+    contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>ノーンプルー、バーンラムング、チョンブリー 20150",
+    contact_phone: "お問い合わせ先",
+    contact_phone_text: "電話: +66 (38) 710-294-8<br>ファックス: +66 (38) 710-487",
+    contact_map: "Googleマップで見る",
+    admin_login: "ログイン", admin_error: "パスワードが間違っています"
+});
 
-        translations.ko.tagline = "믿거나 말거나!";
-        translations.ko.nav_home = "홈";
-        translations.ko.nav_coupon = "쿠폰";
-        translations.ko.nav_menu = "메뉴";
-        translations.ko.nav_contact = "연락처";
-        translations.ko.menu_title = "음식 및 음료 메뉴";
-        translations.ko.menu_snacks = "스낵";
-        translations.ko.menu_drinks = "음료";
-        translations.ko.baht = "바트";
+Object.assign(translations.ko, {
+    nav_home: "홈", nav_coupon: "쿠폰", nav_menu: "메뉴", nav_contact: "연락처",
+    tagline: "믿거나 말거나!",
+    coupon_title: "특별 할인 쿠폰", coupon_get: "쿠폰 받는 방법",
+    coupon_desc: "신나는 액티비티에 참여하고 즉시 할인 쿠폰을 받아보세요!",
+    coupon_laser_title: "레이저 미션 게임", coupon_laser: "음식 및 음료 10% 할인",
+    coupon_scream_title: "스크림 인 더 다크", coupon_scream: "음식 및 음료 15% 할인",
+    coupon_how: "쿠폰 사용 방법",
+    coupon_step1: "레이저 미션 또는 스크림 인 더 다크 완료하기",
+    coupon_step2: "해당 구역 직원에게서 할인 쿠폰 받기",
+    coupon_step3: "결제 전 스낵 카운터에서 쿠폰 제시하기",
+    coupon_step4: "쿠폰에 표시된 즉시 할인 받기",
+    menu_title: "음식 및 음료 메뉴", menu_snacks: "스낵", menu_drinks: "음료", baht: "바트",
+    contact_title: "문의하기", contact_hours: "운영 시간",
+    contact_hours_time: "오전 11:00 - 오후 10:00<br>쇼는 오전 11:30에 시작",
+    contact_address: "주소",
+    contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>농프루에, 방라뭉, 촌부리 20150",
+    contact_phone: "연락처",
+    contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
+    contact_map: "구글 지도에서 보기",
+    admin_login: "로그인", admin_error: "비밀번호가 틀렸습니다"
+});
 
-        translations.ar.tagline = "صدق أو لا تصدق!";
-        translations.ar.nav_home = "الرئيسية";
-        translations.ar.nav_coupon = "القسائم";
-        translations.ar.nav_menu = "القائمة";
-        translations.ar.nav_contact = "اتصل بنا";
-        translations.ar.menu_title = "قائمة الطعام والمشروبات";
-        translations.ar.menu_snacks = "الوجبات الخفيفة";
-        translations.ar.menu_drinks = "المشروبات";
-        translations.ar.baht = "بات";
+Object.assign(translations.ar, {
+    nav_home: "الرئيسية", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا",
+    tagline: "صدق أو لا تصدق!",
+    coupon_title: "قسائم خصم خاصة", coupon_get: "كيفية الحصول على القسيمة",
+    coupon_desc: "شارك في أنشطتنا الممتعة واحصل على قسيمة خصم فورية!",
+    coupon_laser_title: "لعبة مهمة الليزر", coupon_laser: "احصل على خصم 10% على الطعام والمشروبات",
+    coupon_scream_title: "صرخة في الظلام", coupon_scream: "احصل على خصم 15% على الطعام والمشروبات",
+    coupon_how: "كيفية استخدام القسيمة",
+    coupon_step1: "أكمل نشاط مهمة الليزر أو صرخة في الظلام",
+    coupon_step2: "احصل على قسيمة الخصم من الموظف في المنطقة",
+    coupon_step3: "اعرض القسيمة عند كاونتر الوجبات الخفيفة قبل الدفع",
+    coupon_step4: "احصل على الخصم فورًا حسب القيمة الموضحة في القسيمة",
+    menu_title: "قائمة الطعام والمشروبات", menu_snacks: "الوجبات الخفيفة", menu_drinks: "المشروبات", baht: "بات",
+    contact_title: "اتصل بنا", contact_hours: "ساعات العمل",
+    contact_hours_time: "11:00 صباحًا - 10:00 مساءً<br>يبدأ العرض الساعة 11:30 صباحًا",
+    contact_address: "العنوان",
+    contact_address_text: "شركة ماينور سكاي رايدر المحدودة<br>218 حي 10، طريق الشاطئ<br>نونغ برو، بانغ لامونغ، تشونبوري 20150",
+    contact_phone: "قنوات الاتصال",
+    contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
+    contact_map: "عرض على خرائط جوجل",
+    admin_login: "تسجيل الدخول", admin_error: "كلمة مرور غير صحيحة"
+});
 
         const siteData = {
             attractions: {
