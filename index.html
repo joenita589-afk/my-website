@@ -95,14 +95,14 @@
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
             <option value="th">🇹🇭 ไทย</option>
-            <option value="en">🇧 English</option>
+            <option value="en">🇬 English</option>
             <option value="zh">🇨🇳 中文</option>
-            <option value="ru">🇷🇺 Русский</option>
+            <option value="ru">🇷 Русский</option>
             <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="he">🇮🇱 עברית</option>
-            <option value="ja">🇵 日本語</option>
+            <option value="he">🇱 עברית</option>
+            <option value="ja">🇯🇵 日本語</option>
             <option value="ko">🇰🇷 한국어</option>
-            <option value="ar">🇦 العربية</option>
+            <option value="ar">🇸 العربية</option>
         </select>
     </div>
 
@@ -196,7 +196,7 @@
                 <div class="flavor-tag">🍇 GRAPE</div>
                 <div class="flavor-tag">🍵 GREEN TEA</div>
                 <div class="flavor-tag">🍓 MIX BERRY</div>
-                <div class="flavor-tag">🍓 STRAWBERRY</div>
+                <div class="flavor-tag"> STRAWBERRY</div>
             </div>
             <div style="text-align: center; margin-top: 20px;">
                 <div class="menu-price" style="font-size: 2em; color: var(--primary);">59 <span data-i18n="baht">บาท</span></div>
@@ -246,7 +246,7 @@
             </div>
 
             <div class="tabs">
-                <button class="tab active" onclick="showAdminTab('github')"> ตั้งค่า GitHub</button>
+                <button class="tab active" onclick="showAdminTab('github')">🔧 ตั้งค่า GitHub</button>
                 <button class="tab" onclick="showAdminTab('attractions')">🎢 สถานที่</button>
                 <button class="tab" onclick="showAdminTab('menu')">🍽️ เมนู</button>
                 <button class="tab" onclick="showAdminTab('content')">📝 เนื้อหา</button>
@@ -438,18 +438,32 @@
         translations.ar.baht = "بات";
 
         const siteData = {
-            attractions: [
-                { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
-                { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082", image: "", video: "" },
-                { title: "โกดังผีสิง", subtitle: "เมื่อฝันร้ายมาเยือน", desc: "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน", icon: "fa-warehouse", color: "#2F4F4F", image: "", video: "" },
-                { title: "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส", subtitle: "ความอัศจรรย์ ที่คุณต้องตะลึง", desc: "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย", icon: "fa-user", color: "#DAA520", image: "", video: "" },
-                { title: "มหัศจรรย์เขาวงกต", subtitle: "เปิดโลกแห่งจินตนาการ", desc: "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน อินฟินนิตี้ (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ เอฟเฟค พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด", icon: "fa-project-diagram", color: "#FF6347", image: "", video: "" },
-                { title: "เกมส์ตะลุยเลเซอร์", subtitle: "Mission Impossible", desc: "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องลำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น", icon: "fa-bullseye", color: "#00CED1", image: "", video: "" },
-                { title: "โรงพยาบาลหลอน", subtitle: "The Horror Hospital", desc: "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้", icon: "fa-hospital", color: "#8B0000", image: "", video: "" },
-                { title: "พีระมิดที่สาบสูญ", subtitle: "Lost Pyramid", desc: "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ", icon: "fa-monument", color: "#D2691E", image: "", video: "" },
-                { title: "เกมอินเตอร์แอคทีฟสุดล้ำ", subtitle: "Interactive Gaming", desc: "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว", icon: "fa-gamepad", color: "#9370DB", image: "", video: "" },
-                { title: "หนีตายสวนสยอง", subtitle: "Escape the Haunted Garden", desc: "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด", icon: "fa-skull", color: "#556B2F", image: "", video: "" }
-            ],
+            attractions: {
+                th: [
+                    { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
+                    { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082", image: "", video: "" },
+                    { title: "โกดังผีสิง", subtitle: "เมื่อฝันร้ายมาเยือน", desc: "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน", icon: "fa-warehouse", color: "#2F4F4F", image: "", video: "" },
+                    { title: "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส", subtitle: "ความอัศจรรย์ ที่คุณต้องตะลึง", desc: "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย", icon: "fa-user", color: "#DAA520", image: "", video: "" },
+                    { title: "มหัศจรรย์เขาวงกต", subtitle: "เปิดโลกแห่งจินตนาการ", desc: "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน อินฟินนิตี้ (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ เอฟเฟค พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด", icon: "fa-project-diagram", color: "#FF6347", image: "", video: "" },
+                    { title: "เกมส์ตะลุยเลเซอร์", subtitle: "Mission Impossible", desc: "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องลำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น", icon: "fa-bullseye", color: "#00CED1", image: "", video: "" },
+                    { title: "โรงพยาบาลหลอน", subtitle: "The Horror Hospital", desc: "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้", icon: "fa-hospital", color: "#8B0000", image: "", video: "" },
+                    { title: "พีระมิดที่สาบสูญ", subtitle: "Lost Pyramid", desc: "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ", icon: "fa-monument", color: "#D2691E", image: "", video: "" },
+                    { title: "เกมอินเตอร์แอคทีฟสุดล้ำ", subtitle: "Interactive Gaming", desc: "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว", icon: "fa-gamepad", color: "#9370DB", image: "", video: "" },
+                    { title: "หนีตายสวนสยอง", subtitle: "Escape the Haunted Garden", desc: "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด", icon: "fa-skull", color: "#556B2F", image: "", video: "" }
+                ],
+                en: [
+                    { title: "Believe It or Not! Museum", subtitle: "Truth you must see with your own eyes", desc: "Ripley's Believe It or Not! One of the world's most famous museums originating from the USA. The only one that collects wonders from all over the world, both mysterious and beautiful. Discover and experience over 350 types of real artifacts that will amaze you, such as human skin masks, 3-inch shrunken heads, a Titanic model made from over 1,000,000 matchsticks, a man with 4 black pupils, and much more. An experience you will never forget. Believe It or Not!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
+                    { title: "Scream in the Dark", subtitle: "The Ultimate Thrill Ride", desc: "The newest and 6th extreme ride at Ripley World Pattaya, welcoming thrill-seekers with a horror experience. Scream in the Dark was once a famous amusement park that suddenly closed down for unknown reasons. Some say they saw clown spirits floating at night, or heard screams in the darkness. No one dared to prove it until Ripley World Pattaya invites you to explore this deadly path. The only way to escape this haunted amusement park is with your sharp shooting skills and scream as loud as you can!", icon: "fa-ghost", color: "#4B0082", image: "", video: "" },
+                    { title: "Haunted Warehouse", subtitle: "When Nightmares Come True", desc: "The largest coffin warehouse among the 5 in the world, with terrifying legends and cruelty spoken of for over 80 years. Encounter ghosts and uninvited guests from another realm, with special effects and the latest techniques from America in over 20 rooms filled with horror that will make you tremble at every step! Warning: Not suitable for the faint-hearted.", icon: "fa-warehouse", color: "#2F4F4F", image: "", video: "" },
+                    { title: "Louis Tussaud's Waxworks", subtitle: "Astonishingly Real", desc: "The 5th branch in the world and the first in Thailand. This wax museum displays lifelike wax figures of important persons and world celebrities, both Thai and international, living and deceased, totaling over 84 figures. The exhibition is divided into 9 zones: THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER. The wax figures are crafted by world-class artists from various countries, including Thai artists.", icon: "fa-user", color: "#DAA520", image: "", video: "" },
+                    { title: "Infinity Maze", subtitle: "Open Your Imagination", desc: "The ultimate entertainment that must be seen with your own eyes. Throughout 20 minutes of traveling through 'Infinity', enjoy special glasses that will take you to discover the wonders of light, color, sound, and special effects across 16 rooms. Let everyone enjoy and relax in the beauty of mysterious dimensions and optical illusions in a universe with no beginning or end.", icon: "fa-project-diagram", color: "#FF6347", image: "", video: "" },
+                    { title: "Laser Mission", subtitle: "Mission Impossible", desc: "A game that makes you embody a secret agent like in the movies. From the first step into the mysterious mission room, a labyrinth of green laser beams appears before you. You must pass through this laser maze as fast as possible without touching the green beams. If any part of your body touches the laser beams, your mission time will increase.", icon: "fa-bullseye", color: "#00CED1", image: "", video: "" },
+                    { title: "The Horror Hospital", subtitle: "Face Your Fears", desc: "In a remote town in southern England, following tales from relatives and close ones of many patients who received treatment at this hospital, one by one with no sign of returning. This is the beginning that makes everyone wonder and fear what happened. Waiting for brave souls from all directions to challenge the terrifying mystery of this place.", icon: "fa-hospital", color: "#8B0000", image: "", video: "" },
+                    { title: "Lost Pyramid", subtitle: "Ancient Mysteries", desc: "Ripley's Believe It or Not! Pattaya invites everyone to be amazed by a new Edutainment attraction, bringing mysteries from Egypt over 4,700 years ago. One of the 7 wonders of the world, the land of the Pharaohs, known for its mystery, beauty, and grandeur. Brave adventurers are invited to explore and search for treasures.", icon: "fa-monument", color: "#D2691E", image: "", video: "" },
+                    { title: "Interactive Games", subtitle: "Move and Play", desc: "Cutting-edge interactive games that will make you move, have fun, and be excited every second. Combining movement with amazing graphics, playable solo or as a team. A new experience that combines gaming, exercise, and creativity in one place.", icon: "fa-gamepad", color: "#9370DB", image: "", video: "" },
+                    { title: "Escape the Haunted Garden", subtitle: "WWII Nightmare", desc: "In 1945, during World War II, a hospital on an island in southern England stood beside a park full of laughter. Children played happily, patients came out for fresh air, and families spent time together happily. Until a bomb exploded!! Everything collapsed in an instant. The hospital became ruins, people disappeared, leaving only cries for help that slowly faded into the darkness. Since then, no one dared to step in here again... They say the spirits still wander, crying, waiting, never leaving.", icon: "fa-skull", color: "#556B2F", image: "", video: "" }
+                ]
+            },
             menu: {
                 snacks: [
                     { name: "SB ROD SNACK CLASSIC", nameTh: "ข้าวเกรียบ SB", price: 30, image: "" },
@@ -468,6 +482,11 @@
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
+        function getAttractions(lang) {
+            // ดึงข้อมูลตามภาษา ถ้าไม่มีให้ fallback เป็นภาษาอังกฤษ
+            return siteData.attractions[lang] || siteData.attractions['en'] || [];
+        }
+
         function changeLang(lang) {
             currentLang = lang;
             localStorage.setItem('ripleysLang', lang);
@@ -485,13 +504,15 @@
                 if (t[key]) el.innerHTML = t[key];
             });
 
+            // Render attractions ตามภาษาที่เลือก
             renderAttractions();
             renderMenu();
         }
 
         function renderAttractions() {
+            const attractions = getAttractions(currentLang);
             const grid = document.getElementById('attractionsGrid');
-            grid.innerHTML = siteData.attractions.map(item => `
+            grid.innerHTML = attractions.map(item => `
                 <div class="card" style="border-top-color: ${item.color}">
                     ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
                     ${item.video ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>` : ''}
@@ -608,7 +629,8 @@
 
         function renderAttractionsEditor() {
             const container = document.getElementById('attractionsEditor');
-            container.innerHTML = siteData.attractions.map((item, index) => `
+            const attractions = getAttractions(currentLang);
+            container.innerHTML = attractions.map((item, index) => `
                 <div class="admin-section">
                     <h4>${item.title}</h4>
                     <div class="form-group">
@@ -648,11 +670,15 @@
         }
 
         function updateAttraction(index, field, value) {
-            siteData.attractions[index][field] = value;
+            const attractions = getAttractions(currentLang);
+            attractions[index][field] = value;
         }
 
         function addAttraction() {
-            siteData.attractions.push({
+            if (!siteData.attractions[currentLang]) {
+                siteData.attractions[currentLang] = [];
+            }
+            siteData.attractions[currentLang].push({
                 title: "สถานที่ใหม่",
                 subtitle: "",
                 desc: "รายละเอียด...",
@@ -666,7 +692,8 @@
 
         function deleteAttraction(index) {
             if (confirm('ต้องการลบสถานที่นี้?')) {
-                siteData.attractions.splice(index, 1);
+                const attractions = getAttractions(currentLang);
+                attractions.splice(index, 1);
                 renderAttractionsEditor();
             }
         }
