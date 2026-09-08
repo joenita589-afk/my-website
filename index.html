@@ -94,15 +94,15 @@
 
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
-            <option value="th">🇭 ไทย</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="zh">🇳 中文</option>
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="en">🇧 English</option>
+            <option value="zh">🇨🇳 中文</option>
             <option value="ru">🇷🇺 Русский</option>
-            <option value="hi">🇳 हिन्दी</option>
-            <option value="he">🇮 עברית</option>
-            <option value="ja">🇯🇵 日本語</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="he">🇮🇱 עברית</option>
+            <option value="ja">🇵 日本語</option>
             <option value="ko">🇰🇷 한국어</option>
-            <option value="ar">🇸🇦 العربية</option>
+            <option value="ar">🇦 العربية</option>
         </select>
     </div>
 
@@ -196,7 +196,7 @@
                 <div class="flavor-tag">🍇 GRAPE</div>
                 <div class="flavor-tag">🍵 GREEN TEA</div>
                 <div class="flavor-tag">🍓 MIX BERRY</div>
-                <div class="flavor-tag"> STRAWBERRY</div>
+                <div class="flavor-tag">🍓 STRAWBERRY</div>
             </div>
             <div style="text-align: center; margin-top: 20px;">
                 <div class="menu-price" style="font-size: 2em; color: var(--primary);">59 <span data-i18n="baht">บาท</span></div>
@@ -246,7 +246,7 @@
             </div>
 
             <div class="tabs">
-                <button class="tab active" onclick="showAdminTab('github')">🔧 ตั้งค่า GitHub</button>
+                <button class="tab active" onclick="showAdminTab('github')"> ตั้งค่า GitHub</button>
                 <button class="tab" onclick="showAdminTab('attractions')">🎢 สถานที่</button>
                 <button class="tab" onclick="showAdminTab('menu')">🍽️ เมนู</button>
                 <button class="tab" onclick="showAdminTab('content')">📝 เนื้อหา</button>
@@ -358,164 +358,106 @@
                 contact_phone: "Contact Channels", contact_phone_text: "Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",
                 contact_map: "View on Google Maps",
                 admin_login: "Login", admin_error: "Incorrect password"
-            },
-            zh: {
-                nav_home: "首页", nav_coupon: "优惠券", nav_menu: "菜单", nav_contact: "联系我们",
-                tagline: "信不信由你！",
-                coupon_title: "特别折扣优惠券", coupon_get: "如何获得优惠券", coupon_desc: "参加我们精彩的活动即可获得即时折扣优惠券！",
-                coupon_laser_title: "激光任务游戏", coupon_laser: "餐饮享9折优惠",
-                coupon_scream_title: "黑暗尖叫", coupon_scream: "餐饮享8.5折优惠",
-                coupon_how: "如何使用优惠券", coupon_step1: "完成激光任务或黑暗尖叫活动",
-                coupon_step2: "从区域工作人员处领取折扣券", coupon_step3: "付款前在小吃柜台出示优惠券",
-                coupon_step4: "按优惠券所示获得即时折扣",
-                menu_title: "餐饮菜单",
-                promo_3for100_title: "3件100泰铢", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "最优惠的价格", promo_3for100_desc: "热腾腾...外脆内软！",
-                menu_snacks: "小吃", menu_drinks: "饮料", menu_slushy: "冰沙",
-                baht: "泰铢",
-                contact_title: "联系我们", contact_hours: "营业时间", contact_hours_time: "上午11:00 - 晚上10:00<br>演出开始上午11:30",
-                contact_address: "地址", contact_address_text: "Minor Sky Rider有限公司<br>218号10组，海滨路<br>农普鲁，邦拉蒙，春武里府 20150",
-                contact_phone: "联系方式", contact_phone_text: "电话: +66 (38) 710-294-8<br>传真: +66 (38) 710-487",
-                contact_map: "在Google地图上查看",
-                admin_login: "登录", admin_error: "密码错误"
-            },
-            ru: {
-                nav_home: "Главная", nav_coupon: "Купоны", nav_menu: "Меню", nav_contact: "Контакты",
-                tagline: "Хотите — верьте, хотите — нет!",
-                coupon_title: "Специальные купоны на скидку", coupon_get: "Как получить купоны", coupon_desc: "Примите участие в наших увлекательных мероприятиях и получите купоны на скидку!",
-                coupon_laser_title: "Лазерная миссия", coupon_laser: "Скидка 10% на еду и напитки",
-                coupon_scream_title: "Крик в темноте", coupon_scream: "Скидка 15% на еду и напитки",
-                coupon_how: "Как использовать купоны", coupon_step1: "Пройдите миссию с лазером или Крик в темноте",
-                coupon_step2: "Получите купон на скидку у сотрудника зоны", coupon_step3: "Предъявите купон в стойке закусок перед оплатой",
-                coupon_step4: "Получите мгновенную скидку, указанную на купоне",
-                menu_title: "Меню еды и напитков",
-                promo_3for100_title: "3 штуки за 100 бат", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "Лучшая цена по доступной цене", promo_3for100_desc: "Горячее из печи... Хрустящее снаружи, мягкое внутри!",
-                menu_snacks: "Закуски", menu_drinks: "Напитки", menu_slushy: "СЛАШИ",
-                baht: "бат",
-                contact_title: "Свяжитесь с нами", contact_hours: "Часы работы", contact_hours_time: "11:00 - 22:00<br>Шоу начинается в 11:30",
-                contact_address: "Адрес", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "Контактная информация", contact_phone_text: "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487",
-                contact_map: "Посмотреть на Google Maps",
-                admin_login: "Войти", admin_error: "Неверный пароль"
-            },
-            hi: {
-                nav_home: "होम", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क",
-                tagline: "विश्वास करो या नहीं!",
-                coupon_title: "विशेष छूट कूपन", coupon_get: "कूपन कैसे प्राप्त करें", coupon_desc: "तुरंत छूट कूपन पाने के लिए हमारी रोमांचक गतिविधियों में शामिल हों!",
-                coupon_laser_title: "लेजर मिशन गेम", coupon_laser: "भोजन और पेय पर 10% छूट",
-                coupon_scream_title: "अंधेरे में चीख", coupon_scream: "भोजन और पेय पर 15% छूट",
-                coupon_how: "कूपन का उपयोग कैसे करें", coupon_step1: "लेजर मिशन या स्क्रीम इन द डार्क गतिविधियां पूरी करें",
-                coupon_step2: "क्षेत्र के कर्मचारी से छूट कूपन प्राप्त करें", coupon_step3: "भुगतान से पहले स्नैक काउंटर पर कूपन पेश करें",
-                coupon_step4: "कूपन पर दर्शाए अनुसार तुरंत छूट प्राप्त करें",
-                menu_title: "भोजन और पेय मेनू",
-                promo_3for100_title: "3 टुकड़े 100 बाht के लिए", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "अनुकूल कीमत पर सर्वोत्तम मूल्य", promo_3for100_desc: "ओवन से गर्म... बाहर से कुरकुरा, अंदर से नरम!",
-                menu_snacks: "नाश्ते", menu_drinks: "पेय", menu_slushy: "स्लशी",
-                baht: "बाht",
-                contact_title: "संपर्क करें", contact_hours: "खुलने का समय", contact_hours_time: "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू",
-                contact_address: "पता", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "संपर्क चैनल", contact_phone_text: "टेल: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
-                contact_map: "Google Maps पर देखें",
-                admin_login: "लॉगिन", admin_error: "गलत पासवर्ड"
-            },
-            he: {
-                nav_home: "דף הבית", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר",
-                tagline: "תאמינו או לא!",
-                coupon_title: "קופוני הנחה מיוחדים", coupon_get: "כיצד לקבל קופונים", coupon_desc: "הצטרף לפעילויות המרגשות שלנו וקבל קופוני הנחה מיידית!",
-                coupon_laser_title: "משימת לייזר", coupon_laser: "10% הנחה על אוכל ומשקאות",
-                coupon_scream_title: "צעקה בחושך", coupon_scream: "15% הנחה על אוכל ומשקאות",
-                coupon_how: "כיצד להשתמש בקופונים", coupon_step1: "השלם את משימת הלייזר או צעקה בחושך",
-                coupon_step2: "קבל קופון הנחה מהצוות באזור", coupon_step3: "הצג קופון בדלפק החטיפים לפני התשלום",
-                coupon_step4: "קבל הנחה מיידית כמצוין בקופון",
-                menu_title: "תפריט אוכל ומשקאות",
-                promo_3for100_title: "3 פריטים ב-100 באט", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "הערך הטוב ביותר במחיר ידידותי", promo_3for100_desc: "חם מהתנור... פריך בחוץ, רך בפנים!",
-                menu_snacks: "חטיפים", menu_drinks: "משקאות", menu_slushy: "סלושי",
-                baht: "באט",
-                contact_title: "צור קשר", contact_hours: "שעות פתיחה", contact_hours_time: "11:00 - 22:00<br>המופע מתחיל 11:30",
-                contact_address: "כתובת", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "ערוצי יצירת קשר", contact_phone_text: "טל: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
-                contact_map: "צפה ב-Google Maps",
-                admin_login: "התחבר", admin_error: "סיסמה שגויה"
-            },
-            ja: {
-                nav_home: "ホーム", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ",
-                tagline: "信じられない！",
-                coupon_title: "特別割引クーポン", coupon_get: "クーポンの入手方法", coupon_desc: "エキサイティングなアクティビティに参加して即時割引クーポンを入手！",
-                coupon_laser_title: "レーザーミッション", coupon_laser: "飲食代10%割引",
-                coupon_scream_title: "ダークスクリーム", coupon_scream: "飲食代15%割引",
-                coupon_how: "クーポンの使い方", coupon_step1: "レーザーミッションまたはダークスクリームを完了",
-                coupon_step2: "ゾーンのスタッフから割引クーポンを受け取る", coupon_step3: "支払い前にスナックカウンターでクーポンを提示",
-                coupon_step4: "クーポンに記載された即時割引を受ける",
-                menu_title: "飲食メニュー",
-                promo_3for100_title: "3個で100バーツ", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "手頃な価格で最高の価値", promo_3for100_desc: "オーブンから熱々...外はカリカリ、中はふわふわ！",
-                menu_snacks: "スナック", menu_drinks: "飲み物", menu_slushy: "スラシー",
-                baht: "バーツ",
-                contact_title: "お問い合わせ", contact_hours: "営業時間", contact_hours_time: "午前11:00 - 午後10:00<br>ショー開始 午前11:30",
-                contact_address: "住所", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "連絡先", contact_phone_text: "電話: +66 (38) 710-294-8<br>FAX: +66 (38) 710-487",
-                contact_map: "Google Mapsで見る",
-                admin_login: "ログイン", admin_error: "パスワードが正しくありません"
-            },
-            ko: {
-                nav_home: "홈", nav_coupon: "쿠폰", nav_menu: "메뉴", nav_contact: "연락처",
-                tagline: "믿거나 말거나!",
-                coupon_title: "특별 할인 쿠", coupon_get: "쿠폰 받는 방법", coupon_desc: "흥미진진한 활동에 참여하고 즉시 할인 쿠폰을 받으세요!",
-                coupon_laser_title: "레이저 미션", coupon_laser: "음식 및 음료 10% 할인",
-                coupon_scream_title: "스크림 인 더 다", coupon_scream: "음식 및 음료 15% 할인",
-                coupon_how: "쿠폰 사용 방법", coupon_step1: "레이저 미션 또는 스크림 인 더 다크 완료",
-                coupon_step2: "존 직원에게서 할인 쿠폰 받기", coupon_step3: "결제 전 스 카운터에서 쿠폰 제시",
-                coupon_step4: "쿠폰에 표시된 즉시 할인 받기",
-                menu_title: "음식 및 음료 메뉴",
-                promo_3for100_title: "3개 100바트", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "합리적인 가격의 최고의 가치", promo_3for100_desc: "오븐에서 갓 나온... 바삭바삭하고 속은 부드러워!",
-                menu_snacks: "스낵", menu_drinks: "음료", menu_slushy: "슬러시",
-                baht: "바트",
-                contact_title: "연락처", contact_hours: "운영 시간", contact_hours_time: "오전 11:00 - 오후 10:00<br>쇼 시작 오전 11:30",
-                contact_address: "주소", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "연락처", contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
-                contact_map: "Google Maps에서 보기",
-                admin_login: "로그인", admin_error: "잘못된 비밀번호"
-            },
-            ar: {
-                nav_home: "الرئيسية", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا",
-                tagline: "صدق أو لا تصدق!",
-                coupon_title: "قسائم خصم خاصة", coupon_get: "كيفية الحصول على القسائم", coupon_desc: "انضم إلى أنشطتنا المثيرة واحصل على قسائم خصم فورية!",
-                coupon_laser_title: "مهمة الليزر", coupon_laser: "خصم 10% على الطعام والمشروبات",
-                coupon_scream_title: "صرخة في الظلام", coupon_scream: "خصم 15% على الطعام والمشروبات",
-                coupon_how: "كيفية استخدام القسائم", coupon_step1: "أكمل مهمة الليزر أو الصراخ في الظلام",
-                coupon_step2: "احصل على قسيمة الخصم من موظف المنطقة", coupon_step3: "أظهر القسيمة في كاونتر الوجبات الخفيفة قبل الدفع",
-                coupon_step4: "احصل على خصم فوري كما هو موضح في القسيمة",
-                menu_title: "قائمة الطعام والمشروبات",
-                promo_3for100_title: "3 قطع بـ 100 بات", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
-                promo_3for100_tag: "أفضل قيمة بسعر مناسب", promo_3for100_desc: "ساخن من الفرن... مقرمش من الخارج، طري من الداخل!",
-                menu_snacks: "الوجبات الخفيفة", menu_drinks: "المشروبات", menu_slushy: "سلوشي",
-                baht: "بات",
-                contact_title: "اتصل بنا", contact_hours: "ساعات العمل", contact_hours_time: "11:00 ص - 10:00 م<br>يبدأ العرض 11:30 ص",
-                contact_address: "العنوان", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
-                contact_phone: "قنوات الاتصال", contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
-                contact_map: "عرض على Google Maps",
-                admin_login: "تسجيل الدخول", admin_error: "كلمة المرور غير صحيحة"
             }
         };
 
+        // Fallback translations for other languages (use English as base)
+        ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
+            translations[lang] = { ...translations.en };
+        });
+
+        // Custom translations for specific languages
+        translations.zh.tagline = "信不信由你！";
+        translations.zh.nav_home = "首页";
+        translations.zh.nav_coupon = "优惠券";
+        translations.zh.nav_menu = "菜单";
+        translations.zh.nav_contact = "联系我们";
+        translations.zh.menu_title = "餐饮菜单";
+        translations.zh.menu_snacks = "小吃";
+        translations.zh.menu_drinks = "饮料";
+        translations.zh.baht = "泰铢";
+
+        translations.ru.tagline = "Хотите — верьте, хотите — нет!";
+        translations.ru.nav_home = "Главная";
+        translations.ru.nav_coupon = "Купоны";
+        translations.ru.nav_menu = "Меню";
+        translations.ru.nav_contact = "Контакты";
+        translations.ru.menu_title = "Меню еды и напитков";
+        translations.ru.menu_snacks = "Закуски";
+        translations.ru.menu_drinks = "Напитки";
+        translations.ru.baht = "бат";
+
+        translations.hi.tagline = "विश्वास करो या नहीं!";
+        translations.hi.nav_home = "होम";
+        translations.hi.nav_coupon = "कूपन";
+        translations.hi.nav_menu = "मेनू";
+        translations.hi.nav_contact = "संपर्क";
+        translations.hi.menu_title = "भोजन और पेय मेनू";
+        translations.hi.menu_snacks = "नाश्ते";
+        translations.hi.menu_drinks = "पेय";
+        translations.hi.baht = "बाht";
+
+        translations.he.tagline = "תאמינו או לא!";
+        translations.he.nav_home = "דף הבית";
+        translations.he.nav_coupon = "קופונים";
+        translations.he.nav_menu = "תפריט";
+        translations.he.nav_contact = "צור קשר";
+        translations.he.menu_title = "תפריט אוכל ומשקאות";
+        translations.he.menu_snacks = "חטיפים";
+        translations.he.menu_drinks = "משקאות";
+        translations.he.baht = "באט";
+
+        translations.ja.tagline = "信じられない！";
+        translations.ja.nav_home = "ホーム";
+        translations.ja.nav_coupon = "クーポン";
+        translations.ja.nav_menu = "メニュー";
+        translations.ja.nav_contact = "お問い合わせ";
+        translations.ja.menu_title = "飲食メニュー";
+        translations.ja.menu_snacks = "スナック";
+        translations.ja.menu_drinks = "飲み物";
+        translations.ja.baht = "バーツ";
+
+        translations.ko.tagline = "믿거나 말거나!";
+        translations.ko.nav_home = "홈";
+        translations.ko.nav_coupon = "쿠폰";
+        translations.ko.nav_menu = "메뉴";
+        translations.ko.nav_contact = "연락처";
+        translations.ko.menu_title = "음식 및 음료 메뉴";
+        translations.ko.menu_snacks = "스낵";
+        translations.ko.menu_drinks = "음료";
+        translations.ko.baht = "바트";
+
+        translations.ar.tagline = "صدق أو لا تصدق!";
+        translations.ar.nav_home = "الرئيسية";
+        translations.ar.nav_coupon = "القسائم";
+        translations.ar.nav_menu = "القائمة";
+        translations.ar.nav_contact = "اتصل بنا";
+        translations.ar.menu_title = "قائمة الطعام والمشروبات";
+        translations.ar.menu_snacks = "الوجبات الخفيفة";
+        translations.ar.menu_drinks = "المشروبات";
+        translations.ar.baht = "بات";
+
         const siteData = {
-            attractions: {
-                th: [
-                    { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย \"ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
-                    { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082", image: "", video: "" }
-                ],
-                en: [
-                    { title: "Believe It or Not! Museum", subtitle: "Truth you must see", desc: "One of the world's most famous museums originating from the USA. Discover over 350 types of bizarre artifacts.", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
-                    { title: "Scream in the Dark", subtitle: "The Ultimate Thrill", desc: "The newest extreme ride at Ripley World Pattaya. A legendary abandoned amusement park.", icon: "fa-ghost", color: "#4B0082", image: "", video: "" }
-                ]
-            },
+            attractions: [
+                { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
+                { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082", image: "", video: "" },
+                { title: "โกดังผีสิง", subtitle: "เมื่อฝันร้ายมาเยือน", desc: "โกดังเก็บโลงศพที่ใหญ่ที่สุดในจำนวน 5 แห่งในโลก ที่มีตำนานอันน่ากลัวและความหฤโหดที่ถูกกล่าวขานมากว่า 80 ปี พบกับภูตผีปีศาจและแขกไม่ได้รับเชิญจากอีกภพ พร้อมสัมผัสกับ เอฟเฟค พิเศษ และเทคนิคต่างๆ อันทันสมัยล่าสุดจากอเมริกา ในแต่ละห้องกว่า 20 ห้อง ซึ่งแฝงไว้ด้วยความสยอง ที่จะทำให้หวาดผวาทุกฝีก้าวและขนหัวลุกจนก้าวสุดท้าย! คำเตือน ไม่เหมาะสำหรับคนขวัญอ่อน", icon: "fa-warehouse", color: "#2F4F4F", image: "", video: "" },
+                { title: "พิพิธภัณฑ์หุ่นขี้ผึ้ง หลุยส์ ทุสโซด์ส", subtitle: "ความอัศจรรย์ ที่คุณต้องตะลึง", desc: "เป็นสาขาที่ 5 ของโลก ครั้งแรกของประเทศไทย สำหรับพิพิธภัณฑ์หุ่นขี้ผึ้งที่จัดแสดงหุ่นขี้ผึ้งเสมือนจริงของบุคคลสำคัญ และคนดังระดับโลกทั้งไทยและเทศที่ยังมีชีวิตอยู่และเสียชีวิตไปแล้วรวมมากกว่า 84 ตัว โดยแบ่งห้องจัดแสดงออกเป็น 9โซน ได้แก่ THAI SUNSET GARDEN PARTY, SPORT, POP STAR, CHAMBER OF THE SECRET, BRITISH ROYALTY, POLITICAL AND HUMANITARIAN LEADERS, HORROR DEN, BATMAN AND FRIENDS, CELEBRITIES IN CHARACTER หุ่นขี้ผึ้งที่จัดแสดง ถูกรังสรรค์ขึ้นโดยฝีมือของศิลปินชั้นแนวหน้าของโลกมากมาย", icon: "fa-user", color: "#DAA520", image: "", video: "" },
+                { title: "มหัศจรรย์เขาวงกต", subtitle: "เปิดโลกแห่งจินตนาการ", desc: "ที่สุดของความบันเทิงที่ต้องพิสูจน์ด้วยสายตา ตลอด 20 นาที ของการเดินทางใน อินฟินนิตี้ (Infinity) เพลินเพลินกับแว่นสุดพิเศษ ที่จะพาคุณไปพบกับความอัศจรรย์ของแสง-สี-เสียง และ เอฟเฟค พิเศษอันทันสมัยถึง 16 ห้อง ที่จะนำพาทุกท่านได้เพลิดเพลิน ผ่อนคลายในความสวยงามของมิติพิศวง และภาพลวงตาในจักรวาลที่ไม่มีจุดเริ่มต้นและสิ้นสุด", icon: "fa-project-diagram", color: "#FF6347", image: "", video: "" },
+                { title: "เกมส์ตะลุยเลเซอร์", subtitle: "Mission Impossible", desc: "เกมส์ที่ทำให้คุณต้องสวมวิญญาณนักจารกรรมเหมือนในภาพยนตร์ เพียงย่างก้าวแรกเข้าสู่ห้องปฏิบัติภารกิจที่สุดแสนจะลึกลับ ดั่งเขาวงกตลำแสงเลเซอร์สีเขียวจะปรากฏขึ้นเบื้องหน้า คุณจะต้องผ่านเขาวงกตเลเซอร์นี้ให้ได้ไวที่สุด โดยไม่แตะต้องลำแสงสีเขียวเหล่านั้น หากส่วนหนึ่งส่วนใดของร่างกายสัมผัสลำแสงเลเซอร์ เวลาของภาระกิจนี้จะเพิ่มขึ้น", icon: "fa-bullseye", color: "#00CED1", image: "", video: "" },
+                { title: "โรงพยาบาลหลอน", subtitle: "The Horror Hospital", desc: "ณ เมืองๆ หนึ่งทางตอนใต้อันห่างไกลของประเทศอังกฤษ สืบเนื่องจากคำเล่าขานของญาติและผู้ใกล้ชิดของผู้ป่วยมากมายที่เข้ารับการรักษาในโรงพยาบาลแห่งนี้ คนแล้วคนเล่าไร้แววจะได้กลับออกมา นับเป็นจุดเริ่มต้นที่ทุกคนสงสัยและหวาดระแวงว่าเกิดอะไรขึ้น รอคอยผู้กล้าจากทุกสารทิศที่จะมาท้าทายความลี้ลับสยดสยองของสถานที่แห่งนี้", icon: "fa-hospital", color: "#8B0000", image: "", video: "" },
+                { title: "พีระมิดที่สาบสูญ", subtitle: "Lost Pyramid", desc: "Ripley's Believe It or Not! Pattaya ชวนทุกคนมาตื่นตากับ Attraction ใหม่ในรูปแบบ Edutainment ยกความลึกลับมาจากอียิปต์ เมื่อกว่า 4,700 ปีที่แล้ว เป็นหนึ่งใน 7 สิ่งมหัศจรรย์ของโลก ดินแดนของกษัตริย์ฟาโรห์ ที่กล่าวขานถึงความลึกลับ น่าค้นหา สวยงาม และยิ่งใหญ่ พร้อมให้เหล่านักผจญภัยผู้กล้าทั้งหลายเข้าไปร่วมผจญภัยตามหาสมบัติ", icon: "fa-monument", color: "#D2691E", image: "", video: "" },
+                { title: "เกมอินเตอร์แอคทีฟสุดล้ำ", subtitle: "Interactive Gaming", desc: "เกมอินเตอร์แอคทีฟสุดล้ำ ที่จะทำให้คุณต้องขยับ สนุก และตื่นเต้นทุกวินาที รวมการเคลื่อนไหวเข้ากับภาพกราฟิกสุดมันส์ เล่นได้ทั้งเดี่ยวและเป็นทีม ประสบการณ์ใหม่ที่ผสมเกม การออกกำลังกาย และความคิดสร้างสรรค์ไว้ในที่เดียว", icon: "fa-gamepad", color: "#9370DB", image: "", video: "" },
+                { title: "หนีตายสวนสยอง", subtitle: "Escape the Haunted Garden", desc: "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด", icon: "fa-skull", color: "#556B2F", image: "", video: "" }
+            ],
             menu: {
                 snacks: [
                     { name: "SB ROD SNACK CLASSIC", nameTh: "ข้าวเกรียบ SB", price: 30, image: "" },
-                    { name: "POPCORN", nameTh: "ป๊อปคอร์น", price: 90, image: "" }
+                    { name: "POPCORN", nameTh: "ป๊อปคอร์น", price: 90, image: "" },
+                    { name: "FRENCH FRIES", nameTh: "เฟรนช์ฟรายส์", price: 69, image: "" },
+                    { name: "CHICKEN STICKS", nameTh: "สติ๊กไก่ทอด", price: 89, image: "" },
+                    { name: "CRISPY CHICKEN POP", nameTh: "ไก่ป๊อป", price: 89, image: "" },
+                    { name: "MIXED FRIED SNACKS", nameTh: "ของทานเล่นทอดรวม", price: 109, image: "" }
                 ],
                 drinks: [
                     { name: "WATER", nameTh: "น้ำดื่ม", price: 25, image: "" },
@@ -548,9 +490,8 @@
         }
 
         function renderAttractions() {
-            const attractions = siteData.attractions[currentLang] || siteData.attractions['en'];
             const grid = document.getElementById('attractionsGrid');
-            grid.innerHTML = attractions.map(item => `
+            grid.innerHTML = siteData.attractions.map(item => `
                 <div class="card" style="border-top-color: ${item.color}">
                     ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
                     ${item.video ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>` : ''}
@@ -667,8 +608,7 @@
 
         function renderAttractionsEditor() {
             const container = document.getElementById('attractionsEditor');
-            const attractions = siteData.attractions[currentLang] || siteData.attractions['en'];
-            container.innerHTML = attractions.map((item, index) => `
+            container.innerHTML = siteData.attractions.map((item, index) => `
                 <div class="admin-section">
                     <h4>${item.title}</h4>
                     <div class="form-group">
@@ -708,15 +648,11 @@
         }
 
         function updateAttraction(index, field, value) {
-            const attractions = siteData.attractions[currentLang] || siteData.attractions['en'];
-            attractions[index][field] = value;
+            siteData.attractions[index][field] = value;
         }
 
         function addAttraction() {
-            if (!siteData.attractions[currentLang]) {
-                siteData.attractions[currentLang] = [];
-            }
-            siteData.attractions[currentLang].push({
+            siteData.attractions.push({
                 title: "สถานที่ใหม่",
                 subtitle: "",
                 desc: "รายละเอียด...",
@@ -730,7 +666,7 @@
 
         function deleteAttraction(index) {
             if (confirm('ต้องการลบสถานที่นี้?')) {
-                siteData.attractions[currentLang].splice(index, 1);
+                siteData.attractions.splice(index, 1);
                 renderAttractionsEditor();
             }
         }
@@ -865,7 +801,7 @@
                 if (updateResponse.ok) {
                     alert('✅ บันทึกสำเร็จ! Cloudflare จะ Deploy อัตโนมัติภายใน 1-2 นาที ลูกค้าทุกคนจะเห็นการเปลี่ยนแปลง');
                 } else {
-                    alert(' เกิดข้อผิดพลาดในการบันทึก');
+                    alert('❌ เกิดข้อผิดพลาดในการบันทึก');
                 }
             } catch (error) {
                 alert('❌ เกิดข้อผิดพลาด: ' + error.message);
