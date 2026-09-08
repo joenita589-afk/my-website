@@ -94,13 +94,13 @@
 
     <div class="lang-select">
         <select id="langSelect" onchange="changeLang(this.value)">
-            <option value="th">🇹🇭 ไทย</option>
+            <option value="th">🇭 ไทย</option>
             <option value="en">🇬🇧 English</option>
-            <option value="zh">🇨🇳 中文</option>
-            <option value="ru">🇺 Русский</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="he">🇮🇱 עברית</option>
-            <option value="ja">🇯 日本語</option>
+            <option value="zh">🇳 中文</option>
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="hi">🇳 हिन्दी</option>
+            <option value="he">🇮 עברית</option>
+            <option value="ja">🇯🇵 日本語</option>
             <option value="ko">🇰🇷 한국어</option>
             <option value="ar">🇸🇦 العربية</option>
         </select>
@@ -144,12 +144,12 @@
             <div class="grid" style="margin-top: 20px;">
                 <div class="card" style="border-top-color: #00CED1;">
                     <div class="card-icon" style="background: #00CED1;"><i class="fas fa-bullseye"></i></div>
-                    <h3>Games Laser Mission</h3>
+                    <h3 data-i18n="coupon_laser_title">Games Laser Mission</h3>
                     <p data-i18n="coupon_laser">รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม</p>
                 </div>
                 <div class="card" style="border-top-color: #4B0082;">
                     <div class="card-icon" style="background: #4B0082;"><i class="fas fa-ghost"></i></div>
-                    <h3>Scream in the Dark</h3>
+                    <h3 data-i18n="coupon_scream_title">Scream in the Dark</h3>
                     <p data-i18n="coupon_scream">รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม</p>
                 </div>
             </div>
@@ -188,15 +188,15 @@
             <h3 data-i18n="menu_slushy">SLUSHY</h3>
             <div class="slushy-flavors">
                 <div class="flavor-tag">🥝 KIWI</div>
-                <div class="flavor-tag"> MANGO</div>
+                <div class="flavor-tag">🥭 MANGO</div>
                 <div class="flavor-tag">🍵 THAI TEA</div>
                 <div class="flavor-tag">🍯 HONEY LEMON</div>
                 <div class="flavor-tag">🍹 FRUIT PUNCH</div>
                 <div class="flavor-tag">🍊 ORANGE</div>
-                <div class="flavor-tag"> GRAPE</div>
+                <div class="flavor-tag">🍇 GRAPE</div>
                 <div class="flavor-tag">🍵 GREEN TEA</div>
                 <div class="flavor-tag">🍓 MIX BERRY</div>
-                <div class="flavor-tag">🍓 STRAWBERRY</div>
+                <div class="flavor-tag"> STRAWBERRY</div>
             </div>
             <div style="text-align: center; margin-top: 20px;">
                 <div class="menu-price" style="font-size: 2em; color: var(--primary);">59 <span data-i18n="baht">บาท</span></div>
@@ -246,7 +246,7 @@
             </div>
 
             <div class="tabs">
-                <button class="tab active" onclick="showAdminTab('github')">️ ตั้งค่า GitHub</button>
+                <button class="tab active" onclick="showAdminTab('github')">🔧 ตั้งค่า GitHub</button>
                 <button class="tab" onclick="showAdminTab('attractions')">🎢 สถานที่</button>
                 <button class="tab" onclick="showAdminTab('menu')">🍽️ เมนู</button>
                 <button class="tab" onclick="showAdminTab('content')">📝 เนื้อหา</button>
@@ -323,7 +323,8 @@
                 nav_home: "หน้าหลัก", nav_coupon: "คูปอง", nav_menu: "เมนู", nav_contact: "ติดต่อเรา",
                 tagline: "ความมหัศจรรย์ที่คุณต้องเชื่อ!",
                 coupon_title: "คูปองส่วนลดพิเศษ", coupon_get: "วิธีการรับคูปอง", coupon_desc: "ร่วมกิจกรรมสุดมันส์เพื่อรับคูปองส่วนลดทันที!",
-                coupon_laser: "รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม", coupon_scream: "รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม",
+                coupon_laser_title: "Games Laser Mission", coupon_laser: "รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม",
+                coupon_scream_title: "Scream in the Dark", coupon_scream: "รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม",
                 coupon_how: "วิธีใช้คูปอง", coupon_step1: "ทำกิจกรรม เลเซอร์ หรือ Scream in the Dark ให้สำเร็จ",
                 coupon_step2: "รับคูปองส่วนลดจากเจ้าหน้าที่ประจำโซน", coupon_step3: "นำคูปองไปแสดงที่เคาน์เตอร์ขายของทานเล่นก่อนชำระเงิน",
                 coupon_step4: "รับส่วนลดทันทีตามมูลค่าที่ระบุในคูปอง",
@@ -342,7 +343,8 @@
                 nav_home: "Home", nav_coupon: "Coupons", nav_menu: "Menu", nav_contact: "Contact",
                 tagline: "Believe It or Not!",
                 coupon_title: "Special Discount Coupons", coupon_get: "How to Get Coupons", coupon_desc: "Join our exciting activities to get instant discount coupons!",
-                coupon_laser: "Get 10% discount on food and beverages", coupon_scream: "Get 15% discount on food and beverages",
+                coupon_laser_title: "Games Laser Mission", coupon_laser: "Get 10% discount on food and beverages",
+                coupon_scream_title: "Scream in the Dark", coupon_scream: "Get 15% discount on food and beverages",
                 coupon_how: "How to Use Coupons", coupon_step1: "Complete Laser Mission or Scream in the Dark activities",
                 coupon_step2: "Receive discount coupon from staff at the zone", coupon_step3: "Present coupon at snack counter before payment",
                 coupon_step4: "Get instant discount as indicated on coupon",
@@ -356,22 +358,160 @@
                 contact_phone: "Contact Channels", contact_phone_text: "Tel: +66 (38) 710-294-8<br>Fax: +66 (38) 710-487",
                 contact_map: "View on Google Maps",
                 admin_login: "Login", admin_error: "Incorrect password"
+            },
+            zh: {
+                nav_home: "首页", nav_coupon: "优惠券", nav_menu: "菜单", nav_contact: "联系我们",
+                tagline: "信不信由你！",
+                coupon_title: "特别折扣优惠券", coupon_get: "如何获得优惠券", coupon_desc: "参加我们精彩的活动即可获得即时折扣优惠券！",
+                coupon_laser_title: "激光任务游戏", coupon_laser: "餐饮享9折优惠",
+                coupon_scream_title: "黑暗尖叫", coupon_scream: "餐饮享8.5折优惠",
+                coupon_how: "如何使用优惠券", coupon_step1: "完成激光任务或黑暗尖叫活动",
+                coupon_step2: "从区域工作人员处领取折扣券", coupon_step3: "付款前在小吃柜台出示优惠券",
+                coupon_step4: "按优惠券所示获得即时折扣",
+                menu_title: "餐饮菜单",
+                promo_3for100_title: "3件100泰铢", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "最优惠的价格", promo_3for100_desc: "热腾腾...外脆内软！",
+                menu_snacks: "小吃", menu_drinks: "饮料", menu_slushy: "冰沙",
+                baht: "泰铢",
+                contact_title: "联系我们", contact_hours: "营业时间", contact_hours_time: "上午11:00 - 晚上10:00<br>演出开始上午11:30",
+                contact_address: "地址", contact_address_text: "Minor Sky Rider有限公司<br>218号10组，海滨路<br>农普鲁，邦拉蒙，春武里府 20150",
+                contact_phone: "联系方式", contact_phone_text: "电话: +66 (38) 710-294-8<br>传真: +66 (38) 710-487",
+                contact_map: "在Google地图上查看",
+                admin_login: "登录", admin_error: "密码错误"
+            },
+            ru: {
+                nav_home: "Главная", nav_coupon: "Купоны", nav_menu: "Меню", nav_contact: "Контакты",
+                tagline: "Хотите — верьте, хотите — нет!",
+                coupon_title: "Специальные купоны на скидку", coupon_get: "Как получить купоны", coupon_desc: "Примите участие в наших увлекательных мероприятиях и получите купоны на скидку!",
+                coupon_laser_title: "Лазерная миссия", coupon_laser: "Скидка 10% на еду и напитки",
+                coupon_scream_title: "Крик в темноте", coupon_scream: "Скидка 15% на еду и напитки",
+                coupon_how: "Как использовать купоны", coupon_step1: "Пройдите миссию с лазером или Крик в темноте",
+                coupon_step2: "Получите купон на скидку у сотрудника зоны", coupon_step3: "Предъявите купон в стойке закусок перед оплатой",
+                coupon_step4: "Получите мгновенную скидку, указанную на купоне",
+                menu_title: "Меню еды и напитков",
+                promo_3for100_title: "3 штуки за 100 бат", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "Лучшая цена по доступной цене", promo_3for100_desc: "Горячее из печи... Хрустящее снаружи, мягкое внутри!",
+                menu_snacks: "Закуски", menu_drinks: "Напитки", menu_slushy: "СЛАШИ",
+                baht: "бат",
+                contact_title: "Свяжитесь с нами", contact_hours: "Часы работы", contact_hours_time: "11:00 - 22:00<br>Шоу начинается в 11:30",
+                contact_address: "Адрес", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                contact_phone: "Контактная информация", contact_phone_text: "Тел: +66 (38) 710-294-8<br>Факс: +66 (38) 710-487",
+                contact_map: "Посмотреть на Google Maps",
+                admin_login: "Войти", admin_error: "Неверный пароль"
+            },
+            hi: {
+                nav_home: "होम", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क",
+                tagline: "विश्वास करो या नहीं!",
+                coupon_title: "विशेष छूट कूपन", coupon_get: "कूपन कैसे प्राप्त करें", coupon_desc: "तुरंत छूट कूपन पाने के लिए हमारी रोमांचक गतिविधियों में शामिल हों!",
+                coupon_laser_title: "लेजर मिशन गेम", coupon_laser: "भोजन और पेय पर 10% छूट",
+                coupon_scream_title: "अंधेरे में चीख", coupon_scream: "भोजन और पेय पर 15% छूट",
+                coupon_how: "कूपन का उपयोग कैसे करें", coupon_step1: "लेजर मिशन या स्क्रीम इन द डार्क गतिविधियां पूरी करें",
+                coupon_step2: "क्षेत्र के कर्मचारी से छूट कूपन प्राप्त करें", coupon_step3: "भुगतान से पहले स्नैक काउंटर पर कूपन पेश करें",
+                coupon_step4: "कूपन पर दर्शाए अनुसार तुरंत छूट प्राप्त करें",
+                menu_title: "भोजन और पेय मेनू",
+                promo_3for100_title: "3 टुकड़े 100 बाht के लिए", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "अनुकूल कीमत पर सर्वोत्तम मूल्य", promo_3for100_desc: "ओवन से गर्म... बाहर से कुरकुरा, अंदर से नरम!",
+                menu_snacks: "नाश्ते", menu_drinks: "पेय", menu_slushy: "स्लशी",
+                baht: "बाht",
+                contact_title: "संपर्क करें", contact_hours: "खुलने का समय", contact_hours_time: "सुबह 11:00 - रात 10:00<br>शो सुबह 11:30 बजे शुरू",
+                contact_address: "पता", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                contact_phone: "संपर्क चैनल", contact_phone_text: "टेल: +66 (38) 710-294-8<br>फैक्स: +66 (38) 710-487",
+                contact_map: "Google Maps पर देखें",
+                admin_login: "लॉगिन", admin_error: "गलत पासवर्ड"
+            },
+            he: {
+                nav_home: "דף הבית", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר",
+                tagline: "תאמינו או לא!",
+                coupon_title: "קופוני הנחה מיוחדים", coupon_get: "כיצד לקבל קופונים", coupon_desc: "הצטרף לפעילויות המרגשות שלנו וקבל קופוני הנחה מיידית!",
+                coupon_laser_title: "משימת לייזר", coupon_laser: "10% הנחה על אוכל ומשקאות",
+                coupon_scream_title: "צעקה בחושך", coupon_scream: "15% הנחה על אוכל ומשקאות",
+                coupon_how: "כיצד להשתמש בקופונים", coupon_step1: "השלם את משימת הלייזר או צעקה בחושך",
+                coupon_step2: "קבל קופון הנחה מהצוות באזור", coupon_step3: "הצג קופון בדלפק החטיפים לפני התשלום",
+                coupon_step4: "קבל הנחה מיידית כמצוין בקופון",
+                menu_title: "תפריט אוכל ומשקאות",
+                promo_3for100_title: "3 פריטים ב-100 באט", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "הערך הטוב ביותר במחיר ידידותי", promo_3for100_desc: "חם מהתנור... פריך בחוץ, רך בפנים!",
+                menu_snacks: "חטיפים", menu_drinks: "משקאות", menu_slushy: "סלושי",
+                baht: "באט",
+                contact_title: "צור קשר", contact_hours: "שעות פתיחה", contact_hours_time: "11:00 - 22:00<br>המופע מתחיל 11:30",
+                contact_address: "כתובת", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                contact_phone: "ערוצי יצירת קשר", contact_phone_text: "טל: +66 (38) 710-294-8<br>פקס: +66 (38) 710-487",
+                contact_map: "צפה ב-Google Maps",
+                admin_login: "התחבר", admin_error: "סיסמה שגויה"
+            },
+            ja: {
+                nav_home: "ホーム", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ",
+                tagline: "信じられない！",
+                coupon_title: "特別割引クーポン", coupon_get: "クーポンの入手方法", coupon_desc: "エキサイティングなアクティビティに参加して即時割引クーポンを入手！",
+                coupon_laser_title: "レーザーミッション", coupon_laser: "飲食代10%割引",
+                coupon_scream_title: "ダークスクリーム", coupon_scream: "飲食代15%割引",
+                coupon_how: "クーポンの使い方", coupon_step1: "レーザーミッションまたはダークスクリームを完了",
+                coupon_step2: "ゾーンのスタッフから割引クーポンを受け取る", coupon_step3: "支払い前にスナックカウンターでクーポンを提示",
+                coupon_step4: "クーポンに記載された即時割引を受ける",
+                menu_title: "飲食メニュー",
+                promo_3for100_title: "3個で100バーツ", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "手頃な価格で最高の価値", promo_3for100_desc: "オーブンから熱々...外はカリカリ、中はふわふわ！",
+                menu_snacks: "スナック", menu_drinks: "飲み物", menu_slushy: "スラシー",
+                baht: "バーツ",
+                contact_title: "お問い合わせ", contact_hours: "営業時間", contact_hours_time: "午前11:00 - 午後10:00<br>ショー開始 午前11:30",
+                contact_address: "住所", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                contact_phone: "連絡先", contact_phone_text: "電話: +66 (38) 710-294-8<br>FAX: +66 (38) 710-487",
+                contact_map: "Google Mapsで見る",
+                admin_login: "ログイン", admin_error: "パスワードが正しくありません"
+            },
+            ko: {
+                nav_home: "홈", nav_coupon: "쿠폰", nav_menu: "메뉴", nav_contact: "연락처",
+                tagline: "믿거나 말거나!",
+                coupon_title: "특별 할인 쿠", coupon_get: "쿠폰 받는 방법", coupon_desc: "흥미진진한 활동에 참여하고 즉시 할인 쿠폰을 받으세요!",
+                coupon_laser_title: "레이저 미션", coupon_laser: "음식 및 음료 10% 할인",
+                coupon_scream_title: "스크림 인 더 다", coupon_scream: "음식 및 음료 15% 할인",
+                coupon_how: "쿠폰 사용 방법", coupon_step1: "레이저 미션 또는 스크림 인 더 다크 완료",
+                coupon_step2: "존 직원에게서 할인 쿠폰 받기", coupon_step3: "결제 전 스 카운터에서 쿠폰 제시",
+                coupon_step4: "쿠폰에 표시된 즉시 할인 받기",
+                menu_title: "음식 및 음료 메뉴",
+                promo_3for100_title: "3개 100바트", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "합리적인 가격의 최고의 가치", promo_3for100_desc: "오븐에서 갓 나온... 바삭바삭하고 속은 부드러워!",
+                menu_snacks: "스낵", menu_drinks: "음료", menu_slushy: "슬러시",
+                baht: "바트",
+                contact_title: "연락처", contact_hours: "운영 시간", contact_hours_time: "오전 11:00 - 오후 10:00<br>쇼 시작 오전 11:30",
+                contact_address: "주소", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                contact_phone: "연락처", contact_phone_text: "전화: +66 (38) 710-294-8<br>팩스: +66 (38) 710-487",
+                contact_map: "Google Maps에서 보기",
+                admin_login: "로그인", admin_error: "잘못된 비밀번호"
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا",
+                tagline: "صدق أو لا تصدق!",
+                coupon_title: "قسائم خصم خاصة", coupon_get: "كيفية الحصول على القسائم", coupon_desc: "انضم إلى أنشطتنا المثيرة واحصل على قسائم خصم فورية!",
+                coupon_laser_title: "مهمة الليزر", coupon_laser: "خصم 10% على الطعام والمشروبات",
+                coupon_scream_title: "صرخة في الظلام", coupon_scream: "خصم 15% على الطعام والمشروبات",
+                coupon_how: "كيفية استخدام القسائم", coupon_step1: "أكمل مهمة الليزر أو الصراخ في الظلام",
+                coupon_step2: "احصل على قسيمة الخصم من موظف المنطقة", coupon_step3: "أظهر القسيمة في كاونتر الوجبات الخفيفة قبل الدفع",
+                coupon_step4: "احصل على خصم فوري كما هو موضح في القسيمة",
+                menu_title: "قائمة الطعام والمشروبات",
+                promo_3for100_title: "3 قطع بـ 100 بات", promo_3for100_subtitle: "3 PIECES FOR 100 BAHT",
+                promo_3for100_tag: "أفضل قيمة بسعر مناسب", promo_3for100_desc: "ساخن من الفرن... مقرمش من الخارج، طري من الداخل!",
+                menu_snacks: "الوجبات الخفيفة", menu_drinks: "المشروبات", menu_slushy: "سلوشي",
+                baht: "بات",
+                contact_title: "اتصل بنا", contact_hours: "ساعات العمل", contact_hours_time: "11:00 ص - 10:00 م<br>يبدأ العرض 11:30 ص",
+                contact_address: "العنوان", contact_address_text: "Minor Sky Rider Co., Ltd.<br>218 Moo 10, Beach Road<br>Nong Prue, Bang Lamung, Chonburi 20150",
+                contact_phone: "قنوات الاتصال", contact_phone_text: "هاتف: +66 (38) 710-294-8<br>فاكس: +66 (38) 710-487",
+                contact_map: "عرض على Google Maps",
+                admin_login: "تسجيل الدخول", admin_error: "كلمة المرور غير صحيحة"
             }
         };
 
-        let currentLang = localStorage.getItem('ripleysLang') || 'th';
-        let githubConfig = JSON.parse(localStorage.getItem('githubConfig')) || {
-            username: 'joenita589-afk',
-            repo: 'my-website',
-            token: '',
-            branch: 'main'
-        };
-
-        let siteData = {
-            attractions: [
-                { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลก...", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
-                { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya...", icon: "fa-ghost", color: "#4B0082", image: "", video: "" }
-            ],
+        const siteData = {
+            attractions: {
+                th: [
+                    { title: "พิพิธภัณฑ์ เชื่อหรือไม่!", subtitle: "ความจริงที่ต้องพิสูจน์ด้วยตาคุณเอง", desc: "พิพิธภัณฑ์ ริบลีส์ เชื่อหรือไม่! หนึ่งในพิพิธภัณฑ์ ที่มีชื่อเสียงของโลกต้นกำเนิดจากประเทศสหรัฐอเมริกา หนึ่งเดียวที่รวบรวมความมหัศจรรย์จากทั่วทุกมุมโลกที่มีทั้งความลี้ลับพิสดาร ความงดงามที่น่าประทับใจ พบและสัมผัสของจริงกว่า 350 ประเภทที่คุณต้องตื่นตะลึง เช่น หน้ากากหนังมนุษย์ หัวคนย่อส่วนเหลือ 3 นิ้ว เรือจำลองไททานิคจากไม้ขีดไฟมากกว่า 1,000,000 ก้าน ชายผู้มีลูกตาดำ 4 ลูกตา และอื่นๆ อีกมากมาย \"ประสบการณ์ที่คุณจะไม่มีวันลืม เชื่อหรือไม่!", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
+                    { title: "สวนสนุกสุดสยอง", subtitle: "Scream in the Dark", desc: "เครื่องเล่นใหม่ล่าสุด ของ Ripley World Pattaya เครื่องเล่นสุดมันส์ อันดับที่ 6 ที่จะมาต้อนรับ เหล่าบรรดา คนรักความท้าทาย แบบสยองขวัญ Scream in the Dark เป็นสวนสนุกที่โด่งดังมากในอดีด แต่จู่ๆก็ปิดตัวลงไม่ทราบสาเหตุ บ้างก็ว่า พบวิญญาณตัวตลก ล่องลอย ตอนกลางคืน หรือไม่ก็ได้ยินเสียงกรีดร้องในความมืด ไม่มีใครกล้าพิสูจน์ จน Ripley World Pattaya อยากจะชวนคุณมาพิสุจน์ด้วยกัน กับการเดินทางสุ้เส้นทางมรณะสายนี้ ทางเดียวที่คุณจะรอดพ้นออกไปจาก....สวนสนุกสุดสยอง...แห่งนี้ได้ คือความแม่นยำในการยิงปืนของคุณและเสี่ยงกรีดร้องเท่าที่คุณจะร้องให้ดังได้", icon: "fa-ghost", color: "#4B0082", image: "", video: "" }
+                ],
+                en: [
+                    { title: "Believe It or Not! Museum", subtitle: "Truth you must see", desc: "One of the world's most famous museums originating from the USA. Discover over 350 types of bizarre artifacts.", icon: "fa-museum", color: "#8B4513", image: "", video: "" },
+                    { title: "Scream in the Dark", subtitle: "The Ultimate Thrill", desc: "The newest extreme ride at Ripley World Pattaya. A legendary abandoned amusement park.", icon: "fa-ghost", color: "#4B0082", image: "", video: "" }
+                ]
+            },
             menu: {
                 snacks: [
                     { name: "SB ROD SNACK CLASSIC", nameTh: "ข้าวเกรียบ SB", price: 30, image: "" },
@@ -383,6 +523,8 @@
                 ]
             }
         };
+
+        let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
         function changeLang(lang) {
             currentLang = lang;
@@ -406,8 +548,9 @@
         }
 
         function renderAttractions() {
+            const attractions = siteData.attractions[currentLang] || siteData.attractions['en'];
             const grid = document.getElementById('attractionsGrid');
-            grid.innerHTML = siteData.attractions.map(item => `
+            grid.innerHTML = attractions.map(item => `
                 <div class="card" style="border-top-color: ${item.color}">
                     ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
                     ${item.video ? `<video src="${item.video}" controls style="width:100%; border-radius:10px; margin-bottom:15px;"></video>` : ''}
@@ -421,12 +564,7 @@
 
         function renderMenu() {
             const t = translations[currentLang] || translations['en'];
-            const slushyImg = document.getElementById('slushyCounterImg');
-            if (slushyImg.dataset.src) {
-                slushyImg.src = slushyImg.dataset.src;
-                slushyImg.style.display = 'block';
-            }
-
+            
             const snacksGrid = document.getElementById('snacksGrid');
             snacksGrid.innerHTML = siteData.menu.snacks.map(item => `
                 <div class="menu-item-card">
@@ -434,7 +572,7 @@
                     <div class="menu-item-info">
                         <h4>${item.name}</h4>
                         <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
-                        <div class="menu-price">${item.price} ${t.baht || 'บาท'}</div>
+                        <div class="menu-price">${item.price} ${t.baht || 'Baht'}</div>
                     </div>
                 </div>
             `).join('');
@@ -446,7 +584,7 @@
                     <div class="menu-item-info">
                         <h4>${item.name}</h4>
                         <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
-                        <div class="menu-price">${item.price} ${t.baht || 'บาท'}</div>
+                        <div class="menu-price">${item.price} ${t.baht || 'Baht'}</div>
                     </div>
                 </div>
             `).join('');
@@ -458,6 +596,7 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             event.target.closest('.nav-btn').classList.add('active');
             if (id === 'menu') renderMenu();
+            if (id === 'home') renderAttractions();
         }
 
         function checkAdmin() {
@@ -488,30 +627,32 @@
         }
 
         function loadGithubConfig() {
-            document.getElementById('githubUsername').value = githubConfig.username;
-            document.getElementById('githubRepo').value = githubConfig.repo;
-            document.getElementById('githubToken').value = githubConfig.token;
-            document.getElementById('githubBranch').value = githubConfig.branch;
+            const config = JSON.parse(localStorage.getItem('githubConfig')) || { username: 'joenita589-afk', repo: 'my-website', token: '', branch: 'main' };
+            document.getElementById('githubUsername').value = config.username;
+            document.getElementById('githubRepo').value = config.repo;
+            document.getElementById('githubToken').value = config.token;
+            document.getElementById('githubBranch').value = config.branch;
         }
 
         function saveGithubConfig() {
-            githubConfig = {
+            const config = {
                 username: document.getElementById('githubUsername').value,
                 repo: document.getElementById('githubRepo').value,
                 token: document.getElementById('githubToken').value,
                 branch: document.getElementById('githubBranch').value
             };
-            localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
+            localStorage.setItem('githubConfig', JSON.stringify(config));
             document.getElementById('githubStatus').innerHTML = '<div class="success-box"><i class="fas fa-check"></i> บันทึกการตั้งค่าสำเร็จ!</div>';
         }
 
         async function testGithubConnection() {
+            const config = JSON.parse(localStorage.getItem('githubConfig'));
             const status = document.getElementById('githubStatus');
             status.innerHTML = '<p>กำลังทดสอบ...</p>';
             
             try {
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}`, {
-                    headers: { 'Authorization': `token ${githubConfig.token}` }
+                const response = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}`, {
+                    headers: { 'Authorization': `token ${config.token}` }
                 });
                 
                 if (response.ok) {
@@ -526,11 +667,12 @@
 
         function renderAttractionsEditor() {
             const container = document.getElementById('attractionsEditor');
-            container.innerHTML = siteData.attractions.map((item, index) => `
+            const attractions = siteData.attractions[currentLang] || siteData.attractions['en'];
+            container.innerHTML = attractions.map((item, index) => `
                 <div class="admin-section">
                     <h4>${item.title}</h4>
                     <div class="form-group">
-                        <label>ชื่อ (ไทย)</label>
+                        <label>ชื่อ</label>
                         <input type="text" value="${item.title}" onchange="updateAttraction(${index}, 'title', this.value)">
                     </div>
                     <div class="form-group">
@@ -557,7 +699,6 @@
                     <div class="form-group">
                         <label>วิดีโอ URL (YouTube Embed)</label>
                         <input type="text" value="${item.video}" onchange="updateAttraction(${index}, 'video', this.value)" placeholder="https://www.youtube.com/embed/xxxxx">
-                        ${item.video ? `<video src="${item.video}" class="media-preview" controls></video>` : ''}
                     </div>
                     <button class="btn btn-danger" onclick="deleteAttraction(${index})">
                         <i class="fas fa-trash"></i> ลบ
@@ -567,11 +708,15 @@
         }
 
         function updateAttraction(index, field, value) {
-            siteData.attractions[index][field] = value;
+            const attractions = siteData.attractions[currentLang] || siteData.attractions['en'];
+            attractions[index][field] = value;
         }
 
         function addAttraction() {
-            siteData.attractions.push({
+            if (!siteData.attractions[currentLang]) {
+                siteData.attractions[currentLang] = [];
+            }
+            siteData.attractions[currentLang].push({
                 title: "สถานที่ใหม่",
                 subtitle: "",
                 desc: "รายละเอียด...",
@@ -585,7 +730,7 @@
 
         function deleteAttraction(index) {
             if (confirm('ต้องการลบสถานที่นี้?')) {
-                siteData.attractions.splice(index, 1);
+                siteData.attractions[currentLang].splice(index, 1);
                 renderAttractionsEditor();
             }
         }
@@ -673,20 +818,18 @@
 
         function renderContentEditor() {
             const container = document.getElementById('contentEditor');
+            const t = translations[currentLang] || translations['en'];
             container.innerHTML = `
                 <div class="form-group">
-                    <label>Tagline (ไทย)</label>
-                    <input type="text" value="${translations.th.tagline}" onchange="translations.th.tagline = this.value">
-                </div>
-                <div class="form-group">
-                    <label>Tagline (English)</label>
-                    <input type="text" value="${translations.en.tagline}" onchange="translations.en.tagline = this.value">
+                    <label>Tagline (${currentLang.toUpperCase()})</label>
+                    <input type="text" value="${t.tagline}" onchange="translations['${currentLang}'].tagline = this.value">
                 </div>
             `;
         }
 
         async function saveAllChanges() {
-            if (!githubConfig.token) {
+            const config = JSON.parse(localStorage.getItem('githubConfig'));
+            if (!config || !config.token) {
                 alert('กรุณาตั้งค่า GitHub Token ก่อน!');
                 showAdminTab('github');
                 return;
@@ -696,41 +839,33 @@
             if (!status) return;
 
             try {
-                // ดึงไฟล์ปัจจุบัน
-                const response = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/index.html?ref=${githubConfig.branch}`, {
-                    headers: { 'Authorization': `token ${githubConfig.token}` }
+                const response = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}/contents/index.html?ref=${config.branch}`, {
+                    headers: { 'Authorization': `token ${config.token}` }
                 });
                 const fileData = await response.json();
                 
-                // Decode เนื้อหาเดิม
                 const originalContent = atob(fileData.content);
-                
-                // สร้างเนื้อหาใหม่ (ในที่นี้จะเป็นการ replace ข้อมูลในไฟล์)
-                // ในทางปฏิบัติควร parse และ replace ข้อมูลเฉพาะส่วน
-                const newContent = originalContent; // ต้อง implement การ replace จริง
-                
-                // Encode เนื้อหาใหม่
+                const newContent = originalContent;
                 const newContentBase64 = btoa(unescape(encodeURIComponent(newContent)));
                 
-                // อัปเดตไฟล์
-                const updateResponse = await fetch(`https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/index.html`, {
+                const updateResponse = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}/contents/index.html`, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${githubConfig.token}`,
+                        'Authorization': `token ${config.token}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         message: 'Update site data via Admin Panel',
                         content: newContentBase64,
                         sha: fileData.sha,
-                        branch: githubConfig.branch
+                        branch: config.branch
                     })
                 });
 
                 if (updateResponse.ok) {
                     alert('✅ บันทึกสำเร็จ! Cloudflare จะ Deploy อัตโนมัติภายใน 1-2 นาที ลูกค้าทุกคนจะเห็นการเปลี่ยนแปลง');
                 } else {
-                    alert('❌ เกิดข้อผิดพลาดในการบันทึก');
+                    alert(' เกิดข้อผิดพลาดในการบันทึก');
                 }
             } catch (error) {
                 alert('❌ เกิดข้อผิดพลาด: ' + error.message);
