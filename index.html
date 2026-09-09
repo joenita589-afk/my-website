@@ -49,6 +49,24 @@
         .card-price-badge { position: absolute; top: 12px; right: 12px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 1em; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid white; z-index: 2; }
         .card { position: relative; }
         .modal-price { display: inline-block; background: var(--primary); color: white; padding: 8px 22px; border-radius: 25px; font-size: 1.3em; font-weight: bold; margin-bottom: 15px; }
+        .pkg-fixed-list { margin-top: 18px; text-align: left; }
+        .pkg-fixed-item { display: flex; align-items: center; gap: 10px; padding: 7px 2px; border-top: 1px dashed #eee; font-size: 0.95em; color: #444; }
+        .pkg-fixed-thumb { width: 34px; height: 34px; border-radius: 50%; object-fit: contain; background: #f4f4f4; border: 1px solid #eee; flex-shrink: 0; }
+        .pkg-fixed-item i { width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; font-size: 0.9em; }
+        .pkg-fixed-title { font-size: 0.8em; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 16px; margin-bottom: 4px; font-weight: 700; }
+        .single-price-thumb { width: 52px; height: 52px; border-radius: 50%; object-fit: contain; background: #f4f4f4; border: 2px solid #eee; flex-shrink: 0; }
+        .single-price-name { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+        .terms-modal-box { max-width: 640px; }
+        .terms-modal-box h2 { margin-bottom: 5px; }
+        .terms-modal-box .terms-section { margin-top: 18px; }
+        .terms-modal-box .terms-section h3 { font-size: 1.05em; color: var(--dark); margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 6px; display: inline-block; }
+        .terms-modal-box .step-num { width: 30px; height: 30px; font-size: 0.85em; }
+        .terms-accept-bar { margin-top: 25px; padding-top: 18px; border-top: 2px solid #eee; text-align: center; }
+        .terms-accept-bar label { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; font-weight: 600; color: var(--dark); cursor: pointer; flex-wrap: wrap; }
+        .terms-accept-bar input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+        .btn:disabled { background: #bbb; cursor: not-allowed; }
+        .btn:disabled:hover { background: #bbb; transform: none; }
+        .terms-again-link { display: inline-block; margin-top: 15px; color: var(--primary); font-size: 0.9em; cursor: pointer; text-decoration: underline; }
         .single-price-list { margin-top: 40px; }
         .single-price-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px dashed #ddd; }
         .single-price-item:last-child { border-bottom: none; }
@@ -185,7 +203,7 @@
             <button class="nav-btn active" onclick="showSection('home')">
                 <i class="fas fa-home"></i> <span data-i18n="nav_home">หน้าหลัก</span>
             </button>
-            <button class="nav-btn" onclick="showSection('pricing')">
+            <button class="nav-btn" onclick="showPricing()">
                 <i class="fas fa-tag"></i> <span data-i18n="nav_pricing">ราคา</span>
             </button>
             <button class="nav-btn" onclick="showSection('coupon')">
@@ -220,7 +238,8 @@
             <div class="price-card" style="border-top-color: #e94560;">
                 <span class="price-badge">PACKAGE</span>
                 <h3 data-i18n="pkg_superfun_name">SUPER FUN</h3>
-                <p class="price-sub" data-i18n="pkg_superfun_desc">เลือก 4 เครื่องเล่น ที่ท่านชื่นชอบ</p>
+                <p class="price-sub" data-i18n="pkg_superfun_desc">เครื่องเล่น 4 รายการที่กำหนด (ไม่สามารถเปลี่ยนได้)</p>
+                <div class="pkg-fixed-list" id="pkgFixedSuper"></div>
                 <div class="price-row">
                     <div class="price-box">
                         <div class="price-label" data-i18n="price_child">เด็ก</div>
@@ -237,7 +256,8 @@
             <div class="price-card" style="border-top-color: #ff8c00;">
                 <span class="price-badge">PACKAGE</span>
                 <h3 data-i18n="pkg_happyfun_name">HAPPY FUN</h3>
-                <p class="price-sub" data-i18n="pkg_happyfun_desc">เลือก 4 เครื่องเล่น ที่ท่านชื่นชอบ</p>
+                <p class="price-sub" data-i18n="pkg_happyfun_desc">เครื่องเล่น 4 รายการที่กำหนด (ไม่สามารถเปลี่ยนได้)</p>
+                <div class="pkg-fixed-list" id="pkgFixedHappy"></div>
                 <div class="price-row">
                     <div class="price-box">
                         <div class="price-label" data-i18n="price_child">เด็ก</div>
@@ -268,6 +288,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="info-box">
+            <h2><i class="fas fa-exclamation-circle"></i> <span data-i18n="pricing_note_title">หมายเหตุ</span></h2>
+            <div class="step"><div class="step-num"><i class="fas fa-lock"></i></div><div data-i18n="pricing_note_1">โปรโมชั่น Super Fun และ Happy Fun ของรางวัลสิทธิ์ ไม่สามารถเปลี่ยนแปลงรายการเครื่องเล่นได้ในทุกกรณี</div></div>
+            <div class="step" style="margin-bottom:0;"><div class="step-num"><i class="fas fa-list-ol"></i></div><div data-i18n="pricing_note_2">แพ็กเกจ Combo 8 เครื่องเล่น สามารถเลือกเครื่องเล่นได้จากทั้งหมด 9 รายการ โดยไม่สามารถเลือกเครื่องเล่นซ้ำได้</div></div>
         </div>
         <div class="info-box single-price-list">
             <h2><i class="fas fa-ticket-alt"></i> <span data-i18n="single_price_title">ราคาเดี่ยวแต่ละเครื่องเล่น</span></h2>
@@ -483,6 +508,22 @@
         </div>
     </section>
 
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-box terms-modal-box">
+            <button class="modal-close" onclick="closeTermsModal()" aria-label="Close"><i class="fas fa-times"></i></button>
+            <div id="termsContent"></div>
+            <div class="terms-accept-bar">
+                <label>
+                    <input type="checkbox" id="termsCheck" onchange="document.getElementById('termsAcceptBtn').disabled = !this.checked;">
+                    <span data-i18n="terms_checkbox">ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขและข้อปฏิบัติแล้ว</span>
+                </label>
+                <button class="btn btn-success" id="termsAcceptBtn" disabled onclick="acceptTerms()">
+                    <i class="fas fa-check-circle"></i> <span data-i18n="terms_accept">ยอมรับเงื่อนไขและดูราคา</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="attractionModal" onclick="if(event.target===this)closeAttractionModal()">
         <div class="modal-box">
             <button class="modal-close" onclick="closeAttractionModal()" aria-label="Close"><i class="fas fa-times"></i></button>
@@ -498,14 +539,21 @@
                     "pricing_title": "ราคาบัตรเข้าชม",
                     "pricing_sub": "PROMOTION ราคาสุดคุ้ม",
                     "pkg_superfun_name": "SUPER FUN",
-                    "pkg_superfun_desc": "เลือก 4 เครื่องเล่น ที่ท่านชื่นชอบ",
+                    "pkg_superfun_desc": "เครื่องเล่น 4 รายการที่กำหนด (ไม่สามารถเปลี่ยนได้)",
+                    "pkg_fixed_label": "เครื่องเล่นที่กำหนด",
+                    "pricing_note_title": "หมายเหตุ",
+                    "pricing_note_1": "โปรโมชั่น Super Fun และ Happy Fun ของรางวัลสิทธิ์ ไม่สามารถเปลี่ยนแปลงรายการเครื่องเล่นได้ในทุกกรณี",
+                    "pricing_note_2": "แพ็กเกจ Combo 8 เครื่องเล่น สามารถเลือกเครื่องเล่นได้จากทั้งหมด 9 รายการ โดยไม่สามารถเลือกเครื่องเล่นซ้ำได้",
                     "pkg_happyfun_name": "HAPPY FUN",
-                    "pkg_happyfun_desc": "เลือก 4 เครื่องเล่น ที่ท่านชื่นชอบ",
+                    "pkg_happyfun_desc": "เครื่องเล่น 4 รายการที่กำหนด (ไม่สามารถเปลี่ยนได้)",
                     "pkg_combo_name": "COMBO 8 เครื่องเล่น",
                     "pkg_combo_desc": "สนุกครบทั้ง 8 เครื่องเล่น ในราคาสุดคุ้ม",
                     "price_child": "เด็ก",
                     "price_adult": "ผู้ใหญ่",
                     "single_price_title": "ราคาเดี่ยวแต่ละเครื่องเล่น",
+                    "terms_checkbox": "ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขและข้อปฏิบัติแล้ว",
+                    "terms_accept": "ยอมรับเงื่อนไขและดูราคา",
+                    "terms_again": "อ่านเงื่อนไขการใช้บริการอีกครั้ง",
                     "nav_coupon": "คูปอง",
                     "nav_menu": "เมนู",
                     "nav_contact": "ติดต่อเรา",
@@ -561,14 +609,21 @@
                     "pricing_title": "Admission Prices",
                     "pricing_sub": "PROMOTION - Best Value Prices",
                     "pkg_superfun_name": "SUPER FUN",
-                    "pkg_superfun_desc": "Choose 4 attractions of your choice",
+                    "pkg_superfun_desc": "4 fixed attractions (cannot be changed)",
+                    "pkg_fixed_label": "Included attractions",
+                    "pricing_note_title": "Note",
+                    "pricing_note_1": "Super Fun and Happy Fun promotions are fixed privileges; the list of attractions cannot be changed under any circumstances",
+                    "pricing_note_2": "The Combo 8-attraction package lets you choose from a total of 9 attractions; no attraction may be selected twice",
                     "pkg_happyfun_name": "HAPPY FUN",
-                    "pkg_happyfun_desc": "Choose 4 attractions of your choice",
+                    "pkg_happyfun_desc": "4 fixed attractions (cannot be changed)",
                     "pkg_combo_name": "COMBO 8 Attractions",
                     "pkg_combo_desc": "Enjoy all 8 attractions at the best price",
                     "price_child": "Child",
                     "price_adult": "Adult",
                     "single_price_title": "Single Attraction Prices",
+                    "terms_checkbox": "I have read and agree to the terms and conditions",
+                    "terms_accept": "Accept & View Prices",
+                    "terms_again": "Read terms & conditions again",
                     "nav_coupon": "Coupons",
                     "nav_menu": "Menu",
                     "nav_contact": "Contact",
@@ -904,14 +959,21 @@ Object.assign(translations.zh, {
     pricing_title: "门票价格",
     pricing_sub: "促销价 超值优惠",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "任选4项游乐设施",
+    pkg_superfun_desc: "固定4项游乐设施（不可更改）",
+    pkg_fixed_label: "包含游乐设施",
+    pricing_note_title: "备注",
+    pricing_note_1: "SUPER FUN 和 HAPPY FUN 促销活动为固定权益，任何情况下均不可更改游乐设施项目",
+    pricing_note_2: "COMBO 8项游乐设施套票可从全部9项中任选，但不可重复选择同一项",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "任选4项游乐设施",
+    pkg_happyfun_desc: "固定4项游乐设施（不可更改）",
     pkg_combo_name: "COMBO 8项游乐设施",
     pkg_combo_desc: "畅玩全部8项游乐设施 超值价格",
     price_child: "儿童",
     price_adult: "成人",
-    single_price_title: "单项游乐设施价格", nav_coupon: "优惠券", nav_menu: "菜单", nav_contact: "联系我们",
+    single_price_title: "单项游乐设施价格",
+    terms_checkbox: "本人已阅读并同意条款与注意事项",
+    terms_accept: "同意条款并查看价格",
+    terms_again: "再次阅读服务条款", nav_coupon: "优惠券", nav_menu: "菜单", nav_contact: "联系我们",
     tagline: "信不信由你！",
     coupon_title: "特别折扣优惠券", coupon_get: "如何获取优惠券",
     coupon_desc: "参加精彩活动即可立即获得折扣优惠券！",
@@ -951,14 +1013,21 @@ Object.assign(translations.ru, {
     pricing_title: "Цены на входные билеты",
     pricing_sub: "АКЦИЯ — выгодные цены",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "Выберите 4 аттракциона на выбор",
+    pkg_superfun_desc: "4 фиксированных аттракциона (изменить нельзя)",
+    pkg_fixed_label: "Включённые аттракционы",
+    pricing_note_title: "Примечание",
+    pricing_note_1: "Акции Super Fun и Happy Fun являются фиксированной привилегией; список аттракционов нельзя изменить ни при каких обстоятельствах",
+    pricing_note_2: "Пакет COMBO на 8 аттракционов: можно выбрать из общего списка из 9 аттракционов, но нельзя выбирать один и тот же дважды",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "Выберите 4 аттракциона на выбор",
+    pkg_happyfun_desc: "4 фиксированных аттракциона (изменить нельзя)",
     pkg_combo_name: "COMBO — 8 аттракционов",
     pkg_combo_desc: "Все 8 аттракционов по выгодной цене",
     price_child: "Детский",
     price_adult: "Взрослый",
-    single_price_title: "Цены отдельных аттракционов", nav_coupon: "Купоны", nav_menu: "Меню", nav_contact: "Контакты",
+    single_price_title: "Цены отдельных аттракционов",
+    terms_checkbox: "Я прочитал(а) и принимаю условия и правила",
+    terms_accept: "Принять условия и посмотреть цены",
+    terms_again: "Прочитать условия ещё раз", nav_coupon: "Купоны", nav_menu: "Меню", nav_contact: "Контакты",
     tagline: "Хотите — верьте, хотите — нет!",
     coupon_title: "Специальные купоны на скидку", coupon_get: "Как получить купон",
     coupon_desc: "Примите участие в наших увлекательных мероприятиях и получите купон на скидку мгновенно!",
@@ -998,14 +1067,21 @@ Object.assign(translations.hi, {
     pricing_title: "प्रवेश टिकट की कीमतें",
     pricing_sub: "प्रोमोशन — सबसे किफायती कीमतें",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "अपनी पसंद के 4 आकर्षण चुनें",
+    pkg_superfun_desc: "4 निश्चित आकर्षण (इन्हें बदला नहीं जा सकता)",
+    pkg_fixed_label: "शामिल आकर्षण",
+    pricing_note_title: "टिप्पणी",
+    pricing_note_1: "Super Fun और Happy Fun प्रोमोशन स्थायी सुविधाएँ हैं; किसी भी स्थिति में आकर्षणों की सूची नहीं बदली जा सकती",
+    pricing_note_2: "COMBO 8 आकर्षण पैकेज में कुल 9 में से चुन सकते हैं, लेकिन कोई आकर्षण दो बार नहीं चुना जा सकता",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "अपनी पसंद के 4 आकर्षण चुनें",
+    pkg_happyfun_desc: "4 निश्चित आकर्षण (इन्हें बदला नहीं जा सकता)",
     pkg_combo_name: "COMBO — 8 आकर्षण",
     pkg_combo_desc: "सभी 8 आकर्षणों का आनंद सबसे अच्छे दाम पर",
     price_child: "बच्चा",
     price_adult: "वयस्क",
-    single_price_title: "प्रत्येक आकर्षण की अलग कीमत", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क",
+    single_price_title: "प्रत्येक आकर्षण की अलग कीमत",
+    terms_checkbox: "मैंने नियमों और शर्तों को पढ़ लिया है और उनसे सहमत हूँ",
+    terms_accept: "सहमत हों और कीमतें देखें",
+    terms_again: "नियम दोबारा पढ़ें", nav_coupon: "कूपन", nav_menu: "मेनू", nav_contact: "संपर्क",
     tagline: "विश्वास करो या नहीं!",
     coupon_title: "विशेष छूट कूपन", coupon_get: "कूपन कैसे प्राप्त करें",
     coupon_desc: "हमारी रोमांचक गतिविधियों में भाग लें और तुरंत छूट कूपन पाएं!",
@@ -1045,14 +1121,21 @@ Object.assign(translations.he, {
     pricing_title: "מחירי כרטיסי כניסה",
     pricing_sub: "מבצע — מחירים משתלמים",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "בחרו 4 מתקנים לבחירתכם",
+    pkg_superfun_desc: "4 מתקנים קבועים (לא ניתן לשנות)",
+    pkg_fixed_label: "מתקנים כלולים",
+    pricing_note_title: "הערה",
+    pricing_note_1: "מבצעי Super Fun ו-Happy Fun הם הטבה קבועה; לא ניתן לשנות את רשימת המתקנים בכל מקרה",
+    pricing_note_2: "חבילת COMBO של 8 מתקנים מאפשרת בחירה מתוך 9 בסך הכול, ללא אפשרות לבחור את אותו מתקן פעמיים",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "בחרו 4 מתקנים לבחירתכם",
+    pkg_happyfun_desc: "4 מתקנים קבועים (לא ניתן לשנות)",
     pkg_combo_name: "COMBO — 8 מתקנים",
     pkg_combo_desc: "כל 8 המתקנים במחיר הטוב ביותר",
     price_child: "ילד",
     price_adult: "מבוגר",
-    single_price_title: "מחירים למתקן בודד", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר",
+    single_price_title: "מחירים למתקן בודד",
+    terms_checkbox: "קראתי את התנאים וההוראות ואני מסכים/ה להם",
+    terms_accept: "אישור התנאים והצגת מחירים",
+    terms_again: "קריאת התנאים שוב", nav_coupon: "קופונים", nav_menu: "תפריט", nav_contact: "צור קשר",
     tagline: "תאמינו או לא!",
     coupon_title: "קופוני הנחה מיוחדים", coupon_get: "כיצד לקבל קופון",
     coupon_desc: "השתתפו בפעילויות המרגשות שלנו וקבלו קופון הנחה מיידי!",
@@ -1092,14 +1175,21 @@ Object.assign(translations.ja, {
     pricing_title: "入場料金",
     pricing_sub: "プロモーション お得な料金",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "お好きなアトラクション4つを選択",
+    pkg_superfun_desc: "固定アトラクション4つ（変更不可）",
+    pkg_fixed_label: "対象アトラクション",
+    pricing_note_title: "注意事項",
+    pricing_note_1: "SUPER FUNおよびHAPPY FUNプロモーションは固定特典のため、どのような場合でもアトラクションの変更はできません",
+    pricing_note_2: "COMBO 8アトラクションパッケージは全9つからお選びいただけますが、同じアトラクションを2回選ぶことはできません",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "お好きなアトラクション4つを選択",
+    pkg_happyfun_desc: "固定アトラクション4つ（変更不可）",
     pkg_combo_name: "COMBO 8アトラクション",
     pkg_combo_desc: "8つすべてのアトラクションをお得な価格で",
     price_child: "子供",
     price_adult: "大人",
-    single_price_title: "アトラクション別料金", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ",
+    single_price_title: "アトラクション別料金",
+    terms_checkbox: "利用規約と注意事項を読み、同意します",
+    terms_accept: "規約に同意して料金を見る",
+    terms_again: "利用規約をもう一度読む", nav_coupon: "クーポン", nav_menu: "メニュー", nav_contact: "お問い合わせ",
     tagline: "信じられない！",
     coupon_title: "特別割引クーポン", coupon_get: "クーポンの入手方法",
     coupon_desc: "楽しいアクティビティに参加して、その場で割引クーポンをゲットしよう！",
@@ -1139,14 +1229,21 @@ Object.assign(translations.ko, {
     pricing_title: "입장권 가격",
     pricing_sub: "프로모션 — 가장 합리적인 가격",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "원하는 어트랙션 4가지 선택",
+    pkg_superfun_desc: "고정 어트랙션 4개 (변경 불가)",
+    pkg_fixed_label: "포함 어트랙션",
+    pricing_note_title: "참고 사항",
+    pricing_note_1: "SUPER FUN 및 HAPPY FUN 프로모션은 고정 혜택으로, 어떠한 경우에도 어트랙션 목록을 변경할 수 없습니다",
+    pricing_note_2: "COMBO 8개 어트랙션 패키지는 전체 9개 중에서 선택 가능하며, 같은 어트랙션을 중복 선택할 수 없습니다",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "원하는 어트랙션 4가지 선택",
+    pkg_happyfun_desc: "고정 어트랙션 4개 (변경 불가)",
     pkg_combo_name: "COMBO 8개 어트랙션",
     pkg_combo_desc: "어트랙션 8개 모두를 가장 좋은 가격에",
     price_child: "어린이",
     price_adult: "성인",
-    single_price_title: "어트랙션별 단품 가격", nav_coupon: "쿠폰", nav_menu: "메뉴", nav_contact: "연락처",
+    single_price_title: "어트랙션별 단품 가격",
+    terms_checkbox: "약관 및 유의사항을 읽었으며 이에 동의합니다",
+    terms_accept: "약관 동의 후 가격 보기",
+    terms_again: "이용 약관 다시 읽기", nav_coupon: "쿠폰", nav_menu: "메뉴", nav_contact: "연락처",
     tagline: "믿거나 말거나!",
     coupon_title: "특별 할인 쿠폰", coupon_get: "쿠폰 받는 방법",
     coupon_desc: "신나는 액티비티에 참여하고 즉시 할인 쿠폰을 받아보세요!",
@@ -1186,14 +1283,21 @@ Object.assign(translations.ar, {
     pricing_title: "أسعار التذاكر",
     pricing_sub: "عروض — أفضل الأسعار",
     pkg_superfun_name: "SUPER FUN",
-    pkg_superfun_desc: "اختر 4 ألعاب من اختيارك",
+    pkg_superfun_desc: "4 ألعاب محددة (لا يمكن تغييرها)",
+    pkg_fixed_label: "الألعاب المتضمنة",
+    pricing_note_title: "ملاحظة",
+    pricing_note_1: "عروض SUPER FUN وHAPPY FUN امتيازات ثابتة؛ لا يمكن تغيير قائمة الألعاب في جميع الحالات",
+    pricing_note_2: "باقة COMBO ذات الألعاب الثمانية تتيح الاختيار من بين 9 ألعاب إجمالاً، دون إمكانية اختيار نفس اللعبة مرتين",
     pkg_happyfun_name: "HAPPY FUN",
-    pkg_happyfun_desc: "اختر 4 ألعاب من اختيارك",
+    pkg_happyfun_desc: "4 ألعاب محددة (لا يمكن تغييرها)",
     pkg_combo_name: "COMBO - 8 ألعاب",
     pkg_combo_desc: "استمتع بجميع الألعاب الثمانية بأفضل سعر",
     price_child: "طفل",
     price_adult: "بالغ",
-    single_price_title: "أسعار كل لعبة على حدة", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا",
+    single_price_title: "أسعار كل لعبة على حدة",
+    terms_checkbox: "لقد قرأت الشروط والأحكام وأوافق عليها",
+    terms_accept: "الموافقة على الشروط وعرض الأسعار",
+    terms_again: "قراءة الشروط مرة أخرى", nav_coupon: "القسائم", nav_menu: "القائمة", nav_contact: "اتصل بنا",
     tagline: "صدق أو لا تصدق!",
     coupon_title: "قسائم خصم خاصة", coupon_get: "كيفية الحصول على القسيمة",
     coupon_desc: "شارك في أنشطتنا الممتعة واحصل على قسيمة خصم فورية!",
@@ -1331,6 +1435,7 @@ Object.assign(translations.ar, {
                               },
                               {
                                         "title": "หนีตายสวนสยอง",
+                                        "price": 400,
                                         "subtitle": "Escape the Haunted Garden",
                                         "desc": "ปี ค.ศ. 1945 ท่ามกลางสงครามโลกครั้งที่สอง โรงพยาบาลแห่งหนึ่งบนเกาะทางตอนใต้ของอังกฤษ ตั้งอยู่เคียงข้างสวนสาธารณะที่เต็มไปด้วยเสียงหัวเราะ จนกระทั่งเสียงระเบิดดังตูม!! ทุกสิ่งพังทลายในพริบตา โรงพยาบาลกลายเป็นซากปรักหักพัง ผู้คนสูญหาย เหลือเพียงเสียงร้องขอความช่วยเหลือที่ค่อยๆ เลือนหายไปในความมืด",
                                         "icon": "fa-skull",
@@ -2278,6 +2383,7 @@ Object.assign(translations.ar, {
 
             // Render attractions ตามภาษาที่เลือก
             renderAttractions();
+            renderPackageFixed();
             renderSinglePrices();
             renderMenu();
 
@@ -2290,6 +2396,74 @@ Object.assign(translations.ar, {
             if (couponTab && couponTab.style.display !== 'none') {
                 renderCouponEditor();
             }
+        }
+
+        function isTermsAccepted() {
+            return localStorage.getItem('ripleysTermsAccepted') === '1';
+        }
+
+        function renderTermsContent() {
+            const t = translations[currentLang] || translations['en'];
+            const step = (icon, key) => `
+                <div class="step"><div class="step-num"><i class="fas ${icon}"></i></div><div>${t[key] || ''}</div></div>`;
+            document.getElementById('termsContent').innerHTML = `
+                <h2><i class="fas fa-file-contract"></i> ${t.coupon_ticket_title || ''}</h2>
+                <div class="terms-section">
+                    <h3>${t.ticket_policy_title || ''}</h3>
+                    ${step('fa-ban', 'ticket_policy_1')}
+                    ${step('fa-hand-holding', 'ticket_policy_2')}
+                    ${step('fa-user', 'ticket_policy_3')}
+                </div>
+                <div class="terms-section">
+                    <h3>${t.ticket_height_title || ''}</h3>
+                    ${step('fa-baby', 'ticket_height_1')}
+                    ${step('fa-child', 'ticket_height_2')}
+                    ${step('fa-male', 'ticket_height_3')}
+                </div>
+                <div class="terms-section">
+                    <h3>${t.ticket_online_title || ''}</h3>
+                    ${step('fa-search', 'ticket_online_1')}
+                    ${step('fa-file-invoice', 'ticket_online_2')}
+                </div>
+            `;
+        }
+
+        function openTermsModal() {
+            renderTermsContent();
+            document.getElementById('termsCheck').checked = false;
+            document.getElementById('termsAcceptBtn').disabled = true;
+            document.getElementById('termsModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTermsModal() {
+            document.getElementById('termsModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function acceptTerms() {
+            localStorage.setItem('ripleysTermsAccepted', '1');
+            closeTermsModal();
+            showSection('pricing');
+        }
+
+        // กดเมนู "ราคา": ถ้ายังไม่เคยยอมรับเงื่อนไข ให้เด้งป๊อปอัพเงื่อนไขก่อน
+        function showPricing() {
+            if (isTermsAccepted()) {
+                showSection('pricing');
+            } else {
+                openTermsModal();
+            }
+        }
+
+        // เปิดดูเงื่อนไขอีกครั้งจากหน้าราคา (ไม่ต้องยอมรับซ้ำ)
+        function showTermsAgain() {
+            renderTermsContent();
+            document.getElementById('termsModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            document.querySelector('#termsModal .terms-accept-bar').style.display = 'none';
+            const ov = document.getElementById('termsModal');
+            ov.onclick = ev => { if (ev.target === ov) { closeTermsModal(); ov.onclick = null; document.querySelector('#termsModal .terms-accept-bar').style.display = ''; } };
         }
 
         function renderAttractions() {
@@ -2337,6 +2511,26 @@ Object.assign(translations.ar, {
             if (e.key === 'Escape') closeAttractionModal();
         });
 
+        // แพ็กเกจฟิกเครื่องเล่น: SUPER FUN = [museum, tussauds, scream, playneo], HAPPY FUN = [pyramid, infinity maze, laser, playneo]
+        const pkgFixed = { pkgFixedSuper: [0, 3, 1, 8], pkgFixedHappy: [7, 4, 5, 8] };
+
+        function renderPackageFixed() {
+            const t = translations[currentLang] || translations['en'];
+            const atts = getAttractions(currentLang);
+            Object.entries(pkgFixed).forEach(([elId, idxs]) => {
+                const el = document.getElementById(elId);
+                if (!el) return;
+                el.innerHTML = `<div class="pkg-fixed-title"><i class="fas fa-lock"></i> ${t.pkg_fixed_label || ''}</div>` + idxs.map(i => {
+                    const a = atts[i];
+                    if (!a) return '';
+                    const thumb = a.logo
+                        ? `<img class="pkg-fixed-thumb" src="${a.logo}" alt="${a.title}">`
+                        : `<i style="background:${a.color || '#999'}" class="fas ${a.icon || 'fa-star'}"></i>`;
+                    return `<div class="pkg-fixed-item">${thumb}<span>${a.title}</span></div>`;
+                }).join('');
+            });
+        }
+
         function renderSinglePrices() {
             const t = translations[currentLang] || translations['en'];
             const items = getAttractions(currentLang).filter(a => a.price !== undefined);
@@ -2344,10 +2538,13 @@ Object.assign(translations.ar, {
             if (!el) return;
             el.innerHTML = items.map(a => `
                 <div class="single-price-item">
-                    <span class="single-price-name">${a.title}${a.subtitle ? ` <small style="color:#888; font-weight:normal;">(${a.subtitle})</small>` : ''}</span>
+                    <span class="single-price-name">
+                        ${a.logo ? `<img class="single-price-thumb" src="${a.logo}" alt="${a.title}">` : `<span class="single-price-thumb" style="display:inline-flex;align-items:center;justify-content:center;color:#fff;background:${a.color || '#999'};"><i class="fas ${a.icon || 'fa-star'}"></i></span>`}
+                        <span>${a.title}${a.subtitle ? ` <small style="color:#888; font-weight:normal;">(${a.subtitle})</small>` : ''}</span>
+                    </span>
                     <span class="single-price-val">${a.price.toLocaleString()} ${t.baht || 'Baht'}</span>
                 </div>
-            `).join('');
+            `).join('') + `<div style="text-align:center;"><span class="terms-again-link" onclick="showTermsAgain()"><i class="fas fa-file-contract"></i> ${t.terms_again || ''}</span></div>`;
         }
 
         function renderMenu() {
@@ -2373,7 +2570,13 @@ Object.assign(translations.ar, {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            event.target.closest('.nav-btn').classList.add('active');
+            const navBtn = event.target.closest('.nav-btn');
+            if (navBtn) {
+                navBtn.classList.add('active');
+            } else {
+                const pricingBtn = document.querySelector('.nav-btn[onclick*="showPricing"]');
+                if (pricingBtn) pricingBtn.classList.add('active');
+            }
             document.getElementById('navContainer').classList.remove('open');
             if (id === 'menu') renderMenu();
             if (id === 'home') renderAttractions();
