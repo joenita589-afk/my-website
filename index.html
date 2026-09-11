@@ -179,6 +179,7 @@
 <base target="_blank">
 <base target="_blank">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -312,11 +313,13 @@
             <p data-i18n="coupon_desc">ร่วมกิจกรรมสุดมันส์เพื่อรับคูปองส่วนลดทันที!</p>
             <div class="grid" style="margin-top: 20px;">
                 <div class="card" style="border-top-color: #00CED1;">
+                    <div id="couponLaserImg"></div>
                     <div class="card-icon" style="background: #00CED1;"><i class="fas fa-bullseye"></i></div>
                     <h3 data-i18n="coupon_laser_title">Games Laser Mission</h3>
                     <p data-i18n="coupon_laser">รับส่วนลด 10% สำหรับอาหารและเครื่องดื่ม</p>
                 </div>
                 <div class="card" style="border-top-color: #4B0082;">
+                    <div id="couponScreamImg"></div>
                     <div class="card-icon" style="background: #4B0082;"><i class="fas fa-ghost"></i></div>
                     <h3 data-i18n="coupon_scream_title">Scream in the Dark</h3>
                     <p data-i18n="coupon_scream">รับส่วนลด 15% สำหรับอาหารและเครื่องดื่ม</p>
@@ -2334,6 +2337,10 @@ Object.assign(translations.ar, {
                                         "image": ""
                               }
                     ]
+          },
+          "coupon": {
+                    "laserImage": "",
+                    "screamImage": ""
           }
 };;;;;
 
@@ -2400,6 +2407,7 @@ Object.assign(translations.ar, {
             renderPackageFixed();
             renderSinglePrices();
             renderMenu();
+            renderCouponImages();
 
             // ถ้ากำลังเปิดหน้าแอดมินอยู่ ให้รีเฟรชตัวแก้ไขสถานที่ตามภาษาที่เลือกด้วย
             const attractionsTab = document.getElementById('adminTabAttractions');
@@ -2852,6 +2860,25 @@ Object.assign(translations.ar, {
             }
         }
 
+        function renderCouponImages() {
+            const c = (typeof siteData !== 'undefined' && siteData.coupon) || {};
+            const setImg = (id, url) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.innerHTML = url ? `<img src="${url}" alt="coupon" style="width:100%;border-radius:10px;margin-bottom:15px;" onerror="this.style.display='none'">` : '';
+            };
+            setImg('couponLaserImg', c.laserImage);
+            setImg('couponScreamImg', c.screamImage);
+        }
+
+        function updateCouponImage(field, value) {
+            if (!siteData.coupon) siteData.coupon = { laserImage: '', screamImage: '' };
+            siteData.coupon[field] = value;
+            renderCouponImages();
+            const couponTab = document.getElementById('adminTabCoupon');
+            if (couponTab && couponTab.style.display !== 'none') renderCouponEditor();
+        }
+
         function renderCouponEditor() {
             const langNames = { th: 'ไทย', en: 'English', zh: '中文', ru: 'Русский', hi: 'हिन्दी', he: 'עברית', ja: '日本語', ko: '한국어', ar: 'العربية' };
             const t = translations[currentLang] || translations['en'];
@@ -2881,6 +2908,11 @@ Object.assign(translations.ar, {
                 ['ticket_online_1', 'เงื่อนไข 3.1 (ตรวจสอบก่อนจ่าย)'],
                 ['ticket_online_2', 'เงื่อนไข 3.2 (จ่ายแล้วไม่ยกเลิก)']
             ];
+            const couponImgs = (siteData.coupon) || { laserImage: '', screamImage: '' };
+            const imgFields = [
+                ['laserImage', 'รูปคูปองเลเซอร์ (Games Laser Mission)', 'couponLaserImg'],
+                ['screamImage', 'รูปคูปอง Scream in the Dark', 'couponScreamImg']
+            ];
             const noteEl = document.getElementById('couponLangNote');
             if (noteEl) {
                 noteEl.innerHTML = `<i class="fas fa-language"></i> กำลังแก้ไขข้อความของภาษา: <strong>${langNames[currentLang] || currentLang}</strong>` +
@@ -2890,6 +2922,12 @@ Object.assign(translations.ar, {
                 <div class="form-group">
                     <label>${label} <small style="color:#999;">(${key})</small></label>
                     <input type="text" value="${(t[key] || '').replace(/"/g, '&quot;')}" onchange="updateCouponText('${key}', this.value)">
+                </div>
+            `).join('') + imgFields.map(([key, label]) => `
+                <div class="form-group">
+                    <label>🖼️ ${label} <small style="color:#999;">(URL รูปภาพ)</small></label>
+                    <input type="text" value="${(couponImgs[key] || '').replace(/"/g, '&quot;')}" onchange="updateCouponImage('${key}', this.value)" placeholder="https://example.com/coupon.png">
+                    ${couponImgs[key] ? `<img src="${couponImgs[key]}" class="media-preview" onerror="this.style.display='none'">` : '<small style="color:#999;">ยังไม่ได้ตั้งรูป — ใส่ URL แล้วรูปจะแสดงบนหน้าคูปองทันที</small>'}
                 </div>
             `).join('');
         }
