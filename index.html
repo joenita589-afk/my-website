@@ -2874,7 +2874,7 @@ Object.assign(translations.ar, {
             renderMenu();
             renderCouponImages();
 
-            // ถ้ากำลังเปิดหน้าแอดมินอยู่ ให้รีเฟรชตัวแก้ไขสถานที่ตามภาษาที่เลือกด้วย
+                        // ถ้ากำลังเปิดหน้าแอดมินอยู่ ให้รีเฟรชตัวแก้ไขสถานที่ตามภาษาที่เลือกด้วย
             const attractionsTab = document.getElementById('adminTabAttractions');
             if (attractionsTab && attractionsTab.style.display !== 'none') {
                 renderAttractionsEditor();
@@ -2882,6 +2882,10 @@ Object.assign(translations.ar, {
             const couponTab = document.getElementById('adminTabCoupon');
             if (couponTab && couponTab.style.display !== 'none') {
                 renderCouponEditor();
+            }
+            const menuTab = document.getElementById('adminTabMenu');
+            if (menuTab && menuTab.style.display !== 'none') {
+                renderMenuEditor();
             }
         }
 
@@ -3035,24 +3039,35 @@ Object.assign(translations.ar, {
             `).join('') + `<div style="text-align:center;"><span class="terms-again-link" onclick="showTermsAgain()"><i class="fas fa-file-contract"></i> ${t.terms_again || ''}</span></div>`;
         }
 
-        function renderMenu() {
-            const t = translations[currentLang] || translations['en'];
-            
-            const renderItem = item => `
-                <div class="menu-item-card">
-                    <div class="img-wrap">
-                        ${item.image ? `<img src="${item.image}" alt="${item.name}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
-                        <div class="menu-price-badge">${item.price} ${t.baht || 'Baht'}</div>
-                    </div>
-                    <div class="menu-item-info">
-                        <h4>${item.name}</h4>
-                        <p>${currentLang === 'th' ? item.nameTh : item.name}</p>
-                    </div>
-                </div>
-            `;
-            document.getElementById('snacksGrid').innerHTML = siteData.menu.snacks.map(renderItem).join('');
-            document.getElementById('drinksGrid').innerHTML = siteData.menu.drinks.map(renderItem).join('');
-        }
+        function getMenuName(item, lang) {
+    if (item.names && item.names[lang]) return item.names[lang];
+    if (lang === 'th' && item.nameTh) return item.nameTh;
+    if (item.names && item.names.en) return item.names.en;
+    return item.name || '';
+}
+
+function renderMenu() {
+    const t = translations[currentLang] || translations['en'];
+
+    const renderItem = item => {
+        const localName = getMenuName(item, currentLang);
+        const subName = (item.name && item.name.toUpperCase() !== localName.toUpperCase()) ? item.name : '';
+        return `
+        <div class="menu-item-card">
+            <div class="img-wrap">
+                ${item.image ? `<img src="${item.image}" alt="${localName}">` : '<div style="height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;color:#999;"><i class="fas fa-image" style="font-size:3em;"></i></div>'}
+                <div class="menu-price-badge">${item.price} ${t.baht || 'Baht'}</div>
+            </div>
+            <div class="menu-item-info">
+                <h4>${localName}</h4>
+                ${subName ? `<p>${subName}</p>` : ''}
+            </div>
+        </div>`;
+    };
+
+    document.getElementById('snacksGrid').innerHTML = siteData.menu.snacks.map(renderItem).join('');
+    document.getElementById('drinksGrid').innerHTML = siteData.menu.drinks.map(renderItem).join('');
+}
 
         function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -3245,76 +3260,63 @@ Object.assign(translations.ar, {
         }
 
         function renderMenuEditor() {
-            const container = document.getElementById('menuEditor');
-            let html = '<h4>อาหารว่าง</h4>';
-            html += siteData.menu.snacks.map((item, index) => `
-                <div class="admin-section">
-                    <div class="form-group">
-                        <label>ชื่อ (English)</label>
-                        <input type="text" value="${item.name}" onchange="updateMenu('snacks', ${index}, 'name', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>ชื่อ (ไทย)</label>
-                        <input type="text" value="${item.nameTh}" onchange="updateMenu('snacks', ${index}, 'nameTh', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>ราคา</label>
-                        <input type="number" value="${item.price}" onchange="updateMenu('snacks', ${index}, 'price', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>รูปภาพ URL</label>
-                        <input type="text" value="${item.image}" onchange="updateMenu('snacks', ${index}, 'image', this.value)">
-                        ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
-                    </div>
-                    <button class="btn btn-danger" onclick="deleteMenuItem('snacks', ${index})">
-                        <i class="fas fa-trash"></i> ลบ
-                    </button>
-                </div>
-            `).join('');
+    const langNames = { th:'ไทย', en:'English', zh:'中文', ru:'Русский', hi:'हिन्दी', he:'עברית', ja:'日本語', ko:'한국어', ar:'العربية' };
+    const container = document.getElementById('menuEditor');
 
-            html += '<h4 style="margin-top:30px;">เครื่องดื่ม</h4>';
-            html += siteData.menu.drinks.map((item, index) => `
-                <div class="admin-section">
-                    <div class="form-group">
-                        <label>ชื่อ (English)</label>
-                        <input type="text" value="${item.name}" onchange="updateMenu('drinks', ${index}, 'name', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>ชื่อ (ไทย)</label>
-                        <input type="text" value="${item.nameTh}" onchange="updateMenu('drinks', ${index}, 'nameTh', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>ราคา</label>
-                        <input type="number" value="${item.price}" onchange="updateMenu('drinks', ${index}, 'price', this.value)">
-                    </div>
-                    <div class="form-group">
-                        <label>รูปภาพ URL</label>
-                        <input type="text" value="${item.image}" onchange="updateMenu('drinks', ${index}, 'image', this.value)">
-                        ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
-                    </div>
-                    <button class="btn btn-danger" onclick="deleteMenuItem('drinks', ${index})">
-                        <i class="fas fa-trash"></i> ลบ
-                    </button>
-                </div>
-            `).join('');
+    const itemBlock = (item, index, category) => `
+        <div class="admin-section">
+            <div class="form-group">
+                <label>ชื่อเมนู (${langNames[currentLang] || currentLang})</label>
+                <input type="text" value="${(getMenuName(item, currentLang)).replace(/"/g, '&quot;')}" onchange="updateMenuName('${category}', ${index}, this.value)">
+                <small style="color:#666;">สลับภาษาที่มุมขวาบนเพื่อแก้ชื่อภาษาอื่น</small>
+            </div>
+            <div class="form-group">
+                <label>รหัสอ้างอิง (English key)</label>
+                <input type="text" value="${(item.name || '').replace(/"/g, '&quot;')}" onchange="updateMenu('${category}', ${index}, 'name', this.value)">
+            </div>
+            <div class="form-group">
+                <label>ราคา</label>
+                <input type="number" value="${item.price}" onchange="updateMenu('${category}', ${index}, 'price', this.value)">
+            </div>
+            <div class="form-group">
+                <label>รูปภาพ URL</label>
+                <input type="text" value="${item.image}" onchange="updateMenu('${category}', ${index}, 'image', this.value)">
+                ${item.image ? `<img src="${item.image}" class="media-preview">` : ''}
+            </div>
+            <button class="btn btn-danger" onclick="deleteMenuItem('${category}', ${index})">
+                <i class="fas fa-trash"></i> ลบ
+            </button>
+        </div>`;
 
-            container.innerHTML = html;
-        }
+    container.innerHTML =
+        '<div class="lang-editing-note"><i class="fas fa-language"></i> กำลังแก้ไขชื่อเมนูของภาษา: <strong>' + (langNames[currentLang] || currentLang) + '</strong></div>' +
+        '<h4>อาหารว่าง</h4>' + siteData.menu.snacks.map((it, i) => itemBlock(it, i, 'snacks')).join('') +
+        '<h4 style="margin-top:30px;">เครื่องดื่ม</h4>' + siteData.menu.drinks.map((it, i) => itemBlock(it, i, 'drinks')).join('');
+}
 
-        function updateMenu(category, index, field, value) {
-            siteData.menu[category][index][field] = field === 'price' ? parseInt(value) : value;
-            renderMenu();
-        }
+function updateMenuName(category, index, value) {
+    const item = siteData.menu[category][index];
+    if (!item.names) item.names = {};
+    item.names[currentLang] = value;
+    if (currentLang === 'th') item.nameTh = value;
+    renderMenu();
+}
+
+function updateMenu(category, index, field, value) {
+    siteData.menu[category][index][field] = field === 'price' ? parseInt(value) : value;
+    renderMenu();
+}
 
         function addMenuItem() {
             const category = prompt('เพิ่มในหมวดใด? (snacks/drinks)');
             if (category === 'snacks' || category === 'drinks') {
                 siteData.menu[category].push({
-                    name: "New Item",
-                    nameTh: "เมนูใหม่",
-                    price: 0,
-                    image: ""
-                });
+    name: "New Item",
+    nameTh: "เมนูใหม่",
+    names: { th: "เมนูใหม่", en: "New Item" },
+    price: 0,
+    image: ""
+});
                 renderMenuEditor();
             }
         }
