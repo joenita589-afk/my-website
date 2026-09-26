@@ -144,6 +144,15 @@
         .modal-box h2 { color: var(--dark); margin-bottom: 5px; }
         .modal-box h4 { color: var(--primary); margin-bottom: 15px; }
         .modal-box p { color: #555; line-height: 1.8; }
+        .narration-box { background: #f8f9fa; border: 2px solid #eee; border-radius: 12px; padding: 14px 16px; margin: 15px 0; }
+.narration-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.narration-controls select { flex: 1; min-width: 160px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9em; }
+.narration-btn { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-size: 0.95em; font-weight: 600; white-space: nowrap; transition: 0.2s; }
+.narration-btn:hover { background: #c0392b; }
+.narration-btn.stop { background: #6c757d; }
+.narration-btn.stop:hover { background: #565e64; }
+.narration-btn:disabled { background: #bbb; cursor: not-allowed; }
+.narration-label { font-size: 0.85em; color: #888; margin-bottom: 8px; }
         @media (max-width: 768px) {
             .hero { padding: 30px 15px; }
             .hero h1 { font-size: 1.6em; }
@@ -627,7 +636,11 @@
                     "souvenir_title": "ของที่ระลึก",
                     "souvenir_sub": "สินค้าที่ระลึกจาก Ripley's Believe It or Not! Pattaya",
                     "souvenir_empty": "สินค้ากำลังจะมาเร็วๆ นี้",
-                    "souvenir_soldout": "สินค้าหมด"
+                                        "souvenir_soldout": "สินค้าหมด",
+                    "listen_desc": "ฟังคำบรรยาย",
+                    "stop_desc": "หยุดฟัง",
+                    "voice_select": "เลือกเสียงพากย์",
+                    "voice_default": "เสียงเริ่มต้นของเบราว์เซอร์"
           },
           "en": {
                     "nav_home": "Home",
@@ -703,7 +716,11 @@
                     "souvenir_title": "Souvenir Shop",
                     "souvenir_sub": "Souvenirs from Ripley's Believe It or Not! Pattaya",
                     "souvenir_empty": "Coming soon",
-                    "souvenir_soldout": "Sold out"
+                                        "souvenir_soldout": "Sold out",
+                    "listen_desc": "Listen to description",
+                    "stop_desc": "Stop",
+                    "voice_select": "Select narration voice",
+                    "voice_default": "Browser default voice"
           },
           "zh": {
                     "nav_home": "首页",
@@ -3171,9 +3188,76 @@ Object.assign(translations.ar, {
             `).join('');
         }
 
+                // ==== ระบบฟังคำบรรยาย (Text-to-Speech) ====
+        const speechLangMap = { th:'th-TH', en:'en-US', zh:'zh-CN', ru:'ru-RU', hi:'hi-IN', he:'he-IL', ja:'ja-JP', ko:'ko-KR', ar:'ar-SA' };
+        let cachedVoices = [];
+
+        function loadVoices() {
+            cachedVoices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+        }
+        if (window.speechSynthesis) {
+            loadVoices();
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function getVoicesForLang(lang) {
+            const bcp = speechLangMap[lang] || 'en-US';
+            const prefix = bcp.split('-')[0];
+            return cachedVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith(prefix));
+        }
+
+        function renderVoiceOptions(lang) {
+            const voices = getVoicesForLang(lang);
+            const t = translations[lang] || translations['en'];
+            const saved = localStorage.getItem('ripleysVoice_' + lang) || '';
+            if (voices.length === 0) {
+                return `<option value="">${t.voice_default || 'Default voice'}</option>`;
+            }
+            return `<option value="">${t.voice_default || 'Default voice'}</option>` +
+                voices.map(v => `<option value="${v.name}" ${v.name === saved ? 'selected' : ''}>${v.name} (${v.lang})</option>`).join('');
+        }
+
+        function onVoiceChange(select, lang) {
+            localStorage.setItem('ripleysVoice_' + lang, select.value);
+        }
+
+        function speakAttractionDesc(index) {
+            if (!window.speechSynthesis) { alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง'); return; }
+            stopSpeaking();
+            const item = getAttractions(currentLang)[index];
+            if (!item) return;
+            const text = `${item.title}. ${item.subtitle || ''}. ${item.desc}`;
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = speechLangMap[currentLang] || 'en-US';
+            const select = document.getElementById('narrationVoiceSelect');
+            const voiceName = select ? select.value : '';
+            if (voiceName) {
+                const voice = cachedVoices.find(v => v.name === voiceName);
+                if (voice) utter.voice = voice;
+            }
+            utter.rate = 0.95;
+            utter.onstart = () => updateNarrationButtons(true);
+            utter.onend = () => updateNarrationButtons(false);
+            utter.onerror = () => updateNarrationButtons(false);
+            window.speechSynthesis.speak(utter);
+        }
+
+        function stopSpeaking() {
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            updateNarrationButtons(false);
+        }
+
+        function updateNarrationButtons(isSpeaking) {
+            const playBtn = document.getElementById('narrationPlayBtn');
+            const stopBtn = document.getElementById('narrationStopBtn');
+            if (playBtn) playBtn.disabled = isSpeaking;
+            if (stopBtn) stopBtn.disabled = !isSpeaking;
+        }
+
         function openAttractionDetail(index) {
             const item = getAttractions(currentLang)[index];
             if (!item) return;
+            const t = translations[currentLang] || translations['en'];
             document.getElementById('modalContent').innerHTML = `
                 ${item.image ? `<img class="modal-photo" src="${item.image}" alt="${item.title}">` : ''}
                 ${item.video ? (isDirectVideoFile(item.video)
@@ -3181,14 +3265,25 @@ Object.assign(translations.ar, {
                     : `<iframe src="${getVideoEmbedUrl(item.video)}" height="240" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`) : ''}
                 <h2>${item.title}</h2>
                 ${item.subtitle ? `<h4>${item.subtitle}</h4>` : ''}
-                ${item.price !== undefined ? `<div class="modal-price">${(translations[currentLang] || translations['en']).price_adult || 'Adult'} ${item.price.toLocaleString()} ${item.childPrice !== undefined ? ` &nbsp;|&nbsp; ${(translations[currentLang] || translations['en']).price_child || 'Child'} <span style="color:#f39c12;">${item.childPrice.toLocaleString()}</span>` : ''} ${(translations[currentLang] || translations['en']).baht || 'Baht'}</div>` : ''}
+                ${item.price !== undefined ? `<div class="modal-price">${t.price_adult || 'Adult'} ${item.price.toLocaleString()} ${item.childPrice !== undefined ? ` &nbsp;|&nbsp; ${t.price_child || 'Child'} <span style="color:#f39c12;">${item.childPrice.toLocaleString()}</span>` : ''} ${t.baht || 'Baht'}</div>` : ''}
                 <p>${item.desc}</p>
+                <div class="narration-box">
+                    <div class="narration-label"><i class="fas fa-volume-up"></i> ${t.voice_select || 'Select voice'}</div>
+                    <div class="narration-controls">
+                        <select id="narrationVoiceSelect" onchange="onVoiceChange(this, '${currentLang}')">
+                            ${renderVoiceOptions(currentLang)}
+                        </select>
+                        <button id="narrationPlayBtn" class="narration-btn" onclick="speakAttractionDesc(${index})"><i class="fas fa-play"></i> ${t.listen_desc || 'Listen'}</button>
+                        <button id="narrationStopBtn" class="narration-btn stop" onclick="stopSpeaking()" disabled><i class="fas fa-stop"></i> ${t.stop_desc || 'Stop'}</button>
+                    </div>
+                </div>
             `;
             document.getElementById('attractionModal').classList.add('show');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeAttractionModal() {
+               function closeAttractionModal() {
+            stopSpeaking();
             document.getElementById('attractionModal').classList.remove('show');
             document.getElementById('modalContent').innerHTML = '';
             document.body.style.overflow = '';
