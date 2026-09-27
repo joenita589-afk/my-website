@@ -230,8 +230,11 @@
             <button class="nav-btn" onclick="showSection('menu')">
                 <i class="fas fa-utensils"></i> <span data-i18n="nav_menu">เมนู</span>
             </button>
-            <button class="nav-btn" onclick="showSection('contact')">
+                        <button class="nav-btn" onclick="showSection('contact')">
                 <i class="fas fa-map-marker-alt"></i> <span data-i18n="nav_contact">ติดต่อเรา</span>
+            </button>
+            <button class="nav-btn" onclick="openShareModal()">
+                <i class="fas fa-share-alt"></i> <span data-i18n="nav_share">แชร์</span>
             </button>
             <button class="nav-btn" onclick="showSection('admin')">
                 <i class="fas fa-lock"></i> Admin
@@ -554,10 +557,25 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="attractionModal" onclick="if(event.target===this)closeAttractionModal()">
+        <div class="modal-overlay" id="attractionModal" onclick="if(event.target===this)closeAttractionModal()">
         <div class="modal-box">
             <button class="modal-close" onclick="closeAttractionModal()" aria-label="Close"><i class="fas fa-times"></i></button>
             <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="shareModal" onclick="if(event.target===this)closeShareModal()">
+        <div class="modal-box" style="max-width:420px; text-align:center;">
+            <button class="modal-close" onclick="closeShareModal()" aria-label="Close"><i class="fas fa-times"></i></button>
+            <h2 data-i18n="share_title">แชร์เว็บไซต์นี้</h2>
+            <p data-i18n="share_desc" style="margin-bottom:20px; color:#777;">สแกน QR โค้ด หรือคัดลอกลิงก์ด้านล่างเพื่อแชร์</p>
+            <img id="shareQrImg" src="" alt="QR Code" style="width:220px; height:220px; border-radius:10px; border:2px solid #eee; margin-bottom:20px;">
+            <div class="form-group">
+                <input type="text" id="shareLinkInput" readonly style="text-align:center; font-size:0.9em;">
+            </div>
+            <button class="btn btn-success" onclick="copyShareLink()" style="width:100%;">
+                <i class="fas fa-copy"></i> <span id="shareCopyBtnLabel" data-i18n="share_copy">คัดลอกลิงก์</span>
+            </button>
         </div>
     </div>
 
@@ -636,9 +654,14 @@
                     "nav_souvenir": "ของที่ระลึก",
                     "souvenir_title": "ของที่ระลึก",
                     "souvenir_sub": "สินค้าที่ระลึกจาก Ripley's Believe It or Not! Pattaya",
-                    "souvenir_empty": "สินค้ากำลังจะมาเร็วๆ นี้",
+                                        "souvenir_empty": "สินค้ากำลังจะมาเร็วๆ นี้",
                                         "souvenir_soldout": "สินค้าหมด",
-                    "menu_toggle_label": "เมนู"
+                    "menu_toggle_label": "เมนู",
+                    "nav_share": "แชร์",
+                    "share_title": "แชร์เว็บไซต์นี้",
+                    "share_desc": "สแกน QR โค้ด หรือคัดลอกลิงก์ด้านล่างเพื่อแชร์",
+                    "share_copy": "คัดลอกลิงก์",
+                    "share_copied": "คัดลอกแล้ว!"
           },
           "en": {
                     "nav_home": "Home",
@@ -713,9 +736,14 @@
                     "nav_souvenir": "Souvenirs",
                     "souvenir_title": "Souvenir Shop",
                     "souvenir_sub": "Souvenirs from Ripley's Believe It or Not! Pattaya",
-                    "souvenir_empty": "Coming soon",
+                                        "souvenir_empty": "Coming soon",
                                         "souvenir_soldout": "Sold out",
-                    "menu_toggle_label": "Menu"
+                    "menu_toggle_label": "Menu",
+                    "nav_share": "Share",
+                    "share_title": "Share this website",
+                    "share_desc": "Scan the QR code or copy the link below to share",
+                    "share_copy": "Copy link",
+                    "share_copied": "Copied!"
           },
           "zh": {
                     "nav_home": "首页",
@@ -1308,7 +1336,8 @@ Object.assign(translations.zh, {
     ticket_online_title: "3. 在线订票条款",
     ticket_online_1: "请各位顾客付款前仔细查看条款，因为各代理商(Agent)的门票条款可能有所不同",
     ticket_online_2: "如使用线上电子票，须于当日20:00前兑换实体票/手环",
-    ticket_online_3: "付款完成后，任何情况下均不可取消、退款或修改任何信息",menu_toggle_label: "菜单"
+        ticket_online_3: "付款完成后，任何情况下均不可取消、退款或修改任何信息",menu_toggle_label: "菜单",
+    nav_share: "分享", share_title: "分享此网站", share_desc: "扫描二维码或复制下方链接进行分享", share_copy: "复制链接", share_copied: "已复制！"
 });
 
 Object.assign(translations.ru, {
@@ -1363,7 +1392,8 @@ Object.assign(translations.ru, {
     ticket_online_title: "3. Условия онлайн-бронирования",
     ticket_online_1: "Просим внимательно ознакомиться с условиями перед оплатой, так как билеты разных агентов (Agent) могут иметь разные условия",
     ticket_online_2: "При использовании электронного билета обмен на билет/браслет необходимо произвести не позднее 20:00",
-    ticket_online_3: "После завершения оплаты отмена, возврат средств или изменение каких-либо данных невозможны ни при каких обстоятельствах",menu_toggle_label: "Меню"
+        ticket_online_3: "После завершения оплаты отмена, возврат средств или изменение каких-либо данных невозможны ни при каких обстоятельствах",menu_toggle_label: "Меню",
+    nav_share: "Поделиться", share_title: "Поделиться этим сайтом", share_desc: "Отсканируйте QR-код или скопируйте ссылку ниже", share_copy: "Скопировать ссылку", share_copied: "Скопировано!"
 });
 
 Object.assign(translations.hi, {
@@ -1418,7 +1448,8 @@ Object.assign(translations.hi, {
     ticket_online_title: "3. ऑनलाइन बुकिंग की शर्तें",
     ticket_online_1: "भुगतान से पहले शर्तों को ध्यान से जाँचने का अनुरोध है, क्योंकि प्रत्येक एजेंट के टिकटों की शर्तें अलग हो सकती हैं",
     ticket_online_2: "ऑनलाइन टिकट का उपयोग करने पर, टिकट/कलाई बैंड शाम 8:00 बजे (20:00) तक अवश्य प्राप्त कर लें",
-    ticket_online_3: "भुगतान पूरा होने के बाद किसी भी स्थिति में रद्दीकरण, रिफंड या किसी भी जानकारी में बदलाव संभव नहीं है",menu_toggle_label: "मेनू"
+        ticket_online_3: "भुगतान पूरा होने के बाद किसी भी स्थिति में रद्दीकरण, रिफंड या किसी भी जानकारी में बदलाव संभव नहीं है",menu_toggle_label: "मेनू",
+    nav_share: "साझा करें", share_title: "इस वेबसाइट को साझा करें", share_desc: "QR कोड स्कैन करें या नीचे दिया गया लिंक कॉपी करें", share_copy: "लिंक कॉपी करें", share_copied: "कॉपी हो गया!"
 });
 
 Object.assign(translations.he, {
@@ -1473,7 +1504,8 @@ Object.assign(translations.he, {
     ticket_online_title: "3. תנאי הזמנה מקוונת",
     ticket_online_1: "אנא בדקו את התנאים בקפידה לפני התשלום, שכן כרטיסים מכל סוכן (Agent) עשויים להיות כפופים לתנאים שונים",
     ticket_online_2: "בעת שימוש בכרטיס מקוון, יש להחליפו לכרטיס/צמיד עד השעה 20:00",
-    ticket_online_3: "לאחר השלמת התשלום, לא ניתן לבטל, להחזיר כספית או לשנות פרטים כלשהם בכל מקרה",menu_toggle_label: "תפריט"
+        ticket_online_3: "לאחר השלמת התשלום, לא ניתן לבטל, להחזיר כספית או לשנות פרטים כלשהם בכל מקרה",menu_toggle_label: "תפריט",
+    nav_share: "שתף", share_title: "שתף אתר זה", share_desc: "סרוק את קוד ה-QR או העתק את הקישור למטה", share_copy: "העתק קישור", share_copied: "הועתק!"
 });
 
 Object.assign(translations.ja, {
@@ -1528,7 +1560,8 @@ Object.assign(translations.ja, {
     ticket_online_title: "3. オンライン予約の条件",
     ticket_online_1: "各販売代理店 (Agent) のチケットには異なる条件が適用されるため、お支払い前に必ず条件をご確認ください",
     ticket_online_2: "オンラインチケットをご利用の場合、チケット・リストバンドへの引き換えは20:00までに完了してください",
-    ticket_online_3: "お支払い完了後は、どのような場合でもキャンセル・返金・情報の変更はできません",menu_toggle_label: "メニュー"
+        ticket_online_3: "お支払い完了後は、どのような場合でもキャンセル・返金・情報の変更はできません",menu_toggle_label: "メニュー",
+    nav_share: "共有", share_title: "このウェブサイトを共有", share_desc: "QRコードをスキャンするか、下のリンクをコピーして共有してください", share_copy: "リンクをコピー", share_copied: "コピーしました！"
 });
 
 Object.assign(translations.ko, {
@@ -1583,7 +1616,8 @@ Object.assign(translations.ko, {
     ticket_online_title: "3. 온라인 예매 조건",
     ticket_online_1: "각 판매 대리점 (Agent)별로 조건이 다를 수 있으므로 결제 전에 조건을 꼼꼼히 확인해 주시기 바랍니다",
     ticket_online_2: "온라인 티켓을 사용하는 경우, 티켓/손목밴드 교환은 오후 8시(20:00)까지 완료해야 합니다",
-    ticket_online_3: "결제가 완료된 후에는 어떠한 경우에도 취소, 환불 또는 정보 수정이 불가능합니다",menu_toggle_label: "메뉴"
+        ticket_online_3: "결제가 완료된 후에는 어떠한 경우에도 취소, 환불 또는 정보 수정이 불가능합니다",menu_toggle_label: "메뉴",
+    nav_share: "공유", share_title: "이 웹사이트 공유", share_desc: "QR 코드를 스캔하거나 아래 링크를 복사하여 공유하세요", share_copy: "링크 복사", share_copied: "복사됨!"
 });
 
 Object.assign(translations.ar, {
@@ -1638,7 +1672,8 @@ Object.assign(translations.ar, {
     ticket_online_title: "3. شروط الحجز عبر الإنترنت",
     ticket_online_1: "نرجو من العملاء مراجعة الشروط بعناية قبل الدفع، لأن تذاكر كل وكيل (Agent) قد تخضع لشروط مختلفة",
     ticket_online_2: "عند استخدام التذكرة الإلكترونية، يجب استبدالها بالتذكرة/السوار قبل الساعة 20:00",
-    ticket_online_3: "بعد إتمام الدفع، لا يمكن إلغاء الحجز أو استرداد الأموال أو تعديل أي معلومات في جميع الحالات",menu_toggle_label: "القائمة"
+        ticket_online_3: "بعد إتمام الدفع، لا يمكن إلغاء الحجز أو استرداد الأموال أو تعديل أي معلومات في جميع الحالات",menu_toggle_label: "القائمة",
+    nav_share: "مشاركة", share_title: "شارك هذا الموقع", share_desc: "امسح رمز QR أو انسخ الرابط أدناه للمشاركة", share_copy: "نسخ الرابط", share_copied: "تم النسخ!"
 });
 
 
@@ -3277,15 +3312,46 @@ Object.assign(translations.ar, {
             document.body.style.overflow = 'hidden';
         }
 
-               function closeAttractionModal() {
+                              function closeAttractionModal() {
             stopSpeaking();
             document.getElementById('attractionModal').classList.remove('show');
             document.getElementById('modalContent').innerHTML = '';
             document.body.style.overflow = '';
         }
 
+        function openShareModal() {
+            const url = window.location.href;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}`;
+            document.getElementById('shareQrImg').src = qrUrl;
+            document.getElementById('shareLinkInput').value = url;
+            document.getElementById('shareModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function copyShareLink() {
+            const input = document.getElementById('shareLinkInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            const doCopyFallback = () => { try { document.execCommand('copy'); } catch (e) {} };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(input.value).catch(doCopyFallback);
+            } else {
+                doCopyFallback();
+            }
+            const t = translations[currentLang] || translations['en'];
+            const label = document.getElementById('shareCopyBtnLabel');
+            const original = t.share_copy || 'Copy link';
+            label.textContent = t.share_copied || 'Copied!';
+            setTimeout(() => { label.textContent = original; }, 2000);
+        }
+
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeAttractionModal();
+            if (e.key === 'Escape') { closeAttractionModal(); closeShareModal(); }
         });
 
         // แพ็กเกจฟิกเครื่องเล่น: SUPER FUN = [museum, tussauds, scream, playneo], HAPPY FUN = [pyramid, infinity maze, laser, playneo]
