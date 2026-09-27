@@ -3213,28 +3213,57 @@ Object.assign(translations.ar, {
             localStorage.setItem('ripleysVoice_' + lang, select.value);
         }
 
+                let speechQueue = [];
+        let speechWatchdog = null;
+
+        function splitIntoSentences(text) {
+            return text
+                .replace(/([.!?。！？])\s*/g, '$1|')
+                .split('|')
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+        }
+
         function speakAttractionDesc(index) {
             if (!window.speechSynthesis) { alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง'); return; }
             stopSpeaking();
             const item = getAttractions(currentLang)[index];
             if (!item) return;
-            const text = `${item.title}. ${item.subtitle || ''}. ${item.desc}`;
-            const utter = new SpeechSynthesisUtterance(text);
-            utter.lang = speechLangMap[currentLang] || 'en-US';
+            const fullText = `${item.title}. ${item.subtitle || ''}. ${item.desc}`;
+            speechQueue = splitIntoSentences(fullText);
             const select = document.getElementById('narrationVoiceSelect');
             const voiceName = select ? select.value : '';
-            if (voiceName) {
-                const voice = cachedVoices.find(v => v.name === voiceName);
-                if (voice) utter.voice = voice;
+            const voice = voiceName ? cachedVoices.find(v => v.name === voiceName) : null;
+            updateNarrationButtons(true);
+            playNextInQueue(voice);
+            // แก้บั๊ก Chrome: เสียงจะค้างเองทุก ~15 วิ ถ้าไม่มีตัวปลุก
+            speechWatchdog = setInterval(() => {
+                if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+                    window.speechSynthesis.pause();
+                    window.speechSynthesis.resume();
+                }
+            }, 5000);
+        }
+
+        function playNextInQueue(voice) {
+            if (speechQueue.length === 0) {
+                stopSpeaking();
+                return;
             }
-            utter.rate = 0.95;
-            utter.onstart = () => updateNarrationButtons(true);
-            utter.onend = () => updateNarrationButtons(false);
-            utter.onerror = () => updateNarrationButtons(false);
+            const sentence = speechQueue.shift();
+            const utter = new SpeechSynthesisUtterance(sentence);
+            utter.lang = speechLangMap[currentLang] || 'en-US';
+            if (voice) utter.voice = voice;
+            utter.rate = 0.92;
+            utter.pitch = 1;
+            utter.onend = () => playNextInQueue(voice);
+            utter.onerror = () => playNextInQueue(voice);
             window.speechSynthesis.speak(utter);
         }
 
         function stopSpeaking() {
+            speechQueue = [];
+            if (speechWatchdog) { clearInterval(speechWatchdog); speechWatchdog = null; }
             if (window.speechSynthesis) window.speechSynthesis.cancel();
             updateNarrationButtons(false);
         }
