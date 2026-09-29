@@ -236,9 +236,7 @@
             <button class="nav-btn" onclick="openShareModal()">
                 <i class="fas fa-share-alt"></i> <span data-i18n="nav_share">แชร์</span>
             </button>
-            <button class="nav-btn" onclick="showSection('admin')">
-                <i class="fas fa-lock"></i> Admin
-            </button>
+            
         </div>
     </nav>
 
@@ -3846,9 +3844,22 @@ function updateMenu(category, index, field, value) {
             }
         }
 
-                window.onload = () => {
-            changeLang(currentLang);
-        };
+                function openAdminFromHash() {
+    if (location.hash.toLowerCase() === '#admin') {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById('admin').classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        window.scrollTo(0, 0);
+    }
+}
+
+window.onload = () => {
+    changeLang(currentLang);
+    openAdminFromHash();
+};
+
+// รองรับกรณีเปลี่ยน # โดยที่หน้าเว็บโหลดอยู่แล้ว
+window.addEventListener('hashchange', openAdminFromHash);
     </script>
     <script src="souvenir.js"></script>
 
