@@ -267,20 +267,23 @@ async function autoTranslateNote(i, silentStart) {
     const from = n.th ? 'th' : 'en';
     const btn = document.getElementById('autoTrNoteBtn' + i);
     if (btn) btn.disabled = true;
-    try {
-        const out = {};
-        for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
-            if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase();
-            out[lang] = (lang === from) ? src : await pkgTranslate(src, PKG_LANG_CODES[from], code);
+    const out = { [from]: src };
+    const failed = [];
+    for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
+        if (lang === from) continue;
+        if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase();
+        try {
+            out[lang] = await pkgTranslate(src, PKG_LANG_CODES[from], code);
+        } catch (e) {
+            failed.push(lang.toUpperCase());
+            out[lang] = (n[lang] || '');
         }
-        siteData.pricing.extraNotes[i] = out;
-        renderExtraNotes();
-        renderPricingEditor();
-        alert('แปลเสร็จแล้ว ตรวจทานแล้วกดบันทึกไปยัง GitHub');
-    } catch (e) {
-        renderPricingEditor();
-        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nเพิ่มหมายเหตุแล้วแต่ยังเป็นภาษาเดียว กรอกแต่ละภาษาเอง หรือลองกดแปลใหม่ภายหลัง');
     }
+    siteData.pricing.extraNotes[i] = out;
+    renderExtraNotes();
+    renderPricingEditor();
+    if (failed.length) alert('แปลไม่สำเร็จบางภาษา: ' + failed.join(', ') + '\nกรอกเอง หรือกดแปลอัตโนมัติอีกครั้งภายหลัง (ถ้าโควตา MyMemory เต็ม)');
+    else alert('แปลเสร็จแล้ว ตรวจทานแล้วกดบันทึกไปยัง GitHub');
 }
 
 // แก้ข้อความหน้าราคา แล้ววาดส่วนที่ไม่ได้ใช้ data-i18n ใหม่ (การ์ดแพ็กเกจ, ราคาเดี่ยว, เมนู)
@@ -469,6 +472,7 @@ function updateSinglePrice(idx, field, value) {
     const origChangeLang = window.changeLang;
     window.changeLang = function () {
         origChangeLang.apply(this, arguments);
+        try { renderPricingPackages(); renderExtraNotes(); } catch (e) { console.error(e); }
         const tab = document.getElementById('adminTabPricing');
         if (tab && tab.style.display !== 'none') renderPricingEditor();
     };
