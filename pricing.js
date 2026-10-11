@@ -26,6 +26,30 @@ if (!siteData.pricing) {
     });
 })();
 
+// ---------- เติมคำแปลที่ขาดของแพ็กเกจที่ระบุไว้ (เติมเฉพาะช่องที่ยังว่าง ไม่ทับสิ่งที่แอดมินแก้เอง) ----------
+(function fillMissingPackageDesc() {
+    const known = {
+        'Double Attraction Special': {
+            th: 'สามารถเลือกได้ 2 เครื่องเล่น ในราคา 900 บาท',
+            en: 'Choose any 2 attractions for 900 Baht',
+            zh: '任选2项游乐设施，仅需900泰铢',
+            ru: 'Выберите любые 2 аттракциона за 900 бат',
+            hi: '900 बात में कोई भी 2 आकर्षण चुनें',
+            he: 'בחרו 2 מתקנים כלשהם ב-900 באט',
+            ja: 'お好きなアトラクションを2つ選べて900バーツ',
+            ko: '원하는 어트랙션 2개를 900바트에',
+            ar: 'اختر أي لعبتين مقابل 900 بات'
+        }
+    };
+    (siteData.pricing.packages || []).forEach(p => {
+        const nm = p.name && (p.name.en || p.name.th);
+        const dict = known[nm];
+        if (!dict) return;
+        if (!p.desc) p.desc = {};
+        Object.keys(dict).forEach(l => { if (!p.desc[l]) p.desc[l] = dict[l]; });
+    });
+})();
+
 // ---------- แสดงการ์ดแพ็กเกจในหน้าลูกค้า ----------
 function pkgText(p, field, lang) {
     const o = p[field] || {};
