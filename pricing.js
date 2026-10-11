@@ -103,8 +103,8 @@ function renderPricingEditor() {
             <details style="margin:10px 0 15px;">
                 <summary style="cursor:pointer;font-weight:bold;color:var(--primary);">🌐 ชื่อ/คำอธิบายทุกภาษา (กรอกครบทุกภาษาในที่เดียว)</summary>
                 <div style="margin:10px 0;">
-                    <button class="btn btn-secondary" id="autoTrBtn${i}" onclick="autoTranslatePkg(${i})">🤖 แปลอัตโนมัติจากภาษาไทย</button>
-                    <small style="color:#666;">แปลคำอธิบายภาษาไทยเป็นอีก 8 ภาษา (ข้อความเดิมของภาษาอื่นจะถูกแทนที่) ควรตรวจทานอีกครั้ง</small>
+                    <button class="btn btn-secondary" id="autoTrBtn${i}" onclick="autoTranslatePkg(${i})">🤖 แปลอัตโนมัติเป็นทุกภาษา</button>
+                    <small style="color:#666;">แปลจากช่องภาษาไทย (ถ้าไม่มีภาษาไทยจะแปลจากอังกฤษ) เป็นอีก 8 ภาษา ข้อความเดิมของภาษาอื่นจะถูกแทนที่ ควรตรวจทานอีกครั้ง</small>
                 </div>
                 ${Object.keys(langNames).map(l => `
                     <div style="margin:10px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
@@ -171,45 +171,6 @@ function updatePkgText(i, field, value) {
     renderPricingPackages();
 }
 
-// แปลชื่อ/คำอธิบายภาษาไทยเป็นภาษาอื่นอัตโนมัติ (ใช้บริการแปลฟรี MyMemory)
-async function autoTranslatePkg(i) {
-    const p = siteData.pricing.packages[i];
-    const srcName = pkgText(p, 'name', 'th');
-    const srcDesc = pkgText(p, 'desc', 'th');
-    if (!srcName && !srcDesc) { alert('กรุณากรอกชื่อ/คำอธิบายภาษาไทยก่อน'); return; }
-    if (!confirm('แปลข้อความภาษาไทยเป็นภาษาอื่นอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
-
-    const targets = { en:'en', zh:'zh-CN', ru:'ru', hi:'hi', he:'he', ja:'ja', ko:'ko', ar:'ar' };
-    const hasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
-    const tr = async (text, to) => {
-        if (!text || !hasThai(text)) return text;   // ไม่มีตัวอักษรไทย (เช่นชื่อภาษาอังกฤษ) ใช้ข้อความเดิม
-        const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=th|' + to);
-        const j = await r.json();
-        if (!j || String(j.responseStatus) !== '200' || !j.responseData || !j.responseData.translatedText) throw new Error('แปลไม่สำเร็จ');
-        return j.responseData.translatedText;
-    };
-
-    const btn = document.getElementById('autoTrBtn' + i);
-    if (btn) btn.disabled = true;
-    try {
-        if (!p.name) p.name = {};
-        if (!p.desc) p.desc = {};
-        if (srcName) p.name.th = srcName;
-        if (srcDesc) p.desc.th = srcDesc;
-        for (const [lang, code] of Object.entries(targets)) {
-            if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase();
-            if (srcName) p.name[lang] = await tr(srcName, code);
-            if (srcDesc) p.desc[lang] = await tr(srcDesc, code);
-        }
-        renderPricingPackages();
-        renderPricingEditor();
-        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
-    } catch (e) {
-        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่อีกครั้ง หรือกรอกเองในแต่ละภาษา');
-        renderPricingEditor();
-    }
-}
-
 function updatePkgTextLang(i, field, lang, value) {
     const p = siteData.pricing.packages[i];
     if (!p[field]) p[field] = {};
@@ -225,20 +186,89 @@ function togglePkgFixed(i, idx, checked) {
     renderPricingPackages();
 }
 
-// เพิ่มแพ็กเกจใหม่ (ถามชื่อก่อน แล้วใส่ให้ครบทุกภาษา)
+// ---------- แปลอัตโนมัติ (ใช้บริการแปลฟรี MyMemory) ----------
+const PKG_LANG_CODES = { th:'th', en:'en', zh:'zh-CN', ru:'ru', hi:'hi', he:'he', ja:'ja', ko:'ko', ar:'ar' };
 const pkgHasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
 
-function addPackage() {
+async function pkgTranslate(text, from, to) {
+    if (!text || from === to) return text;
+    const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to);
+    const j = await r.json();
+    const out = j && j.responseData && j.responseData.translatedText;
+    // MyMemory บางครั้งตอบ status 200 แต่ส่งข้อความเตือนโควต้าหมดมาแทนคำแปล ต้องกันไม่ให้บันทึกข้อความนั้น
+    if (!j || String(j.responseStatus) !== '200' || !out || /MYMEMORY WARNING|QUERY LENGTH LIMIT|INVALID/i.test(out)) {
+        throw new Error('บริการแปลไม่ตอบกลับหรือโควต้าฟรีวันนี้หมด');
+    }
+    return out;
+}
+
+// แปลชื่อ/คำอธิบายเป็นทุกภาษา (ตรวจภาษาต้นฉบับอัตโนมัติ: มีตัวอักษรไทย = ไทย ไม่งั้น = อังกฤษ)
+// ชื่อที่ไม่ใช่ภาษาไทย (เช่น SUPER MAX, Double Attraction Special) จะคงเดิมทุกภาษา
+async function translatePkgAll(p, srcName, srcDesc, onProgress) {
+    const srcLang = pkgHasThai(srcDesc || srcName) ? 'th' : 'en';
+    const nameIsThai = pkgHasThai(srcName);
+    const newName = {}, newDesc = {};   // เก็บผลไว้ก่อน ถ้าแปลพังกลางทางจะไม่ทับข้อมูลเดิมครึ่ง ๆ กลาง ๆ
+    for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
+        if (onProgress) onProgress(lang);
+        newDesc[lang] = (lang === srcLang) ? srcDesc : await pkgTranslate(srcDesc, PKG_LANG_CODES[srcLang], code);
+        newName[lang] = nameIsThai ? ((lang === 'th') ? srcName : await pkgTranslate(srcName, 'th', code)) : srcName;
+    }
+    p.name = newName;
+    p.desc = newDesc;
+}
+
+async function autoTranslatePkg(i) {
+    const p = siteData.pricing.packages[i];
+    const srcName = pkgText(p, 'name', 'th');
+    const srcDesc = pkgText(p, 'desc', 'th');
+    if (!srcName && !srcDesc) { alert('กรุณากรอกชื่อ/คำอธิบายก่อน (ช่องภาษาไทย)'); return; }
+    if (!confirm('แปลข้อความเป็นทุกภาษาอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
+    const btn = document.getElementById('autoTrBtn' + i);
+    if (btn) btn.disabled = true;
+    try {
+        await translatePkgAll(p, srcName, srcDesc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        renderPricingPackages();
+        renderPricingEditor();
+        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
+    } catch (e) {
+        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่ภายหลัง หรือกรอกเองในแต่ละภาษา');
+        renderPricingEditor();
+    }
+}
+
+// ---------- เพิ่ม / ลบ แพ็กเกจ ----------
+async function addPackage() {
     const name = prompt('ชื่อแพ็กเกจ เช่น SUPER MAX');
     if (!name) return;
-    const desc = prompt('คำอธิบายแพ็กเกจ (ภาษาไทย) เว้นว่างได้') || '';
+    const desc = prompt('คำอธิบายแพ็กเกจ (พิมพ์ภาษาไทยหรืออังกฤษ ระบบจะแปลให้ทุกภาษาอัตโนมัติ)\nเว้นว่างได้') || '';
     const srcLang = pkgHasThai(desc || name) ? 'th' : 'en';
-    siteData.pricing.packages.push({
+    const p = {
         badge: 'PACKAGE', color: '#3498db',
         name: { [srcLang]: name },
         desc: { [srcLang]: desc },
         child: 0, adult: 0, fixed: []
-    });
+    };
+    siteData.pricing.packages.push(p);
+    renderPricingPackages();
+    renderPricingEditor();
+
+    if (!desc && !pkgHasThai(name)) return;   // ไม่มีอะไรต้องแปล (ชื่ออังกฤษล้วน ไม่มีคำอธิบาย)
+    const i = siteData.pricing.packages.length - 1;
+    const btn = document.getElementById('autoTrBtn' + i);
+    try {
+        await translatePkgAll(p, name, desc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        renderPricingPackages();
+        renderPricingEditor();
+        alert('เพิ่มแพ็กเกจและแปลให้ครบทุกภาษาแล้ว อย่าลืมกรอกราคา แล้วกดบันทึกไปยัง GitHub');
+    } catch (e) {
+        renderPricingEditor();
+        alert('เพิ่มแพ็กเกจแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nกดปุ่ม "แปลอัตโนมัติ" ในแพ็กเกจนั้นเพื่อลองใหม่ หรือกรอกเองในแต่ละภาษา');
+    }
+}
+
+function deletePackage(i) {
+    if (!confirm('ต้องการลบแพ็กเกจนี้?')) return;
+    siteData.pricing.packages.splice(i, 1);
     renderPricingPackages();
     renderPricingEditor();
 }
