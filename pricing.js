@@ -102,6 +102,10 @@ function renderPricingEditor() {
                 <textarea onchange="updatePkgText(${i}, 'desc', this.value)">${pkgText(p, 'desc', currentLang)}</textarea></div>
             <details style="margin:10px 0 15px;">
                 <summary style="cursor:pointer;font-weight:bold;color:var(--primary);">🌐 ชื่อ/คำอธิบายทุกภาษา (กรอกครบทุกภาษาในที่เดียว)</summary>
+                <div style="margin:10px 0;">
+                    <button class="btn btn-secondary" id="autoTrBtn${i}" onclick="autoTranslatePkg(${i})">🤖 แปลอัตโนมัติจากภาษาไทย</button>
+                    <small style="color:#666;">แปลคำอธิบายภาษาไทยเป็นอีก 8 ภาษา (ข้อความเดิมของภาษาอื่นจะถูกแทนที่) ควรตรวจทานอีกครั้ง</small>
+                </div>
                 ${Object.keys(langNames).map(l => `
                     <div style="margin:10px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
                         <strong>${langNames[l]}</strong>
@@ -165,6 +169,45 @@ function updatePkgText(i, field, value) {
     if (!p[field]) p[field] = {};
     p[field][currentLang] = value;
     renderPricingPackages();
+}
+
+// แปลชื่อ/คำอธิบายภาษาไทยเป็นภาษาอื่นอัตโนมัติ (ใช้บริการแปลฟรี MyMemory)
+async function autoTranslatePkg(i) {
+    const p = siteData.pricing.packages[i];
+    const srcName = pkgText(p, 'name', 'th');
+    const srcDesc = pkgText(p, 'desc', 'th');
+    if (!srcName && !srcDesc) { alert('กรุณากรอกชื่อ/คำอธิบายภาษาไทยก่อน'); return; }
+    if (!confirm('แปลข้อความภาษาไทยเป็นภาษาอื่นอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
+
+    const targets = { en:'en', zh:'zh-CN', ru:'ru', hi:'hi', he:'he', ja:'ja', ko:'ko', ar:'ar' };
+    const hasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
+    const tr = async (text, to) => {
+        if (!text || !hasThai(text)) return text;   // ไม่มีตัวอักษรไทย (เช่นชื่อภาษาอังกฤษ) ใช้ข้อความเดิม
+        const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=th|' + to);
+        const j = await r.json();
+        if (!j || String(j.responseStatus) !== '200' || !j.responseData || !j.responseData.translatedText) throw new Error('แปลไม่สำเร็จ');
+        return j.responseData.translatedText;
+    };
+
+    const btn = document.getElementById('autoTrBtn' + i);
+    if (btn) btn.disabled = true;
+    try {
+        if (!p.name) p.name = {};
+        if (!p.desc) p.desc = {};
+        if (srcName) p.name.th = srcName;
+        if (srcDesc) p.desc.th = srcDesc;
+        for (const [lang, code] of Object.entries(targets)) {
+            if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase();
+            if (srcName) p.name[lang] = await tr(srcName, code);
+            if (srcDesc) p.desc[lang] = await tr(srcDesc, code);
+        }
+        renderPricingPackages();
+        renderPricingEditor();
+        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
+    } catch (e) {
+        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่อีกครั้ง หรือกรอกเองในแต่ละภาษา');
+        renderPricingEditor();
+    }
 }
 
 function updatePkgTextLang(i, field, lang, value) {
