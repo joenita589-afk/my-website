@@ -34,6 +34,7 @@ function pkgText(p, field, lang) {
         || (key && translations[lang] && translations[lang][key])
         || o.en
         || (key && translations.en && translations.en[key])
+        || o.th
         || '';
 }
 
@@ -99,6 +100,15 @@ function renderPricingEditor() {
                 <input type="text" value="${q(pkgText(p, 'name', currentLang))}" onchange="updatePkgText(${i}, 'name', this.value)"></div>
             <div class="form-group"><label>คำอธิบาย (${langNames[currentLang]})</label>
                 <textarea onchange="updatePkgText(${i}, 'desc', this.value)">${pkgText(p, 'desc', currentLang)}</textarea></div>
+            <details style="margin:10px 0 15px;">
+                <summary style="cursor:pointer;font-weight:bold;color:var(--primary);">🌐 ชื่อ/คำอธิบายทุกภาษา (กรอกครบทุกภาษาในที่เดียว)</summary>
+                ${Object.keys(langNames).map(l => `
+                    <div style="margin:10px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
+                        <strong>${langNames[l]}</strong>
+                        <input type="text" placeholder="ชื่อแพ็กเกจ" value="${q(pkgText(p, 'name', l))}" onchange="updatePkgTextLang(${i}, 'name', '${l}', this.value)" style="margin:6px 0;">
+                        <textarea placeholder="คำอธิบาย" onchange="updatePkgTextLang(${i}, 'desc', '${l}', this.value)">${pkgText(p, 'desc', l)}</textarea>
+                    </div>`).join('')}
+            </details>
             <div class="form-group"><label>ป้ายเล็กบนการ์ด (เช่น PACKAGE, COMBO, HOT)</label>
                 <input type="text" value="${q(p.badge)}" onchange="updatePkg(${i}, 'badge', this.value)"></div>
             <div class="form-group"><label>สีขอบการ์ด</label>
@@ -154,6 +164,13 @@ function updatePkgText(i, field, value) {
     const p = siteData.pricing.packages[i];
     if (!p[field]) p[field] = {};
     p[field][currentLang] = value;
+    renderPricingPackages();
+}
+
+function updatePkgTextLang(i, field, lang, value) {
+    const p = siteData.pricing.packages[i];
+    if (!p[field]) p[field] = {};
+    p[field][lang] = value;
     renderPricingPackages();
 }
 
