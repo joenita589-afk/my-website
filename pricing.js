@@ -229,13 +229,9 @@ function togglePkgFixed(i, idx, checked) {
 function addPackage() {
     const name = prompt('ชื่อแพ็กเกจ');
     if (!name) return;
-    const nm = {}, ds = {};
-    Object.keys(translations).forEach(l => { nm[l] = name; ds[l] = ''; });
-    siteData.pricing.packages.push({
-        badge: 'PACKAGE', color: '#3498db',
-        name: nm, desc: ds,
-        child: 0, adult: 0, fixed: []
-    });
+        // ใส่ข้อความเฉพาะภาษาต้นฉบับ ภาษาอื่นปล่อยว่างไว้ให้ระบบ fallback / แปลอัตโนมัติ
+    const srcLang = pkgHasThai(desc || name) ? 'th' : 'en';
+    const nm = { [srcLang]: name }, ds = { [srcLang]: desc };
     renderPricingPackages();
     renderPricingEditor();
 }
