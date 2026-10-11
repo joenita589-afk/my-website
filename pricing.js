@@ -226,19 +226,19 @@ function togglePkgFixed(i, idx, checked) {
 }
 
 // เพิ่มแพ็กเกจใหม่ (ถามชื่อก่อน แล้วใส่ให้ครบทุกภาษา)
-function addPackage() {
-    const name = prompt('ชื่อแพ็กเกจ');
-    if (!name) return;
-        // ใส่ข้อความเฉพาะภาษาต้นฉบับ ภาษาอื่นปล่อยว่างไว้ให้ระบบ fallback / แปลอัตโนมัติ
-    const srcLang = pkgHasThai(desc || name) ? 'th' : 'en';
-    const nm = { [srcLang]: name }, ds = { [srcLang]: desc };
-    renderPricingPackages();
-    renderPricingEditor();
-}
+const pkgHasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
 
-function deletePackage(i) {
-    if (!confirm('ต้องการลบแพ็กเกจนี้?')) return;
-    siteData.pricing.packages.splice(i, 1);
+function addPackage() {
+    const name = prompt('ชื่อแพ็กเกจ เช่น SUPER MAX');
+    if (!name) return;
+    const desc = prompt('คำอธิบายแพ็กเกจ (ภาษาไทย) เว้นว่างได้') || '';
+    const srcLang = pkgHasThai(desc || name) ? 'th' : 'en';
+    siteData.pricing.packages.push({
+        badge: 'PACKAGE', color: '#3498db',
+        name: { [srcLang]: name },
+        desc: { [srcLang]: desc },
+        child: 0, adult: 0, fixed: []
+    });
     renderPricingPackages();
     renderPricingEditor();
 }
