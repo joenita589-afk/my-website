@@ -634,11 +634,11 @@ async function autoTranslateNote(i) {
         st.textContent = `
         @keyframes promoTap { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-4px,-7px) scale(1.12); } }
         @keyframes promoRing { 0% { box-shadow: 0 0 0 0 rgba(233,69,96,.65); } 100% { box-shadow: 0 0 0 16px rgba(233,69,96,0); } }
-        .promo-card { position:relative; background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.3); cursor:pointer; transition:.3s; border-top:6px solid var(--primary); }
-        .promo-card:hover { transform:translateY(-8px); box-shadow:0 15px 40px rgba(0,0,0,.5); }
-        .promo-cover { position:relative; line-height:0; }
-        .promo-cover img { width:100%; height:auto; display:block; }
-        .promo-ph { min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; padding:20px; text-align:center; line-height:1.3; }
+        .promo-card { position:relative; display:flex; flex-direction:column; background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.3); cursor:pointer; transition:.3s; border-top:6px solid var(--primary); }
+.promo-cover { position:relative; line-height:0; aspect-ratio:3/4; background:#1a1a2e; overflow:hidden; }
+.promo-cover img { width:100%; height:100%; object-fit:contain; display:block; }
+.promo-ph { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; padding:20px; text-align:center; line-height:1.3; }
+.promo-caption { flex:1; }
         .promo-ph i { font-size:3em; opacity:.9; }
         .promo-ph b { font-size:1.6em; }
         .promo-badge { position:absolute; top:10px; left:10px; background:var(--secondary); color:#333; font-weight:bold; padding:4px 14px; border-radius:20px; font-size:.8em; line-height:1.5; box-shadow:0 2px 8px rgba(0,0,0,.3); }
