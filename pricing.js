@@ -7,7 +7,7 @@
    ===================================================================== */
 
 // เวอร์ชันของไฟล์นี้ (ไว้เช็กใน Console ว่าเบราว์เซอร์โหลดไฟล์ล่าสุดหรือยัง: พิมพ์ PRICING_JS_VERSION)
-const PRICING_JS_VERSION = 'v10-addon';
+const PRICING_JS_VERSION = 'v11-addon-total-optional';
 console.log('pricing.js loaded:', PRICING_JS_VERSION);
 
 // ---------- ข้อมูลราคาเริ่มต้น (ถูกบันทึกไปกับ siteData เมื่อแอดมินกดบันทึก) ----------
@@ -79,7 +79,7 @@ function pkgDetailHtml(p) {
             <div class="pkg-addon-plus">+${ex.toLocaleString()}<small>${t.baht || 'Baht'}</small></div>
             <div class="pkg-addon-body">
                 <div class="pkg-addon-text"><i class="fas fa-gift"></i> ${noteText(a, currentLang)}</div>
-                <div class="pkg-addon-total">${t.price_child || 'Child'} ${(Number(p.child) + ex).toLocaleString()} · ${t.price_adult || 'Adult'} ${(Number(p.adult) + ex).toLocaleString()} ${t.baht || 'Baht'}</div>
+                ${a.showTotal ? `<div class="pkg-addon-total">${t.price_child || 'Child'} ${(Number(p.child) + ex).toLocaleString()} · ${t.price_adult || 'Adult'} ${(Number(p.adult) + ex).toLocaleString()} ${t.baht || 'Baht'}</div>` : ''}
             </div>
         </div>`;
     }).join('');
@@ -212,6 +212,9 @@ function renderPricingEditor() {
                         <input type="number" min="0" value="${a.extra || 0}" onchange="updateAddon(${i}, ${k}, this.value)">
                         <small>ข้อความ (${langNames[currentLang]})</small>
                         <textarea onchange="updateAddonText(${i}, ${k}, this.value)">${noteText(a, currentLang)}</textarea>
+                        <label style="display:flex;align-items:center;gap:8px;font-weight:normal;margin:6px 0;">
+                            <input type="checkbox" style="width:auto;" ${a.showTotal ? 'checked' : ''} onchange="toggleAddonTotal(${i}, ${k}, this.checked)"> แสดงราคารวม (ราคาแพ็กเกจ + ราคาที่จ่ายเพิ่ม) ใต้ข้อความ
+                        </label>
                         <button class="btn btn-secondary" id="autoTrAddon${i}_${k}" onclick="autoTranslateAddon(${i}, ${k})">🤖 แปลอัตโนมัติ</button>
                         <button class="btn btn-danger" onclick="deleteAddon(${i}, ${k})"><i class="fas fa-trash"></i> ลบ</button>
                     </div>`).join('')}
@@ -672,6 +675,10 @@ async function addAddon(i) {
         renderPricingEditor();
         alert('เพิ่มเงื่อนไขแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nทุกภาษาใช้ข้อความที่พิมพ์ไว้ก่อน');
     }
+}
+
+function toggleAddonTotal(i, k, checked) {
+    siteData.pricing.packages[i].addons[k].showTotal = !!checked;
 }
 
 function updateAddon(i, k, value) {
