@@ -6,6 +6,10 @@
    ไม่ต้องแก้โค้ดอื่นใน index.html
    ===================================================================== */
 
+// เวอร์ชันของไฟล์นี้ (ไว้เช็กใน Console ว่าเบราว์เซอร์โหลดไฟล์ล่าสุดหรือยัง: พิมพ์ PRICING_JS_VERSION)
+const PRICING_JS_VERSION = 'v6-notes-translate';
+console.log('pricing.js loaded:', PRICING_JS_VERSION);
+
 // ---------- ข้อมูลราคาเริ่มต้น (ถูกบันทึกไปกับ siteData เมื่อแอดมินกดบันทึก) ----------
 if (!siteData.pricing) {
     siteData.pricing = { packages: [
