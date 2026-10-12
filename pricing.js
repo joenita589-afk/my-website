@@ -7,7 +7,7 @@
    ===================================================================== */
 
 // เวอร์ชันของไฟล์นี้ (ไว้เช็กใน Console ว่าเบราว์เซอร์โหลดไฟล์ล่าสุดหรือยัง: พิมพ์ PRICING_JS_VERSION)
-const PRICING_JS_VERSION = 'v7-autosync';
+const PRICING_JS_VERSION = 'v8-cover';
 console.log('pricing.js loaded:', PRICING_JS_VERSION);
 
 // ---------- ข้อมูลราคาเริ่มต้น (ถูกบันทึกไปกับ siteData เมื่อแอดมินกดบันทึก) ----------
@@ -50,43 +50,87 @@ function pkgText(p, field, lang) {
         || '';
 }
 
+// รูปปกที่เพิ่งอัปโหลด (ใช้โชว์ทันทีก่อนที่ Cloudflare จะ deploy เสร็จ)
+const pkgCoverPreview = {};
+function pkgCoverSrc(p) {
+    return (p && p.cover) ? (pkgCoverPreview[p.cover] || p.cover) : '';
+}
+
+// เนื้อหาหน้ารายละเอียดแพ็กเกจ (แสดงในป๊อปอัพเมื่อลูกค้ากดดู)
+function pkgDetailHtml(p) {
+    const t = translations[currentLang] || translations['en'];
+    const atts = getAttractions(currentLang);
+    const fixedHtml = (p.fixed && p.fixed.length)
+        ? `<div class="pkg-fixed-list"><div class="pkg-fixed-title"><i class="fas fa-lock"></i> ${t.pkg_fixed_label || ''}</div>` +
+          p.fixed.map(i => {
+              const a = atts[i];
+              if (!a) return '';
+              const thumb = a.logo
+                  ? `<img class="pkg-fixed-thumb" src="${a.logo}" alt="${a.title}">`
+                  : `<i style="background:${a.color || '#999'}" class="fas ${a.icon || 'fa-star'}"></i>`;
+              return `<div class="pkg-fixed-item">${thumb}<span>${a.title}</span></div>`;
+          }).join('') + `</div>`
+        : '';
+    return `
+    <div class="price-card" style="border-top-color:${p.color || '#e94560'};">
+        ${p.badge ? `<span class="price-badge">${p.badge}</span>` : ''}
+        <h3>${pkgText(p, 'name', currentLang)}</h3>
+        <p class="price-sub">${pkgText(p, 'desc', currentLang)}</p>
+        ${fixedHtml}
+        <div class="price-row">
+            <div class="price-box">
+                <div class="price-label">${t.price_child || 'Child'}</div>
+                <div class="price-value">${Number(p.child).toLocaleString()}</div>
+                <div class="price-unit">${t.baht || 'Baht'}</div>
+            </div>
+            <div class="price-box">
+                <div class="price-label">${t.price_adult || 'Adult'}</div>
+                <div class="price-value">${Number(p.adult).toLocaleString()}</div>
+                <div class="price-unit">${t.baht || 'Baht'}</div>
+            </div>
+        </div>
+    </div>`;
+}
+
+// หน้าปกโปรโมชั่น: โชว์รูปปกก่อน ลูกค้ากดเพื่อดูรายละเอียด
 function renderPricingPackages() {
     const grid = document.getElementById('priceGrid');
     if (!grid) return;
     const t = translations[currentLang] || translations['en'];
-    const atts = getAttractions(currentLang);
-    grid.innerHTML = (siteData.pricing.packages || []).map(p => {
-        const fixedHtml = (p.fixed && p.fixed.length)
-            ? `<div class="pkg-fixed-list"><div class="pkg-fixed-title"><i class="fas fa-lock"></i> ${t.pkg_fixed_label || ''}</div>` +
-              p.fixed.map(i => {
-                  const a = atts[i];
-                  if (!a) return '';
-                  const thumb = a.logo
-                      ? `<img class="pkg-fixed-thumb" src="${a.logo}" alt="${a.title}">`
-                      : `<i style="background:${a.color || '#999'}" class="fas ${a.icon || 'fa-star'}"></i>`;
-                  return `<div class="pkg-fixed-item">${thumb}<span>${a.title}</span></div>`;
-              }).join('') + `</div>`
-            : '';
+    grid.innerHTML = (siteData.pricing.packages || []).map((p, i) => {
+        const cover = pkgCoverSrc(p);
+        const name = pkgText(p, 'name', currentLang);
+        const coverHtml = cover
+            ? `<div class="promo-cover"><img src="${cover}" alt="${String(name).replace(/"/g, '&quot;')}" loading="lazy">`
+            : `<div class="promo-cover"><div class="promo-ph" style="background:linear-gradient(135deg, ${p.color || '#e94560'}, #1a1a2e);"><i class="fas fa-ticket-alt"></i><b>${name}</b></div>`;
         return `
-        <div class="price-card" style="border-top-color:${p.color || '#e94560'};">
-            ${p.badge ? `<span class="price-badge">${p.badge}</span>` : ''}
-            <h3>${pkgText(p, 'name', currentLang)}</h3>
-            <p class="price-sub">${pkgText(p, 'desc', currentLang)}</p>
-            ${fixedHtml}
-            <div class="price-row">
-                <div class="price-box">
-                    <div class="price-label">${t.price_child || 'Child'}</div>
-                    <div class="price-value">${Number(p.child).toLocaleString()}</div>
-                    <div class="price-unit">${t.baht || 'Baht'}</div>
-                </div>
-                <div class="price-box">
-                    <div class="price-label">${t.price_adult || 'Adult'}</div>
-                    <div class="price-value">${Number(p.adult).toLocaleString()}</div>
-                    <div class="price-unit">${t.baht || 'Baht'}</div>
-                </div>
+        <div class="promo-card" style="border-top-color:${p.color || '#e94560'};" onclick="openPkgDetail(${i})" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openPkgDetail(${i})">
+            ${coverHtml}
+                ${p.badge ? `<span class="promo-badge">${p.badge}</span>` : ''}
+                <span class="promo-hint"><i class="fas fa-hand-pointer"></i></span>
+            </div>
+            <div class="promo-caption">
+                <h3>${name}</h3>
+                <div class="detail-hint"><i class="fas fa-hand-pointer"></i> ${t.tap_view || 'Tap to view details'}</div>
             </div>
         </div>`;
     }).join('');
+}
+
+function openPkgDetail(i) {
+    const p = siteData.pricing.packages[i];
+    const box = document.getElementById('pkgModalContent');
+    if (!p || !box) return;
+    const cover = pkgCoverSrc(p);
+    box.innerHTML = (cover ? `<img class="modal-photo" src="${cover}" alt="">` : '') + pkgDetailHtml(p);
+    document.getElementById('pkgModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePkgDetail() {
+    const m = document.getElementById('pkgModal');
+    if (m) m.classList.remove('show');
+    document.body.style.overflow = '';
 }
 
 // เดิม index.html เรียกฟังก์ชันนี้ตอนเปลี่ยนภาษา — ให้ไปเรียกตัวแสดงราคาใหม่แทน
@@ -125,6 +169,14 @@ function renderPricingEditor() {
                         <textarea placeholder="คำอธิบาย" onchange="updatePkgTextLang(${i}, 'desc', '${l}', this.value)">${pkgText(p, 'desc', l)}</textarea>
                     </div>`).join('')}
             </details>
+            <div class="form-group"><label>🖼️ รูปหน้าปกโปรโมชั่น (ลูกค้าเห็นรูปนี้ก่อน แล้วกดเพื่อดูรายละเอียด)</label>
+                <input type="text" value="${q(p.cover)}" placeholder="วาง URL รูป หรือเลือกไฟล์อัปโหลดด้านล่าง" onchange="updatePkg(${i}, 'cover', this.value)">
+                <input type="file" accept="image/*" onchange="uploadPkgCover(${i}, this)" style="margin-top:6px;">
+                ${p.cover
+                    ? `<img src="${pkgCoverSrc(p)}" class="media-preview" style="object-fit:contain;background:#f8f9fa;"><br>
+                       <button class="btn btn-danger" onclick="updatePkg(${i}, 'cover', '')"><i class="fas fa-times"></i> เอารูปปกออก</button>`
+                    : '<small style="color:#999;">ยังไม่มีรูปปก ระบบจะแสดงเป็นการ์ดสีพร้อมชื่อแพ็กเกจแทน</small>'}
+            </div>
             <div class="form-group"><label>ป้ายเล็กบนการ์ด (เช่น PACKAGE, COMBO, HOT)</label>
                 <input type="text" value="${q(p.badge)}" onchange="updatePkg(${i}, 'badge', this.value)"></div>
             <div class="form-group"><label>สีขอบการ์ด</label>
@@ -205,6 +257,7 @@ function updatePkg(i, field, value) {
     const p = siteData.pricing.packages[i];
     p[field] = (field === 'child' || field === 'adult') ? (parseInt(value) || 0) : value;
     renderPricingPackages();
+    if (field === 'cover') renderPricingEditor();
 }
 
 function updatePkgText(i, field, value) {
@@ -345,6 +398,59 @@ function updateSinglePrice(idx, field, value) {
     });
     renderSinglePrices();
     renderAttractions();
+}
+
+// ---------- อัปโหลดรูปปกไป GitHub (โฟลเดอร์ promo/) ----------
+function pkgResizeImage(file, maxW) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+            const scale = Math.min(1, maxW / img.width);
+            const c = document.createElement('canvas');
+            c.width = Math.round(img.width * scale);
+            c.height = Math.round(img.height * scale);
+            const g = c.getContext('2d');
+            g.fillStyle = '#fff';
+            g.fillRect(0, 0, c.width, c.height);
+            g.drawImage(img, 0, 0, c.width, c.height);
+            URL.revokeObjectURL(url);
+            resolve(c.toDataURL('image/jpeg', 0.85));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('อ่านไฟล์รูปไม่ได้')); };
+        img.src = url;
+    });
+}
+
+async function uploadPkgCover(i, input) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    let cfg = null;
+    try { cfg = JSON.parse(localStorage.getItem('githubConfig')); } catch (e) {}
+    if (!cfg || !cfg.token) {
+        alert('กรุณาตั้งค่า GitHub Token ในแท็บ "ตั้งค่า GitHub" และกดบันทึกการตั้งค่าก่อน');
+        input.value = '';
+        return;
+    }
+    pricingToast('⏳ กำลังอัปโหลดรูป...');
+    try {
+        const dataUrl = await pkgResizeImage(file, 1200);   // ย่อให้กว้างไม่เกิน 1200px และแปลงเป็น JPG
+        const path = 'promo/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.jpg';
+        const res = await fetch('https://api.github.com/repos/' + cfg.username + '/' + cfg.repo + '/contents/' + path, {
+            method: 'PUT',
+            headers: { 'Authorization': 'token ' + cfg.token, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: 'Upload promo cover via Admin Panel', content: dataUrl.split(',')[1], branch: cfg.branch || 'main' })
+        });
+        if (!res.ok) throw new Error('GitHub ตอบกลับ ' + res.status);
+        pkgCoverPreview[path] = dataUrl;
+        siteData.pricing.packages[i].cover = path;
+        renderPricingPackages();
+        renderPricingEditor();
+        pricingToast('✅ อัปโหลดรูปแล้ว อย่าลืมกดบันทึกไปยัง GitHub เพื่อให้รูปปกแสดงบนหน้าเว็บ', 6000);
+    } catch (e) {
+        input.value = '';
+        pricingToast('⚠️ อัปโหลดไม่สำเร็จ: ' + e.message + ' (หรือวาง URL รูปแทนได้)', 6000);
+    }
 }
 
 // ---------- แปลอัตโนมัติทันทีเมื่อแก้ข้อความภาษาไทย ----------
@@ -520,6 +626,44 @@ async function autoTranslateNote(i) {
     // 1) หน้าลูกค้า: เปลี่ยนการ์ดแพ็กเกจเดิมให้เรนเดอร์จากข้อมูล
     const grid = document.querySelector('#pricing .price-grid');
     if (grid) { grid.id = 'priceGrid'; grid.innerHTML = ''; }
+
+    // 1.0) CSS ของการ์ดหน้าปกโปรโมชั่น + ป๊อปอัพรายละเอียด
+    if (!document.getElementById('pricingCss')) {
+        const st = document.createElement('style');
+        st.id = 'pricingCss';
+        st.textContent = `
+        @keyframes promoTap { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-4px,-7px) scale(1.12); } }
+        @keyframes promoRing { 0% { box-shadow: 0 0 0 0 rgba(233,69,96,.65); } 100% { box-shadow: 0 0 0 16px rgba(233,69,96,0); } }
+        .promo-card { position:relative; background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.3); cursor:pointer; transition:.3s; border-top:6px solid var(--primary); }
+        .promo-card:hover { transform:translateY(-8px); box-shadow:0 15px 40px rgba(0,0,0,.5); }
+        .promo-cover { position:relative; line-height:0; }
+        .promo-cover img { width:100%; height:auto; display:block; }
+        .promo-ph { min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; padding:20px; text-align:center; line-height:1.3; }
+        .promo-ph i { font-size:3em; opacity:.9; }
+        .promo-ph b { font-size:1.6em; }
+        .promo-badge { position:absolute; top:10px; left:10px; background:var(--secondary); color:#333; font-weight:bold; padding:4px 14px; border-radius:20px; font-size:.8em; line-height:1.5; box-shadow:0 2px 8px rgba(0,0,0,.3); }
+        .promo-hint { position:absolute; right:12px; bottom:12px; width:42px; height:42px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1em; border:2px solid #fff; animation: promoTap 1.2s ease-in-out infinite, promoRing 1.8s infinite; pointer-events:none; line-height:1; }
+        .promo-caption { padding:14px 16px 18px; text-align:center; }
+        .promo-caption h3 { color:var(--dark); font-size:1.25em; margin-bottom:4px; }
+        [dir="rtl"] .promo-hint { right:auto; left:12px; }
+        [dir="rtl"] .promo-badge { left:auto; right:10px; }
+        #pkgModalContent .price-card { box-shadow:none; border-top:none; padding:0; }
+        #pkgModalContent .price-card:hover { transform:none; box-shadow:none; }
+        `;
+        (document.head || document.body).appendChild(st);
+    }
+    if (!document.getElementById('pkgModal')) {
+        const m = document.createElement('div');
+        m.className = 'modal-overlay';
+        m.id = 'pkgModal';
+        m.onclick = function (ev) { if (ev.target === m) closePkgDetail(); };
+        m.innerHTML = `<div class="modal-box" style="max-width:520px;">
+            <button class="modal-close" onclick="closePkgDetail()" aria-label="Close"><i class="fas fa-times"></i></button>
+            <div id="pkgModalContent"></div>
+        </div>`;
+        document.body.appendChild(m);
+        document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') closePkgDetail(); });
+    }
 
     // 1.1) หน้าลูกค้า: เปลี่ยนหมายเหตุเดิม (2 ข้อ) ให้เรนเดอร์จากข้อมูล
     const noteBox = document.querySelector('#pricing .info-box:not(.single-price-list)');
