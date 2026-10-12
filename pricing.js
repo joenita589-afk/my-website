@@ -7,7 +7,7 @@
    ===================================================================== */
 
 // เวอร์ชันของไฟล์นี้ (ไว้เช็กใน Console ว่าเบราว์เซอร์โหลดไฟล์ล่าสุดหรือยัง: พิมพ์ PRICING_JS_VERSION)
-const PRICING_JS_VERSION = 'v8-cover';
+const PRICING_JS_VERSION = 'v10-addon';
 console.log('pricing.js loaded:', PRICING_JS_VERSION);
 
 // ---------- ข้อมูลราคาเริ่มต้น (ถูกบันทึกไปกับ siteData เมื่อแอดมินกดบันทึก) ----------
@@ -71,6 +71,19 @@ function pkgDetailHtml(p) {
               return `<div class="pkg-fixed-item">${thumb}<span>${a.title}</span></div>`;
           }).join('') + `</div>`
         : '';
+
+    // เงื่อนไขซ้อน: จ่ายเพิ่มแล้วได้ของแถม/อัปเกรด
+    const addonHtml = (p.addons || []).map(a => {
+        const ex = Number(a.extra) || 0;
+        return `<div class="pkg-addon">
+            <div class="pkg-addon-plus">+${ex.toLocaleString()}<small>${t.baht || 'Baht'}</small></div>
+            <div class="pkg-addon-body">
+                <div class="pkg-addon-text"><i class="fas fa-gift"></i> ${noteText(a, currentLang)}</div>
+                <div class="pkg-addon-total">${t.price_child || 'Child'} ${(Number(p.child) + ex).toLocaleString()} · ${t.price_adult || 'Adult'} ${(Number(p.adult) + ex).toLocaleString()} ${t.baht || 'Baht'}</div>
+            </div>
+        </div>`;
+    }).join('');
+
     return `
     <div class="price-card" style="border-top-color:${p.color || '#e94560'};">
         ${p.badge ? `<span class="price-badge">${p.badge}</span>` : ''}
@@ -89,6 +102,7 @@ function pkgDetailHtml(p) {
                 <div class="price-unit">${t.baht || 'Baht'}</div>
             </div>
         </div>
+        ${addonHtml}
     </div>`;
 }
 
@@ -190,6 +204,18 @@ function renderPricingEditor() {
                     <label style="display:flex;align-items:center;gap:8px;font-weight:normal;">
                         <input type="checkbox" style="width:auto;" ${(p.fixed || []).includes(idx) ? 'checked' : ''} onchange="togglePkgFixed(${i}, ${idx}, this.checked)"> ${a.title}
                     </label>`).join('')}
+            </div>
+            <div class="form-group"><label>🎁 เงื่อนไขซ้อน (จ่ายเพิ่มแล้วได้ของแถม/อัปเกรด)</label>
+                ${(p.addons || []).map((a, k) => `
+                    <div style="margin:8px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
+                        <small>จ่ายเพิ่ม (บาท)</small>
+                        <input type="number" min="0" value="${a.extra || 0}" onchange="updateAddon(${i}, ${k}, this.value)">
+                        <small>ข้อความ (${langNames[currentLang]})</small>
+                        <textarea onchange="updateAddonText(${i}, ${k}, this.value)">${noteText(a, currentLang)}</textarea>
+                        <button class="btn btn-secondary" id="autoTrAddon${i}_${k}" onclick="autoTranslateAddon(${i}, ${k})">🤖 แปลอัตโนมัติ</button>
+                        <button class="btn btn-danger" onclick="deleteAddon(${i}, ${k})"><i class="fas fa-trash"></i> ลบ</button>
+                    </div>`).join('')}
+                <button class="btn btn-success" onclick="addAddon(${i})"><i class="fas fa-plus"></i> เพิ่มเงื่อนไขซ้อน</button>
             </div>
             <button class="btn btn-danger" onclick="deletePackage(${i})"><i class="fas fa-trash"></i> ลบแพ็กเกจนี้</button>
         </div>`).join('');
@@ -621,13 +647,82 @@ async function autoTranslateNote(i) {
     }
 }
 
+// ---------- เงื่อนไขซ้อน (จ่ายเพิ่มแล้วได้ของแถม/อัปเกรด) ----------
+async function addAddon(i) {
+    const extraStr = prompt('จ่ายเพิ่มกี่บาท?', '100');
+    if (extraStr === null) return;
+    const extra = parseInt(extraStr) || 0;
+    const text = prompt('ข้อความ เช่น: เพิ่มเงิน 100 บาท รับแก้วเก็บความเย็น Ripley\'s Glass Limited Edition\n(พิมพ์ภาษาไทยหรืออังกฤษ ระบบจะแปลให้ทุกภาษาอัตโนมัติ)');
+    if (!text) return;
+    const p = siteData.pricing.packages[i];
+    if (!p.addons) p.addons = [];
+    const tx = {};
+    Object.keys(translations).forEach(l => { tx[l] = text; });   // ใส่ข้อความเดิมให้ทุกภาษาก่อน เผื่อแปลไม่สำเร็จ
+    p.addons.push({ extra: extra, text: tx });
+    renderPricingEditor();
+
+    const a = p.addons[p.addons.length - 1];
+    const k = p.addons.length - 1;
+    const btn = document.getElementById('autoTrAddon' + i + '_' + k);
+    try {
+        const failed = await translateNoteAll(a, text, lang => { if (btn) btn.textContent = '⏳ ' + lang.toUpperCase(); });
+        renderPricingEditor();
+        alert(pkgTrMsg(failed, 'เพิ่มเงื่อนไขและแปลครบทุกภาษาแล้ว อย่าลืมกดบันทึกไปยัง GitHub'));
+    } catch (e) {
+        renderPricingEditor();
+        alert('เพิ่มเงื่อนไขแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nทุกภาษาใช้ข้อความที่พิมพ์ไว้ก่อน');
+    }
+}
+
+function updateAddon(i, k, value) {
+    siteData.pricing.packages[i].addons[k].extra = parseInt(value) || 0;
+}
+
+async function updateAddonText(i, k, value) {
+    const a = siteData.pricing.packages[i].addons[k];
+    if (!a.text) a.text = {};
+    a.text[currentLang] = value;
+    if (currentLang !== 'th') return;
+    pricingToast('⏳ กำลังแปลเป็นทุกภาษาอัตโนมัติ...');
+    try {
+        const failed = await translateNoteAll(a, value, null, true);
+        refreshEditorIfIdle();
+        pricingToast(failed.length ? '⚠️ แปลไม่สำเร็จบางภาษา: ' + failed.join(', ').toUpperCase() : '✅ แปลทุกภาษาแล้ว อย่าลืมกดบันทึกไปยัง GitHub', 5000);
+    } catch (e) {
+        pricingToast('⚠️ แปลอัตโนมัติไม่สำเร็จ: ' + e.message, 5000);
+    }
+}
+
+async function autoTranslateAddon(i, k) {
+    const a = siteData.pricing.packages[i].addons[k];
+    const src = noteText(a, 'th');
+    if (!src) { alert('กรุณากรอกข้อความภาษาไทยก่อน'); return; }
+    if (!confirm('แปลข้อความเป็นทุกภาษาอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
+    const btn = document.getElementById('autoTrAddon' + i + '_' + k);
+    if (btn) btn.disabled = true;
+    try {
+        const failed = await translateNoteAll(a, src, lang => { if (btn) btn.textContent = '⏳ ' + lang.toUpperCase(); }, true);
+        renderPricingEditor();
+        alert(pkgTrMsg(failed, 'แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub'));
+    } catch (e) {
+        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message);
+        renderPricingEditor();
+    }
+}
+
+function deleteAddon(i, k) {
+    if (!confirm('ต้องการลบเงื่อนไขนี้?')) return;
+    siteData.pricing.packages[i].addons.splice(k, 1);
+    renderPricingEditor();
+}
+
 // ---------- ติดตั้งส่วนหน้าเว็บ + เชื่อมกับฟังก์ชันเดิม ----------
 (function installPricingUI() {
     // 1) หน้าลูกค้า: เปลี่ยนการ์ดแพ็กเกจเดิมให้เรนเดอร์จากข้อมูล
     const grid = document.querySelector('#pricing .price-grid');
     if (grid) { grid.id = 'priceGrid'; grid.innerHTML = ''; }
 
-    // 1.0) CSS ของการ์ดหน้าปกโปรโมชั่น + ป๊อปอัพรายละเอียด
+    // 1.0) CSS ของการ์ดหน้าปกโปรโมชั่น + ป๊อปอัพรายละเอียด + เงื่อนไขซ้อน
     if (!document.getElementById('pricingCss')) {
         const st = document.createElement('style');
         st.id = 'pricingCss';
@@ -635,20 +730,28 @@ async function autoTranslateNote(i) {
         @keyframes promoTap { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-4px,-7px) scale(1.12); } }
         @keyframes promoRing { 0% { box-shadow: 0 0 0 0 rgba(233,69,96,.65); } 100% { box-shadow: 0 0 0 16px rgba(233,69,96,0); } }
         .promo-card { position:relative; display:flex; flex-direction:column; background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.3); cursor:pointer; transition:.3s; border-top:6px solid var(--primary); }
-.promo-cover { position:relative; line-height:0; aspect-ratio:3/4; background:#1a1a2e; overflow:hidden; }
-.promo-cover img { width:100%; height:100%; object-fit:contain; display:block; }
-.promo-ph { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; padding:20px; text-align:center; line-height:1.3; }
-.promo-caption { flex:1; }
+        .promo-card:hover { transform:translateY(-8px); box-shadow:0 15px 40px rgba(0,0,0,.5); }
+        .promo-cover { position:relative; line-height:0; aspect-ratio:3/4; background:#1a1a2e; overflow:hidden; }
+        .promo-cover img { width:100%; height:100%; object-fit:contain; display:block; }
+        .promo-ph { height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#fff; padding:20px; text-align:center; line-height:1.3; }
         .promo-ph i { font-size:3em; opacity:.9; }
         .promo-ph b { font-size:1.6em; }
         .promo-badge { position:absolute; top:10px; left:10px; background:var(--secondary); color:#333; font-weight:bold; padding:4px 14px; border-radius:20px; font-size:.8em; line-height:1.5; box-shadow:0 2px 8px rgba(0,0,0,.3); }
         .promo-hint { position:absolute; right:12px; bottom:12px; width:42px; height:42px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1em; border:2px solid #fff; animation: promoTap 1.2s ease-in-out infinite, promoRing 1.8s infinite; pointer-events:none; line-height:1; }
-        .promo-caption { padding:14px 16px 18px; text-align:center; }
+        .promo-caption { flex:1; padding:14px 16px 18px; text-align:center; }
         .promo-caption h3 { color:var(--dark); font-size:1.25em; margin-bottom:4px; }
         [dir="rtl"] .promo-hint { right:auto; left:12px; }
         [dir="rtl"] .promo-badge { left:auto; right:10px; }
         #pkgModalContent .price-card { box-shadow:none; border-top:none; padding:0; }
         #pkgModalContent .price-card:hover { transform:none; box-shadow:none; }
+        .pkg-addon { display:flex; gap:12px; align-items:center; margin-top:14px; padding:12px; border-radius:12px; background:#fff8e1; border:2px dashed #ff8c00; text-align:left; }
+        .pkg-addon-plus { flex:none; min-width:74px; text-align:center; background:#ff8c00; color:#fff; font-weight:bold; font-size:1.5em; border-radius:10px; padding:8px 6px; line-height:1.1; }
+        .pkg-addon-plus small { display:block; font-size:.5em; font-weight:normal; }
+        .pkg-addon-text { color:#333; font-weight:bold; }
+        .pkg-addon-text i { color:#ff8c00; margin-right:4px; }
+        .pkg-addon-total { color:#777; font-size:.85em; margin-top:4px; }
+        [dir="rtl"] .pkg-addon { text-align:right; }
+        [dir="rtl"] .pkg-addon-text i { margin-right:0; margin-left:4px; }
         `;
         (document.head || document.body).appendChild(st);
     }
