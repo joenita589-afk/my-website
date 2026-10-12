@@ -15,6 +15,14 @@ if (!siteData.pricing) {
     ]};
 }
 
+// ---------- หมายเหตุหน้าราคา (เพิ่ม/ลบ/แก้ไขได้จากแอดมิน) ----------
+if (!siteData.pricing.notes) {
+    siteData.pricing.notes = [
+        { icon:'fa-lock',    textKey:'pricing_note_1' },
+        { icon:'fa-list-ol', textKey:'pricing_note_2' }
+    ];
+}
+
 // ---------- แก้คำแปลที่ผิด (แก้เฉพาะเมื่อค่ายังเป็นค่าผิดเดิม ไม่ทับสิ่งที่แอดมินแก้เอง) ----------
 (function fixTranslations() {
     const fixes = [
@@ -78,7 +86,7 @@ function renderPricingPackages() {
 }
 
 // เดิม index.html เรียกฟังก์ชันนี้ตอนเปลี่ยนภาษา — ให้ไปเรียกตัวแสดงราคาใหม่แทน
-function renderPackageFixed() { renderPricingPackages(); }
+function renderPackageFixed() { renderPricingPackages(); renderPricingNotes(); }
 
 // ---------- ตัวแก้ไขราคาในหน้าแอดมิน ----------
 function renderPricingEditor() {
@@ -139,12 +147,40 @@ function renderPricingEditor() {
                 <input type="number" min="0" value="${a.childPrice !== undefined ? a.childPrice : ''}" onchange="updateSinglePrice(${idx}, 'childPrice', this.value)"></div>
         </div>`).join('');
 
+    const iconOptions = [
+        ['fa-lock','🔒 ล็อก'], ['fa-list-ol','🔢 รายการ'], ['fa-info-circle','ℹ️ ข้อมูล'],
+        ['fa-exclamation-triangle','⚠️ เตือน'], ['fa-clock','🕒 เวลา'], ['fa-ban','🚫 ห้าม'],
+        ['fa-check-circle','✅ ถูกต้อง'], ['fa-star','⭐ ดาว'], ['fa-child','🧒 เด็ก'], ['fa-ticket-alt','🎟️ ตั๋ว']
+    ];
+    const notesHtml = (siteData.pricing.notes || []).map((n, i) => `
+        <div class="admin-section">
+            <div class="form-group"><label>ข้อความหมายเหตุข้อ ${i + 1} (${langNames[currentLang]})</label>
+                <textarea onchange="updateNoteText(${i}, this.value)">${noteText(n, currentLang)}</textarea></div>
+            <div class="form-group"><label>ไอคอน</label>
+                <select onchange="updateNote(${i}, 'icon', this.value)">
+                    ${iconOptions.map(([v, l]) => `<option value="${v}" ${n.icon === v ? 'selected' : ''}>${l}</option>`).join('')}
+                </select></div>
+            <details style="margin:10px 0 15px;">
+                <summary style="cursor:pointer;font-weight:bold;color:var(--primary);">🌐 ข้อความทุกภาษา</summary>
+                <div style="margin:10px 0;">
+                    <button class="btn btn-secondary" id="autoTrNote${i}" onclick="autoTranslateNote(${i})">🤖 แปลอัตโนมัติเป็นทุกภาษา</button>
+                    <small style="color:#666;">แปลจากช่องภาษาไทยเป็นอีก 8 ภาษา (ข้อความเดิมของภาษาอื่นจะถูกแทนที่)</small>
+                </div>
+                ${Object.keys(langNames).map(l => `
+                    <div style="margin:10px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
+                        <strong>${langNames[l]}</strong>
+                        <textarea onchange="updateNoteTextLang(${i}, '${l}', this.value)">${noteText(n, l)}</textarea>
+                    </div>`).join('')}
+            </details>
+            <button class="btn btn-secondary" onclick="moveNote(${i}, -1)" ${i === 0 ? 'disabled' : ''}>▲ ขึ้น</button>
+            <button class="btn btn-secondary" onclick="moveNote(${i}, 1)" ${i === siteData.pricing.notes.length - 1 ? 'disabled' : ''}>▼ ลง</button>
+            <button class="btn btn-danger" onclick="deleteNote(${i})"><i class="fas fa-trash"></i> ลบ</button>
+        </div>`).join('');
+
     const textKeys = [
         ['pricing_title', 'หัวข้อหน้าราคา'],
         ['pricing_sub', 'หัวข้อรอง (PROMOTION...)'],
         ['pricing_note_title', 'หัวข้อ: หมายเหตุ'],
-        ['pricing_note_1', 'หมายเหตุข้อ 1'],
-        ['pricing_note_2', 'หมายเหตุข้อ 2'],
         ['single_price_title', 'หัวข้อ: ราคาเดี่ยวแต่ละเครื่องเล่น']
     ];
     const textHtml = textKeys.map(([key, label]) => `
@@ -154,6 +190,9 @@ function renderPricingEditor() {
     el.innerHTML = `<h4>📦 แพ็กเกจ</h4>${pkgHtml}
         <h4 style="margin-top:30px;">🎢 ราคาเดี่ยวแต่ละเครื่องเล่น</h4>
         <div class="admin-section">${singleHtml}</div>
+        <h4 style="margin-top:30px;">📌 หมายเหตุ</h4>
+        ${notesHtml}
+        <button class="btn btn-success" onclick="addNote()"><i class="fas fa-plus"></i> เพิ่มหมายเหตุ</button>
         <h4 style="margin-top:30px;">📝 ข้อความหน้าราคา</h4>
         <div class="admin-section">${textHtml}</div>`;
 }
@@ -279,11 +318,128 @@ function updateSinglePrice(idx, field, value) {
     renderAttractions();
 }
 
+// ---------- หมายเหตุ: แสดงผล/แก้ไข ----------
+function noteText(n, lang) {
+    const o = n.text || {};
+    const key = n.textKey;
+    return o[lang]
+        || (key && translations[lang] && translations[lang][key])
+        || o.en
+        || (key && translations.en && translations.en[key])
+        || o.th
+        || '';
+}
+
+function renderPricingNotes() {
+    const box = document.getElementById('pricingNotes');
+    if (!box) return;
+    const notes = siteData.pricing.notes || [];
+    box.innerHTML = notes.map((n, i) => `
+        <div class="step"${i === notes.length - 1 ? ' style="margin-bottom:0;"' : ''}>
+            <div class="step-num"><i class="fas ${n.icon || 'fa-info-circle'}"></i></div>
+            <div>${noteText(n, currentLang)}</div>
+        </div>`).join('');
+    const info = box.closest('.info-box');
+    if (info) info.style.display = notes.length ? '' : 'none';
+}
+
+function updateNote(i, field, value) {
+    siteData.pricing.notes[i][field] = value;
+    renderPricingNotes();
+}
+
+function updateNoteText(i, value) {
+    updateNoteTextLang(i, currentLang, value);
+}
+
+function updateNoteTextLang(i, lang, value) {
+    const n = siteData.pricing.notes[i];
+    if (!n.text) n.text = {};
+    n.text[lang] = value;
+    renderPricingNotes();
+}
+
+function moveNote(i, dir) {
+    const arr = siteData.pricing.notes;
+    const j = i + dir;
+    if (j < 0 || j >= arr.length) return;
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+    renderPricingNotes();
+    renderPricingEditor();
+}
+
+function deleteNote(i) {
+    if (!confirm('ต้องการลบหมายเหตุนี้?')) return;
+    siteData.pricing.notes.splice(i, 1);
+    renderPricingNotes();
+    renderPricingEditor();
+}
+
+async function translateNoteAll(n, src, onProgress) {
+    const srcLang = pkgHasThai(src) ? 'th' : 'en';
+    if (!n.text) n.text = {};
+    for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
+        if (onProgress) onProgress(lang);
+        n.text[lang] = (lang === srcLang) ? src : await pkgTranslate(src, PKG_LANG_CODES[srcLang], code);
+    }
+}
+
+// เพิ่มหมายเหตุใหม่ + แปลให้ทุกภาษาอัตโนมัติ
+async function addNote() {
+    const text = prompt('ข้อความหมายเหตุ (พิมพ์ภาษาไทยหรืออังกฤษ ระบบจะแปลให้ทุกภาษาอัตโนมัติ)');
+    if (!text) return;
+    const tx = {};
+    Object.keys(translations).forEach(l => { tx[l] = text; });   // ใส่ข้อความเดิมให้ทุกภาษาก่อน เผื่อแปลไม่สำเร็จ
+    siteData.pricing.notes.push({ icon: 'fa-info-circle', text: tx });
+    renderPricingNotes();
+    renderPricingEditor();
+
+    const i = siteData.pricing.notes.length - 1;
+    const n = siteData.pricing.notes[i];
+    const btn = document.getElementById('autoTrNote' + i);
+    try {
+        await translateNoteAll(n, text, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        renderPricingNotes();
+        renderPricingEditor();
+        alert('เพิ่มหมายเหตุและแปลให้ครบทุกภาษาแล้ว อย่าลืมกดบันทึกไปยัง GitHub');
+    } catch (e) {
+        renderPricingEditor();
+        alert('เพิ่มหมายเหตุแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nทุกภาษาใช้ข้อความที่พิมพ์ไว้ก่อน กดปุ่ม "แปลอัตโนมัติ" ในหมายเหตุนั้นเพื่อลองใหม่ได้');
+    }
+}
+
+async function autoTranslateNote(i) {
+    const n = siteData.pricing.notes[i];
+    const src = noteText(n, 'th');
+    if (!src) { alert('กรุณากรอกข้อความภาษาไทยก่อน'); return; }
+    if (!confirm('แปลข้อความเป็นทุกภาษาอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
+    const btn = document.getElementById('autoTrNote' + i);
+    if (btn) btn.disabled = true;
+    try {
+        await translateNoteAll(n, src, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        renderPricingNotes();
+        renderPricingEditor();
+        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
+    } catch (e) {
+        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่อีกครั้ง หรือกรอกเองในแต่ละภาษา');
+        renderPricingEditor();
+    }
+}
+
 // ---------- ติดตั้งส่วนหน้าเว็บ + เชื่อมกับฟังก์ชันเดิม ----------
 (function installPricingUI() {
     // 1) หน้าลูกค้า: เปลี่ยนการ์ดแพ็กเกจเดิมให้เรนเดอร์จากข้อมูล
     const grid = document.querySelector('#pricing .price-grid');
     if (grid) { grid.id = 'priceGrid'; grid.innerHTML = ''; }
+
+    // 1.1) หน้าลูกค้า: เปลี่ยนหมายเหตุเดิม (2 ข้อ) ให้เรนเดอร์จากข้อมูล
+    const noteBox = document.querySelector('#pricing .info-box:not(.single-price-list)');
+    if (noteBox && !document.getElementById('pricingNotes')) {
+        noteBox.querySelectorAll('.step').forEach(el => el.remove());
+        const holder = document.createElement('div');
+        holder.id = 'pricingNotes';
+        noteBox.appendChild(holder);
+    }
 
     // 2) แอดมิน: ปุ่มแท็บ "ราคา"
     const tabs = document.querySelector('#adminDashboard .tabs');
@@ -337,4 +493,5 @@ function updateSinglePrice(idx, field, value) {
 
     // 5) วาดการ์ดแพ็กเกจรอบแรก (กรณีหน้าเว็บโหลดเสร็จก่อนสคริปต์นี้)
     renderPricingPackages();
+    renderPricingNotes();
 })();
