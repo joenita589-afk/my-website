@@ -1317,7 +1317,7 @@
                     "share_copy": "نسخ الرابط",
                     "share_copied": "تم النسخ!"
           }
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
         // Fallback translations for other languages (use English as base, then fully override below)
 ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
@@ -3126,7 +3126,17 @@ Object.assign(translations.ar, {
                                         "descKey": "pkg_combo_desc",
                                         "child": 1900,
                                         "adult": 2200,
-                                        "fixed": []
+                                        "fixed": [
+                                                  0,
+                                                  1,
+                                                  2,
+                                                  3,
+                                                  4,
+                                                  5,
+                                                  6,
+                                                  7,
+                                                  8
+                                        ]
                               },
                               {
                                         "badge": "PACKAGE",
@@ -3174,7 +3184,7 @@ Object.assign(translations.ar, {
                                         "textKey": "pricing_note_1"
                               },
                               {
-                                        "icon": "fa-list-ol",
+                                        "icon": "fa-lock",
                                         "textKey": "pricing_note_2"
                               },
                               {
@@ -3193,7 +3203,7 @@ Object.assign(translations.ar, {
                               }
                     ]
           }
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
