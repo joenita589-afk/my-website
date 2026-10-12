@@ -216,10 +216,25 @@ const pkgHasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
 
 async function pkgTranslate(text, from, to) {
     if (!text || from === to) return text;
-    const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to);
-    const j = await r.json();
-    if (!j || String(j.responseStatus) !== '200' || !j.responseData || !j.responseData.translatedText) throw new Error('แปลไม่สำเร็จ');
-    return j.responseData.translatedText;
+    // 1) Google Translate (endpoint ไม่เป็นทางการ ใช้ฟรี)
+    try {
+        const r = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=' + from + '&tl=' + to + '&dt=t&q=' + encodeURIComponent(text));
+        const j = await r.json();
+        const out = (j && j[0] ? j[0].map(x => x[0] || '').join('') : '').trim();
+        if (out) return out;
+    } catch (e) { /* ลองตัวสำรองต่อ */ }
+    // 2) สำรอง: MyMemory
+    const r2 = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to);
+    const j2 = await r2.json();
+    if (!j2 || String(j2.responseStatus) !== '200' || !j2.responseData || !j2.responseData.translatedText) throw new Error('แปลไม่สำเร็จ');
+    return j2.responseData.translatedText;
+}
+
+// สรุปผลการแปล: บอกว่าภาษาไหนแปลไม่สำเร็จ
+function pkgTrMsg(failed, okMsg) {
+    return (failed && failed.length)
+        ? 'แปลสำเร็จบางภาษา แต่ภาษาเหล่านี้แปลไม่สำเร็จ (ใช้ข้อความต้นฉบับแทน): ' + failed.join(', ').toUpperCase() + '\nกดปุ่ม "แปลอัตโนมัติ" อีกครั้งเพื่อลองใหม่'
+        : okMsg;
 }
 
 // แปลชื่อ/คำอธิบายของแพ็กเกจเป็นทุกภาษา (ตรวจภาษาต้นฉบับอัตโนมัติ: มีตัวอักษรไทย = ไทย ไม่งั้น = อังกฤษ)
@@ -227,13 +242,20 @@ async function pkgTranslate(text, from, to) {
 async function translatePkgAll(p, srcName, srcDesc, onProgress) {
     const srcLang = pkgHasThai(srcDesc || srcName) ? 'th' : 'en';
     const nameIsThai = pkgHasThai(srcName);
+    const failed = [];
     if (!p.name) p.name = {};
     if (!p.desc) p.desc = {};
     for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
         if (onProgress) onProgress(lang);
-        p.desc[lang] = (lang === srcLang) ? srcDesc : await pkgTranslate(srcDesc, PKG_LANG_CODES[srcLang], code);
-        p.name[lang] = nameIsThai ? ((lang === 'th') ? srcName : await pkgTranslate(srcName, 'th', code)) : srcName;
+        let d = srcDesc, n = srcName;
+        try {
+            d = (lang === srcLang) ? srcDesc : await pkgTranslate(srcDesc, PKG_LANG_CODES[srcLang], code);
+            n = nameIsThai ? ((lang === 'th') ? srcName : await pkgTranslate(srcName, 'th', code)) : srcName;
+        } catch (e) { failed.push(lang); d = srcDesc; n = srcName; }
+        p.desc[lang] = d;
+        p.name[lang] = n;
     }
+    return failed;
 }
 
 async function autoTranslatePkg(i) {
@@ -245,10 +267,10 @@ async function autoTranslatePkg(i) {
     const btn = document.getElementById('autoTrBtn' + i);
     if (btn) btn.disabled = true;
     try {
-        await translatePkgAll(p, srcName, srcDesc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        const failed = await translatePkgAll(p, srcName, srcDesc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
         renderPricingPackages();
         renderPricingEditor();
-        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
+        alert(pkgTrMsg(failed, 'แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub'));
     } catch (e) {
         alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่อีกครั้ง หรือกรอกเองในแต่ละภาษา');
         renderPricingEditor();
@@ -290,10 +312,10 @@ async function addPackage() {
     const p = siteData.pricing.packages[i];
     const btn = document.getElementById('autoTrBtn' + i);
     try {
-        await translatePkgAll(p, name, desc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        const failed = await translatePkgAll(p, name, desc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
         renderPricingPackages();
         renderPricingEditor();
-        alert('เพิ่มแพ็กเกจและแปลให้ครบทุกภาษาแล้ว อย่าลืมกรอกราคา แล้วกดบันทึกไปยัง GitHub');
+        alert(pkgTrMsg(failed, 'เพิ่มแพ็กเกจและแปลให้ครบทุกภาษาแล้ว อย่าลืมกรอกราคา แล้วกดบันทึกไปยัง GitHub'));
     } catch (e) {
         renderPricingEditor();
         alert('เพิ่มแพ็กเกจแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nทุกภาษาใช้ข้อความที่พิมพ์ไว้ก่อน กดปุ่ม "แปลอัตโนมัติ" ในแพ็กเกจนั้นเพื่อลองใหม่ได้');
@@ -377,11 +399,17 @@ function deleteNote(i) {
 
 async function translateNoteAll(n, src, onProgress) {
     const srcLang = pkgHasThai(src) ? 'th' : 'en';
+    const failed = [];
     if (!n.text) n.text = {};
     for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
         if (onProgress) onProgress(lang);
-        n.text[lang] = (lang === srcLang) ? src : await pkgTranslate(src, PKG_LANG_CODES[srcLang], code);
+        let t = src;
+        try {
+            t = (lang === srcLang) ? src : await pkgTranslate(src, PKG_LANG_CODES[srcLang], code);
+        } catch (e) { failed.push(lang); t = src; }
+        n.text[lang] = t;
     }
+    return failed;
 }
 
 // เพิ่มหมายเหตุใหม่ + แปลให้ทุกภาษาอัตโนมัติ
@@ -398,10 +426,10 @@ async function addNote() {
     const n = siteData.pricing.notes[i];
     const btn = document.getElementById('autoTrNote' + i);
     try {
-        await translateNoteAll(n, text, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        const failed = await translateNoteAll(n, text, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
         renderPricingNotes();
         renderPricingEditor();
-        alert('เพิ่มหมายเหตุและแปลให้ครบทุกภาษาแล้ว อย่าลืมกดบันทึกไปยัง GitHub');
+        alert(pkgTrMsg(failed, 'เพิ่มหมายเหตุและแปลให้ครบทุกภาษาแล้ว อย่าลืมกดบันทึกไปยัง GitHub'));
     } catch (e) {
         renderPricingEditor();
         alert('เพิ่มหมายเหตุแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nทุกภาษาใช้ข้อความที่พิมพ์ไว้ก่อน กดปุ่ม "แปลอัตโนมัติ" ในหมายเหตุนั้นเพื่อลองใหม่ได้');
@@ -416,10 +444,10 @@ async function autoTranslateNote(i) {
     const btn = document.getElementById('autoTrNote' + i);
     if (btn) btn.disabled = true;
     try {
-        await translateNoteAll(n, src, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        const failed = await translateNoteAll(n, src, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
         renderPricingNotes();
         renderPricingEditor();
-        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
+        alert(pkgTrMsg(failed, 'แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub'));
     } catch (e) {
         alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่อีกครั้ง หรือกรอกเองในแต่ละภาษา');
         renderPricingEditor();
