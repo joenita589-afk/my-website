@@ -1317,7 +1317,7 @@
                     "share_copy": "نسخ الرابط",
                     "share_copied": "تم النسخ!"
           }
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
         // Fallback translations for other languages (use English as base, then fully override below)
 ['zh', 'ru', 'hi', 'he', 'ja', 'ko', 'ar'].forEach(lang => {
@@ -3167,9 +3167,33 @@ Object.assign(translations.ar, {
                                         ]
                               }
                     ],
-                    "extraNotes": []
+                    "extraNotes": [],
+                    "notes": [
+                              {
+                                        "icon": "fa-lock",
+                                        "textKey": "pricing_note_1"
+                              },
+                              {
+                                        "icon": "fa-list-ol",
+                                        "textKey": "pricing_note_2"
+                              },
+                              {
+                                        "icon": "fa-info-circle",
+                                        "text": {
+                                                  "th": "แพ็กเกจ Double Attraction Special สามารถเลือกได้2เครื่องตามเงื่อนไขที่กำหนดในราคา 900บาท",
+                                                  "en": "Note 2 (Thai)",
+                                                  "zh": "备注文本编号2 （泰语）",
+                                                  "ru": "Текст примечания № 2 (тайский)",
+                                                  "hi": "नोट टेक्स्ट नंबर 2 (थाई)",
+                                                  "he": "טקסט הערה מספר 2 (תאילנדית)",
+                                                  "ja": "Note text number 2 (Thai)",
+                                                  "ko": "메모 텍스트 번호 2 (태국어)",
+                                                  "ar": "نص الملاحظة رقم 2 (التايلاندية)"
+                                        }
+                              }
+                    ]
           }
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
         let currentLang = localStorage.getItem('ripleysLang') || 'th';
 
