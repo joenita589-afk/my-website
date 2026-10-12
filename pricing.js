@@ -15,9 +15,6 @@ if (!siteData.pricing) {
     ]};
 }
 
-// หมายเหตุเพิ่มเติม (เพิ่ม/ลบได้ในแอดมิน) เก็บเป็นรายการ: { th:'...', en:'...', ... }
-if (!siteData.pricing.extraNotes) siteData.pricing.extraNotes = [];
-
 // ---------- แก้คำแปลที่ผิด (แก้เฉพาะเมื่อค่ายังเป็นค่าผิดเดิม ไม่ทับสิ่งที่แอดมินแก้เอง) ----------
 (function fixTranslations() {
     const fixes = [
@@ -26,30 +23,6 @@ if (!siteData.pricing.extraNotes) siteData.pricing.extraNotes = [];
     ];
     fixes.forEach(([lang, key, wrong, right]) => {
         if (translations[lang] && translations[lang][key] === wrong) translations[lang][key] = right;
-    });
-})();
-
-// ---------- เติมคำแปลที่ขาดของแพ็กเกจที่ระบุไว้ (เติมเฉพาะช่องที่ยังว่าง ไม่ทับสิ่งที่แอดมินแก้เอง) ----------
-(function fillMissingPackageDesc() {
-    const known = {
-        'Double Attraction Special': {
-            th: 'สามารถเลือกได้ 2 เครื่องเล่น ในราคา 900 บาท',
-            en: 'Choose any 2 attractions for 900 Baht',
-            zh: '任选2项游乐设施，仅需900泰铢',
-            ru: 'Выберите любые 2 аттракциона за 900 бат',
-            hi: '900 बात में कोई भी 2 आकर्षण चुनें',
-            he: 'בחרו 2 מתקנים כלשהם ב-900 באט',
-            ja: 'お好きなアトラクションを2つ選べて900バーツ',
-            ko: '원하는 어트랙션 2개를 900바트에',
-            ar: 'اختر أي لعبتين مقابل 900 بات'
-        }
-    };
-    (siteData.pricing.packages || []).forEach(p => {
-        const nm = p.name && (p.name.en || p.name.th);
-        const dict = known[nm];
-        if (!dict) return;
-        if (!p.desc) p.desc = {};
-        Object.keys(dict).forEach(l => { if (!p.desc[l]) p.desc[l] = dict[l]; });
     });
 })();
 
@@ -105,25 +78,7 @@ function renderPricingPackages() {
 }
 
 // เดิม index.html เรียกฟังก์ชันนี้ตอนเปลี่ยนภาษา — ให้ไปเรียกตัวแสดงราคาใหม่แทน
-function renderPackageFixed() { renderPricingPackages(); renderExtraNotes(); }
-
-// ---------- หมายเหตุเพิ่มเติมในหน้าลูกค้า ----------
-const pkgEsc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const noteText = (n, lang) => n[lang] || n.en || n.th || '';
-
-function renderExtraNotes() {
-    const box = document.getElementById('extraNotes');
-    if (!box) return;
-    const notes = siteData.pricing.extraNotes || [];
-    const n2 = document.querySelector('[data-i18n="pricing_note_2"]');
-    const step2 = n2 && n2.closest('.step');
-    if (step2) step2.style.marginBottom = notes.length ? '' : '0';
-    box.innerHTML = notes.map((n, i) => `
-        <div class="step" style="${i === notes.length - 1 ? 'margin-bottom:0;' : ''}">
-            <div class="step-num"><i class="fas fa-info-circle"></i></div>
-            <div>${pkgEsc(noteText(n, currentLang))}</div>
-        </div>`).join('');
-}
+function renderPackageFixed() { renderPricingPackages(); }
 
 // ---------- ตัวแก้ไขราคาในหน้าแอดมิน ----------
 function renderPricingEditor() {
@@ -149,7 +104,7 @@ function renderPricingEditor() {
                 <summary style="cursor:pointer;font-weight:bold;color:var(--primary);">🌐 ชื่อ/คำอธิบายทุกภาษา (กรอกครบทุกภาษาในที่เดียว)</summary>
                 <div style="margin:10px 0;">
                     <button class="btn btn-secondary" id="autoTrBtn${i}" onclick="autoTranslatePkg(${i})">🤖 แปลอัตโนมัติเป็นทุกภาษา</button>
-                    <small style="color:#666;">แปลจากช่องภาษาไทย (ถ้าไม่มีภาษาไทยจะแปลจากอังกฤษ) เป็นอีก 8 ภาษา ข้อความเดิมของภาษาอื่นจะถูกแทนที่ ควรตรวจทานอีกครั้ง</small>
+                    <small style="color:#666;">แปลจากช่องภาษาไทยเป็นอีก 8 ภาษา (ข้อความเดิมของภาษาอื่นจะถูกแทนที่) ควรตรวจทานอีกครั้ง</small>
                 </div>
                 ${Object.keys(langNames).map(l => `
                     <div style="margin:10px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
@@ -190,108 +145,17 @@ function renderPricingEditor() {
         ['pricing_note_title', 'หัวข้อ: หมายเหตุ'],
         ['pricing_note_1', 'หมายเหตุข้อ 1'],
         ['pricing_note_2', 'หมายเหตุข้อ 2'],
-        ['single_price_title', 'หัวข้อ: ราคาเดี่ยวแต่ละเครื่องเล่น'],
-        ['pkg_fixed_label', 'หัวข้อรายการในแพ็กเกจ (เช่น เครื่องเล่นที่กำหนด)'],
-        ['price_child', 'ป้ายราคา: เด็ก'],
-        ['price_adult', 'ป้ายราคา: ผู้ใหญ่'],
-        ['baht', 'หน่วยเงิน (บาท) — ใช้ร่วมกับหน้าเมนูด้วย'],
-        ['terms_again', 'ลิงก์: อ่านเงื่อนไขการใช้บริการอีกครั้ง']
+        ['single_price_title', 'หัวข้อ: ราคาเดี่ยวแต่ละเครื่องเล่น']
     ];
     const textHtml = textKeys.map(([key, label]) => `
         <div class="form-group"><label>${label} <small style="color:#999;">(${key})</small></label>
-            <input type="text" value="${q(t[key])}" onchange="updatePricingText('${key}', this.value)"></div>`).join('');
+            <input type="text" value="${q(t[key])}" onchange="updateCouponText('${key}', this.value)"></div>`).join('');
 
     el.innerHTML = `<h4>📦 แพ็กเกจ</h4>${pkgHtml}
         <h4 style="margin-top:30px;">🎢 ราคาเดี่ยวแต่ละเครื่องเล่น</h4>
         <div class="admin-section">${singleHtml}</div>
         <h4 style="margin-top:30px;">📝 ข้อความหน้าราคา</h4>
-        <div class="admin-section">${textHtml}</div>
-        <h4 style="margin-top:30px;">📌 หมายเหตุเพิ่มเติม (ต่อจากหมายเหตุข้อ 2)</h4>
-        ${renderNotesEditorHtml(langNames)}
-        <button class="btn btn-success" onclick="addNote()"><i class="fas fa-plus"></i> เพิ่มหมายเหตุ</button>`;
-}
-
-function renderNotesEditorHtml(langNames) {
-    const notes = siteData.pricing.extraNotes || [];
-    if (!notes.length) return '<div class="admin-section"><small style="color:#666;">ยังไม่มีหมายเหตุเพิ่มเติม กดปุ่ม "เพิ่มหมายเหตุ" ด้านล่าง</small></div>';
-    return notes.map((n, i) => `
-        <div class="admin-section">
-            <div class="form-group"><label>หมายเหตุเพิ่มเติมข้อ ${i + 3} (${langNames[currentLang]})</label>
-                <textarea placeholder="ยังไม่มีข้อความภาษานี้" onchange="updateNoteLang(${i}, '${currentLang}', this.value)">${pkgEsc(n[currentLang] || '')}</textarea></div>
-            <details style="margin:10px 0 15px;">
-                <summary style="cursor:pointer;font-weight:bold;color:var(--primary);">🌐 ข้อความทุกภาษา</summary>
-                <div style="margin:10px 0;">
-                    <button class="btn btn-secondary" id="autoTrNoteBtn${i}" onclick="autoTranslateNote(${i})">🤖 แปลอัตโนมัติเป็นทุกภาษา</button>
-                    <small style="color:#666;">แปลจากช่องภาษาไทย (ถ้าไม่มีจะแปลจากอังกฤษ) ควรตรวจทานอีกครั้ง</small>
-                </div>
-                ${Object.keys(langNames).map(l => `
-                    <div style="margin:10px 0;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;">
-                        <strong>${langNames[l]}</strong>
-                        <textarea onchange="updateNoteLang(${i}, '${l}', this.value)">${pkgEsc(n[l] || '')}</textarea>
-                    </div>`).join('')}
-            </details>
-            <button class="btn btn-danger" onclick="deleteNote(${i})"><i class="fas fa-trash"></i> ลบหมายเหตุนี้</button>
-        </div>`).join('');
-}
-
-function updateNoteLang(i, lang, value) {
-    const n = siteData.pricing.extraNotes[i];
-    if (!n) return;
-    n[lang] = value;
-    renderExtraNotes();
-}
-
-async function addNote() {
-    const text = prompt('พิมพ์ข้อความหมายเหตุ (ภาษาไทยหรืออังกฤษ ระบบจะลองแปลให้ทุกภาษา)');
-    if (!text) return;
-    const srcLang = pkgHasThai(text) ? 'th' : 'en';
-    siteData.pricing.extraNotes.push({ [srcLang]: text });
-    renderExtraNotes();
-    renderPricingEditor();
-    await autoTranslateNote(siteData.pricing.extraNotes.length - 1, true);
-}
-
-function deleteNote(i) {
-    if (!confirm('ต้องการลบหมายเหตุนี้?')) return;
-    siteData.pricing.extraNotes.splice(i, 1);
-    renderExtraNotes();
-    renderPricingEditor();
-}
-
-async function autoTranslateNote(i, silentStart) {
-    const n = siteData.pricing.extraNotes[i];
-    if (!n) return;
-    const src = n.th || n.en;
-    if (!src) { alert('กรุณากรอกข้อความภาษาไทยหรืออังกฤษก่อน'); return; }
-    if (!silentStart && !confirm('แปลเป็นทุกภาษาอัตโนมัติ? ข้อความเดิมของภาษาอื่นจะถูกแทนที่')) return;
-    const from = n.th ? 'th' : 'en';
-    const btn = document.getElementById('autoTrNoteBtn' + i);
-    if (btn) btn.disabled = true;
-    const out = { [from]: src };
-    const failed = [];
-    for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
-        if (lang === from) continue;
-        if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase();
-        try {
-            out[lang] = await pkgTranslate(src, PKG_LANG_CODES[from], code);
-        } catch (e) {
-            failed.push(lang.toUpperCase());
-            out[lang] = (n[lang] || '');
-        }
-    }
-    siteData.pricing.extraNotes[i] = out;
-    renderExtraNotes();
-    renderPricingEditor();
-    if (failed.length) alert('แปลไม่สำเร็จบางภาษา: ' + failed.join(', ') + '\nกรอกเอง หรือกดแปลอัตโนมัติอีกครั้งภายหลัง (ถ้าโควตา MyMemory เต็ม)');
-    else alert('แปลเสร็จแล้ว ตรวจทานแล้วกดบันทึกไปยัง GitHub');
-}
-
-// แก้ข้อความหน้าราคา แล้ววาดส่วนที่ไม่ได้ใช้ data-i18n ใหม่ (การ์ดแพ็กเกจ, ราคาเดี่ยว, เมนู)
-function updatePricingText(key, value) {
-    updateCouponText(key, value);
-    renderPricingPackages();
-    renderSinglePrices();
-    renderMenu();
+        <div class="admin-section">${textHtml}</div>`;
 }
 
 function updatePkg(i, field, value) {
@@ -305,6 +169,51 @@ function updatePkgText(i, field, value) {
     if (!p[field]) p[field] = {};
     p[field][currentLang] = value;
     renderPricingPackages();
+}
+
+// ---------- แปลอัตโนมัติ (ใช้บริการแปลฟรี MyMemory) ----------
+const PKG_LANG_CODES = { th:'th', en:'en', zh:'zh-CN', ru:'ru', hi:'hi', he:'he', ja:'ja', ko:'ko', ar:'ar' };
+const pkgHasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
+
+async function pkgTranslate(text, from, to) {
+    if (!text || from === to) return text;
+    const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to);
+    const j = await r.json();
+    if (!j || String(j.responseStatus) !== '200' || !j.responseData || !j.responseData.translatedText) throw new Error('แปลไม่สำเร็จ');
+    return j.responseData.translatedText;
+}
+
+// แปลชื่อ/คำอธิบายของแพ็กเกจเป็นทุกภาษา (ตรวจภาษาต้นฉบับอัตโนมัติ: มีตัวอักษรไทย = ไทย ไม่งั้น = อังกฤษ)
+// ชื่อที่ไม่ใช่ภาษาไทย (เช่น SUPER MAX) จะคงเดิมทุกภาษา
+async function translatePkgAll(p, srcName, srcDesc, onProgress) {
+    const srcLang = pkgHasThai(srcDesc || srcName) ? 'th' : 'en';
+    const nameIsThai = pkgHasThai(srcName);
+    if (!p.name) p.name = {};
+    if (!p.desc) p.desc = {};
+    for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
+        if (onProgress) onProgress(lang);
+        p.desc[lang] = (lang === srcLang) ? srcDesc : await pkgTranslate(srcDesc, PKG_LANG_CODES[srcLang], code);
+        p.name[lang] = nameIsThai ? ((lang === 'th') ? srcName : await pkgTranslate(srcName, 'th', code)) : srcName;
+    }
+}
+
+async function autoTranslatePkg(i) {
+    const p = siteData.pricing.packages[i];
+    const srcName = pkgText(p, 'name', 'th');
+    const srcDesc = pkgText(p, 'desc', 'th');
+    if (!srcName && !srcDesc) { alert('กรุณากรอกชื่อ/คำอธิบายก่อน (ช่องภาษาไทย)'); return; }
+    if (!confirm('แปลข้อความเป็นทุกภาษาอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
+    const btn = document.getElementById('autoTrBtn' + i);
+    if (btn) btn.disabled = true;
+    try {
+        await translatePkgAll(p, srcName, srcDesc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
+        renderPricingPackages();
+        renderPricingEditor();
+        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
+    } catch (e) {
+        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่อีกครั้ง หรือกรอกเองในแต่ละภาษา');
+        renderPricingEditor();
+    }
 }
 
 function updatePkgTextLang(i, field, lang, value) {
@@ -322,74 +231,24 @@ function togglePkgFixed(i, idx, checked) {
     renderPricingPackages();
 }
 
-// ---------- แปลอัตโนมัติ (ใช้บริการแปลฟรี MyMemory) ----------
-const PKG_LANG_CODES = { th:'th', en:'en', zh:'zh-CN', ru:'ru', hi:'hi', he:'he', ja:'ja', ko:'ko', ar:'ar' };
-const pkgHasThai = s => /[\u0E00-\u0E7F]/.test(s || '');
-
-async function pkgTranslate(text, from, to) {
-    if (!text || from === to) return text;
-    const r = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + from + '|' + to);
-    const j = await r.json();
-    const out = j && j.responseData && j.responseData.translatedText;
-    // MyMemory บางครั้งตอบ status 200 แต่ส่งข้อความเตือนโควต้าหมดมาแทนคำแปล ต้องกันไม่ให้บันทึกข้อความนั้น
-    if (!j || String(j.responseStatus) !== '200' || !out || /MYMEMORY WARNING|QUERY LENGTH LIMIT|INVALID/i.test(out)) {
-        throw new Error('บริการแปลไม่ตอบกลับหรือโควต้าฟรีวันนี้หมด');
-    }
-    return out;
-}
-
-// แปลชื่อ/คำอธิบายเป็นทุกภาษา (ตรวจภาษาต้นฉบับอัตโนมัติ: มีตัวอักษรไทย = ไทย ไม่งั้น = อังกฤษ)
-// ชื่อที่ไม่ใช่ภาษาไทย (เช่น SUPER MAX, Double Attraction Special) จะคงเดิมทุกภาษา
-async function translatePkgAll(p, srcName, srcDesc, onProgress) {
-    const srcLang = pkgHasThai(srcDesc || srcName) ? 'th' : 'en';
-    const nameIsThai = pkgHasThai(srcName);
-    const newName = {}, newDesc = {};   // เก็บผลไว้ก่อน ถ้าแปลพังกลางทางจะไม่ทับข้อมูลเดิมครึ่ง ๆ กลาง ๆ
-    for (const [lang, code] of Object.entries(PKG_LANG_CODES)) {
-        if (onProgress) onProgress(lang);
-        newDesc[lang] = (lang === srcLang) ? srcDesc : await pkgTranslate(srcDesc, PKG_LANG_CODES[srcLang], code);
-        newName[lang] = nameIsThai ? ((lang === 'th') ? srcName : await pkgTranslate(srcName, 'th', code)) : srcName;
-    }
-    p.name = newName;
-    p.desc = newDesc;
-}
-
-async function autoTranslatePkg(i) {
-    const p = siteData.pricing.packages[i];
-    const srcName = pkgText(p, 'name', 'th');
-    const srcDesc = pkgText(p, 'desc', 'th');
-    if (!srcName && !srcDesc) { alert('กรุณากรอกชื่อ/คำอธิบายก่อน (ช่องภาษาไทย)'); return; }
-    if (!confirm('แปลข้อความเป็นทุกภาษาอัตโนมัติ?\nข้อความเดิมของภาษาอื่นจะถูกแทนที่ และควรตรวจทานผลอีกครั้ง')) return;
-    const btn = document.getElementById('autoTrBtn' + i);
-    if (btn) btn.disabled = true;
-    try {
-        await translatePkgAll(p, srcName, srcDesc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
-        renderPricingPackages();
-        renderPricingEditor();
-        alert('แปลเสร็จแล้ว ลองสลับภาษาดูผล แล้วกดบันทึกไปยัง GitHub');
-    } catch (e) {
-        alert('แปลอัตโนมัติไม่สำเร็จ: ' + e.message + '\nลองใหม่ภายหลัง หรือกรอกเองในแต่ละภาษา');
-        renderPricingEditor();
-    }
-}
-
-// ---------- เพิ่ม / ลบ แพ็กเกจ ----------
+// เพิ่มแพ็กเกจใหม่ + แปลให้ทุกภาษาอัตโนมัติ
 async function addPackage() {
     const name = prompt('ชื่อแพ็กเกจ เช่น SUPER MAX');
     if (!name) return;
     const desc = prompt('คำอธิบายแพ็กเกจ (พิมพ์ภาษาไทยหรืออังกฤษ ระบบจะแปลให้ทุกภาษาอัตโนมัติ)\nเว้นว่างได้') || '';
-    const srcLang = pkgHasThai(desc || name) ? 'th' : 'en';
-    const p = {
+    const nm = {}, ds = {};
+    Object.keys(translations).forEach(l => { nm[l] = name; ds[l] = desc; });   // ใส่ข้อความเดิมให้ทุกภาษาก่อน เผื่อแปลไม่สำเร็จ
+    siteData.pricing.packages.push({
         badge: 'PACKAGE', color: '#3498db',
-        name: { [srcLang]: name },
-        desc: { [srcLang]: desc },
+        name: nm, desc: ds,
         child: 0, adult: 0, fixed: []
-    };
-    siteData.pricing.packages.push(p);
+    });
     renderPricingPackages();
     renderPricingEditor();
 
-    if (!desc && !pkgHasThai(name)) return;   // ไม่มีอะไรต้องแปล (ชื่ออังกฤษล้วน ไม่มีคำอธิบาย)
+    if (!desc && !pkgHasThai(name)) return;   // ไม่มีอะไรต้องแปล (เช่น ชื่อภาษาอังกฤษล้วน ไม่มีคำอธิบาย)
     const i = siteData.pricing.packages.length - 1;
+    const p = siteData.pricing.packages[i];
     const btn = document.getElementById('autoTrBtn' + i);
     try {
         await translatePkgAll(p, name, desc, lang => { if (btn) btn.textContent = '⏳ กำลังแปล... ' + lang.toUpperCase(); });
@@ -398,7 +257,7 @@ async function addPackage() {
         alert('เพิ่มแพ็กเกจและแปลให้ครบทุกภาษาแล้ว อย่าลืมกรอกราคา แล้วกดบันทึกไปยัง GitHub');
     } catch (e) {
         renderPricingEditor();
-        alert('เพิ่มแพ็กเกจแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nกดปุ่ม "แปลอัตโนมัติ" ในแพ็กเกจนั้นเพื่อลองใหม่ หรือกรอกเองในแต่ละภาษา');
+        alert('เพิ่มแพ็กเกจแล้ว แต่แปลอัตโนมัติไม่สำเร็จ (' + e.message + ')\nทุกภาษาใช้ข้อความที่พิมพ์ไว้ก่อน กดปุ่ม "แปลอัตโนมัติ" ในแพ็กเกจนั้นเพื่อลองใหม่ได้');
     }
 }
 
@@ -472,21 +331,10 @@ function updateSinglePrice(idx, field, value) {
     const origChangeLang = window.changeLang;
     window.changeLang = function () {
         origChangeLang.apply(this, arguments);
-        try { renderPricingPackages(); renderExtraNotes(); } catch (e) { console.error(e); }
         const tab = document.getElementById('adminTabPricing');
         if (tab && tab.style.display !== 'none') renderPricingEditor();
     };
 
-    // 5) สร้างที่ใส่หมายเหตุเพิ่มเติมต่อจากหมายเหตุข้อ 2 ในหน้าลูกค้า
-    const n2 = document.querySelector('[data-i18n="pricing_note_2"]');
-    const step2 = n2 && n2.closest('.step');
-    if (step2 && !document.getElementById('extraNotes')) {
-        const box = document.createElement('div');
-        box.id = 'extraNotes';
-        step2.insertAdjacentElement('afterend', box);
-    }
-
-    // 6) วาดการ์ดแพ็กเกจและหมายเหตุรอบแรก (กรณีหน้าเว็บโหลดเสร็จก่อนสคริปต์นี้)
+    // 5) วาดการ์ดแพ็กเกจรอบแรก (กรณีหน้าเว็บโหลดเสร็จก่อนสคริปต์นี้)
     renderPricingPackages();
-    renderExtraNotes();
 })();
